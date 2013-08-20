@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class IGXMLNode;
+
 /**
  Array like construct allow chaining query
  */
@@ -18,5 +20,11 @@
 -(id) initWithNodes:(NSArray*)nodes;
 
 -(NSUInteger) count;
+
+-(NSArray *) allObjects;
+
+-(IGXMLNode*) firstObject;
+
+-(id) objectAtIndexedSubscript:(NSUInteger)idx;
 
 @end

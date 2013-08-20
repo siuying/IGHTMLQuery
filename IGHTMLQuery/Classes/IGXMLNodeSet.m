@@ -7,6 +7,7 @@
 //
 
 #import "IGXMLNodeSet.h"
+#import "IGXMLNode.h"
 
 @interface IGXMLNodeSet()
 @property (nonatomic, copy) NSOrderedSet* nodes;
@@ -30,6 +31,24 @@
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained [])buffer count:(NSUInteger)len {
     return [self.nodes countByEnumeratingWithState:state objects:buffer count:len];
+}
+
+-(NSArray *) allObjects {
+    return [self.nodes array];
+}
+
+-(IGXMLNode*) firstObject {
+    if ([self.nodes count] > 0) {
+        return self.nodes[0];
+    } else {
+        return nil;
+    }
+}
+
+#pragma mark -
+
+- (id)objectAtIndexedSubscript:(NSUInteger)idx {
+    return [self.nodes objectAtIndexedSubscript:idx];
 }
 
 @end

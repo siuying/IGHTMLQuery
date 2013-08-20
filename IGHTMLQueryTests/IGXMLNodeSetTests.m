@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "IGXMLNodeSet.h"
-#import "IGXMLNode.h"
+#import "IGXMLDocument.h"
 
 @interface IGXMLNodeSetTests : XCTestCase {
     NSString* catelogXml;
@@ -47,13 +47,21 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testBasicNodeMethods
 {
-//    IGXMLNode* node = [[IGXMLNode alloc] initFromXMLString:catelogXml encoding:NSUTF8StringEncoding];
-//    IGXMLNodeSet* nodeSet = [node children];
-//    for (IGXMLNode* n in nodeSet) {
-//        XCTAssert(n);
-//    }
+    IGXMLDocument* node = [[IGXMLDocument alloc] initFromXMLString:catelogXml encoding:NSUTF8StringEncoding];
+    IGXMLNodeSet* nodeSet = [node children];
+    IGXMLNode* firstChild = [nodeSet firstObject];
+    XCTAssertEqualObjects(firstChild.tag, @"cd");
+    
+    XCTAssertTrue([nodeSet count] == 3, @"should have 3 nodes");
+    
+    NSArray* nodes = [nodeSet allObjects];
+    XCTAssertTrue([nodes isKindOfClass:[NSArray class]], @"should be an array");
+    XCTAssertTrue([[nodes firstObject] isKindOfClass:[IGXMLNode class]], @"should be a node");
+    XCTAssertTrue([nodes count] == 3, @"should have 3 objects");
+    XCTAssertEqualObjects(nodes[0], [nodeSet firstObject]);
+    XCTAssertEqualObjects(nodes[0], nodeSet[0]);
 }
 
 @end
