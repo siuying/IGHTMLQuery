@@ -29,6 +29,7 @@
 		543763F817C378CF004CE333 /* IGXMLNodeSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763F617C378CF004CE333 /* IGXMLNodeSet.m */; };
 		543763F917C37BB4004CE333 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763DF17C36F52004CE333 /* libxml2.dylib */; };
 		54AF474D17C3854000D16C80 /* IGXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AF474C17C3854000D16C80 /* IGXMLDocument.m */; };
+		54E40FCD17C3B61C00C8FBB9 /* IGXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AF474C17C3854000D16C80 /* IGXMLDocument.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -300,6 +301,7 @@
 			files = (
 				541B153517C383FA00F2C646 /* IGXMLNodeSetTests.m in Sources */,
 				543763D117C36EFD004CE333 /* IGXMLDocumentTests.m in Sources */,
+				54E40FCD17C3B61C00C8FBB9 /* IGXMLDocument.m in Sources */,
 				543763F817C378CF004CE333 /* IGXMLNodeSet.m in Sources */,
 				543763E417C37028004CE333 /* IGXMLNode.m in Sources */,
 			);

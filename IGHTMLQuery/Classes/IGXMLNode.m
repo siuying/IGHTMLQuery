@@ -77,7 +77,36 @@
 @implementation IGXMLNode (Query)
 
 -(IGXMLNodeSet*) queryWithXPath:(NSString*)xpath {
-    return nil;
+    if (!xpath) {
+        return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+    }
+
+    xmlXPathContextPtr context = xmlXPathNewContext(self.root.doc);
+    if (context == NULL) {
+		return nil;
+    }
+    
+    context->node = self.node;
+
+    xmlXPathObjectPtr object = xmlXPathEvalExpression((xmlChar *)[xpath cStringUsingEncoding:NSUTF8StringEncoding], context);
+    if (object == NULL) {
+		return nil;
+    }
+    
+	xmlNodeSetPtr nodes = object->nodesetval;
+	if (nodes == NULL) {
+		return nil;
+	}
+    
+	NSMutableArray *resultNodes = [NSMutableArray array];
+    for (NSInteger i = 0; i < nodes->nodeNr; i++) {
+        [resultNodes addObject:[[IGXMLNode alloc] initFromRoot:self.root node:nodes->nodeTab[i]]];
+	}
+    
+    xmlXPathFreeObject(object);
+    xmlXPathFreeContext(context);
+
+    return [[IGXMLNodeSet alloc] initWithNodes:resultNodes];
 }
 
 @end
