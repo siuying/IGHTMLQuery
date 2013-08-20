@@ -52,3 +52,18 @@
 }
 
 @end
+
+@implementation IGXMLNodeSet (Query)
+
+- (IGXMLNodeSet*) queryWithXPath:(NSString*)xpath {
+    NSMutableOrderedSet* nodes = [[NSMutableOrderedSet alloc] init];
+    [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
+        IGXMLNodeSet* nodeSet = [node queryWithXPath:xpath];
+        if (nodeSet) {
+            [nodes unionOrderedSet:nodeSet.nodes];
+        }
+    }];
+    return [[IGXMLNodeSet alloc] initWithNodes:[nodes array]];
+}
+
+@end

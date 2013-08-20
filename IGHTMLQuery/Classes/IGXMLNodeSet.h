@@ -19,6 +19,8 @@
 
 -(id) initWithNodes:(NSArray*)nodes;
 
+-(IGXMLNodeSet*) appendWithSet:(IGXMLNodeSet*)set;
+
 -(NSUInteger) count;
 
 -(NSArray *) allObjects;
@@ -26,5 +28,11 @@
 -(IGXMLNode*) firstObject;
 
 -(id) objectAtIndexedSubscript:(NSUInteger)idx;
+
+@end
+
+@interface IGXMLNodeSet (Query)
+
+- (IGXMLNodeSet*) queryWithXPath:(NSString*)xpath;
 
 @end

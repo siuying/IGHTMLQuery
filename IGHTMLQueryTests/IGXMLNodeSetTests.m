@@ -64,4 +64,13 @@
     XCTAssertEqualObjects(nodes[0], nodeSet[0]);
 }
 
+- (void)testXPathQuery
+{
+    IGXMLDocument* node = [[IGXMLDocument alloc] initFromXMLString:catelogXml encoding:NSUTF8StringEncoding];
+    IGXMLNodeSet* cds = [node queryWithXPath:@"//cd"];
+    IGXMLNodeSet* titles = [cds queryWithXPath:@"./title"];
+    IGXMLNode* title = titles[0];
+    XCTAssertEqualObjects(title.text, @"Empire Burlesque");
+}
+
 @end
