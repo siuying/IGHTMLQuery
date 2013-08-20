@@ -21,6 +21,9 @@
 		543763C717C36EFD004CE333 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763A917C36EFD004CE333 /* UIKit.framework */; };
 		543763CF17C36EFD004CE333 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 543763CD17C36EFD004CE333 /* InfoPlist.strings */; };
 		543763D117C36EFD004CE333 /* IGHTMLQueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763D017C36EFD004CE333 /* IGHTMLQueryTests.m */; };
+		543763E017C36F52004CE333 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763DF17C36F52004CE333 /* libxml2.dylib */; };
+		543763E317C37028004CE333 /* IGXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763E217C37028004CE333 /* IGXMLNode.m */; };
+		543763E417C37028004CE333 /* IGXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763E217C37028004CE333 /* IGXMLNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		543763CC17C36EFD004CE333 /* IGHTMLQueryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IGHTMLQueryTests-Info.plist"; sourceTree = "<group>"; };
 		543763CE17C36EFD004CE333 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		543763D017C36EFD004CE333 /* IGHTMLQueryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGHTMLQueryTests.m; sourceTree = "<group>"; };
+		543763DF17C36F52004CE333 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		543763E117C37028004CE333 /* IGXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGXMLNode.h; path = Classes/IGXMLNode.h; sourceTree = "<group>"; };
+		543763E217C37028004CE333 /* IGXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGXMLNode.m; path = Classes/IGXMLNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				543763E017C36F52004CE333 /* libxml2.dylib in Frameworks */,
 				543763A817C36EFD004CE333 /* CoreGraphics.framework in Frameworks */,
 				543763AA17C36EFD004CE333 /* UIKit.framework in Frameworks */,
 				543763A617C36EFD004CE333 /* Foundation.framework in Frameworks */,
@@ -101,6 +108,7 @@
 		543763A417C36EFD004CE333 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				543763DF17C36F52004CE333 /* libxml2.dylib */,
 				543763A517C36EFD004CE333 /* Foundation.framework */,
 				543763A717C36EFD004CE333 /* CoreGraphics.framework */,
 				543763A917C36EFD004CE333 /* UIKit.framework */,
@@ -112,6 +120,7 @@
 		543763AB17C36EFD004CE333 /* IGHTMLQuery */ = {
 			isa = PBXGroup;
 			children = (
+				543763DA17C36F04004CE333 /* Classes */,
 				543763B417C36EFD004CE333 /* IGAppDelegate.h */,
 				543763B517C36EFD004CE333 /* IGAppDelegate.m */,
 				543763B717C36EFD004CE333 /* Main.storyboard */,
@@ -150,6 +159,15 @@
 				543763CD17C36EFD004CE333 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		543763DA17C36F04004CE333 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				543763E117C37028004CE333 /* IGXMLNode.h */,
+				543763E217C37028004CE333 /* IGXMLNode.m */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +271,7 @@
 				543763B617C36EFD004CE333 /* IGAppDelegate.m in Sources */,
 				543763B217C36EFD004CE333 /* main.m in Sources */,
 				543763BC17C36EFD004CE333 /* IGViewController.m in Sources */,
+				543763E317C37028004CE333 /* IGXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				543763D117C36EFD004CE333 /* IGHTMLQueryTests.m in Sources */,
+				543763E417C37028004CE333 /* IGXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +397,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IGHTMLQuery/IGHTMLQuery-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
 				INFOPLIST_FILE = "IGHTMLQuery/IGHTMLQuery-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -390,6 +411,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IGHTMLQuery/IGHTMLQuery-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
 				INFOPLIST_FILE = "IGHTMLQuery/IGHTMLQuery-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
