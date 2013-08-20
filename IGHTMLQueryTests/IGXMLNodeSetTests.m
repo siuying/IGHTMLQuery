@@ -76,10 +76,7 @@
 - (void)testXPathShorthand
 {
     IGXMLDocument* node = [[IGXMLDocument alloc] initFromXMLString:catelogXml encoding:NSUTF8StringEncoding];
-    IGXMLNodeSet* cds = node.query(@"//cd");
-    IGXMLNodeSet* titles = cds.query(@"./title");
-    IGXMLNode* title = titles[0];
-    XCTAssertEqualObjects(title.text, @"Empire Burlesque");
+    XCTAssertEqualObjects(node.query(@"//cd/title").firstObject.text, @"Empire Burlesque");
 }
 
 @end
