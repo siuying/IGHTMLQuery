@@ -11,8 +11,12 @@
 /**
  Array like construct allow chaining query
  */
-@interface IGXMLNodeSet : NSObject
+@interface IGXMLNodeSet : NSObject <NSFastEnumeration>
 
 @property (nonatomic, copy, readonly) NSOrderedSet* nodes;
+
+-(id) initWithNodes:(NSArray*)nodes;
+
+-(NSUInteger) count;
 
 @end
