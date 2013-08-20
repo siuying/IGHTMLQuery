@@ -64,6 +64,7 @@
 @interface IGXMLNode (Query)
 
 /**
+ Query a node with XPath
  @param xpath used to query the document
  @return elements matched by supplied XPath query.
  */

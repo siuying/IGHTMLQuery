@@ -27,20 +27,35 @@
 
 -(id) initWithNodes:(NSArray*)nodes;
 
--(IGXMLNodeSet*) appendWithSet:(IGXMLNodeSet*)set;
-
+/**
+ @return number of nodes in the set
+ */
 -(NSUInteger) count;
 
+/**
+ @return return an array of all objects in the node set.
+ */
 -(NSArray *) allObjects;
 
+/**
+ @return return first object in the node set.
+ */
 -(IGXMLNode*) firstObject;
 
+/**
+ @return add support of subscript syntax.
+ */
 -(id) objectAtIndexedSubscript:(NSUInteger)idx;
 
 @end
 
 @interface IGXMLNodeSet (Query)
 
+/**
+ Query set of nodes with XPath
+ @param xpath used to query the nodes.
+ @return elements matched by supplied XPath query on the node set.
+ */
 - (IGXMLNodeSet*) queryWithXPath:(NSString*)xpath;
 
 @end
