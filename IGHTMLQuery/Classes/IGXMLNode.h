@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class IGXMLNodeSet;
+
 @interface IGXMLNode : NSObject
 
 - (id)initFromXMLString:(NSString *)xmlString encoding:(NSStringEncoding)encoding;
@@ -16,5 +18,15 @@
 - (id)initFromXMLFile:(NSString *)filename fileExtension:(NSString *)extension;
 - (id)initFromURL:(NSURL *)url;
 - (id)initFromXMLData:(NSData *)data;
+
+@end
+
+@interface IGXMLNode (Query)
+
+-(IGXMLNode*) firstChild;
+
+-(IGXMLNodeSet*) children;
+
+-(IGXMLNodeSet*) queryWithXPath:(NSString*)xpath;
 
 @end

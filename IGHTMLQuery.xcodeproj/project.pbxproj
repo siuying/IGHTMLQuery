@@ -24,6 +24,8 @@
 		543763E017C36F52004CE333 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763DF17C36F52004CE333 /* libxml2.dylib */; };
 		543763E317C37028004CE333 /* IGXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763E217C37028004CE333 /* IGXMLNode.m */; };
 		543763E417C37028004CE333 /* IGXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763E217C37028004CE333 /* IGXMLNode.m */; };
+		543763F717C378CF004CE333 /* IGXMLNodeSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763F617C378CF004CE333 /* IGXMLNodeSet.m */; };
+		543763F817C378CF004CE333 /* IGXMLNodeSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763F617C378CF004CE333 /* IGXMLNodeSet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		543763DF17C36F52004CE333 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		543763E117C37028004CE333 /* IGXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGXMLNode.h; path = Classes/IGXMLNode.h; sourceTree = "<group>"; };
 		543763E217C37028004CE333 /* IGXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGXMLNode.m; path = Classes/IGXMLNode.m; sourceTree = "<group>"; };
+		543763F517C378CF004CE333 /* IGXMLNodeSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGXMLNodeSet.h; path = Classes/IGXMLNodeSet.h; sourceTree = "<group>"; };
+		543763F617C378CF004CE333 /* IGXMLNodeSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGXMLNodeSet.m; path = Classes/IGXMLNodeSet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +170,8 @@
 			children = (
 				543763E117C37028004CE333 /* IGXMLNode.h */,
 				543763E217C37028004CE333 /* IGXMLNode.m */,
+				543763F517C378CF004CE333 /* IGXMLNodeSet.h */,
+				543763F617C378CF004CE333 /* IGXMLNodeSet.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -271,6 +277,7 @@
 				543763B617C36EFD004CE333 /* IGAppDelegate.m in Sources */,
 				543763B217C36EFD004CE333 /* main.m in Sources */,
 				543763BC17C36EFD004CE333 /* IGViewController.m in Sources */,
+				543763F717C378CF004CE333 /* IGXMLNodeSet.m in Sources */,
 				543763E317C37028004CE333 /* IGXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				543763D117C36EFD004CE333 /* IGHTMLQueryTests.m in Sources */,
+				543763F817C378CF004CE333 /* IGXMLNodeSet.m in Sources */,
 				543763E417C37028004CE333 /* IGXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
