@@ -83,4 +83,12 @@
     XCTAssertEqualObjects(price.text, @"10.90");
 }
 
+- (void)testXPathShorthand {
+    IGXMLDocument* node = [[IGXMLDocument alloc] initFromXMLString:catelogXml encoding:NSUTF8StringEncoding];
+    IGXMLNodeSet* cds = node.query(@"//cd");
+    XCTAssertNotNil(cds);
+    XCTAssertTrue(cds.count == 3, @"should have 3 cd");
+
+}
+
 @end

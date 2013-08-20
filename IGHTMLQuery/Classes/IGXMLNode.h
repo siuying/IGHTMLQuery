@@ -19,12 +19,20 @@
 
 @interface IGXMLNode : NSObject
 
+/**
+ backed XML node,
+ */
 @property (nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
 
 /**
  Root node of the current node.
  */
 @property (nonatomic, strong, readonly) IGXMLDocument* root;
+
+/**
+ Shorthand for [IGXMLNode queryWithXPath:]
+ */
+@property (nonatomic, copy, readonly) IGXMLNodeSet* (^query)(NSString*);
 
 /**
  Create a node using a root node and a xml node pointer.
@@ -55,6 +63,10 @@
 
 @interface IGXMLNode (Query)
 
+/**
+ @param xpath used to query the document
+ @return elements matched by supplied XPath query.
+ */
 - (IGXMLNodeSet*) queryWithXPath:(NSString*)xpath;
 
 @end

@@ -66,4 +66,10 @@
     return [[IGXMLNodeSet alloc] initWithNodes:[nodes array]];
 }
 
+-(IGXMLNodeSet* (^)(NSString*)) query {
+    return ^IGXMLNodeSet* (NSString* query) {
+        return [self queryWithXPath:query];
+    };
+}
+
 @end

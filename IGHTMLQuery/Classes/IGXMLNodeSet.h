@@ -15,7 +15,15 @@
  */
 @interface IGXMLNodeSet : NSObject <NSFastEnumeration>
 
+/**
+ nodes in this node set
+ */
 @property (nonatomic, copy, readonly) NSOrderedSet* nodes;
+
+/**
+ Shorthand for [IGXMLNodeSet queryWithXPath:]
+ */
+@property (nonatomic, copy, readonly) IGXMLNodeSet* (^query)(NSString*);
 
 -(id) initWithNodes:(NSArray*)nodes;
 

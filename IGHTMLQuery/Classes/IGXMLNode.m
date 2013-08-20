@@ -109,6 +109,12 @@
     return [[IGXMLNodeSet alloc] initWithNodes:resultNodes];
 }
 
+-(IGXMLNodeSet* (^)(NSString*)) query {
+    return ^IGXMLNodeSet* (NSString* query) {
+        return [self queryWithXPath:query];
+    };
+}
+
 @end
 
 @implementation IGXMLNode (Attributes)
