@@ -6,15 +6,10 @@
 //  Copyright (c) 2013 Ignition Soft. All rights reserved.
 //
 
-#import <libxml2/libxml/xmlreader.h>
-#import <libxml2/libxml/xmlmemory.h>
-#import <libxml2/libxml/HTMLparser.h>
-
 #import "IGXMLDocument.h"
 
-@interface IGXMLDocument () {
-    xmlDocPtr _doc;
-}
+@interface IGXMLDocument ()
+@property (nonatomic, unsafe_unretained) xmlDocPtr doc;
 @end
 
 @implementation IGXMLDocument
@@ -45,8 +40,8 @@
     if ((self = [super init])) {
         _doc = xmlReadMemory([data bytes], (int)[data length], "", nil, XML_PARSE_RECOVER | XML_PARSE_NOBLANKS);
         if (_doc) {
-            _node = xmlDocGetRootElement(_doc);
-            if (!_node) {
+            self.node = xmlDocGetRootElement(_doc);
+            if (!self.node) {
                 _doc = nil;
             }
         }
@@ -61,7 +56,7 @@
         xmlFreeDoc(_doc);
     }
     _doc = nil;
-    _node = nil;
+    self.node = nil;
 }
 
 #pragma mark - Override super class

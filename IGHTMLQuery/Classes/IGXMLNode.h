@@ -17,10 +17,9 @@
 
 @class IGXMLDocument;
 
-@interface IGXMLNode : NSObject {
-@protected
-    xmlNodePtr _node;
-}
+@interface IGXMLNode : NSObject
+
+@property (nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
 
 /**
  Root node of the current node.
