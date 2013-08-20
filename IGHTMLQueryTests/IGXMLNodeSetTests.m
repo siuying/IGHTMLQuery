@@ -71,12 +71,22 @@
     IGXMLNodeSet* titles = [cds queryWithXPath:@"./title"];
     IGXMLNode* title = titles[0];
     XCTAssertEqualObjects(title.text, @"Empire Burlesque");
+
+    NSArray* artists = @[@"Bob Dylan", @"Bonnie Tyler", @"Dolly Parton"];
+    [[node queryWithXPath:@"//title"] enumerateNodesUsingBlock:^(IGXMLNode *node, NSUInteger idx, BOOL *stop) {
+        XCTAssertTrue((NSInteger)[artists indexOfObject:node.text] > -1, @"should be valid artist");
+    }];
 }
 
 - (void)testXPathShorthand
 {
     IGXMLDocument* node = [[IGXMLDocument alloc] initFromXMLString:catelogXml encoding:NSUTF8StringEncoding];
     XCTAssertEqualObjects(node.query(@"//cd/title").firstObject.text, @"Empire Burlesque");
+
+    NSArray* artists = @[@"Bob Dylan", @"Bonnie Tyler", @"Dolly Parton"];
+    node.query(@"//cd/artist").each(^(IGXMLNode* node){
+        XCTAssertTrue((NSInteger)[artists indexOfObject:node.text] > -1, @"should be valid artist");
+    });
 }
 
 @end

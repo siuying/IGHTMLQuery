@@ -10,6 +10,10 @@
 
 @class IGXMLNode;
 
+typedef void (^IGXMLNodeSetEnumerateBlock)(IGXMLNode* node, NSUInteger idx, BOOL *stop);
+
+typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* node);
+
 /**
  Array like construct allow chaining query
  */
@@ -24,6 +28,11 @@
  Shorthand for [IGXMLNodeSet queryWithXPath:]
  */
 @property (nonatomic, copy, readonly) IGXMLNodeSet* (^query)(NSString*);
+
+/**
+ Shorthand for [IGXMLNodeSet enumerateNodessUsingBlock:]
+ */
+@property (nonatomic, copy, readonly) void (^each)(IGXMLNodeSetEachBlock);
 
 -(id) initWithNodes:(NSArray*)nodes;
 
@@ -46,6 +55,8 @@
  @return add support of subscript syntax.
  */
 -(id) objectAtIndexedSubscript:(NSUInteger)idx;
+
+-(void) enumerateNodesUsingBlock:(IGXMLNodeSetEnumerateBlock)block;
 
 @end
 
