@@ -10,9 +10,6 @@
 #import <libxml2/libxml/xmlmemory.h>
 #import <libxml2/libxml/HTMLparser.h>
 
-#import <libxml/xpath.h>
-#import <libxml/xpathInternals.h>
-
 #import "IGXMLDocument.h"
 
 @interface IGXMLDocument () {
@@ -57,6 +54,8 @@
     return self;
 }
 
+#pragma mark - Lifecycle
+
 -(void) dealloc {
     if (_doc) {
         xmlFreeDoc(_doc);
@@ -65,6 +64,11 @@
     _node = nil;
 }
 
+#pragma mark - Override super class
+
+/**
+ Get the root node of the node, which is always itself.
+ */
 -(IGXMLDocument*) root {
     return self;
 }

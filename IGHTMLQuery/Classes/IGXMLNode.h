@@ -8,10 +8,9 @@
 
 #import <libxml2/libxml/xmlreader.h>
 #import <libxml2/libxml/xmlmemory.h>
-#import <libxml2/libxml/HTMLparser.h>
-
 #import <libxml/xpath.h>
 #import <libxml/xpathInternals.h>
+
 #import <Foundation/Foundation.h>
 
 #import "IGXMLNodeSet.h"
@@ -23,8 +22,14 @@
     xmlNodePtr _node;
 }
 
+/**
+ Root node of the current node.
+ */
 @property (nonatomic, strong, readonly) IGXMLDocument* root;
 
+/**
+ Create a node using a root node and a xml node pointer.
+ */
 - (id)initFromRoot:(IGXMLDocument*)root node:(xmlNodePtr)node;
 
 /**
