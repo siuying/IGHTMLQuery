@@ -42,7 +42,7 @@ Alternatively:
 
 ## Usage
 
-### Add Headers
+### Import header
 
 For each files using IGHTMLQuery, import ```IGHTMLQuery.h```:
 
