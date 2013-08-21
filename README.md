@@ -38,7 +38,7 @@ Alternatively:
 
 1. Add all the source files in ```Classes``` to your Xcoe project
 2. In "Build Phases" > "Link Binary With Libraries, add ```libxml2```.
-3. In "Build Setting", find "Header Search Paths" and add "$(SDK_DIR)"/usr/include/libxml2"
+3. In "Build Setting", find "Header Search Paths" and add "$(SDK_DIR)/usr/include/libxml2"
 
 ## Usage
 
