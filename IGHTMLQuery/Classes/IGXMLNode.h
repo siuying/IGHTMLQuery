@@ -62,6 +62,9 @@ extern NSString* const IGXMLQueryErrorDomain;
  */
 - (IGXMLNodeSet*) children;
 
+/**
+ @return get last error.
+ */
 - (NSError*) lastError;
 
 @end

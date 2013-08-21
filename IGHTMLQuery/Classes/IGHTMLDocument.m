@@ -33,11 +33,13 @@
 }
 
 - (id)initWithHTMLData:(NSData *)data error:(NSError**)outError{
-    return [self initWithHTMLData:data forceEncoding:nil options:(HTML_PARSE_RECOVER | HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR | HTML_PARSE_NOIMPLIED) error:outError];
+    return [self initWithHTMLData:data forceEncoding:nil options:(HTML_PARSE_RECOVER | HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR | HTML_PARSE_NOIMPLIED | HTML_PARSE_NONET) error:outError];
 }
 
 - (id)initWithHTMLData:(NSData *)data forceEncoding:(NSString*)encoding options:(htmlParserOption)options error:(NSError**)outError{
     if ((self = [super init])) {
+        xmlInitGlobals();
+
         xmlKeepBlanksDefault(false);
 
         self.doc = htmlReadMemory([data bytes], (int)[data length], "", encoding ? [encoding UTF8String] : nil, options);

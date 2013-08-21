@@ -42,6 +42,8 @@
 
 - (id)initWithXMLData:(NSData *)data forceEncoding:(NSString*)encoding options:(xmlParserOption)options error:(NSError**)outError {
     if ((self = [super init])) {
+        xmlInitGlobals();
+
         _doc = xmlReadMemory([data bytes], (int)[data length], encoding ? [encoding UTF8String] : nil, nil, options);
         if (_doc) {
             self.node = xmlDocGetRootElement(_doc);
