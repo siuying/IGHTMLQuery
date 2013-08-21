@@ -29,7 +29,7 @@ node.query(@"//cd/title").each(^(IGXMLNode* node){
 })
 
 // quick manipulation
-node.query(@"//cd/title").append(@"&lt;message&gt;Hi!&lt;/message&gt;")
+node.query(@"//cd/title").append(@"<message>Hi!</message>")
 ```
 
 ## Usage
