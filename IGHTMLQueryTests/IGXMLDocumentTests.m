@@ -159,11 +159,33 @@
                           @"<h2>Greetings</h2><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div><p>Test</p>");
 }
 
+- (void)testAfter {
+    doc = [[IGXMLDocument alloc] initWithXMLData:[@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    
+    doc.query(@"//*[@class='inner']").each(^(IGXMLNode* node){
+        node.after(@"<p>Test</p>");
+    });
+    
+    XCTAssertEqualObjects(doc.innerXml,
+                          @"<h2>Greetings</h2><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div><p>Test</p>");
+}
+
 - (void)testPreviousNextSibling {
     doc = [[IGXMLDocument alloc] initWithXMLData:[@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
     
     doc.query(@"//*[@class='inner']").each(^(IGXMLNode* node){
         [node addPreviousSiblingWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<p>Test</p>" encoding:NSUTF8StringEncoding error:nil]];
+    });
+    
+    XCTAssertEqualObjects(doc.innerXml,
+                          @"<h2>Greetings</h2><p>Test</p><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div>");
+}
+
+- (void)testBefore {
+    doc = [[IGXMLDocument alloc] initWithXMLData:[@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    
+    doc.query(@"//*[@class='inner']").each(^(IGXMLNode* node){
+        node.before(@"<p>Test</p>");
     });
     
     XCTAssertEqualObjects(doc.innerXml,

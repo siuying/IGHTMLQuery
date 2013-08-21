@@ -276,6 +276,22 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
 }
 
+-(IGXMLNodeSet* (^)(NSString*))after {
+    return ^IGXMLNodeSet* (NSString* xml) {
+        NSError* error = nil;
+        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
+                                                          encoding:NSUTF8StringEncoding
+                                                             error:&error];
+        if (node) {
+            [self addNextSiblingWithNode:node];
+            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
+        } else {
+            // TODO: log error for diagnosis
+            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        }
+    };
+}
+
 -(IGXMLNode*) addPreviousSiblingWithNode:(IGXMLNode*)child {
     if (!child) {
         @throw [NSException exceptionWithName:@"IGXMLNode Error"
@@ -286,6 +302,22 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     xmlNodePtr newNode = xmlDocCopyNode(child.node, self.root.doc, 1);
     xmlAddPrevSibling(self.node, newNode);
     return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
+}
+
+-(IGXMLNodeSet* (^)(NSString*))before {
+    return ^IGXMLNodeSet* (NSString* xml) {
+        NSError* error = nil;
+        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
+                                                          encoding:NSUTF8StringEncoding
+                                                             error:&error];
+        if (node) {
+            [self addPreviousSiblingWithNode:node];
+            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
+        } else {
+            // TODO: log error for diagnosis
+            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        }
+    };
 }
 
 -(void) empty {
