@@ -29,9 +29,17 @@
     [super tearDown];
 }
 
-- (void)testHtmlDocumentTest
+- (void)testHtmlDocumentXPathQuery
 {
     XCTAssertNotNil(doc);
+
+    NSString* title = [doc queryWithXPath:@"//title"].firstObject.text;
+    XCTAssertEqualObjects(title, @"Sample \"Hello, World\" Application");
+    
+    NSArray* validLinks = @[@"about.html", @"hello.html"];
+    [[doc queryWithXPath:@"//ul/li/a"] enumerateNodesUsingBlock:^(IGXMLNode *link, NSUInteger idx, BOOL *stop) {
+        XCTAssertTrue((NSInteger)[validLinks indexOfObject:link[@"href"]] > -1, @"should be valid link");
+    }];
 }
 
 @end
