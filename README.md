@@ -28,6 +28,8 @@ node.query(@"//cd/title").each(^(IGXMLNode* node){
   NSLog(@"%@", node.text);
 })
 
+// quick manipulation
+node.query(@"//cd/title").append(@"&lt;message&gt;Hi!&lt;/message&gt;")
 ```
 
 ## Usage
