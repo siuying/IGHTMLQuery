@@ -8,7 +8,9 @@
 
 #ifndef IGHTMLQuery_h
 #define IGHTMLQuery_h
+#import "IGXMLNodeManipulation.h"
 #import "IGXMLNode.h"
 #import "IGXMLDocument.h"
+#import "IGHTMLDocument.h"
 #import "IGXMLNodeSet.h"
 #endif

@@ -121,106 +121,21 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     }
 }
 
-@end
+#pragma mark - IGXMLNodeManipulation
 
-@implementation IGXMLNode (Query)
-
--(IGXMLNodeSet*) queryWithXPath:(NSString*)xpath {
-    if (!xpath) {
-        return [[IGXMLNodeSet alloc] initWithNodes:@[]];
-    }
-
-    xmlXPathContextPtr context = xmlXPathNewContext(self.root.doc);
-    if (context == NULL) {
-		return nil;
-    }
-    
-    context->node = self.node;
-
-    xmlXPathObjectPtr object = xmlXPathEvalExpression((xmlChar *)[xpath cStringUsingEncoding:NSUTF8StringEncoding], context);
-    if (object == NULL) {
-		return nil;
-    }
-    
-	xmlNodeSetPtr nodes = object->nodesetval;
-	if (nodes == NULL) {
-		return nil;
-	}
-    
-	NSMutableArray *resultNodes = [NSMutableArray array];
-    for (NSInteger i = 0; i < nodes->nodeNr; i++) {
-        [resultNodes addObject:[[IGXMLNode alloc] initFromRoot:self.root node:nodes->nodeTab[i]]];
-	}
-    
-    xmlXPathFreeObject(object);
-    xmlXPathFreeContext(context);
-
-    return [[IGXMLNodeSet alloc] initWithNodes:resultNodes];
-}
-
--(IGXMLNodeSet* (^)(NSString*)) query {
-    return ^IGXMLNodeSet* (NSString* query) {
-        return [self queryWithXPath:query];
-    };
-}
-
-@end
-
-@implementation IGXMLNode (Attributes)
-
-- (id)objectForKeyedSubscript:(id)key {
-    return [self attribute:key];
-}
-
-- (NSString *)attribute:(NSString *)attName {
-    return [self attribute:attName inNamespace:nil];
-}
-
-- (NSString *)attribute:(NSString *)attName inNamespace:(NSString *)ns {
-    const unsigned char *attCStr = ns ?
-        xmlGetNsProp(_node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding], (const xmlChar *)[ns cStringUsingEncoding:NSUTF8StringEncoding]) :
-        xmlGetProp(_node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding]) ;
-
-    if (attCStr) {
-        return [NSString stringWithUTF8String:(const char *)attCStr];
-    }
-    
-    return nil;
-}
-
-@end
-
-@implementation IGXMLNode (Manipulation)
-
--(IGXMLNode*) appendWithNode:(IGXMLNode*)child {
+-(instancetype) appendWithNode:(IGXMLNode*)child {
     if (!child) {
         @throw [NSException exceptionWithName:@"IGXMLNode Error"
                                        reason:@"child node cannot be nil"
                                      userInfo:nil];
     }
-
+    
     xmlNodePtr newNode = xmlDocCopyNode(child.node, self.root.doc, 1);
     xmlAddChild(self.node, newNode);
     return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
 }
 
--(IGXMLNodeSet* (^)(NSString*)) append {
-    return ^IGXMLNodeSet* (NSString* xml) {
-        NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                          encoding:NSUTF8StringEncoding
-                                                             error:&error];
-        if (node) {
-            [self appendWithNode:node];
-            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
-        } else {
-            // TODO: log error for diagnosis
-            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
-        }
-    };
-}
-
--(IGXMLNode*) prependWithNode:(IGXMLNode*)child {
+-(instancetype) prependWithNode:(IGXMLNode*)child {
     if (!child) {
         @throw [NSException exceptionWithName:@"IGXMLNode Error"
                                        reason:@"child node cannot be nil"
@@ -229,7 +144,7 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     
     xmlNodePtr cur = self.node;
     cur = cur->children;
-
+    
     while (cur != nil && cur->type != XML_ELEMENT_NODE && cur->type != XML_TEXT_NODE) {
         cur = cur->next;
     }
@@ -240,24 +155,8 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     } else {
         xmlAddChild(self.node, newNode);
     }
-
+    
     return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
-}
-
--(IGXMLNodeSet* (^)(NSString*)) prepend {
-    return ^IGXMLNodeSet* (NSString* xml) {
-        NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                          encoding:NSUTF8StringEncoding
-                                                             error:&error];
-        if (node) {
-            [self prependWithNode:node];
-            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
-        } else {
-            // TODO: log error for diagnosis
-            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
-        }
-    };
 }
 
 -(IGXMLNode*) addChildWithNode:(IGXMLNode*)child {
@@ -276,6 +175,67 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
 }
 
+-(IGXMLNode*) addPreviousSiblingWithNode:(IGXMLNode*)child {
+    if (!child) {
+        @throw [NSException exceptionWithName:@"IGXMLNode Error"
+                                       reason:@"child node cannot be nil"
+                                     userInfo:nil];
+    }
+    
+    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.root.doc, 1);
+    xmlAddPrevSibling(self.node, newNode);
+    return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
+}
+
+-(void) empty {
+    xmlNodePtr cur = self.node;
+    cur = cur->children;
+    
+    while (cur != nil) {
+        xmlNodePtr next = cur->next;
+        xmlUnlinkNode(cur);
+        cur = next;
+    }
+}
+
+-(void)remove {
+    xmlUnlinkNode(self.node);
+}
+
+#pragma mark - Manipulation - Shorthand
+
+-(IGXMLNodeSet* (^)(NSString*)) append {
+    return ^IGXMLNodeSet* (NSString* xml) {
+        NSError* error = nil;
+        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
+                                                          encoding:NSUTF8StringEncoding
+                                                             error:&error];
+        if (node) {
+            [self appendWithNode:node];
+            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
+        } else {
+            // TODO: log error for diagnosis
+            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        }
+    };
+}
+
+-(IGXMLNodeSet* (^)(NSString*)) prepend {
+    return ^IGXMLNodeSet* (NSString* xml) {
+        NSError* error = nil;
+        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
+                                                          encoding:NSUTF8StringEncoding
+                                                             error:&error];
+        if (node) {
+            [self prependWithNode:node];
+            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
+        } else {
+            // TODO: log error for diagnosis
+            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        }
+    };
+}
+
 -(IGXMLNodeSet* (^)(NSString*))after {
     return ^IGXMLNodeSet* (NSString* xml) {
         NSError* error = nil;
@@ -290,18 +250,6 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
             return [[IGXMLNodeSet alloc] initWithNodes:@[]];
         }
     };
-}
-
--(IGXMLNode*) addPreviousSiblingWithNode:(IGXMLNode*)child {
-    if (!child) {
-        @throw [NSException exceptionWithName:@"IGXMLNode Error"
-                                       reason:@"child node cannot be nil"
-                                     userInfo:nil];
-    }
-
-    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.root.doc, 1);
-    xmlAddPrevSibling(self.node, newNode);
-    return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
 }
 
 -(IGXMLNodeSet* (^)(NSString*))before {
@@ -320,19 +268,68 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     };
 }
 
--(void) empty {
-    xmlNodePtr cur = self.node;
-    cur = cur->children;
-    
-    while (cur != nil) {
-        xmlNodePtr next = cur->next;
-        xmlUnlinkNode(cur);
-        cur = next;
+#pragma mark - Query
+
+-(IGXMLNodeSet*) queryWithXPath:(NSString*)xpath {
+    if (!xpath) {
+        return [[IGXMLNodeSet alloc] initWithNodes:@[]];
     }
+    
+    xmlXPathContextPtr context = xmlXPathNewContext(self.root.doc);
+    if (context == NULL) {
+		return nil;
+    }
+    
+    context->node = self.node;
+    
+    xmlXPathObjectPtr object = xmlXPathEvalExpression((xmlChar *)[xpath cStringUsingEncoding:NSUTF8StringEncoding], context);
+    if (object == NULL) {
+		return nil;
+    }
+    
+	xmlNodeSetPtr nodes = object->nodesetval;
+	if (nodes == NULL) {
+		return nil;
+	}
+    
+	NSMutableArray *resultNodes = [NSMutableArray array];
+    for (NSInteger i = 0; i < nodes->nodeNr; i++) {
+        [resultNodes addObject:[[IGXMLNode alloc] initFromRoot:self.root node:nodes->nodeTab[i]]];
+	}
+    
+    xmlXPathFreeObject(object);
+    xmlXPathFreeContext(context);
+    
+    return [[IGXMLNodeSet alloc] initWithNodes:resultNodes];
 }
 
--(void)remove {
-    xmlUnlinkNode(self.node);
+-(IGXMLNodeSet* (^)(NSString*)) query {
+    return ^IGXMLNodeSet* (NSString* query) {
+        return [self queryWithXPath:query];
+    };
+}
+
+
+#pragma mark - Attributes
+
+- (id)objectForKeyedSubscript:(id)key {
+    return [self attribute:key];
+}
+
+- (NSString *)attribute:(NSString *)attName {
+    return [self attribute:attName inNamespace:nil];
+}
+
+- (NSString *)attribute:(NSString *)attName inNamespace:(NSString *)ns {
+    const unsigned char *attCStr = ns ?
+    xmlGetNsProp(_node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding], (const xmlChar *)[ns cStringUsingEncoding:NSUTF8StringEncoding]) :
+    xmlGetProp(_node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding]) ;
+    
+    if (attCStr) {
+        return [NSString stringWithUTF8String:(const char *)attCStr];
+    }
+    
+    return nil;
 }
 
 @end

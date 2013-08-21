@@ -15,12 +15,13 @@
 #import <Foundation/Foundation.h>
 
 #import "IGXMLNodeSet.h"
+#import "IGXMLNodeManipulation.h"
 
 extern NSString* const IGXMLQueryErrorDomain;
 
 @class IGXMLDocument;
 
-@interface IGXMLNode : NSObject
+@interface IGXMLNode : NSObject <IGXMLNodeManipulation>
 
 /**
  backed XML node,
@@ -46,7 +47,6 @@ extern NSString* const IGXMLQueryErrorDomain;
  Prepend xml to the node, shorthand for [IGXMLNode prependWithNode:]
  */
 @property (nonatomic, copy, readonly) IGXMLNodeSet* (^prepend)(NSString*);
-
 
 /**
  Add xml before the node, shorthand for [IGXMLNode addPreviousSiblingWithNode:]
@@ -124,23 +124,5 @@ extern NSString* const IGXMLQueryErrorDomain;
  subscript support
  */
 - (id)objectForKeyedSubscript:(id)key;
-
-@end
-
-@interface IGXMLNode (Manipulation)
-
--(IGXMLNode*) appendWithNode:(IGXMLNode*)child;
-
--(IGXMLNode*) prependWithNode:(IGXMLNode*)child;
-
--(IGXMLNode*) addChildWithNode:(IGXMLNode*)child;
-
--(IGXMLNode*) addNextSiblingWithNode:(IGXMLNode*)child;
-
--(IGXMLNode*) addPreviousSiblingWithNode:(IGXMLNode*)child;
-
--(void) empty;
-
--(void) remove;
 
 @end

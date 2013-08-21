@@ -8,6 +8,7 @@
 
 #import "IGXMLNodeSet.h"
 #import "IGXMLNode.h"
+#import "IGXMLDocument.h"
 
 @interface IGXMLNodeSet()
 @property (nonatomic, copy) NSOrderedSet* nodes;
@@ -21,6 +22,10 @@
         _nodes = [NSOrderedSet orderedSetWithArray:nodes];
     }
     return self;
+}
+
++(id) nodeSetWithNodes:(NSArray*)nodes {
+    return [[self alloc] initWithNodes:nodes];
 }
 
 -(NSUInteger) count {
@@ -65,9 +70,123 @@
     };
 }
 
-@end
+#pragma mark - IGXMLNodeManipulation
 
-@implementation IGXMLNodeSet (Query)
+-(instancetype) appendWithNode:(IGXMLNode*)child {
+    NSMutableArray* newNodes = [NSMutableArray array];
+    [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
+        [newNodes addObject:[node appendWithNode:child]];
+    }];
+    return [IGXMLNodeSet nodeSetWithNodes:newNodes];
+}
+
+-(instancetype) prependWithNode:(IGXMLNode*)child {
+    NSMutableArray* newNodes = [NSMutableArray array];
+    [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
+        [newNodes addObject:[node prependWithNode:child]];
+    }];
+    return [IGXMLNodeSet nodeSetWithNodes:newNodes];
+}
+
+-(instancetype) addChildWithNode:(IGXMLNode*)child {
+    NSMutableArray* newNodes = [NSMutableArray array];
+    [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
+        [newNodes addObject:[node prependWithNode:child]];
+    }];
+    return [IGXMLNodeSet nodeSetWithNodes:newNodes];
+}
+
+-(instancetype) addNextSiblingWithNode:(IGXMLNode*)child {
+    NSMutableArray* newNodes = [NSMutableArray array];
+    [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
+        [newNodes addObject:[node addNextSiblingWithNode:child]];
+    }];
+    return [IGXMLNodeSet nodeSetWithNodes:newNodes];
+}
+
+-(instancetype) addPreviousSiblingWithNode:(IGXMLNode*)child {
+    NSMutableArray* newNodes = [NSMutableArray array];
+    [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
+        [newNodes addObject:[node addPreviousSiblingWithNode:child]];
+    }];
+    return [IGXMLNodeSet nodeSetWithNodes:newNodes];
+}
+
+-(void) empty {
+    [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
+        [node empty];
+    }];
+}
+
+-(void) remove {
+    [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
+        [node remove];
+    }];
+}
+
+#pragma mark - IGXMLNodeManipulation Shorthand
+
+-(IGXMLNodeSet* (^)(NSString*)) append {
+    return ^IGXMLNodeSet* (NSString* xml) {
+        NSError* error = nil;
+        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
+                                                          encoding:NSUTF8StringEncoding
+                                                             error:&error];
+        if (node) {
+            return [self appendWithNode:node];
+        } else {
+            // TODO: log error for diagnosis
+            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        }
+    };
+}
+
+-(IGXMLNodeSet* (^)(NSString*)) prepend {
+    return ^IGXMLNodeSet* (NSString* xml) {
+        NSError* error = nil;
+        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
+                                                          encoding:NSUTF8StringEncoding
+                                                             error:&error];
+        if (node) {
+            return [self prependWithNode:node];
+        } else {
+            // TODO: log error for diagnosis
+            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        }
+    };
+}
+
+-(IGXMLNodeSet* (^)(NSString*))after {
+    return ^IGXMLNodeSet* (NSString* xml) {
+        NSError* error = nil;
+        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
+                                                          encoding:NSUTF8StringEncoding
+                                                             error:&error];
+        if (node) {
+            return [self addNextSiblingWithNode:node];
+        } else {
+            // TODO: log error for diagnosis
+            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        }
+    };
+}
+
+-(IGXMLNodeSet* (^)(NSString*))before {
+    return ^IGXMLNodeSet* (NSString* xml) {
+        NSError* error = nil;
+        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
+                                                          encoding:NSUTF8StringEncoding
+                                                             error:&error];
+        if (node) {
+            return [self addPreviousSiblingWithNode:node];
+        } else {
+            // TODO: log error for diagnosis
+            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        }
+    };
+}
+
+#pragma mark - Query
 
 - (IGXMLNodeSet*) queryWithXPath:(NSString*)xpath {
     NSMutableOrderedSet* nodes = [[NSMutableOrderedSet alloc] init];
