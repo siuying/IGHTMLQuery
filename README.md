@@ -70,7 +70,7 @@ Use ```parent```, ```nextSibling```, ```previousSibling```, ```children``` and `
 
 ### Query using XPath
 
-You can query the document with queryWithXPath: method. The method will always return a ```IGXMLNodeSet``` object, which is a set like object that you can chain query and operations.
+You can query the document or any node with ```queryWithXPath:``` method. It will always return a ```IGXMLNodeSet``` object, which is a set like object that you can chain query and operations.
 
 ```objective-c
 IGXMLNodeSet* contents = [doc queryWithXPath:@"//div[@class='content']"];
@@ -80,7 +80,7 @@ IGXMLNodeSet* contents = [doc queryWithXPath:@"//div[@class='content']"];
 
 ```
 
-Alternative shorthand syntax:
+Alternative, you can use shorthand syntax:
 
 ```objective-c
 IGXMLNode* content = doc.query(@"//div[@class='content']").each(^(IGXMLNode* content){
