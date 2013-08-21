@@ -105,3 +105,11 @@ extern NSString* const IGXMLQueryErrorDomain;
 - (id)objectForKeyedSubscript:(id)key;
 
 @end
+
+@interface IGXMLNode (Manipulation)
+
+-(void) empty;
+
+-(void) remove;
+
+@end

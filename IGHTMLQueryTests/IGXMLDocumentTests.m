@@ -87,4 +87,35 @@
     XCTAssertNil(error);
 }
 
+- (void)testRemove {
+    doc.query(@"//cd").each(^(IGXMLNode* cd){
+        NSString* title = cd.query(@"./title").firstObject.text;
+        NSLog(@"cd: %@", title);
+        if (![title isEqualToString:@"Empire Burlesque"]) {
+            [cd remove];
+        }
+    });
+    
+    IGXMLNodeSet* nodes = doc.query(@"//cd");
+    XCTAssertTrue(nodes.count == 1, @"should have 1 node");
+    XCTAssertEqualObjects(nodes.query(@"title").firstObject.text, @"Empire Burlesque");
+    
+}
+
+- (void)testEmpty {
+    doc.query(@"//cd").each(^(IGXMLNode* cd){
+        NSString* title = cd.query(@"./title").firstObject.text;
+        NSLog(@"cd: %@", title);
+        if ([title isEqualToString:@"Empire Burlesque"]) {
+            [cd empty];
+        }
+    });
+    
+    IGXMLNodeSet* nodes = doc.query(@"//cd");
+    XCTAssertTrue(nodes.count == 3, @"should have 3 node");
+    XCTAssertEqualObjects([nodes[0] innerXml], @"");
+    XCTAssertEqualObjects(doc.query(@"//cd[@country='USA']//title").firstObject.text, @"Greatest Hits");
+    XCTAssertEqualObjects(doc.query(@"//cd[@country='UK']//title").firstObject.text, @"Hide your heart");
+}
+
 @end

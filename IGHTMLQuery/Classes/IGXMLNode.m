@@ -189,3 +189,21 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
 }
 
 @end
+
+@implementation IGXMLNode (Manipulation)
+-(void) empty {
+    xmlNodePtr cur = self.node;
+    cur = cur->children;
+    
+    while (cur != nil) {
+        xmlNodePtr next = cur->next;
+        xmlUnlinkNode(cur);
+        cur = next;
+    }
+}
+
+-(void)remove {
+    xmlUnlinkNode(self.node);
+}
+
+@end
