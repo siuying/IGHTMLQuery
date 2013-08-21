@@ -71,6 +71,10 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     }
 }
 
+- (void)setTag:(NSString*)tag {
+    xmlNodeSetName(_node, (xmlChar*) [tag cStringUsingEncoding:NSUTF8StringEncoding]);
+}
+
 - (NSString *)text {
     xmlChar *key = xmlNodeGetContent(_node);
     NSString *text = (key ? [NSString stringWithUTF8String:(const char *)key] : @"");

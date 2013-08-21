@@ -34,6 +34,9 @@
     IGXMLDocument* hello = [[IGXMLDocument alloc] initWithXMLString:@"<p>Hello</p>" error:nil];
     XCTAssertEqualObjects(hello.tag, @"p");
     XCTAssertEqualObjects(hello.text, @"Hello");
+    
+    hello.tag = @"span";
+    XCTAssertEqualObjects(hello.tag, @"span");
 }
 
 - (void)testInnerXmlAndXml {

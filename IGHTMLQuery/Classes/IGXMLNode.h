@@ -70,6 +70,11 @@ extern NSString* const IGXMLQueryErrorDomain;
 - (NSString *)tag;
 
 /**
+ @param the new tag to set
+ */
+- (void)setTag:(NSString*)tag;
+
+/**
  @return get text of current node.
  */
 - (NSString *)text;
