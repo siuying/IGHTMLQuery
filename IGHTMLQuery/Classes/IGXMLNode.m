@@ -15,6 +15,12 @@
 
 @implementation IGXMLNode
 
++(void) initialize {
+    if ([self class] == [IGXMLNode class]) {
+        xmlInitGlobals();
+    }
+}
+
 - (id)initFromRoot:(IGXMLDocument*)root node:(xmlNodePtr)node {
     if ((self = [super init])) {
         _root = root;
