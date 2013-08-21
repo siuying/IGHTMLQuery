@@ -31,7 +31,7 @@ node.query(@"//cd/title").append(@"<message>Hi!</message>")
 IGHTMLQuery is available through [CocoaPods](http://cocoapods.org/), to install it simply add the following line to your Podfile:
 
 ```ruby
-pod "IGHTMLQuery"
+pod "IGHTMLQuery", :podspec => 'https://raw.github.com/siuying/IGHTMLQuery/master/IGHTMLQuery.podspec'
 ```
 
 Alternatively:
