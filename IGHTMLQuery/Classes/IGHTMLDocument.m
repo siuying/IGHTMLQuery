@@ -51,4 +51,36 @@
     return self;
 }
 
+-(IGXMLNodeSet* (^)(NSString*)) append {
+    return ^IGXMLNodeSet* (NSString* xml) {
+        NSError* error = nil;
+        IGXMLNode* node = [[IGHTMLDocument alloc] initWithHTMLString:xml
+                                                            encoding:NSUTF8StringEncoding
+                                                               error:&error];
+        if (node) {
+            [self appendWithNode:node];
+            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
+        } else {
+            // TODO: log error for diagnosis
+            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        }
+    };
+}
+
+-(IGXMLNodeSet* (^)(NSString*)) prepend {
+    return ^IGXMLNodeSet* (NSString* xml) {
+        NSError* error = nil;
+        IGXMLNode* node = [[IGHTMLDocument alloc] initWithXMLString:xml
+                                                           encoding:NSUTF8StringEncoding
+                                                              error:&error];
+        if (node) {
+            [self prependWithNode:node];
+            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
+        } else {
+            // TODO: log error for diagnosis
+            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        }
+    };
+}
+
 @end

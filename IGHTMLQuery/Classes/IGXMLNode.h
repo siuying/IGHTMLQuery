@@ -38,6 +38,16 @@ extern NSString* const IGXMLQueryErrorDomain;
 @property (nonatomic, copy, readonly) IGXMLNodeSet* (^query)(NSString*);
 
 /**
+ Append xml to the node, shorthand for [IGXMLNode appendWithNode:]
+ */
+@property (nonatomic, copy, readonly) IGXMLNodeSet* (^append)(NSString*);
+
+/**
+ Prepend xml to the node, shorthand for [IGXMLNode prependWithNode:]
+ */
+@property (nonatomic, copy, readonly) IGXMLNodeSet* (^prepend)(NSString*);
+
+/**
  Create a node using a root node and a xml node pointer.
  */
 - (id)initFromRoot:(IGXMLDocument*)root node:(xmlNodePtr)node;

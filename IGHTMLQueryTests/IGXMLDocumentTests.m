@@ -126,10 +126,24 @@
     XCTAssertEqualObjects(doc.query(@"//cd/title").firstObject.innerXml, @"Empire Burlesque<test/>");
 }
 
+- (void)testAppendShorthand {
+    doc.query(@"//cd/title").each(^(IGXMLNode* cd){
+        cd.append(@"<test/>");
+    });
+    XCTAssertEqualObjects(doc.query(@"//cd/title").firstObject.innerXml, @"Empire Burlesque<test/>");
+}
+
 - (void)testPrepend {
     doc.query(@"//cd/title").each(^(IGXMLNode* cd){
         IGXMLNode* newNode = [[IGXMLDocument alloc] initWithXMLString:@"<test/>" encoding:NSUTF8StringEncoding error:nil];
         [cd prependWithNode:newNode];
+    });
+    XCTAssertEqualObjects(doc.query(@"//cd/title").firstObject.innerXml, @"<test/>Empire Burlesque");
+}
+
+- (void)testPrependShorthand {
+    doc.query(@"//cd/title").each(^(IGXMLNode* cd){
+        cd.prepend(@"<test/>");
     });
     XCTAssertEqualObjects(doc.query(@"//cd/title").firstObject.innerXml, @"<test/>Empire Burlesque");
 }

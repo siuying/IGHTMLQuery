@@ -204,6 +204,22 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
 }
 
+-(IGXMLNodeSet* (^)(NSString*)) append {
+    return ^IGXMLNodeSet* (NSString* xml) {
+        NSError* error = nil;
+        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
+                                                          encoding:NSUTF8StringEncoding
+                                                             error:&error];
+        if (node) {
+            [self appendWithNode:node];
+            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
+        } else {
+            // TODO: log error for diagnosis
+            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        }
+    };
+}
+
 -(IGXMLNode*) prependWithNode:(IGXMLNode*)child {
     if (!child) {
         @throw [NSException exceptionWithName:@"IGXMLNode Error"
@@ -226,6 +242,22 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     }
 
     return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
+}
+
+-(IGXMLNodeSet* (^)(NSString*)) prepend {
+    return ^IGXMLNodeSet* (NSString* xml) {
+        NSError* error = nil;
+        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
+                                                          encoding:NSUTF8StringEncoding
+                                                             error:&error];
+        if (node) {
+            [self prependWithNode:node];
+            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
+        } else {
+            // TODO: log error for diagnosis
+            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        }
+    };
 }
 
 -(IGXMLNode*) addChildWithNode:(IGXMLNode*)child {
