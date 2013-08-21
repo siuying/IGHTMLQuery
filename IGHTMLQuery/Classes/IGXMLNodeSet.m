@@ -32,6 +32,23 @@
     return [_nodes count];
 }
 
+- (BOOL) isEqual:(id)object {
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[self class]]) {
+        return NO;
+    }
+    
+    IGXMLNodeSet* another = object;
+    return [self.nodes isEqual:another.nodes];
+}
+
+- (NSUInteger)hash {
+    return self.nodes.hash;
+}
+
 #pragma NSFastEnumeration -
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained [])buffer count:(NSUInteger)len {

@@ -123,6 +123,11 @@ extern NSString* const IGXMLQueryErrorDomain;
  */
 - (IGXMLNode*) firstChild;
 
+/**
+ @return It returns a key guaranteed to be unique for this node, and to always be the same value for this node. In other words, two node objects return the same key if and only if isSameNode indicates that they are the same node.
+ */
+- (NSString*) uniqueKey;
+
 @end
 
 @interface IGXMLNode (Attributes)

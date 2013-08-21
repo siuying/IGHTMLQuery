@@ -191,13 +191,26 @@
     NSError* error = nil;
     IGXMLDocument* atom = [[IGXMLDocument alloc] initWithXMLFile:@"atom" fileExtension:@"xml" error:&error];
     [atom removeNamespaces];
-
+    
     IGXMLNode* entry = atom.query(@"//entry").firstObject;
     XCTAssertNotNil(entry);
-
+    
     IGXMLNodeSet* titles = entry.query(@"title");
     NSString* lang = titles.firstObject[@"lang"];
     XCTAssertEqualObjects(lang, @"zh-Hant");
+}
+
+- (void)testIsEuqal {
+    IGXMLNode* node1a = doc.query(@"cd").firstObject;
+    IGXMLNode* node1b = doc.query(@"cd").firstObject;
+    IGXMLNode* node2 = doc.query(@"cd")[1];
+
+    XCTAssertTrue([node1a isEqual:node1b]);
+    XCTAssertTrue([node1b isEqual:node1a]);
+    XCTAssertEqualObjects(node1a.uniqueKey, node1b.uniqueKey);
+
+    XCTAssertFalse([node1a isEqual:node2]);
+    XCTAssertNotEqualObjects(node1a.uniqueKey, node2.uniqueKey);
 }
 
 @end

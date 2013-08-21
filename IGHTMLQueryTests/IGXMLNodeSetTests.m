@@ -133,4 +133,11 @@
                           @"<h2>Greetings</h2><p>Test</p><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div>");
 }
 
+- (void)testIsEuqal {
+    IGXMLNodeSet* node1a = doc.query(@"cd");
+    IGXMLNodeSet* node1b = doc.query(@"cd");
+    XCTAssertEqualObjects(node1a, node1b);
+    XCTAssertEqual([node1a hash], [node1b hash]);
+}
+
 @end

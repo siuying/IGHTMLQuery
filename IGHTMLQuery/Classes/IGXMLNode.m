@@ -185,6 +185,39 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     return nil;
 }
 
+- (NSString*) uniqueKey {
+    return [NSString stringWithFormat:@"%x", (int) self.node];
+}
+
+- (BOOL) isEqual:(id)object {
+    if (self == object) {
+        return YES;
+    }
+
+    if (![object isKindOfClass:[self class]]) {
+        return NO;
+    }
+    
+    IGXMLNode* another = object;
+    if (self.root != another.root) {
+        return NO;
+    }
+    
+    if (self.node == another.node) {
+        return YES;
+    }
+
+    return NO;
+}
+
+- (NSUInteger)hash {
+    NSUInteger prime = 31;
+    NSUInteger result = 1;
+    result = prime * result + (NSUInteger) self.root;
+    result = prime * result + (NSUInteger) self.node;
+    return result;
+}
+
 #pragma mark - IGXMLNodeManipulation
 
 -(instancetype) appendWithNode:(IGXMLNode*)child {
