@@ -8,7 +8,7 @@
 
 #import <libxml2/libxml/xmlreader.h>
 #import <libxml2/libxml/xmlmemory.h>
-#import <libxml2/libxml/HTMLparser.h>
+
 #import <Foundation/Foundation.h>
 #import "IGXMLNode.h"
 
