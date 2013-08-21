@@ -133,6 +133,10 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     recursively_remove_namespaces_from_node(self.node);
 }
 
+-(id)copyWithZone:(NSZone *)zone{
+    return [[IGXMLNode alloc] initFromRoot:self.root node:self.node];
+}
+
 #pragma mark - Traversal
 
 - (IGXMLNode *) parent {

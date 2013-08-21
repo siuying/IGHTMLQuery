@@ -22,7 +22,7 @@ extern NSString* const IGXMLQueryErrorDomain;
 
 @class IGXMLDocument;
 
-@interface IGXMLNode : NSObject <IGXMLNodeManipulation, IGXMLNodeQuery>
+@interface IGXMLNode : NSObject <IGXMLNodeManipulation, IGXMLNodeQuery, NSCopying>
 
 /**
  backed XML node,

@@ -216,4 +216,11 @@
     XCTAssertNotEqualObjects(node1a.uniqueKey, node2.uniqueKey);
 }
 
+- (void)testCopy {
+    IGXMLNode* node1a = doc.query(@"cd").firstObject;
+    IGXMLNode* node1b = [node1a copy];
+    XCTAssertEqualObjects(node1a, node1b);
+    XCTAssertEqualObjects(node1a.uniqueKey, node1b.uniqueKey);
+}
+
 @end
