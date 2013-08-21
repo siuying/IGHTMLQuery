@@ -52,6 +52,10 @@ extern NSString* const IGXMLQueryErrorDomain;
  */
 - (NSString *)text;
 
+- (NSString *)xml;
+
+- (NSString *)innerXml;
+
 /**
  @return get first child element of current node. If no child exists, return nil.
  */

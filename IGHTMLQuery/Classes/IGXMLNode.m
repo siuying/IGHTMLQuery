@@ -47,6 +47,36 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     return text;
 }
 
+- (NSString *)xml {
+    xmlBufferPtr buffer = xmlBufferCreate();
+    xmlNodeDump(buffer, self.node->doc, self.node, 0, false);
+    NSString *text = [NSString stringWithUTF8String:(const char *)xmlBufferContent(buffer)];
+    xmlBufferFree(buffer);
+    return text;
+}
+
+- (NSString *)innerXml {
+    NSMutableString* innerXml = [NSMutableString string];
+    xmlNodePtr cur = self.node->children;
+    
+    while (cur != nil) {
+        if (cur->type == XML_TEXT_NODE) {
+            xmlChar *key = xmlNodeGetContent(cur);
+            NSString *text = (key ? [NSString stringWithUTF8String:(const char *)key] : @"");
+            xmlFree(key);
+            [innerXml appendString:text];
+        } else {
+            xmlBufferPtr buffer = xmlBufferCreate();
+            xmlNodeDump(buffer, self.node->doc, cur, 0, false);
+            NSString *text = [NSString stringWithUTF8String:(const char *)xmlBufferContent(buffer)];
+            xmlBufferFree(buffer);
+            [innerXml appendString:text];
+        }
+        cur = cur->next;
+    }
+    return innerXml;
+}
+
 -(IGXMLNode*) firstChild {
     xmlNodePtr cur = _node->children;
 

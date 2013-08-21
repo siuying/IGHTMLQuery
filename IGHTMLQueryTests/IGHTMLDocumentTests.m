@@ -42,4 +42,11 @@
     }];
 }
 
+- (void) testInnerHtml {
+    IGHTMLDocument* myDoc = [[IGHTMLDocument alloc] initWithXMLString:@"<html><body><h1>Header</h1><div id=\"content\"><span>Hello</span></div></body></html>" encoding:NSUTF8StringEncoding error:nil];
+    IGXMLNode* content = [myDoc queryWithXPath:@"//div[@id='content']"].firstObject;
+    XCTAssertEqualObjects(content.innerXml, @"<span>Hello</span>");
+    XCTAssertEqualObjects(content.xml, @"<div id=\"content\"><span>Hello</span></div>");
+}
+
 @end
