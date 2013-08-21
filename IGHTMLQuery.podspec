@@ -20,9 +20,12 @@ DESC
   s.ios.deployment_target = '6.0'
   s.osx.deployment_target = '10.8'
 
-  s.source       = { :git => "https://github.com/siuying/IGHTMLQuery".git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/siuying/IGHTMLQuery.git", :tag => s.version.to_s }
   s.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
 
   s.library   = 'xml2'
   s.requires_arc = true
+
+  s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
+  
 end
