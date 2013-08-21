@@ -173,6 +173,8 @@ extern NSString* const IGXMLQueryErrorDomain;
  */
 - (void) removeAttribute:(NSString*)attName inNamespace:(NSString*)ns;
 
+- (NSArray *)attributeNames;
+
 /**
  subscript support
  */

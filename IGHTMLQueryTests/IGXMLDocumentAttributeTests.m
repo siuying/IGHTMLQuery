@@ -36,4 +36,9 @@
     XCTAssertEqualObjects(doc.firstChild[@"country"], @"France");
 }
 
+- (void)testAttributes
+{
+    XCTAssertEqualObjects(doc.firstChild.attributeNames, @[@"country"]);
+}
+
 @end

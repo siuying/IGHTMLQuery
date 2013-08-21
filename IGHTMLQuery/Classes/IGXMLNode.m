@@ -483,6 +483,16 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     }
 }
 
+- (NSArray *)attributeNames {
+    NSMutableArray *names = [[NSMutableArray alloc] init];
+
+    for(xmlAttrPtr attr = self.node->properties; attr != nil; attr = attr->next) {
+        [names addObject:[[NSString alloc] initWithCString:(const char *)attr->name encoding:NSUTF8StringEncoding]];
+    }
+
+    return names;
+}
+
 - (id)objectForKeyedSubscript:(id)key {
     return [self attribute:key];
 }
