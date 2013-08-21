@@ -75,7 +75,11 @@
     doc = [[IGXMLDocument alloc] initWithXMLData:[@"Hi" dataUsingEncoding:NSUTF8StringEncoding] error:&error];
     XCTAssertNil(doc);
     XCTAssertNotNil(error);
-    NSLog(@"error -> %@", error);
+    
+    error = nil;
+    doc = [[IGXMLDocument alloc] initWithXMLData:[@"<xml></xml>" dataUsingEncoding:NSUTF8StringEncoding] error:&error];
+    XCTAssertNotNil(doc);
+    XCTAssertNil(error);
 }
 
 @end

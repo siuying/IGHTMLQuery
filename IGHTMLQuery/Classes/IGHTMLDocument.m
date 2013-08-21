@@ -38,8 +38,6 @@
 
 - (id)initWithHTMLData:(NSData *)data forceEncoding:(NSString*)encoding options:(htmlParserOption)options error:(NSError**)outError{
     if ((self = [super init])) {
-        xmlInitGlobals();
-
         xmlKeepBlanksDefault(false);
 
         self.doc = htmlReadMemory([data bytes], (int)[data length], "", encoding ? [encoding UTF8String] : nil, options);
