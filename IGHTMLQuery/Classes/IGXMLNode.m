@@ -213,7 +213,7 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     
     xmlNodePtr cur = self.node;
     cur = cur->children;
-    
+
     while (cur != nil && cur->type != XML_ELEMENT_NODE && cur->type != XML_TEXT_NODE) {
         cur = cur->next;
     }
@@ -225,6 +225,34 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
         xmlAddChild(self.node, newNode);
     }
 
+    return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
+}
+
+-(IGXMLNode*) addChildWithNode:(IGXMLNode*)child {
+    return [self appendWithNode:child];
+}
+
+-(IGXMLNode*) addNextSiblingWithNode:(IGXMLNode*)child {
+    if (!child) {
+        @throw [NSException exceptionWithName:@"IGXMLNode Error"
+                                       reason:@"child node cannot be nil"
+                                     userInfo:nil];
+    }
+    
+    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.root.doc, 1);
+    xmlAddNextSibling(self.node, newNode);
+    return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
+}
+
+-(IGXMLNode*) addPreviousSiblingWithNode:(IGXMLNode*)child {
+    if (!child) {
+        @throw [NSException exceptionWithName:@"IGXMLNode Error"
+                                       reason:@"child node cannot be nil"
+                                     userInfo:nil];
+    }
+
+    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.root.doc, 1);
+    xmlAddPrevSibling(self.node, newNode);
     return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
 }
 

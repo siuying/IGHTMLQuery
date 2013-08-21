@@ -112,6 +112,12 @@ extern NSString* const IGXMLQueryErrorDomain;
 
 -(IGXMLNode*) prependWithNode:(IGXMLNode*)child;
 
+-(IGXMLNode*) addChildWithNode:(IGXMLNode*)child;
+
+-(IGXMLNode*) addNextSiblingWithNode:(IGXMLNode*)child;
+
+-(IGXMLNode*) addPreviousSiblingWithNode:(IGXMLNode*)child;
+
 -(void) empty;
 
 -(void) remove;
