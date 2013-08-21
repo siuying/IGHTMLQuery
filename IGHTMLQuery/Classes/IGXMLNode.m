@@ -191,6 +191,43 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
 @end
 
 @implementation IGXMLNode (Manipulation)
+
+-(IGXMLNode*) appendWithNode:(IGXMLNode*)child {
+    if (!child) {
+        @throw [NSException exceptionWithName:@"IGXMLNode Error"
+                                       reason:@"child node cannot be nil"
+                                     userInfo:nil];
+    }
+
+    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.root.doc, 1);
+    xmlAddChild(self.node, newNode);
+    return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
+}
+
+-(IGXMLNode*) prependWithNode:(IGXMLNode*)child {
+    if (!child) {
+        @throw [NSException exceptionWithName:@"IGXMLNode Error"
+                                       reason:@"child node cannot be nil"
+                                     userInfo:nil];
+    }
+    
+    xmlNodePtr cur = self.node;
+    cur = cur->children;
+    
+    while (cur != nil && cur->type != XML_ELEMENT_NODE && cur->type != XML_TEXT_NODE) {
+        cur = cur->next;
+    }
+    
+    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.root.doc, 1) ;
+    if (cur) {
+        xmlAddPrevSibling(cur, newNode);
+    } else {
+        xmlAddChild(self.node, newNode);
+    }
+
+    return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
+}
+
 -(void) empty {
     xmlNodePtr cur = self.node;
     cur = cur->children;

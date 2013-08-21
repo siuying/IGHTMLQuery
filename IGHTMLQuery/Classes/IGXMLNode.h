@@ -108,6 +108,10 @@ extern NSString* const IGXMLQueryErrorDomain;
 
 @interface IGXMLNode (Manipulation)
 
+-(IGXMLNode*) appendWithNode:(IGXMLNode*)child;
+
+-(IGXMLNode*) prependWithNode:(IGXMLNode*)child;
+
 -(void) empty;
 
 -(void) remove;

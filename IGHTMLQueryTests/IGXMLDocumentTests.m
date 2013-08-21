@@ -118,4 +118,20 @@
     XCTAssertEqualObjects(doc.query(@"//cd[@country='UK']//title").firstObject.text, @"Hide your heart");
 }
 
+- (void)testAppend {
+    doc.query(@"//cd/title").each(^(IGXMLNode* cd){
+        IGXMLNode* newNode = [[IGXMLDocument alloc] initWithXMLString:@"<test/>" encoding:NSUTF8StringEncoding error:nil];
+        [cd appendWithNode:newNode];
+    });
+    XCTAssertEqualObjects(doc.query(@"//cd/title").firstObject.innerXml, @"Empire Burlesque<test/>");
+}
+
+- (void)testPrepend {
+    doc.query(@"//cd/title").each(^(IGXMLNode* cd){
+        IGXMLNode* newNode = [[IGXMLDocument alloc] initWithXMLString:@"<test/>" encoding:NSUTF8StringEncoding error:nil];
+        [cd prependWithNode:newNode];
+    });
+    XCTAssertEqualObjects(doc.query(@"//cd/title").firstObject.innerXml, @"<test/>Empire Burlesque");
+}
+
 @end
