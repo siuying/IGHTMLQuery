@@ -8,12 +8,15 @@
 
 #import <libxml2/libxml/xmlreader.h>
 #import <libxml2/libxml/xmlmemory.h>
+#import <libxml2/libxml/xmlerror.h>
 #import <libxml/xpath.h>
 #import <libxml/xpathInternals.h>
 
 #import <Foundation/Foundation.h>
 
 #import "IGXMLNodeSet.h"
+
+extern NSString* const IGXMLQueryErrorDomain;
 
 @class IGXMLDocument;
 
@@ -58,6 +61,8 @@
  @return get children elements of current node as {{IGXMLNodeSet}}.
  */
 - (IGXMLNodeSet*) children;
+
+- (NSError*) lastError;
 
 @end
 

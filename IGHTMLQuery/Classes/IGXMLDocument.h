@@ -16,16 +16,18 @@
 
 @property (nonatomic, readonly, unsafe_unretained) xmlDocPtr doc;
 
-- (id)initFromXMLString:(NSString *)xmlString encoding:(NSStringEncoding)encoding;
+- (id)initWithXMLString:(NSString *)xmlString encoding:(NSStringEncoding)encoding error:(NSError**)outError;
 
-- (id)initFromXMLFilePath:(NSString *)fullPath;
+- (id)initWithXMLFilePath:(NSString *)fullPath error:(NSError**)outError;
 
-- (id)initFromXMLFile:(NSString *)filename;
+- (id)initWithXMLFile:(NSString *)filename error:(NSError**)outError;
 
-- (id)initFromXMLFile:(NSString *)filename fileExtension:(NSString *)extension;
+- (id)initWithXMLFile:(NSString *)filename fileExtension:(NSString *)extension error:(NSError**)outError;
 
-- (id)initFromURL:(NSURL *)url;
+- (id)initWithURL:(NSURL *)url error:(NSError**)outError;
 
-- (id)initFromXMLData:(NSData *)data;
+- (id)initWithXMLData:(NSData *)data error:(NSError**)outError;
+
+- (id)initWithXMLData:(NSData *)data forceEncoding:(NSString*)encoding options:(xmlParserOption)options error:(NSError**)outError;
 
 @end

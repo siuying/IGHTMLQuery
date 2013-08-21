@@ -21,7 +21,7 @@
 {
     [super setUp];
 
-    doc = [[IGHTMLDocument alloc] initFromHTMLFile:@"sample" fileExtension:@"html"];
+    doc = [[IGHTMLDocument alloc] initWithHTMLFile:@"sample" fileExtension:@"html" error:nil];
 }
 
 - (void)tearDown

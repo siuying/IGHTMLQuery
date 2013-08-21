@@ -14,36 +14,48 @@
 
 @implementation IGXMLDocument
 
-- (id)initFromXMLString:(NSString *)xmlString encoding:(NSStringEncoding)encoding {
-    return [self initFromXMLData:[xmlString dataUsingEncoding:encoding]];
+- (id)initWithXMLString:(NSString *)xmlString encoding:(NSStringEncoding)encoding error:(NSError**)outError{
+    return [self initWithXMLData:[xmlString dataUsingEncoding:encoding] error:outError];
 }
 
-- (id)initFromXMLFilePath:(NSString *)fullPath {
-    return [self initFromXMLData:[NSData dataWithContentsOfFile:fullPath]];
+- (id)initWithXMLFilePath:(NSString *)fullPath error:(NSError**)outError{
+    return [self initWithXMLData:[NSData dataWithContentsOfFile:fullPath] error:outError];
 }
 
-- (id)initFromXMLFile:(NSString *)filename {
+- (id)initWithXMLFile:(NSString *)filename error:(NSError**)outError{
     NSString *fullPath = [[[NSBundle bundleForClass:self.class] bundlePath] stringByAppendingPathComponent:filename];
-    return [self initFromXMLFilePath:fullPath];
+    return [self initWithXMLData:[NSData dataWithContentsOfFile:fullPath] error:outError];
 }
 
-- (id)initFromXMLFile:(NSString *)filename fileExtension:(NSString *)extension {
+- (id)initWithXMLFile:(NSString *)filename fileExtension:(NSString *)extension error:(NSError**)outError{
     NSString *fullPath = [[NSBundle bundleForClass:[self class]] pathForResource:filename ofType:extension];
-    return [self initFromXMLData:[NSData dataWithContentsOfFile:fullPath]];
+    return [self initWithXMLData:[NSData dataWithContentsOfFile:fullPath] error:outError];
 }
 
-- (id)initFromURL:(NSURL *)url {
-    return [self initFromXMLData:[NSData dataWithContentsOfURL:url]];
+- (id)initWithURL:(NSURL *)url error:(NSError**)outError{
+    return [self initWithXMLData:[NSData dataWithContentsOfURL:url] error:outError];
 }
 
-- (id)initFromXMLData:(NSData *)data {
+- (id)initWithXMLData:(NSData *)data error:(NSError**)outError {
+    return [self initWithXMLData:data forceEncoding:nil options:XML_PARSE_RECOVER|XML_PARSE_NOBLANKS error:outError];
+}
+
+- (id)initWithXMLData:(NSData *)data forceEncoding:(NSString*)encoding options:(xmlParserOption)options error:(NSError**)outError {
     if ((self = [super init])) {
-        _doc = xmlReadMemory([data bytes], (int)[data length], "", nil, XML_PARSE_RECOVER | XML_PARSE_NOBLANKS);
+        _doc = xmlReadMemory([data bytes], (int)[data length], encoding ? [encoding UTF8String] : nil, nil, options);
         if (_doc) {
             self.node = xmlDocGetRootElement(_doc);
             if (!self.node) {
                 _doc = nil;
             }
+        }
+
+        // error handling
+        if (!_doc || !self.node){
+            if (outError) {
+                *outError = [self lastError];
+            }
+            self = nil;
         }
     }
     return self;

@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>53D4A869-A728-41A5-B3F9-C3EDB9D56381</string>
+	<string>6FA6DB56-5619-4BE5-9421-A273B481F0CB</string>
 	<key>IDESourceControlProjectName</key>
 	<string>IGHTMLQuery</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>97D58FED-1725-4761-B1E0-15BCE8938375</key>
-		<string>ssh://git.ignition.hk/ios/ightmlquery.git</string>
+		<key>AE74B2BB-5AAF-4F6A-BB56-4460D2C266AD</key>
+		<string>ssh://github.com/siuying/IGHTMLQuery.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>IGHTMLQuery.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>97D58FED-1725-4761-B1E0-15BCE8938375</key>
+		<key>AE74B2BB-5AAF-4F6A-BB56-4460D2C266AD</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://git.ignition.hk/ios/ightmlquery.git</string>
+	<string>ssh://github.com/siuying/IGHTMLQuery.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>97D58FED-1725-4761-B1E0-15BCE8938375</string>
+	<string>AE74B2BB-5AAF-4F6A-BB56-4460D2C266AD</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>97D58FED-1725-4761-B1E0-15BCE8938375</string>
+			<string>AE74B2BB-5AAF-4F6A-BB56-4460D2C266AD</string>
 			<key>IDESourceControlWCCName</key>
 			<string>IGHTMLQuery</string>
 		</dict>

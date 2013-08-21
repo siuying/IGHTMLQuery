@@ -12,16 +12,16 @@
 
 @interface IGHTMLDocument : IGXMLDocument
 
-- (id)initFromHTMLString:(NSString *)xmlString encoding:(NSStringEncoding)encoding;
+- (id)initWithHTMLString:(NSString *)xmlString encoding:(NSStringEncoding)encoding error:(NSError**)outError;
 
-- (id)initFromHTMLFile:(NSString *)filename;
+- (id)initWithHTMLFile:(NSString *)filename error:(NSError**)outError;
 
-- (id)initFromHTMLFile:(NSString *)filename fileExtension:(NSString*)extension;
+- (id)initWithHTMLFile:(NSString *)filename fileExtension:(NSString*)extension error:(NSError**)outError;
 
-- (id)initFromHTMLFilePath:(NSString *)fullPath;
+- (id)initWithHTMLFilePath:(NSString *)fullPath error:(NSError**)outError;
 
-- (id)initFromHTMLData:(NSData *)data;
+- (id)initWithHTMLData:(NSData *)data error:(NSError**)outError;
 
-- (id)initFromHTMLData:(NSData *)data forceEncoding:(NSString*)encoding options:(htmlParserOption)options;
+- (id)initWithHTMLData:(NSData *)data forceEncoding:(NSString*)encoding options:(htmlParserOption)options error:(NSError**)outError;
 
 @end

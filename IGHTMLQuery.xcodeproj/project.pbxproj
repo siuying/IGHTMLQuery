@@ -74,6 +74,7 @@
 		543763F517C378CF004CE333 /* IGXMLNodeSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGXMLNodeSet.h; path = Classes/IGXMLNodeSet.h; sourceTree = "<group>"; };
 		543763F617C378CF004CE333 /* IGXMLNodeSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGXMLNodeSet.m; path = Classes/IGXMLNodeSet.m; sourceTree = "<group>"; };
 		549C1DC217C47DEE00CF4F20 /* catalog.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = catalog.xml; path = Fixtures/catalog.xml; sourceTree = "<group>"; };
+		549C1DC417C4827200CF4F20 /* broken.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = broken.xml; path = Fixtures/broken.xml; sourceTree = "<group>"; };
 		54AB5F3A17C47786009E2CF1 /* IGHTMLQuery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGHTMLQuery.h; path = Classes/IGHTMLQuery.h; sourceTree = "<group>"; };
 		54AB5F3B17C477BC009E2CF1 /* IGHTMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGHTMLDocument.h; path = Classes/IGHTMLDocument.h; sourceTree = "<group>"; };
 		54AB5F3C17C477BC009E2CF1 /* IGHTMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGHTMLDocument.m; path = Classes/IGHTMLDocument.m; sourceTree = "<group>"; };
@@ -209,6 +210,7 @@
 			children = (
 				54AB5F4217C479E6009E2CF1 /* sample.html */,
 				549C1DC217C47DEE00CF4F20 /* catalog.xml */,
+				549C1DC417C4827200CF4F20 /* broken.xml */,
 			);
 			name = Fixtures;
 			sourceTree = "<group>";

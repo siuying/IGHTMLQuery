@@ -9,6 +9,8 @@
 #import "IGXMLNode.h"
 #import "IGXMLDocument.h"
 
+NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
+
 @interface IGXMLNode ()
 @property (nonatomic, strong, readwrite) IGXMLDocument* root;
 @end
@@ -76,6 +78,23 @@
     }
     
     return [[IGXMLNodeSet alloc] initWithNodes:children];
+}
+
+- (NSError*) lastError {
+    xmlErrorPtr error = xmlGetLastError();
+    if (error) {
+        NSDictionary* userInfo = @{
+                                   @"domain": [NSString stringWithFormat:@"%i", error->domain],
+                                   @"code": [NSString stringWithFormat:@"%i", error->code],
+                                   @"message": error->message ? [NSString stringWithCString:error->message encoding:NSUTF8StringEncoding] : @"",
+                                   @"file": error->file ? [NSString stringWithCString:error->file encoding:NSUTF8StringEncoding] : @"",
+                                   @"line": [NSString stringWithFormat:@"%i", error->line],
+                                   @"column": [NSString stringWithFormat:@"%i", error->int2]
+                                };
+        return [NSError errorWithDomain:IGXMLQueryErrorDomain code:error->code userInfo:userInfo];
+    } else {
+        return nil;
+    }
 }
 
 @end

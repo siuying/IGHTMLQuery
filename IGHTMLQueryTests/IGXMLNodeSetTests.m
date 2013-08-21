@@ -22,7 +22,7 @@
 {
     [super setUp];
     
-    doc = [[IGXMLDocument alloc] initFromXMLFile:@"catalog" fileExtension:@"xml"];
+    doc = [[IGXMLDocument alloc] initWithXMLFile:@"catalog" fileExtension:@"xml" error:nil];
 }
 
 - (void)tearDown

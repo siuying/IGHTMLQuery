@@ -15,7 +15,7 @@ I need a clean, simple, familiar and powerful library to query and manipulate HT
 Consider following snippets:
 
 ```objective-c
-IGXMLDocument* node = [[IGXMLDocument alloc] initFromXMLString:catelogXml encoding:NSUTF8StringEncoding];
+IGXMLDocument* node = [[IGXMLDocument alloc] initWithXMLString:catelogXml encoding:NSUTF8StringEncoding error:nil];
 NSString* title = [[[node queryWithXPath:@"//cd/title"] firstObject] text];
 [[node queryWithXPath:@"//title"] enumerateNodesUsingBlock:^(IGXMLNode *node, NSUInteger idx, BOOL *stop) {
     XCTAssertTrue((NSInteger)[artists indexOfObject:node.text] > -1, @"should be valid artist");
@@ -33,7 +33,7 @@ node.query(@"//cd/title").each(^(IGXMLNode* node){
 
 - -Basic XML document-
 - -Basic XML query-
-- HTML support
+- -HTML support-
 - Document manipulation
 
 ## Usage

@@ -21,7 +21,7 @@
 {
     [super setUp];
     
-    doc = [[IGXMLDocument alloc] initFromXMLFile:@"catalog" fileExtension:@"xml"];
+    doc = [[IGXMLDocument alloc] initWithXMLFile:@"catalog" fileExtension:@"xml" error:nil];
 }
 
 - (void)tearDown
@@ -68,6 +68,14 @@
     XCTAssertNotNil(cds);
     XCTAssertTrue(cds.count == 3, @"should have 3 cd");
 
+}
+
+- (void)testParseError {
+    NSError* error = nil;
+    doc = [[IGXMLDocument alloc] initWithXMLData:[@"Hi" dataUsingEncoding:NSUTF8StringEncoding] error:&error];
+    XCTAssertNil(doc);
+    XCTAssertNotNil(error);
+    NSLog(@"error -> %@", error);
 }
 
 @end
