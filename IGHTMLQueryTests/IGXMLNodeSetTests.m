@@ -11,7 +11,7 @@
 #import "IGXMLDocument.h"
 
 @interface IGXMLNodeSetTests : XCTestCase {
-    NSString* catelogXml;
+    IGXMLDocument* doc;
 }
 
 @end
@@ -22,24 +22,7 @@
 {
     [super setUp];
     
-    catelogXml = @"<?xml version=\"1.0\" ?>\
-    <catalog>\
-    <cd country=\"USA\">\
-    <title>Empire Burlesque</title>\
-    <artist>Bob Dylan</artist>\
-    <price>10.90</price>\
-    </cd>\
-    <cd country=\"UK\">\
-    <title>Hide your heart</title>\
-    <artist>Bonnie Tyler</artist>\
-    <price>9.90</price>\
-    </cd>\
-    <cd country=\"USA\">\
-    <title>Greatest Hits</title>\
-    <artist>Dolly Parton</artist>\
-    <price>9.90</price>\
-    </cd>\
-    </catalog>";
+    doc = [[IGXMLDocument alloc] initFromXMLFile:@"catalog" fileExtension:@"xml"];
 }
 
 - (void)tearDown
@@ -49,8 +32,7 @@
 
 - (void)testBasicNodeMethods
 {
-    IGXMLDocument* node = [[IGXMLDocument alloc] initFromXMLString:catelogXml encoding:NSUTF8StringEncoding];
-    IGXMLNodeSet* nodeSet = [node children];
+    IGXMLNodeSet* nodeSet = [doc children];
     IGXMLNode* firstChild = [nodeSet firstObject];
     XCTAssertEqualObjects(firstChild.tag, @"cd");
     
@@ -66,25 +48,23 @@
 
 - (void)testXPathQuery
 {
-    IGXMLDocument* node = [[IGXMLDocument alloc] initFromXMLString:catelogXml encoding:NSUTF8StringEncoding];
-    IGXMLNodeSet* cds = [node queryWithXPath:@"//cd"];
+    IGXMLNodeSet* cds = [doc queryWithXPath:@"//cd"];
     IGXMLNodeSet* titles = [cds queryWithXPath:@"./title"];
     IGXMLNode* title = titles[0];
     XCTAssertEqualObjects(title.text, @"Empire Burlesque");
 
     NSArray* artists = @[@"Bob Dylan", @"Bonnie Tyler", @"Dolly Parton"];
-    [[node queryWithXPath:@"//title"] enumerateNodesUsingBlock:^(IGXMLNode *node, NSUInteger idx, BOOL *stop) {
+    [[doc queryWithXPath:@"//title"] enumerateNodesUsingBlock:^(IGXMLNode *node, NSUInteger idx, BOOL *stop) {
         XCTAssertTrue((NSInteger)[artists indexOfObject:node.text] > -1, @"should be valid artist");
     }];
 }
 
 - (void)testXPathShorthand
 {
-    IGXMLDocument* node = [[IGXMLDocument alloc] initFromXMLString:catelogXml encoding:NSUTF8StringEncoding];
-    XCTAssertEqualObjects(node.query(@"//cd/title").firstObject.text, @"Empire Burlesque");
+    XCTAssertEqualObjects(doc.query(@"//cd/title").firstObject.text, @"Empire Burlesque");
 
     NSArray* artists = @[@"Bob Dylan", @"Bonnie Tyler", @"Dolly Parton"];
-    node.query(@"//cd/artist").each(^(IGXMLNode* node){
+    doc.query(@"//cd/artist").each(^(IGXMLNode* node){
         XCTAssertTrue((NSInteger)[artists indexOfObject:node.text] > -1, @"should be valid artist");
     });
 }
