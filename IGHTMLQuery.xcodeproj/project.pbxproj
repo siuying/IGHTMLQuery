@@ -31,6 +31,8 @@
 		549C1DC317C47DEE00CF4F20 /* catalog.xml in Resources */ = {isa = PBXBuildFile; fileRef = 549C1DC217C47DEE00CF4F20 /* catalog.xml */; };
 		549C1DC817C4B14F00CF4F20 /* IGXMLNodeTraversalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 549C1DC717C4B14F00CF4F20 /* IGXMLNodeTraversalTests.m */; };
 		549C1DCA17C4B52000CF4F20 /* IGXMLDocumentAttributeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 549C1DC917C4B52000CF4F20 /* IGXMLDocumentAttributeTests.m */; };
+		549C1DCC17C4B91100CF4F20 /* atom.xml in Resources */ = {isa = PBXBuildFile; fileRef = 549C1DCB17C4B69700CF4F20 /* atom.xml */; };
+		549C1DCD17C4B91300CF4F20 /* broken.xml in Resources */ = {isa = PBXBuildFile; fileRef = 549C1DC417C4827200CF4F20 /* broken.xml */; };
 		54AB5F3D17C477BC009E2CF1 /* IGHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AB5F3C17C477BC009E2CF1 /* IGHTMLDocument.m */; };
 		54AB5F3E17C477BC009E2CF1 /* IGHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AB5F3C17C477BC009E2CF1 /* IGHTMLDocument.m */; };
 		54AB5F4017C479A1009E2CF1 /* IGHTMLDocumentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AB5F3F17C479A1009E2CF1 /* IGHTMLDocumentTests.m */; };
@@ -81,6 +83,7 @@
 		549C1DC617C4AC9D00CF4F20 /* IGXMLNodeQuery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGXMLNodeQuery.h; path = Classes/IGXMLNodeQuery.h; sourceTree = "<group>"; };
 		549C1DC717C4B14F00CF4F20 /* IGXMLNodeTraversalTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGXMLNodeTraversalTests.m; sourceTree = "<group>"; };
 		549C1DC917C4B52000CF4F20 /* IGXMLDocumentAttributeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGXMLDocumentAttributeTests.m; sourceTree = "<group>"; };
+		549C1DCB17C4B69700CF4F20 /* atom.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = atom.xml; path = Fixtures/atom.xml; sourceTree = "<group>"; };
 		54AB5F3A17C47786009E2CF1 /* IGHTMLQuery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGHTMLQuery.h; path = Classes/IGHTMLQuery.h; sourceTree = "<group>"; };
 		54AB5F3B17C477BC009E2CF1 /* IGHTMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGHTMLDocument.h; path = Classes/IGHTMLDocument.h; sourceTree = "<group>"; };
 		54AB5F3C17C477BC009E2CF1 /* IGHTMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGHTMLDocument.m; path = Classes/IGHTMLDocument.m; sourceTree = "<group>"; };
@@ -221,6 +224,7 @@
 				54AB5F4217C479E6009E2CF1 /* sample.html */,
 				549C1DC217C47DEE00CF4F20 /* catalog.xml */,
 				549C1DC417C4827200CF4F20 /* broken.xml */,
+				549C1DCB17C4B69700CF4F20 /* atom.xml */,
 			);
 			name = Fixtures;
 			sourceTree = "<group>";
@@ -312,6 +316,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				549C1DCC17C4B91100CF4F20 /* atom.xml in Resources */,
+				549C1DCD17C4B91300CF4F20 /* broken.xml in Resources */,
 				54AB5F4417C47A4C009E2CF1 /* sample.html in Resources */,
 				549C1DC317C47DEE00CF4F20 /* catalog.xml in Resources */,
 				543763CF17C36EFD004CE333 /* InfoPlist.strings in Resources */,

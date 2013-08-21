@@ -89,6 +89,11 @@ extern NSString* const IGXMLQueryErrorDomain;
  */
 - (NSError*) lastError;
 
+/**
+ remove namespace of the document recursively.
+ */
+- (void)removeNamespaces;
+
 @end
 
 @interface IGXMLNode (Traversal)

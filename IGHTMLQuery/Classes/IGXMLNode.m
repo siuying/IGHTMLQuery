@@ -12,6 +12,36 @@
 
 NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
 
+/**
+ * extracted from Nokigiri
+ * @see https://github.com/sparklemotion/nokogiri/blob/master/ext/nokogiri/xml_document.c
+ */
+static void recursively_remove_namespaces_from_node(xmlNodePtr node)
+{
+    xmlNodePtr child ;
+    xmlAttrPtr property ;
+    xmlSetNs(node, NULL);
+    
+    for (child = node->children ; child ; child = child->next)
+        recursively_remove_namespaces_from_node(child);
+    
+    if (((node->type == XML_ELEMENT_NODE) ||
+         (node->type == XML_XINCLUDE_START) ||
+         (node->type == XML_XINCLUDE_END)) &&
+        node->nsDef) {
+        xmlFreeNsList(node->nsDef);
+        node->nsDef = NULL;
+    }
+    
+    if (node->type == XML_ELEMENT_NODE && node->properties != NULL) {
+        property = node->properties ;
+        while (property != NULL) {
+            if (property->ns) property->ns = NULL ;
+            property = property->next ;
+        }
+    }
+}
+
 @interface IGXMLNode ()
 @property (nonatomic, strong, readwrite) IGXMLDocument* root;
 @end
@@ -93,6 +123,10 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     } else {
         return nil;
     }
+}
+
+- (void)removeNamespaces {
+    recursively_remove_namespaces_from_node(self.node);
 }
 
 #pragma mark - Traversal
@@ -303,29 +337,28 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     
     xmlXPathContextPtr context = xmlXPathNewContext(self.root.doc);
     if (context == NULL) {
-		return nil;
+		return [[IGXMLNodeSet alloc] initWithNodes:@[]];
     }
     
     context->node = self.node;
     
     xmlXPathObjectPtr object = xmlXPathEvalExpression((xmlChar *)[xpath cStringUsingEncoding:NSUTF8StringEncoding], context);
     if (object == NULL) {
-		return nil;
+		return [[IGXMLNodeSet alloc] initWithNodes:@[]];
     }
     
 	xmlNodeSetPtr nodes = object->nodesetval;
 	if (nodes == NULL) {
-		return nil;
+		return [[IGXMLNodeSet alloc] initWithNodes:@[]];
 	}
     
 	NSMutableArray *resultNodes = [NSMutableArray array];
     for (NSInteger i = 0; i < nodes->nodeNr; i++) {
         [resultNodes addObject:[[IGXMLNode alloc] initFromRoot:self.root node:nodes->nodeTab[i]]];
 	}
-    
     xmlXPathFreeObject(object);
     xmlXPathFreeContext(context);
-    
+
     return [[IGXMLNodeSet alloc] initWithNodes:resultNodes];
 }
 
@@ -344,13 +377,13 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
 
 - (NSString *)attribute:(NSString *)attName inNamespace:(NSString *)ns {
     const unsigned char *attCStr = ns ?
-    xmlGetNsProp(_node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding], (const xmlChar *)[ns cStringUsingEncoding:NSUTF8StringEncoding]) :
-    xmlGetProp(_node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding]) ;
+    xmlGetNsProp(self.node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding], (const xmlChar *)[ns cStringUsingEncoding:NSUTF8StringEncoding]) :
+    xmlGetProp(self.node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding]) ;
     
     if (attCStr) {
         return [NSString stringWithUTF8String:(const char *)attCStr];
     }
-    
+
     return nil;
 }
 

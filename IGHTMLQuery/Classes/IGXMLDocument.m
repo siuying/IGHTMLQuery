@@ -37,7 +37,13 @@
 }
 
 - (id)initWithXMLData:(NSData *)data error:(NSError**)outError {
-    return [self initWithXMLData:data forceEncoding:nil options:XML_PARSE_RECOVER|XML_PARSE_NOBLANKS error:outError];
+    if (!data) {
+        if (outError) {
+            *outError = [NSError errorWithDomain:IGXMLQueryErrorDomain code:0 userInfo:@{@"reason": @"data cannot be nil"}];
+        }
+        return nil;
+    }
+    return [self initWithXMLData:data forceEncoding:nil options:XML_PARSE_RECOVER|XML_PARSE_NOBLANKS|XML_PARSE_NONET error:outError];
 }
 
 - (id)initWithXMLData:(NSData *)data forceEncoding:(NSString*)encoding options:(xmlParserOption)options error:(NSError**)outError {

@@ -1,0 +1,53 @@
+<feed xmlns="http://www.w3.org/2005/Atom"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:media="http://search.yahoo.com/mrss/">
+    <id>http://www.bbc.co.uk/zhongwen/trad/index.xml</id>
+    <title xml:lang="zh-Hant">bbcchinese.com | 新聞主頁</title>
+    <updated>2013-08-21T07:53:41+00:00</updated>
+    <link rel="self" href="http://www.bbc.co.uk/zhongwen/trad/index.xml"/>
+    <author>
+        <name>BBC Chinese</name>
+        <email>chinese@bbc.co.uk</email>
+        <uri>http://www.bbcchinese.com</uri>
+    </author>
+    <generator>http://www.bbcchinese.com</generator>
+    <category xml:lang="zh-Hant" term="chinese_traditional" label="chinese_traditional"/>
+    <category xml:lang="zh-Hant" term="homepage" label="新聞主頁"/>
+    <logo>http://www.bbc.co.uk/zhongwen/trad/images/gel/rss_logo.gif</logo>
+    <rights xml:lang="zh-Hant">英國廣播公司 版權所有 2013</rights>
+    <entry>
+        <id>tag:www.bbcchinese.com,2013-08-21:26584278</id>
+        <dc:identifier>26584278</dc:identifier>
+        <updated>2013-08-21T07:49:58+00:00</updated>
+        <published>2013-08-21T06:53:47+00:00</published>
+        <category xml:lang="zh-Hant" term="chinese_traditional" label="chinese_traditional"/>
+        <category xml:lang="zh-Hant" term="chinanews" label="兩岸"/>
+        <rights>restricted</rights>
+        <title xml:lang="zh-Hant">陳毅之子陳小魯「為文革造反行為道歉」</title>
+        <summary xml:lang="zh-Hant">中國「十大元帥」之一陳毅的兒子陳小魯就自己在文革期間批鬥師生的反人道行為公開道歉。</summary>
+        <dc:subject>陳毅, 兒子, 陳小魯, 文革, 造反, 行為, 道歉</dc:subject>
+        <link rel="alternate" type="text/html" title="story"
+            href="http://www.bbc.co.uk/zhongwen/trad/china/2013/08/130821_china_chenxiaolu_apology.shtml">
+            <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" media="handheld"
+            title="mobile-story"
+            type="text/html"
+            href="http://www.bbc.co.uk/zhongwen/trad/mobile/china/2013/08/130821_china_chenxiaolu_apology.shtml"/>
+            <media:content>
+                <media:thumbnail url="http://wscdn.bbc.co.uk/worldservice/ic/106x60/wscdn.bbc.co.uk/worldservice/assets/images/2013/02/05/130205082314_cn_cultural_revolution_144x81_afp_nocredit.jpg"
+                    width="106"
+                    height="60">
+                    <img alt="" width="106" height="60"
+                    src="http://wscdn.bbc.co.uk/worldservice/ic/106x60/wscdn.bbc.co.uk/worldservice/assets/images/2013/02/05/130205082314_cn_cultural_revolution_144x81_afp_nocredit.jpg"/>
+                </media:thumbnail>
+                <media:thumbnail url="http://wscdn.bbc.co.uk/worldservice/assets/images/2013/02/05/130205082314_cn_cultural_revolution_144x81_afp_nocredit.jpg"
+                    width="144"
+                    height="81">
+                    <img alt="文革" width="144" height="81"
+                    src="http://wscdn.bbc.co.uk/worldservice/assets/images/2013/02/05/130205082314_cn_cultural_revolution_144x81_afp_nocredit.jpg"/>
+                </media:thumbnail>
+            </media:content>
+        </link>
+    </entry>
+</feed>

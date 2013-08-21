@@ -187,4 +187,17 @@
                           @"<h2>Greetings</h2><p>Test</p><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div>");
 }
 
+- (void)testNamespaces {
+    NSError* error = nil;
+    IGXMLDocument* atom = [[IGXMLDocument alloc] initWithXMLFile:@"atom" fileExtension:@"xml" error:&error];
+    [atom removeNamespaces];
+
+    IGXMLNode* entry = atom.query(@"//entry").firstObject;
+    XCTAssertNotNil(entry);
+
+    IGXMLNodeSet* titles = entry.query(@"title");
+    NSString* lang = titles.firstObject[@"lang"];
+    XCTAssertEqualObjects(lang, @"zh-Hant");
+}
+
 @end
