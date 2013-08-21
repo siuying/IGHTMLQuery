@@ -8,6 +8,7 @@
 
 #import "IGXMLNode.h"
 #import "IGXMLDocument.h"
+#import "IGHTMLDocument.h"
 
 NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
 
@@ -207,9 +208,7 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
 -(IGXMLNodeSet* (^)(NSString*)) append {
     return ^IGXMLNodeSet* (NSString* xml) {
         NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                          encoding:NSUTF8StringEncoding
-                                                             error:&error];
+        IGXMLNode* node = [self nodeWithXml:xml error:&error];
         if (node) {
             [self appendWithNode:node];
             return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
@@ -223,9 +222,7 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
 -(IGXMLNodeSet* (^)(NSString*)) prepend {
     return ^IGXMLNodeSet* (NSString* xml) {
         NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                          encoding:NSUTF8StringEncoding
-                                                             error:&error];
+        IGXMLNode* node = [self nodeWithXml:xml error:&error];
         if (node) {
             [self prependWithNode:node];
             return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
@@ -239,9 +236,7 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
 -(IGXMLNodeSet* (^)(NSString*))after {
     return ^IGXMLNodeSet* (NSString* xml) {
         NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                          encoding:NSUTF8StringEncoding
-                                                             error:&error];
+        IGXMLNode* node = [self nodeWithXml:xml error:&error];
         if (node) {
             [self addNextSiblingWithNode:node];
             return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
@@ -255,9 +250,7 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
 -(IGXMLNodeSet* (^)(NSString*))before {
     return ^IGXMLNodeSet* (NSString* xml) {
         NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                          encoding:NSUTF8StringEncoding
-                                                             error:&error];
+        IGXMLNode* node = [self nodeWithXml:xml error:&error];
         if (node) {
             [self addPreviousSiblingWithNode:node];
             return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
@@ -330,6 +323,18 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     }
     
     return nil;
+}
+
+#pragma mark - Private
+
+- (IGXMLNode*) nodeWithXml:(NSString*)xml error:(NSError**)outError {
+    IGXMLNode* node;
+    if ([self.root isKindOfClass:[IGHTMLDocument class]]) {
+        node = [[IGHTMLDocument alloc] initWithHTMLString:xml encoding:NSUTF8StringEncoding error:outError];
+    } else {
+        node = [[IGXMLDocument alloc] initWithXMLString:xml encoding:NSUTF8StringEncoding error:outError];
+    }
+    return node;
 }
 
 @end
