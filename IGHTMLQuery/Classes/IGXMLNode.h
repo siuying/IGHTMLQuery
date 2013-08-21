@@ -16,12 +16,13 @@
 
 #import "IGXMLNodeSet.h"
 #import "IGXMLNodeManipulation.h"
+#import "IGXMLNodeQuery.h"
 
 extern NSString* const IGXMLQueryErrorDomain;
 
 @class IGXMLDocument;
 
-@interface IGXMLNode : NSObject <IGXMLNodeManipulation>
+@interface IGXMLNode : NSObject <IGXMLNodeManipulation, IGXMLNodeQuery>
 
 /**
  backed XML node,
@@ -73,8 +74,14 @@ extern NSString* const IGXMLQueryErrorDomain;
  */
 - (NSString *)text;
 
+/**
+ @return get XML of node;
+ */
 - (NSString *)xml;
 
+/**
+ @return get inner XML of node;
+ */
 - (NSString *)innerXml;
 
 /**
@@ -91,17 +98,6 @@ extern NSString* const IGXMLQueryErrorDomain;
  @return get last error.
  */
 - (NSError*) lastError;
-
-@end
-
-@interface IGXMLNode (Query)
-
-/**
- Query a node with XPath
- @param xpath used to query the document
- @return elements matched by supplied XPath query.
- */
-- (IGXMLNodeSet*) queryWithXPath:(NSString*)xpath;
 
 @end
 

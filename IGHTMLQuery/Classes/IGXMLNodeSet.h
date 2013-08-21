@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "IGXMLNodeManipulation.h"
+#import "IGXMLNodeQuery.h"
 
 @class IGXMLNode;
 
@@ -18,7 +19,7 @@ typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* node);
 /**
  Array like construct allow chaining query
  */
-@interface IGXMLNodeSet : NSObject <NSFastEnumeration, IGXMLNodeManipulation>
+@interface IGXMLNodeSet : NSObject <NSFastEnumeration, IGXMLNodeManipulation, IGXMLNodeQuery>
 
 /**
  nodes in this node set
@@ -79,17 +80,9 @@ typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* node);
  */
 -(id) objectAtIndexedSubscript:(NSUInteger)idx;
 
--(void) enumerateNodesUsingBlock:(IGXMLNodeSetEnumerateBlock)block;
-
-@end
-
-@interface IGXMLNodeSet (Query)
-
 /**
- Query set of nodes with XPath
- @param xpath used to query the nodes.
- @return elements matched by supplied XPath query on the node set.
+ Enumerator
  */
-- (IGXMLNodeSet*) queryWithXPath:(NSString*)xpath;
+-(void) enumerateNodesUsingBlock:(IGXMLNodeSetEnumerateBlock)block;
 
 @end
