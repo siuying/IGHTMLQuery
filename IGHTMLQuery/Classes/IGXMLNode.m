@@ -338,10 +338,6 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
 
 #pragma mark - Attributes
 
-- (id)objectForKeyedSubscript:(id)key {
-    return [self attribute:key];
-}
-
 - (NSString *)attribute:(NSString *)attName {
     return [self attribute:attName inNamespace:nil];
 }
@@ -356,6 +352,69 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     }
     
     return nil;
+}
+
+- (void) setAttribute:(NSString*)attName value:(NSString*)value {
+    [self setAttribute:attName inNamespace:nil value:value];
+}
+
+- (void) setAttribute:(NSString*)attName inNamespace:(NSString*)ns value:(NSString*)value {
+    if (!attName) {
+        @throw [NSException exceptionWithName:@"IGXMLNode Error"
+                                       reason:@"Attribute name cannot be nil"
+                                     userInfo:nil];
+    }
+    
+    if (!value) {
+        @throw [NSException exceptionWithName:@"IGXMLNode Error"
+                                       reason:@"Attribute value cannot be nil"
+                                     userInfo:nil];
+    }
+    
+    if (ns) {
+        xmlNsPtr nsPtr = xmlSearchNs(self.root.doc, self.node, (const xmlChar *)[ns cStringUsingEncoding:NSUTF8StringEncoding]);
+        xmlSetNsProp(self.node,
+                     nsPtr,
+                     (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding],
+                     (const xmlChar *)[value cStringUsingEncoding:NSUTF8StringEncoding]);
+    } else {
+        xmlSetProp(self.node,
+                   (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding],
+                   (const xmlChar *)[value cStringUsingEncoding:NSUTF8StringEncoding]);
+    }
+}
+
+- (void) removeAttribute:(NSString*)attName {
+    [self removeAttribute:attName inNamespace:nil];
+}
+
+- (void) removeAttribute:(NSString*)attName inNamespace:(NSString*)ns {
+    if (!attName) {
+        @throw [NSException exceptionWithName:@"IGXMLNode Error"
+                                       reason:@"Attribute name cannot be nil"
+                                     userInfo:nil];
+    }
+    
+    xmlAttrPtr attr = NULL;
+    if (ns) {
+        attr = xmlHasNsProp(self.node,
+                            (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding],
+                            (const xmlChar *)[ns cStringUsingEncoding:NSUTF8StringEncoding]);
+    } else {
+        attr = xmlHasProp(self.node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding]);
+    }
+
+    if (attr != NULL) {
+        xmlRemoveProp(attr);
+    }
+}
+
+- (id)objectForKeyedSubscript:(id)key {
+    return [self attribute:key];
+}
+
+- (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key {
+    [self setAttribute:(NSString*)key value:obj];
 }
 
 @end

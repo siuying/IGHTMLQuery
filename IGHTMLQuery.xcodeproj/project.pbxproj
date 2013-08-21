@@ -30,6 +30,7 @@
 		543763F917C37BB4004CE333 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763DF17C36F52004CE333 /* libxml2.dylib */; };
 		549C1DC317C47DEE00CF4F20 /* catalog.xml in Resources */ = {isa = PBXBuildFile; fileRef = 549C1DC217C47DEE00CF4F20 /* catalog.xml */; };
 		549C1DC817C4B14F00CF4F20 /* IGXMLNodeTraversalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 549C1DC717C4B14F00CF4F20 /* IGXMLNodeTraversalTests.m */; };
+		549C1DCA17C4B52000CF4F20 /* IGXMLDocumentAttributeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 549C1DC917C4B52000CF4F20 /* IGXMLDocumentAttributeTests.m */; };
 		54AB5F3D17C477BC009E2CF1 /* IGHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AB5F3C17C477BC009E2CF1 /* IGHTMLDocument.m */; };
 		54AB5F3E17C477BC009E2CF1 /* IGHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AB5F3C17C477BC009E2CF1 /* IGHTMLDocument.m */; };
 		54AB5F4017C479A1009E2CF1 /* IGHTMLDocumentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AB5F3F17C479A1009E2CF1 /* IGHTMLDocumentTests.m */; };
@@ -79,6 +80,7 @@
 		549C1DC517C4A4DF00CF4F20 /* IGXMLNodeManipulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGXMLNodeManipulation.h; path = Classes/IGXMLNodeManipulation.h; sourceTree = "<group>"; };
 		549C1DC617C4AC9D00CF4F20 /* IGXMLNodeQuery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGXMLNodeQuery.h; path = Classes/IGXMLNodeQuery.h; sourceTree = "<group>"; };
 		549C1DC717C4B14F00CF4F20 /* IGXMLNodeTraversalTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGXMLNodeTraversalTests.m; sourceTree = "<group>"; };
+		549C1DC917C4B52000CF4F20 /* IGXMLDocumentAttributeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGXMLDocumentAttributeTests.m; sourceTree = "<group>"; };
 		54AB5F3A17C47786009E2CF1 /* IGHTMLQuery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGHTMLQuery.h; path = Classes/IGHTMLQuery.h; sourceTree = "<group>"; };
 		54AB5F3B17C477BC009E2CF1 /* IGHTMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGHTMLDocument.h; path = Classes/IGHTMLDocument.h; sourceTree = "<group>"; };
 		54AB5F3C17C477BC009E2CF1 /* IGHTMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGHTMLDocument.m; path = Classes/IGHTMLDocument.m; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				543763D017C36EFD004CE333 /* IGXMLDocumentTests.m */,
 				549C1DC717C4B14F00CF4F20 /* IGXMLNodeTraversalTests.m */,
 				541B153417C383FA00F2C646 /* IGXMLNodeSetTests.m */,
+				549C1DC917C4B52000CF4F20 /* IGXMLDocumentAttributeTests.m */,
 				543763A417C36EFD004CE333 /* Frameworks */,
 				543763CB17C36EFD004CE333 /* Supporting Files */,
 			);
@@ -337,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				541B153517C383FA00F2C646 /* IGXMLNodeSetTests.m in Sources */,
+				549C1DCA17C4B52000CF4F20 /* IGXMLDocumentAttributeTests.m in Sources */,
 				543763D117C36EFD004CE333 /* IGXMLDocumentTests.m in Sources */,
 				549C1DC817C4B14F00CF4F20 /* IGXMLNodeTraversalTests.m in Sources */,
 				54E40FCD17C3B61C00C8FBB9 /* IGXMLDocument.m in Sources */,

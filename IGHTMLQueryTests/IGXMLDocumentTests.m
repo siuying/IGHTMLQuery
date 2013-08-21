@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "IGXMLDocument.h"
+#import "IGHTMLQuery.h"
 
 @interface IGXMLDocumentTests : XCTestCase {
     IGXMLDocument* doc;
