@@ -7,6 +7,7 @@ IGHTMLQuery is a lightweight XML/HTML parser for iOS, built on top of libxml.
 
 - XPath support for document searching.
 - jQuery style chainable syntax.
+- XML traversal and manipulation.
 
 ## Why do we need yet another XML library?
 
