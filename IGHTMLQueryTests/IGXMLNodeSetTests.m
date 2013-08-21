@@ -80,7 +80,7 @@
 }
 
 - (void)testAppend {
-    IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:@"<test/>" encoding:NSUTF8StringEncoding error:nil];
+    IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:@"<test/>" error:nil];
     [doc.query(@"//cd/title") appendWithNode:node];
     XCTAssertEqualObjects(doc.query(@"//cd/title").firstObject.innerXml, @"Empire Burlesque<test/>");
 }
@@ -91,7 +91,7 @@
 }
 
 - (void)testPrepend {
-    [doc.query(@"//cd/title") prependWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<test/>" encoding:NSUTF8StringEncoding error:nil]];
+    [doc.query(@"//cd/title") prependWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<test/>" error:nil]];
     XCTAssertEqualObjects(doc.query(@"//cd/title").firstObject.innerXml, @"<test/>Empire Burlesque");
 }
 
@@ -103,7 +103,7 @@
 - (void)testAddNextSibling {
     doc = [[IGXMLDocument alloc] initWithXMLData:[@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
     
-    [doc.query(@"//*[@class='inner']") addNextSiblingWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<p>Test</p>" encoding:NSUTF8StringEncoding error:nil]];
+    [doc.query(@"//*[@class='inner']") addNextSiblingWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<p>Test</p>" error:nil]];
     XCTAssertEqualObjects(doc.innerXml,
                           @"<h2>Greetings</h2><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div><p>Test</p>");
 }
@@ -120,7 +120,7 @@
 - (void)testPreviousNextSibling {
     doc = [[IGXMLDocument alloc] initWithXMLData:[@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
     
-    [doc.query(@"//*[@class='inner']") addPreviousSiblingWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<p>Test</p>" encoding:NSUTF8StringEncoding error:nil]];
+    [doc.query(@"//*[@class='inner']") addPreviousSiblingWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<p>Test</p>" error:nil]];
     XCTAssertEqualObjects(doc.innerXml,
                           @"<h2>Greetings</h2><p>Test</p><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div>");
 }

@@ -14,8 +14,8 @@
 
 @implementation IGHTMLDocument
 
-- (id)initWithHTMLString:(NSString *)xmlString encoding:(NSStringEncoding)encoding error:(NSError**)outError{
-    return [self initWithHTMLData:[xmlString dataUsingEncoding:encoding] error:outError];
+- (id)initWithHTMLString:(NSString *)xmlString error:(NSError**)outError {
+    return [self initWithHTMLData:[xmlString dataUsingEncoding:NSUTF8StringEncoding] error:outError];
 }
 
 - (id)initWithHTMLFile:(NSString *)filename error:(NSError**)outError{

@@ -130,7 +130,6 @@
     return ^IGXMLNodeSet* (NSString* xml) {
         NSError* error = nil;
         IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                          encoding:NSUTF8StringEncoding
                                                              error:&error];
         if (node) {
             return [self appendWithNode:node];
@@ -145,7 +144,6 @@
     return ^IGXMLNodeSet* (NSString* xml) {
         NSError* error = nil;
         IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                          encoding:NSUTF8StringEncoding
                                                              error:&error];
         if (node) {
             return [self prependWithNode:node];
@@ -160,7 +158,6 @@
     return ^IGXMLNodeSet* (NSString* xml) {
         NSError* error = nil;
         IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                          encoding:NSUTF8StringEncoding
                                                              error:&error];
         if (node) {
             return [self addNextSiblingWithNode:node];
@@ -175,7 +172,6 @@
     return ^IGXMLNodeSet* (NSString* xml) {
         NSError* error = nil;
         IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                          encoding:NSUTF8StringEncoding
                                                              error:&error];
         if (node) {
             return [self addPreviousSiblingWithNode:node];

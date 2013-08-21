@@ -14,8 +14,8 @@
 
 @implementation IGXMLDocument
 
-- (id)initWithXMLString:(NSString *)xmlString encoding:(NSStringEncoding)encoding error:(NSError**)outError{
-    return [self initWithXMLData:[xmlString dataUsingEncoding:encoding] error:outError];
+- (id)initWithXMLString:(NSString *)xmlString error:(NSError**)outError{
+    return [self initWithXMLData:[xmlString dataUsingEncoding:NSUTF8StringEncoding] error:outError];
 }
 
 - (id)initWithXMLFilePath:(NSString *)fullPath error:(NSError**)outError{

@@ -16,7 +16,7 @@
 
 @property (nonatomic, readonly, unsafe_unretained) xmlDocPtr doc;
 
-- (id)initWithXMLString:(NSString *)xmlString encoding:(NSStringEncoding)encoding error:(NSError**)outError;
+- (id)initWithXMLString:(NSString *)xmlString error:(NSError**)outError;
 
 - (id)initWithXMLFilePath:(NSString *)fullPath error:(NSError**)outError;
 

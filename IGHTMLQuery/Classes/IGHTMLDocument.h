@@ -12,7 +12,7 @@
 
 @interface IGHTMLDocument : IGXMLDocument
 
-- (id)initWithHTMLString:(NSString *)xmlString encoding:(NSStringEncoding)encoding error:(NSError**)outError;
+- (id)initWithHTMLString:(NSString *)xmlString error:(NSError**)outError;
 
 - (id)initWithHTMLFile:(NSString *)filename error:(NSError**)outError;
 
