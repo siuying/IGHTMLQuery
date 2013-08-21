@@ -78,17 +78,50 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     return innerXml;
 }
 
--(IGXMLNode*) firstChild {
-    xmlNodePtr cur = _node->children;
-
-    while (cur != nil) {
-        if (cur->type == XML_ELEMENT_NODE) {
-            return [[IGXMLNode alloc] initFromRoot:self.root node:cur];
-        }
-        cur = cur->next;
+- (NSError*) lastError {
+    xmlErrorPtr error = xmlGetLastError();
+    if (error) {
+        NSDictionary* userInfo = @{
+                                   @"domain": [NSString stringWithFormat:@"%i", error->domain],
+                                   @"code": [NSString stringWithFormat:@"%i", error->code],
+                                   @"message": error->message ? [NSString stringWithCString:error->message encoding:NSUTF8StringEncoding] : @"",
+                                   @"file": error->file ? [NSString stringWithCString:error->file encoding:NSUTF8StringEncoding] : @"",
+                                   @"line": [NSString stringWithFormat:@"%i", error->line],
+                                   @"column": [NSString stringWithFormat:@"%i", error->int2]
+                                };
+        return [NSError errorWithDomain:IGXMLQueryErrorDomain code:error->code userInfo:userInfo];
+    } else {
+        return nil;
     }
+}
 
-    return nil;
+#pragma mark - Traversal
+
+- (IGXMLNode *) parent {
+    xmlNodePtr parent = self.node->parent;
+    if (!parent) {
+        return nil;
+    } else {
+        return [[IGXMLNode alloc] initFromRoot:self.root node:parent];
+    }
+}
+
+- (IGXMLNode *) nextSibling {
+    xmlNodePtr sibling = self.node->next;
+    if (!sibling) {
+        return nil;
+    } else {
+        return [[IGXMLNode alloc] initFromRoot:self.root node:sibling];
+    }
+}
+
+- (IGXMLNode *) previousSibling {
+    xmlNodePtr sibling = self.node->prev;
+    if (!sibling) {
+        return nil;
+    } else {
+        return [[IGXMLNode alloc] initFromRoot:self.root node:sibling];
+    }
 }
 
 - (IGXMLNodeSet *)children {
@@ -105,21 +138,17 @@ NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
     return [[IGXMLNodeSet alloc] initWithNodes:children];
 }
 
-- (NSError*) lastError {
-    xmlErrorPtr error = xmlGetLastError();
-    if (error) {
-        NSDictionary* userInfo = @{
-                                   @"domain": [NSString stringWithFormat:@"%i", error->domain],
-                                   @"code": [NSString stringWithFormat:@"%i", error->code],
-                                   @"message": error->message ? [NSString stringWithCString:error->message encoding:NSUTF8StringEncoding] : @"",
-                                   @"file": error->file ? [NSString stringWithCString:error->file encoding:NSUTF8StringEncoding] : @"",
-                                   @"line": [NSString stringWithFormat:@"%i", error->line],
-                                   @"column": [NSString stringWithFormat:@"%i", error->int2]
-                                };
-        return [NSError errorWithDomain:IGXMLQueryErrorDomain code:error->code userInfo:userInfo];
-    } else {
-        return nil;
+-(IGXMLNode*) firstChild {
+    xmlNodePtr cur = _node->children;
+    
+    while (cur != nil) {
+        if (cur->type == XML_ELEMENT_NODE) {
+            return [[IGXMLNode alloc] initFromRoot:self.root node:cur];
+        }
+        cur = cur->next;
     }
+    
+    return nil;
 }
 
 #pragma mark - IGXMLNodeManipulation

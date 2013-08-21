@@ -30,18 +30,13 @@
     [super tearDown];
 }
 
-- (void)testXmlNode {
-    XCTAssertEqualObjects(doc.tag, @"catalog");
+- (void)testTagAndText {
+    IGXMLDocument* hello = [[IGXMLDocument alloc] initWithXMLString:@"<p>Hello</p>" error:nil];
+    XCTAssertEqualObjects(hello.tag, @"p");
+    XCTAssertEqualObjects(hello.text, @"Hello");
+}
 
-    IGXMLNodeSet* children = doc.children;
-    NSLog(@"children class: %@", [children class]);
-    XCTAssertNotNil(children);
-    XCTAssertTrue([children isKindOfClass:[IGXMLNodeSet class]]);
-
-    IGXMLNode* firstChild = [doc firstChild];
-    XCTAssertEqualObjects(firstChild[@"country"], @"USA");
-    XCTAssertEqualObjects(firstChild.firstChild.text, @"Empire Burlesque");
-    
+- (void)testInnerXmlAndXml {
     IGXMLDocument* myDoc = [[IGXMLDocument alloc] initWithXMLString:@"<?xml version=\"1.0\" ?><catalog><cd country=\"USA\"><title>Empire Burlesque</title><artist>Bob Dylan</artist><price>10.90</price></cd></catalog>" error:nil];
     IGXMLNode* catalog = [myDoc queryWithXPath:@"//catalog"].firstObject;
     XCTAssertEqualObjects(catalog.innerXml, @"<cd country=\"USA\"><title>Empire Burlesque</title><artist>Bob Dylan</artist><price>10.90</price></cd>");

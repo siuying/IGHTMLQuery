@@ -29,13 +29,6 @@ node.query(@"//cd/title").each(^(IGXMLNode* node){
 
 ```
 
-## State
-
-- -Basic XML document-
-- -Basic XML query-
-- -HTML support-
-- Document manipulation
-
 ## Usage
 
 TBA

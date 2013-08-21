@@ -85,9 +85,28 @@ extern NSString* const IGXMLQueryErrorDomain;
 - (NSString *)innerXml;
 
 /**
- @return get first child element of current node. If no child exists, return nil.
+ @return get last error.
  */
-- (IGXMLNode*) firstChild;
+- (NSError*) lastError;
+
+@end
+
+@interface IGXMLNode (Traversal)
+
+/**
+  @return get parent node
+ */
+- (IGXMLNode *) parent;
+
+/**
+ @return get next sibling node
+ */
+- (IGXMLNode *) nextSibling;
+
+/**
+ @return get previous sibling node
+ */
+- (IGXMLNode *) previousSibling;
 
 /**
  @return get children elements of current node as {{IGXMLNodeSet}}.
@@ -95,9 +114,9 @@ extern NSString* const IGXMLQueryErrorDomain;
 - (IGXMLNodeSet*) children;
 
 /**
- @return get last error.
+ @return get first child element of current node. If no child exists, return nil.
  */
-- (NSError*) lastError;
+- (IGXMLNode*) firstChild;
 
 @end
 
