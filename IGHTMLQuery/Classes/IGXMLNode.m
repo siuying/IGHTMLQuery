@@ -417,12 +417,14 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (NSString *)attribute:(NSString *)attName inNamespace:(NSString *)ns {
-    const unsigned char *attCStr = ns ?
+    unsigned char *attCStr = ns ?
     xmlGetNsProp(self.node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding], (const xmlChar *)[ns cStringUsingEncoding:NSUTF8StringEncoding]) :
     xmlGetProp(self.node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding]) ;
     
     if (attCStr) {
-        return [NSString stringWithUTF8String:(const char *)attCStr];
+        NSString* attibuteValue = [NSString stringWithUTF8String:(const char *)attCStr];
+        xmlFree(attCStr);
+        return attibuteValue;
     }
 
     return nil;
