@@ -14,14 +14,14 @@
 
 - (id)initWithHTMLString:(NSString *)xmlString error:(NSError**)outError;
 
-- (id)initWithHTMLFile:(NSString *)filename error:(NSError**)outError;
+- (id)initWithHTMLFile:(NSString *)filename encoding:(NSString*)encoding error:(NSError**)outError;
 
-- (id)initWithHTMLFile:(NSString *)filename fileExtension:(NSString*)extension error:(NSError**)outError;
+- (id)initWithHTMLResource:(NSString *)filename ofType:(NSString*)extension encoding:(NSString*)encoding error:(NSError**)outError;
 
-- (id)initWithHTMLFilePath:(NSString *)fullPath error:(NSError**)outError;
+- (id)initWithHTMLFilePath:(NSString *)fullPath encoding:(NSString*)encoding error:(NSError**)outError;
 
-- (id)initWithHTMLData:(NSData *)data error:(NSError**)outError;
+- (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding error:(NSError**)outError;
 
-- (id)initWithHTMLData:(NSData *)data forceEncoding:(NSString*)encoding options:(htmlParserOption)options error:(NSError**)outError;
+- (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding options:(htmlParserOption)options error:(NSError**)outError;
 
 @end

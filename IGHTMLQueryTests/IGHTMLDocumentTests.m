@@ -20,8 +20,7 @@
 - (void)setUp
 {
     [super setUp];
-
-    doc = [[IGHTMLDocument alloc] initWithHTMLFile:@"sample" fileExtension:@"html" error:nil];
+    doc = [[IGHTMLDocument alloc] initWithHTMLResource:@"sample" ofType:@"html" encoding:@"utf8" error:nil];
 }
 
 - (void)tearDown

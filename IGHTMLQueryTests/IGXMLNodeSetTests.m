@@ -22,7 +22,7 @@
 {
     [super setUp];
     
-    doc = [[IGXMLDocument alloc] initWithXMLFile:@"catalog" fileExtension:@"xml" error:nil];
+    doc = [[IGXMLDocument alloc] initWithXMLResource:@"catalog" ofType:@"xml" encoding:@"utf8" error:nil];
 }
 
 - (void)tearDown
@@ -101,7 +101,7 @@
 }
 
 - (void)testAddNextSibling {
-    doc = [[IGXMLDocument alloc] initWithXMLData:[@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
     
     [doc.query(@"//*[@class='inner']") addNextSiblingWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<p>Test</p>" error:nil]];
     XCTAssertEqualObjects(doc.innerXml,
@@ -109,7 +109,7 @@
 }
 
 - (void)testAfter {
-    doc = [[IGXMLDocument alloc] initWithXMLData:[@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
     
     doc.query(@"//*[@class='inner']").after(@"<p>Test</p>");
     
@@ -118,7 +118,7 @@
 }
 
 - (void)testPreviousNextSibling {
-    doc = [[IGXMLDocument alloc] initWithXMLData:[@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
     
     [doc.query(@"//*[@class='inner']") addPreviousSiblingWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<p>Test</p>" error:nil]];
     XCTAssertEqualObjects(doc.innerXml,
@@ -126,7 +126,7 @@
 }
 
 - (void)testBefore {
-    doc = [[IGXMLDocument alloc] initWithXMLData:[@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
     
     doc.query(@"//*[@class='inner']").before(@"<p>Test</p>");
     XCTAssertEqualObjects(doc.innerXml,

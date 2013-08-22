@@ -21,7 +21,7 @@
 {
     [super setUp];
     
-    doc = [[IGXMLDocument alloc] initWithXMLFile:@"catalog" fileExtension:@"xml" error:nil];
+    doc = [[IGXMLDocument alloc] initWithXMLResource:@"catalog" ofType:@"xml" encoding:@"utf8" error:nil];
 }
 
 - (void)tearDown
@@ -75,12 +75,12 @@
 
 - (void)testParseError {
     NSError* error = nil;
-    doc = [[IGXMLDocument alloc] initWithXMLData:[@"Hi" dataUsingEncoding:NSUTF8StringEncoding] error:&error];
+    doc = [[IGXMLDocument alloc] initWithXMLString:@"Hi" error:&error];
     XCTAssertNil(doc);
     XCTAssertNotNil(error);
     
     error = nil;
-    doc = [[IGXMLDocument alloc] initWithXMLData:[@"<xml></xml>" dataUsingEncoding:NSUTF8StringEncoding] error:&error];
+    doc = [[IGXMLDocument alloc] initWithXMLString:@"<xml></xml>" error:&error];
     XCTAssertNotNil(doc);
     XCTAssertNil(error);
 }
@@ -147,7 +147,7 @@
 }
 
 - (void)testAddNextSibling {
-    doc = [[IGXMLDocument alloc] initWithXMLData:[@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>"  error:nil];
     
     doc.query(@"//*[@class='inner']").each(^(IGXMLNode* node){
         [node addNextSiblingWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<p>Test</p>" error:nil]];
@@ -158,7 +158,7 @@
 }
 
 - (void)testAfter {
-    doc = [[IGXMLDocument alloc] initWithXMLData:[@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
     
     doc.query(@"//*[@class='inner']").each(^(IGXMLNode* node){
         node.after(@"<p>Test</p>");
@@ -169,7 +169,7 @@
 }
 
 - (void)testPreviousNextSibling {
-    doc = [[IGXMLDocument alloc] initWithXMLData:[@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
     
     doc.query(@"//*[@class='inner']").each(^(IGXMLNode* node){
         [node addPreviousSiblingWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<p>Test</p>" error:nil]];
@@ -180,7 +180,7 @@
 }
 
 - (void)testBefore {
-    doc = [[IGXMLDocument alloc] initWithXMLData:[@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
     
     doc.query(@"//*[@class='inner']").each(^(IGXMLNode* node){
         node.before(@"<p>Test</p>");
@@ -192,7 +192,7 @@
 
 - (void)testNamespaces {
     NSError* error = nil;
-    IGXMLDocument* atom = [[IGXMLDocument alloc] initWithXMLFile:@"atom" fileExtension:@"xml" error:&error];
+    IGXMLDocument* atom = [[IGXMLDocument alloc] initWithXMLResource:@"atom" ofType:@"xml" encoding:@"utf8" error:&error];
     [atom removeNamespaces];
     
     IGXMLNode* entry = atom.query(@"//entry").firstObject;

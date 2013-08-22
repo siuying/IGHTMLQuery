@@ -15,28 +15,28 @@
 @implementation IGHTMLDocument
 
 - (id)initWithHTMLString:(NSString *)xmlString error:(NSError**)outError {
-    return [self initWithHTMLData:[xmlString dataUsingEncoding:NSUTF8StringEncoding] error:outError];
+    return [self initWithHTMLData:[xmlString dataUsingEncoding:NSUTF8StringEncoding] encoding:@"utf8" error:outError];
 }
 
-- (id)initWithHTMLFile:(NSString *)filename error:(NSError**)outError{
+- (id)initWithHTMLFile:(NSString *)filename encoding:(NSString*)encoding error:(NSError**)outError{
     NSString *fullPath = [[[NSBundle bundleForClass:self.class] bundlePath] stringByAppendingPathComponent:filename];
-    return [self initWithHTMLData:[NSData dataWithContentsOfFile:fullPath] error:outError];
+    return [self initWithHTMLData:[NSData dataWithContentsOfFile:fullPath] encoding:encoding error:outError];
 }
 
-- (id)initWithHTMLFile:(NSString *)filename fileExtension:(NSString*)extension error:(NSError**)outError{
-    NSString *fullPath = [[NSBundle bundleForClass:[self class]] pathForResource:filename ofType:extension];
-    return [self initWithHTMLData:[NSData dataWithContentsOfFile:fullPath] error:outError];
+- (id)initWithHTMLResource:(NSString *)resource ofType:(NSString*)extension encoding:(NSString*)encoding error:(NSError**)outError{
+    NSString *fullPath = [[NSBundle bundleForClass:[self class]] pathForResource:resource ofType:extension];
+    return [self initWithHTMLData:[NSData dataWithContentsOfFile:fullPath] encoding:encoding error:outError];
 }
 
-- (id)initWithHTMLFilePath:(NSString *)fullPath error:(NSError**)outError{
-    return [self initWithHTMLData:[NSData dataWithContentsOfFile:fullPath] error:outError];
+- (id)initWithHTMLFilePath:(NSString *)fullPath encoding:(NSString*)encoding error:(NSError**)outError{
+    return [self initWithHTMLData:[NSData dataWithContentsOfFile:fullPath] encoding:encoding error:outError];
 }
 
-- (id)initWithHTMLData:(NSData *)data error:(NSError**)outError{
-    return [self initWithHTMLData:data forceEncoding:nil options:(HTML_PARSE_RECOVER | HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR | HTML_PARSE_NOIMPLIED | HTML_PARSE_NONET) error:outError];
+- (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding error:(NSError**)outError{
+    return [self initWithHTMLData:data encoding:encoding options:(HTML_PARSE_RECOVER | HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR | HTML_PARSE_NOIMPLIED | HTML_PARSE_NONET) error:outError];
 }
 
-- (id)initWithHTMLData:(NSData *)data forceEncoding:(NSString*)encoding options:(htmlParserOption)options error:(NSError**)outError{
+- (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding options:(htmlParserOption)options error:(NSError**)outError{
     if ((self = [super init])) {
         xmlKeepBlanksDefault(false);
 
