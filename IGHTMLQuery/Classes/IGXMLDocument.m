@@ -52,6 +52,7 @@
         if (_doc) {
             self.node = xmlDocGetRootElement(_doc);
             if (!self.node) {
+                xmlFreeDoc(_doc);
                 _doc = nil;
             }
         }
@@ -74,7 +75,6 @@
         xmlFreeDoc(_doc);
     }
     _doc = nil;
-    self.node = nil;
 }
 
 #pragma mark - Override super class

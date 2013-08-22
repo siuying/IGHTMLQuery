@@ -44,11 +44,19 @@
         if (self.doc) {
             self.node = xmlDocGetRootElement(self.doc);
             if (!self.node) {
+                xmlFreeDoc(self.doc);
                 self.doc = nil;
             }
         }
     }
     return self;
+}
+
+-(void) dealloc {
+    if (self.doc) {
+        xmlFreeDoc(self.doc);
+    }
+    self.doc = nil;
 }
 
 @end
