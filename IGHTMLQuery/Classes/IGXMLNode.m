@@ -133,7 +133,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     recursively_remove_namespaces_from_node(self.node);
 }
 
--(id)copyWithZone:(NSZone *)zone {
+-(id)copyWithZone:(NSZone *)zone{
     return [[IGXMLNode alloc] initFromRoot:self.root node:self.node];
 }
 
@@ -299,17 +299,12 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     while (cur != nil) {
         xmlNodePtr next = cur->next;
         xmlUnlinkNode(cur);
-        xmlFreeNode(cur);
         cur = next;
     }
 }
 
 -(void)remove {
-    if (_node) {
-        xmlUnlinkNode(_node);
-        xmlFreeNode(_node);
-        _node = nil;
-    }
+    xmlUnlinkNode(self.node);
 }
 
 #pragma mark - Manipulation - Shorthand
