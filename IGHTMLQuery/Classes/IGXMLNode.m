@@ -43,6 +43,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 @interface IGXMLNode ()
+@property (nonatomic, assign) BOOL shouldFreeNode;
 @end
 
 @implementation IGXMLNode
@@ -50,6 +51,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 - (id)initWithXMLNode:(xmlNodePtr)node {
     if ((self = [super init])) {
         _node = node;
+        _shouldFreeNode = NO;
     }
     return self;
 }
@@ -59,13 +61,16 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(void) dealloc {
+    if (_shouldFreeNode) {
+        xmlFreeNode(_node);
+    }
     _node = nil;
 }
 
-#pragma mark - 
+#pragma mark -
 
 - (NSString *)tag {
-    if (_node->name) {
+    if (_node && _node->name) {
         return [NSString stringWithUTF8String:(const char *)_node->name];
     } else {
         return nil;
@@ -123,7 +128,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
                                    @"file": error->file ? [NSString stringWithCString:error->file encoding:NSUTF8StringEncoding] : @"",
                                    @"line": [NSString stringWithFormat:@"%i", error->line],
                                    @"column": [NSString stringWithFormat:@"%i", error->int2]
-                                };
+                                   };
         return [NSError errorWithDomain:IGXMLQueryErrorDomain code:error->code userInfo:userInfo];
     } else {
         return nil;
@@ -202,7 +207,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     if (self == object) {
         return YES;
     }
-
+    
     if (![object isKindOfClass:[self class]]) {
         return NO;
     }
@@ -211,7 +216,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     if (self.node == another.node) {
         return YES;
     }
-
+    
     return NO;
 }
 
@@ -298,8 +303,13 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(void)remove {
+    if (self.node->type == XML_NAMESPACE_DECL) {
+        @throw [NSException exceptionWithName:IGXMLQueryErrorDomain reason:@"Cannot remove a namespace" userInfo:nil];
+        return;
+    }
+    
     xmlUnlinkNode(self.node);
-    xmlFreeNode(self.node);
+    _shouldFreeNode = YES;
 }
 
 #pragma mark - Manipulation - Shorthand
@@ -379,7 +389,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     if (context == NULL) {
 		return [[IGXMLNodeSet alloc] initWithNodes:@[]];
     }
-
+    
     context->node = self.node;
     
     xmlXPathObjectPtr object = xmlXPathEvalExpression((xmlChar *)[xpath UTF8String], context);
@@ -396,7 +406,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 	}
     xmlXPathFreeObject(object);
     xmlXPathFreeContext(context);
-
+    
     return [[IGXMLNodeSet alloc] initWithNodes:resultNodes];
 }
 
@@ -423,7 +433,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
         xmlFree(attCStr);
         return attibuteValue;
     }
-
+    
     return nil;
 }
 
@@ -476,7 +486,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     } else {
         attr = xmlHasProp(self.node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding]);
     }
-
+    
     if (attr != NULL) {
         xmlRemoveProp(attr);
     }
@@ -484,11 +494,11 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 
 - (NSArray *)attributeNames {
     NSMutableArray *names = [[NSMutableArray alloc] init];
-
+    
     for(xmlAttrPtr attr = self.node->properties; attr != nil; attr = attr->next) {
         [names addObject:[[NSString alloc] initWithCString:(const char *)attr->name encoding:NSUTF8StringEncoding]];
     }
-
+    
     return names;
 }
 
