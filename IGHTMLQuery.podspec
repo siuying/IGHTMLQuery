@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "IGHTMLQuery"
-  s.version      = "0.3.0"
+  s.version      = "0.3.1"
   s.summary      = "IGHTMLQuery is a lightweight XML/HTML parser for iOS, built on top of libxml."
 
   s.description  = <<-DESC
