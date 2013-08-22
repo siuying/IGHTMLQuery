@@ -36,11 +36,28 @@
     XCTAssertEqualObjects(cd.firstObject.parent.tag, @"catalog");
 }
 
+- (void)testNoParent
+{
+    IGXMLNode* catalog = doc.query(@"//catalog").firstObject;
+    XCTAssertNotNil(catalog);
+    XCTAssertNil(catalog.parent.parent);
+}
+
 - (void)testChildrenAndFirstChild
 {
     IGXMLNodeSet* cd = doc.query(@"//cd");
     XCTAssertEqualObjects(cd.firstObject.children.firstObject.tag, @"title");
     XCTAssertEqualObjects(cd.firstObject.firstChild.tag, @"title");
+}
+
+- (void)testNoChildren
+{
+    IGXMLNode* cd = doc.query(@"//cd").firstObject;
+    XCTAssertNotNil(cd.firstChild);
+    
+    IGXMLNode* firstChild = cd.firstChild;
+    XCTAssertEqualObjects(@"title", firstChild.tag);
+    XCTAssertNil(firstChild.firstChild);
 }
 
 - (void)testNextAndPreviousSibling

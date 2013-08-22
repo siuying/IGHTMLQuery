@@ -104,4 +104,13 @@
                           @"<h2>Greetings</h2><p>Test</p><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div>");
 }
 
+- (void)testHtmlFragment
+{
+    doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<div>Hello</div>" error:nil];
+    XCTAssertNotNil(doc);
+    XCTAssertEqualObjects(@"<div>Hello</div>", doc.xml);
+    XCTAssertNil(doc.parent.parent);
+    XCTAssertNil(doc.firstChild);
+}
+
 @end
