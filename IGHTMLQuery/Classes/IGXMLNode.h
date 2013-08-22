@@ -30,11 +30,6 @@ extern NSString* const IGXMLQueryErrorDomain;
 @property (nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
 
 /**
- Root node of the current node.
- */
-@property (nonatomic, strong, readonly) IGXMLDocument* root;
-
-/**
  Shorthand for [IGXMLNode queryWithXPath:]
  */
 @property (nonatomic, copy, readonly) IGXMLNodeSet* (^query)(NSString*);
@@ -62,7 +57,7 @@ extern NSString* const IGXMLQueryErrorDomain;
 /**
  Create a node using a root node and a xml node pointer.
  */
-- (id)initFromRoot:(IGXMLDocument*)root node:(xmlNodePtr)node;
+- (id)initWithNode:(xmlNodePtr)node;
 
 /**
  @return get tag name of current node.

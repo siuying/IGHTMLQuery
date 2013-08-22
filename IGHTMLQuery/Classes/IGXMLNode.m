@@ -42,22 +42,16 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     }
 }
 
-@interface IGXMLNode ()
-@property (nonatomic, strong, readwrite) IGXMLDocument* root;
-@end
-
 @implementation IGXMLNode
 
-- (id)initFromRoot:(IGXMLDocument*)root node:(xmlNodePtr)node {
+- (id)initWithNode:(xmlNodePtr)node {
     if ((self = [super init])) {
-        _root = root;
         _node = node;
     }
     return self;
 }
 
 -(void) dealloc {
-    _root = nil;
     _node = nil;
 }
 
@@ -134,7 +128,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(id)copyWithZone:(NSZone *)zone{
-    return [[IGXMLNode alloc] initFromRoot:self.root node:self.node];
+    return [[IGXMLNode alloc] initWithNode:self.node];
 }
 
 #pragma mark - Traversal
@@ -144,7 +138,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     if (!parent) {
         return nil;
     } else {
-        return [[IGXMLNode alloc] initFromRoot:self.root node:parent];
+        return [[IGXMLNode alloc] initWithNode:parent];
     }
 }
 
@@ -153,7 +147,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     if (!sibling) {
         return nil;
     } else {
-        return [[IGXMLNode alloc] initFromRoot:self.root node:sibling];
+        return [[IGXMLNode alloc] initWithNode:sibling];
     }
 }
 
@@ -162,7 +156,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     if (!sibling) {
         return nil;
     } else {
-        return [[IGXMLNode alloc] initFromRoot:self.root node:sibling];
+        return [[IGXMLNode alloc] initWithNode:sibling];
     }
 }
 
@@ -172,7 +166,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     
     while (cur != nil) {
         if (cur->type == XML_ELEMENT_NODE) {
-            [children addObject:[[IGXMLNode alloc] initFromRoot:self.root node:cur]];
+            [children addObject:[[IGXMLNode alloc] initWithNode:cur]];
         }
         cur = cur->next;
     }
@@ -185,7 +179,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     
     while (cur != nil) {
         if (cur->type == XML_ELEMENT_NODE) {
-            return [[IGXMLNode alloc] initFromRoot:self.root node:cur];
+            return [[IGXMLNode alloc] initWithNode:cur];
         }
         cur = cur->next;
     }
@@ -207,10 +201,6 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     }
     
     IGXMLNode* another = object;
-    if (self.root != another.root) {
-        return NO;
-    }
-    
     if (self.node == another.node) {
         return YES;
     }
@@ -219,11 +209,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (NSUInteger)hash {
-    NSUInteger prime = 31;
-    NSUInteger result = 1;
-    result = prime * result + (NSUInteger) self.root;
-    result = prime * result + (NSUInteger) self.node;
-    return result;
+    return (NSUInteger) self.node;
 }
 
 #pragma mark - IGXMLNodeManipulation
@@ -235,9 +221,9 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
                                      userInfo:nil];
     }
     
-    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.root.doc, 1);
+    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.node->doc, 1);
     xmlAddChild(self.node, newNode);
-    return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
+    return [[IGXMLNode alloc] initWithNode:newNode];
 }
 
 -(instancetype) prependWithNode:(IGXMLNode*)child {
@@ -254,14 +240,14 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
         cur = cur->next;
     }
     
-    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.root.doc, 1) ;
+    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.node->doc, 1) ;
     if (cur) {
         xmlAddPrevSibling(cur, newNode);
     } else {
         xmlAddChild(self.node, newNode);
     }
     
-    return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
+    return [[IGXMLNode alloc] initWithNode:newNode];
 }
 
 -(IGXMLNode*) addChildWithNode:(IGXMLNode*)child {
@@ -275,9 +261,9 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
                                      userInfo:nil];
     }
     
-    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.root.doc, 1);
+    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.node->doc, 1);
     xmlAddNextSibling(self.node, newNode);
-    return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
+    return [[IGXMLNode alloc] initWithNode:newNode];
 }
 
 -(IGXMLNode*) addPreviousSiblingWithNode:(IGXMLNode*)child {
@@ -287,9 +273,9 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
                                      userInfo:nil];
     }
     
-    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.root.doc, 1);
+    xmlNodePtr newNode = xmlDocCopyNode(child.node, self.node->doc, 1);
     xmlAddPrevSibling(self.node, newNode);
-    return [[IGXMLNode alloc] initFromRoot:self.root node:newNode];
+    return [[IGXMLNode alloc] initWithNode:newNode];
 }
 
 -(void) empty {
@@ -376,7 +362,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
         return [[IGXMLNodeSet alloc] initWithNodes:@[]];
     }
     
-    xmlXPathContextPtr context = xmlXPathNewContext(self.root.doc);
+    xmlXPathContextPtr context = xmlXPathNewContext(self.node->doc);
     if (context == NULL) {
 		return [[IGXMLNodeSet alloc] initWithNodes:@[]];
     }
@@ -395,7 +381,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     
 	NSMutableArray *resultNodes = [NSMutableArray array];
     for (NSInteger i = 0; i < nodes->nodeNr; i++) {
-        [resultNodes addObject:[[IGXMLNode alloc] initFromRoot:self.root node:nodes->nodeTab[i]]];
+        [resultNodes addObject:[[IGXMLNode alloc] initWithNode:nodes->nodeTab[i]]];
 	}
     xmlXPathFreeObject(object);
     xmlXPathFreeContext(context);
@@ -448,7 +434,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     }
     
     if (ns) {
-        xmlNsPtr nsPtr = xmlSearchNs(self.root.doc, self.node, (const xmlChar *)[ns cStringUsingEncoding:NSUTF8StringEncoding]);
+        xmlNsPtr nsPtr = xmlSearchNs(self.node->doc, self.node, (const xmlChar *)[ns cStringUsingEncoding:NSUTF8StringEncoding]);
         xmlSetNsProp(self.node,
                      nsPtr,
                      (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding],
