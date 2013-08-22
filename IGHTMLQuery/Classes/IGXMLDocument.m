@@ -10,6 +10,7 @@
 
 @interface IGXMLDocument ()
 @property (nonatomic, unsafe_unretained) xmlDocPtr doc;
+@property (nonatomic, assign) BOOL shouldFreeNode;
 @end
 
 @implementation IGXMLDocument
@@ -50,8 +51,11 @@
     if ((self = [super init])) {
         _doc = xmlReadMemory([data bytes], (int)[data length], encoding ? [encoding UTF8String] : nil, nil, options);
         if (_doc) {
-            self.node = xmlDocGetRootElement(_doc);
-            if (!self.node) {
+            xmlNodePtr root = xmlDocGetRootElement(_doc);
+            if (root) {
+                self.node = root;
+                self.shouldFreeNode = NO;
+            } else {
                 xmlFreeDoc(_doc);
                 _doc = nil;
             }

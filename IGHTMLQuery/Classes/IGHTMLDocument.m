@@ -10,6 +10,7 @@
 
 @interface IGHTMLDocument ()
 @property (nonatomic, unsafe_unretained) xmlDocPtr doc;
+@property (nonatomic, assign) BOOL shouldFreeNode;
 @end
 
 @implementation IGHTMLDocument
@@ -42,11 +43,22 @@
 
         self.doc = htmlReadMemory([data bytes], (int)[data length], "", encoding ? [encoding UTF8String] : nil, options);
         if (self.doc) {
-            self.node = xmlDocGetRootElement(self.doc);
-            if (!self.node) {
+            xmlNodePtr root = xmlDocGetRootElement(self.doc);
+            if (root) {
+                self.node = root;
+                self.shouldFreeNode = NO;
+            } else {
                 xmlFreeDoc(self.doc);
                 self.doc = nil;
             }
+        }
+
+        // error handling
+        if (!self.doc || !self.node){
+            if (outError) {
+                *outError = [self lastError];
+            }
+            self = nil;
         }
     }
     return self;

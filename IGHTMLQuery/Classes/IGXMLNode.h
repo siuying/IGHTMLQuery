@@ -29,6 +29,8 @@ extern NSString* const IGXMLQueryErrorDomain;
  */
 @property (nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
 
+@property (nonatomic, readonly, assign) BOOL shouldFreeNode;
+
 /**
  Shorthand for [IGXMLNode queryWithXPath:]
  */
@@ -55,9 +57,32 @@ extern NSString* const IGXMLQueryErrorDomain;
 @property (nonatomic, copy, readonly) IGXMLNodeSet* (^after)(NSString*);
 
 /**
- Create a node using a root node and a xml node pointer.
+ Create a node using a libxml node, and free it when dealloc.
  */
-- (id)initWithNode:(xmlNodePtr)node;
+- (id)initConsumingXMLNode:(xmlNodePtr)node;
+
+/**
+ Create a node using a libxml node, and not free it when dealloc.
+ */
+- (id)initBorrowingXMLNode:(xmlNodePtr)node;
+
+/**
+ Create a node using a libxml node, and free the node when dealloc.
+ */
++ (id)nodeConsumingXMLNode:(xmlNodePtr)node;
+
+/**
+ Create a node using a libxml node, and not free it when dealloc.
+ */
++ (id)nodeBorrowingXMLNode:(xmlNodePtr)node;
+
+/**
+ Create a new node with specified tag and value
+ @param tag the tag of new element
+ @param value value of the new element
+ @return a new node
+ */
++ (id)nodeWithTag:(NSString*)tag value:(NSString*)value;
 
 /**
  @return get tag name of current node.
