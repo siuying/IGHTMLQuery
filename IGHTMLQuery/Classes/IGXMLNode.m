@@ -43,56 +43,22 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 @interface IGXMLNode ()
-@property (nonatomic, assign) BOOL shouldFreeNode;
 @end
 
 @implementation IGXMLNode
 
-- (id)initConsumingXMLNode:(xmlNodePtr)node {
+- (id)initWithXMLNode:(xmlNodePtr)node {
     if ((self = [super init])) {
         _node = node;
-        _shouldFreeNode = YES;
     }
     return self;
 }
 
-- (id)initBorrowingXMLNode:(xmlNodePtr)node {
-    if ((self = [super init])) {
-        _node = node;
-        _shouldFreeNode = NO;
-    }
-    return self;
-}
-
-+ (id)nodeConsumingXMLNode:(xmlNodePtr)node {
-    return [[self alloc] initConsumingXMLNode:node];
-}
-
-+ (id)nodeBorrowingXMLNode:(xmlNodePtr)node {
-    return [[self alloc] initBorrowingXMLNode:node];
-}
-
-+ (id)nodeWithTag:(NSString*)tag value:(NSString*)value {
-    xmlNodePtr newNode = xmlNewNode(nil, (xmlChar *)[tag UTF8String]);
-    if (newNode) {
-        xmlNodePtr textNode = xmlNewText((xmlChar *)[value UTF8String]);
-        if (textNode) {
-            xmlNodePtr added = xmlAddChild(newNode, textNode);
-            if (added) {
-                return [self nodeConsumingXMLNode:newNode];
-            } else {
-                xmlFreeNode(textNode);
-            }
-        }
-    }
-    xmlFreeNode(newNode);
-    return nil;
++ (id)nodeWithXMLNode:(xmlNodePtr)node {
+    return [[self alloc] initWithXMLNode:node];
 }
 
 -(void) dealloc {
-    if (_node && _shouldFreeNode) {
-        xmlFreeNode(_node);
-    }
     _node = nil;
 }
 
@@ -169,7 +135,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(id)copyWithZone:(NSZone *)zone{
-    return [IGXMLNode nodeBorrowingXMLNode:self.node];
+    return [IGXMLNode nodeWithXMLNode:self.node];
 }
 
 #pragma mark - Traversal
@@ -179,7 +145,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     if (!parent) {
         return nil;
     } else {
-        return [[IGXMLNode alloc] initBorrowingXMLNode:parent];
+        return [IGXMLNode nodeWithXMLNode:parent];
     }
 }
 
@@ -188,7 +154,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     if (!sibling) {
         return nil;
     } else {
-        return [[IGXMLNode alloc] initBorrowingXMLNode:sibling];
+        return [IGXMLNode nodeWithXMLNode:sibling];
     }
 }
 
@@ -197,7 +163,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     if (!sibling) {
         return nil;
     } else {
-        return [[IGXMLNode alloc] initBorrowingXMLNode:sibling];
+        return [IGXMLNode nodeWithXMLNode:sibling];
     }
 }
 
@@ -207,7 +173,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     
     while (cur != nil) {
         if (cur->type == XML_ELEMENT_NODE) {
-            [children addObject:[[IGXMLNode alloc] initBorrowingXMLNode:cur]];
+            [children addObject:[IGXMLNode nodeWithXMLNode:cur]];
         }
         cur = cur->next;
     }
@@ -220,7 +186,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     
     while (cur != nil) {
         if (cur->type == XML_ELEMENT_NODE) {
-            return [[IGXMLNode alloc] initBorrowingXMLNode:cur];
+            return [IGXMLNode nodeWithXMLNode:cur];
         }
         cur = cur->next;
     }
@@ -264,7 +230,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     
     xmlNodePtr newNode = xmlDocCopyNode(child.node, self.node->doc, 1);
     xmlAddChild(self.node, newNode);
-    return [[IGXMLNode alloc] initBorrowingXMLNode:newNode];
+    return [IGXMLNode nodeWithXMLNode:newNode];
 }
 
 -(instancetype) prependWithNode:(IGXMLNode*)child {
@@ -288,7 +254,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
         xmlAddChild(self.node, newNode);
     }
     
-    return [[IGXMLNode alloc] initBorrowingXMLNode:newNode];
+    return [IGXMLNode nodeWithXMLNode:newNode];
 }
 
 -(IGXMLNode*) addChildWithNode:(IGXMLNode*)child {
@@ -304,7 +270,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     
     xmlNodePtr newNode = xmlDocCopyNode(child.node, self.node->doc, 1);
     xmlAddNextSibling(self.node, newNode);
-    return [[IGXMLNode alloc] initBorrowingXMLNode:newNode];
+    return [IGXMLNode nodeWithXMLNode:newNode];
 }
 
 -(IGXMLNode*) addPreviousSiblingWithNode:(IGXMLNode*)child {
@@ -316,7 +282,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     
     xmlNodePtr newNode = xmlDocCopyNode(child.node, self.node->doc, 1);
     xmlAddPrevSibling(self.node, newNode);
-    return [[IGXMLNode alloc] initBorrowingXMLNode:newNode];
+    return [IGXMLNode nodeWithXMLNode:newNode];
 }
 
 -(void) empty {
@@ -333,14 +299,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 
 -(void)remove {
     xmlUnlinkNode(self.node);
-
-    // if the child node was borrowing its xmlNodePtr, then we need to
-    // explicitly free it, since there is probably no owning object that will
-    // free it on dealloc
-    if (!self.shouldFreeNode) {
-        xmlFreeNode(self.node);
-        self.node = nil;
-    }
+    xmlFreeNode(self.node);
 }
 
 #pragma mark - Manipulation - Shorthand
@@ -432,7 +391,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     NSMutableArray *resultNodes = [NSMutableArray array];
 	if (nodes != NULL) {
         for (NSInteger i = 0; i < nodes->nodeNr; i++) {
-            [resultNodes addObject:[[IGXMLNode alloc] initBorrowingXMLNode:nodes->nodeTab[i]]];
+            [resultNodes addObject:[IGXMLNode nodeWithXMLNode:nodes->nodeTab[i]]];
         }
 	}
     xmlXPathFreeObject(object);
