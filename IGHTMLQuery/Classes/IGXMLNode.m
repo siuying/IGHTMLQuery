@@ -187,13 +187,10 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(IGXMLNode*) firstChild {
-    xmlNodePtr cur = _node->children;
-    
-    while (cur != nil) {
-        if (cur->type == XML_ELEMENT_NODE) {
-            return [IGXMLNode nodeWithXMLNode:cur];
-        }
-        cur = cur->next;
+    xmlNodePtr cur = xmlFirstElementChild(self.node);
+
+    if (cur != nil) {
+        return [IGXMLNode nodeWithXMLNode:cur];
     }
     
     return nil;
