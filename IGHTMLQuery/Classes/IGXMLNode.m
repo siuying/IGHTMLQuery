@@ -155,7 +155,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (IGXMLNode *) nextSibling {
-    xmlNodePtr sibling = self.node->next;
+    xmlNodePtr sibling = xmlNextElementSibling(self.node);
     if (!sibling) {
         return nil;
     } else {
@@ -164,7 +164,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (IGXMLNode *) previousSibling {
-    xmlNodePtr sibling = self.node->prev;
+    xmlNodePtr sibling = xmlPreviousElementSibling(self.node);
     if (!sibling) {
         return nil;
     } else {
