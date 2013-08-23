@@ -48,58 +48,32 @@
     XCTAssertEqualObjects(content.xml, @"<div id=\"content\"><span>Hello</span></div>");
 }
 
-- (void)testAppendShorthand {
+- (void)testAppend {
     doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
-    
-    doc.query(@"//div[@class='inner']").each(^(IGXMLNode* cd){
-        cd.append(@"<img/>");
-    });
-    XCTAssertEqualObjects(doc.query(@"//div[@class='inner']").firstObject.innerXml, @"Hello<img/>");
+    [[doc queryWithXPath:@"//div[@class='inner']"] enumerateNodesUsingBlock:^(IGXMLNode *node, NSUInteger idx, BOOL *stop) {
+        [node appendWithXMLString:@"<img/>"];
+    }];
+    XCTAssertEqualObjects([doc queryWithXPath:@"//div[@class='inner']"].firstObject.innerXml, @"Hello<img/>");
 }
 
-- (void)testPrependShorthand {
+- (void)testPrepend {
     doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
-    
-    doc.query(@"//div[@class='inner']").each(^(IGXMLNode* cd){
-        cd.prepend(@"<img/>");
-    });
-    XCTAssertEqualObjects(doc.query(@"//div[@class='inner']").firstObject.innerXml, @"<img/>Hello");
-}
-
-- (void)testAfter {
-    doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
-    
-    doc.query(@"//*[@class='inner']").each(^(IGXMLNode* node){
-        node.after(@"<p>Test</p>");
-    });
-    
-    XCTAssertEqualObjects(doc.innerXml,
-                          @"<h2>Greetings</h2><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div><p>Test</p>");
-}
-
-- (void)testBefore {
-    doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>"  error:nil];
-
-    doc.query(@"//*[@class='inner']").each(^(IGXMLNode* node){
-        node.before(@"<p>Test</p>");
-    });
-    
-    XCTAssertEqualObjects(doc.innerXml,
-                          @"<h2>Greetings</h2><p>Test</p><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div>");
+    [[doc queryWithXPath:@"//div[@class='inner']"] enumerateNodesUsingBlock:^(IGXMLNode *node, NSUInteger idx, BOOL *stop) {
+        [node prependWithXMLString:@"<img/>"];
+    }];
+    XCTAssertEqualObjects([doc queryWithXPath:@"//div[@class='inner']"].firstObject.innerXml, @"<img/>Hello");
 }
 
 - (void)testAfterShorthand {
     doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
-    
-    doc.query(@"//*[@class='inner']").after(@"<p>Test</p>");
+    [[doc queryWithXPath:@"//div[@class='inner']"] addNextSiblingWithXMLString:@"<p>Test</p>"];
     XCTAssertEqualObjects(doc.innerXml,
                           @"<h2>Greetings</h2><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div><p>Test</p>");
 }
 
 - (void)testBeforeShorthand {
     doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
-    
-    doc.query(@"//*[@class='inner']").before(@"<p>Test</p>");    
+    [[doc queryWithXPath:@"//div[@class='inner']"] addPreviousSiblingWithXMLString:@"<p>Test</p>"];
     XCTAssertEqualObjects(doc.innerXml,
                           @"<h2>Greetings</h2><p>Test</p><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div>");
 }

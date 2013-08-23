@@ -30,31 +30,6 @@ extern NSString* const IGXMLQueryErrorDomain;
 @property (nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
 
 /**
- Shorthand for [IGXMLNode queryWithXPath:]
- */
-@property (nonatomic, copy, readonly) IGXMLNodeSet* (^query)(NSString*);
-
-/**
- Append xml to the node, shorthand for [IGXMLNode appendWithNode:]
- */
-@property (nonatomic, copy, readonly) IGXMLNodeSet* (^append)(NSString*);
-
-/**
- Prepend xml to the node, shorthand for [IGXMLNode prependWithNode:]
- */
-@property (nonatomic, copy, readonly) IGXMLNodeSet* (^prepend)(NSString*);
-
-/**
- Add xml before the node, shorthand for [IGXMLNode addPreviousSiblingWithNode:]
- */
-@property (nonatomic, copy, readonly) IGXMLNodeSet* (^before)(NSString*);
-
-/**
- Add xml after the node, shorthand for [IGXMLNode addNextSiblingWithNode:]
- */
-@property (nonatomic, copy, readonly) IGXMLNodeSet* (^after)(NSString*);
-
-/**
  Create a node using a libxml node
  */
 - (id)initWithXMLNode:(xmlNodePtr)node;

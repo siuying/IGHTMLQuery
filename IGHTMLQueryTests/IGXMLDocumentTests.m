@@ -67,7 +67,7 @@
 }
 
 - (void)testXPathShorthand {
-    IGXMLNodeSet* cds = doc.query(@"//cd");
+    IGXMLNodeSet* cds = [doc queryWithXPath:@"//cd"];
     XCTAssertNotNil(cds);
     XCTAssertTrue(cds.count == 3, @"should have 3 cd");
 
@@ -86,84 +86,90 @@
 }
 
 - (void)testRemove {
-    doc.query(@"//cd").each(^(IGXMLNode* cd){
-        NSString* title = cd.query(@"./title").firstObject.text;
+    [[doc queryWithXPath:@"//cd"] enumerateNodesUsingBlock:^(IGXMLNode *cd, NSUInteger idx, BOOL *stop) {
+        NSString* title = [[[cd queryWithXPath:@"./title"] firstObject] text];
         NSLog(@"cd: %@", title);
         if (![title isEqualToString:@"Empire Burlesque"]) {
             [cd remove];
         }
-    });
+    }];
     
-    IGXMLNodeSet* nodes = doc.query(@"//cd");
+    IGXMLNodeSet* nodes = [doc queryWithXPath:@"//cd"];
     XCTAssertTrue(nodes.count == 1, @"should have 1 node");
     XCTAssertEqualObjects(nodes.query(@"title").firstObject.text, @"Empire Burlesque");
     
 }
 
 - (void)testEmpty {
-    doc.query(@"//cd").each(^(IGXMLNode* cd){
-        NSString* title = cd.query(@"./title").firstObject.text;
+    [[doc queryWithXPath:@"//cd"] enumerateNodesUsingBlock:^(IGXMLNode *cd, NSUInteger idx, BOOL *stop) {
+        NSString* title = [[[cd queryWithXPath:@"./title"] firstObject] text];
         NSLog(@"cd: %@", title);
         if ([title isEqualToString:@"Empire Burlesque"]) {
             [cd empty];
         }
-    });
+    }];
     
-    IGXMLNodeSet* nodes = doc.query(@"//cd");
+    [[doc queryWithXPath:@"//cd"] enumerateNodesUsingBlock:^(IGXMLNode *cd, NSUInteger idx, BOOL *stop) {
+        NSString* title = [[[cd queryWithXPath:@"./title"] firstObject] text];
+        NSLog(@"cd: %@", title);
+        if ([title isEqualToString:@"Empire Burlesque"]) {
+            [cd empty];
+        }
+    }];
+
+    IGXMLNodeSet* nodes = [doc queryWithXPath:@"//cd"];
     XCTAssertTrue(nodes.count == 3, @"should have 3 node");
     XCTAssertEqualObjects([nodes[0] innerXml], @"");
-    XCTAssertEqualObjects(doc.query(@"//cd[@country='USA']//title").firstObject.text, @"Greatest Hits");
-    XCTAssertEqualObjects(doc.query(@"//cd[@country='UK']//title").firstObject.text, @"Hide your heart");
+    XCTAssertEqualObjects([doc queryWithXPath:@"//cd[@country='USA']//title"].firstObject.text, @"Greatest Hits");
+    XCTAssertEqualObjects([doc queryWithXPath:@"//cd[@country='UK']//title"].firstObject.text, @"Hide your heart");
 }
 
 - (void)testAppend {
-    doc.query(@"//cd/title").each(^(IGXMLNode* cd){
-        IGXMLNode* newNode = [[IGXMLDocument alloc] initWithXMLString:@"<test/>" error:nil];
-        [cd appendWithNode:newNode];
-    });
-    XCTAssertEqualObjects(doc.query(@"//cd/title").firstObject.innerXml, @"Empire Burlesque<test/>");
+    [[doc queryWithXPath:@"//cd/title"] enumerateNodesUsingBlock:^(IGXMLNode *cd, NSUInteger idx, BOOL *stop) {
+        [cd appendWithXMLString:@"<test/>"];
+    }];
+    XCTAssertEqualObjects([doc queryWithXPath:@"//cd/title"].firstObject.innerXml, @"Empire Burlesque<test/>");
 }
 
-- (void)testAppendShorthand {
-    doc.query(@"//cd/title").each(^(IGXMLNode* cd){
-        cd.append(@"<test/>");
-    });
-    XCTAssertEqualObjects(doc.query(@"//cd/title").firstObject.innerXml, @"Empire Burlesque<test/>");
+- (void)testAppend2 {
+    [[doc queryWithXPath:@"//cd/title"] enumerateNodesUsingBlock:^(IGXMLNode *cd, NSUInteger idx, BOOL *stop) {
+        [cd appendWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<test/>" error:nil]];
+    }];
+    XCTAssertEqualObjects([doc queryWithXPath:@"//cd/title"].firstObject.innerXml, @"Empire Burlesque<test/>");
 }
 
 - (void)testPrepend {
-    doc.query(@"//cd/title").each(^(IGXMLNode* cd){
-        IGXMLNode* newNode = [[IGXMLDocument alloc] initWithXMLString:@"<test/>" error:nil];
-        [cd prependWithNode:newNode];
-    });
-    XCTAssertEqualObjects(doc.query(@"//cd/title").firstObject.innerXml, @"<test/>Empire Burlesque");
+    [[doc queryWithXPath:@"//cd/title"] enumerateNodesUsingBlock:^(IGXMLNode *cd, NSUInteger idx, BOOL *stop) {
+        [cd prependWithXMLString:@"<test/>"];
+    }];
+    XCTAssertEqualObjects([doc queryWithXPath:@"//cd/title"].firstObject.innerXml, @"<test/>Empire Burlesque");
 }
 
-- (void)testPrependShorthand {
-    doc.query(@"//cd/title").each(^(IGXMLNode* cd){
-        cd.prepend(@"<test/>");
-    });
-    XCTAssertEqualObjects(doc.query(@"//cd/title").firstObject.innerXml, @"<test/>Empire Burlesque");
+- (void)testPrepend2 {
+    [[doc queryWithXPath:@"//cd/title"] enumerateNodesUsingBlock:^(IGXMLNode *cd, NSUInteger idx, BOOL *stop) {
+        [cd prependWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<test/>" error:nil]];
+    }];
+    XCTAssertEqualObjects([doc queryWithXPath:@"//cd/title"].firstObject.innerXml, @"<test/>Empire Burlesque");
 }
 
 - (void)testAddNextSibling {
     doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>"  error:nil];
     
-    doc.query(@"//*[@class='inner']").each(^(IGXMLNode* node){
-        [node addNextSiblingWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<p>Test</p>" error:nil]];
-    });
+    [[doc queryWithXPath:@"//*[@class='inner']"] enumerateNodesUsingBlock:^(IGXMLNode *cd, NSUInteger idx, BOOL *stop) {
+        [cd addNextSiblingWithXMLString:@"<p>Test</p>"];
+    }];
     
     XCTAssertEqualObjects(doc.innerXml,
                           @"<h2>Greetings</h2><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div><p>Test</p>");
 }
 
-- (void)testAfter {
-    doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
+- (void)testAddNextSibling2 {
+    doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>"  error:nil];
     
-    doc.query(@"//*[@class='inner']").each(^(IGXMLNode* node){
-        node.after(@"<p>Test</p>");
-    });
-    
+    [[doc queryWithXPath:@"//*[@class='inner']"] enumerateNodesUsingBlock:^(IGXMLNode *cd, NSUInteger idx, BOOL *stop) {
+        [cd addNextSiblingWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<p>Test</p>" error:nil]];
+    }];
+
     XCTAssertEqualObjects(doc.innerXml,
                           @"<h2>Greetings</h2><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div><p>Test</p>");
 }
@@ -171,20 +177,20 @@
 - (void)testPreviousNextSibling {
     doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
     
-    doc.query(@"//*[@class='inner']").each(^(IGXMLNode* node){
-        [node addPreviousSiblingWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<p>Test</p>" error:nil]];
-    });
+    [[doc queryWithXPath:@"//*[@class='inner']"] enumerateNodesUsingBlock:^(IGXMLNode *node, NSUInteger idx, BOOL *stop) {
+        [node addPreviousSiblingWithXMLString:@"<p>Test</p>"];
+    }];
     
     XCTAssertEqualObjects(doc.innerXml,
                           @"<h2>Greetings</h2><p>Test</p><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div>");
 }
 
-- (void)testBefore {
-    doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
+- (void)testPreviousNextSibling2 {
+    doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>"  error:nil];
     
-    doc.query(@"//*[@class='inner']").each(^(IGXMLNode* node){
-        node.before(@"<p>Test</p>");
-    });
+    [[doc queryWithXPath:@"//*[@class='inner']"] enumerateNodesUsingBlock:^(IGXMLNode *cd, NSUInteger idx, BOOL *stop) {
+        [cd addPreviousSiblingWithNode:[[IGXMLDocument alloc] initWithXMLString:@"<p>Test</p>" error:nil]];
+    }];
     
     XCTAssertEqualObjects(doc.innerXml,
                           @"<h2>Greetings</h2><p>Test</p><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div>");
@@ -195,18 +201,18 @@
     IGXMLDocument* atom = [[IGXMLDocument alloc] initWithXMLResource:@"atom" ofType:@"xml" encoding:@"utf8" error:&error];
     [atom removeNamespaces];
     
-    IGXMLNode* entry = atom.query(@"//entry").firstObject;
+    IGXMLNode* entry = [atom queryWithXPath:@"//entry"].firstObject;
     XCTAssertNotNil(entry);
     
-    IGXMLNodeSet* titles = entry.query(@"title");
+    IGXMLNodeSet* titles = [atom queryWithXPath:@"title"];
     NSString* lang = titles.firstObject[@"lang"];
     XCTAssertEqualObjects(lang, @"zh-Hant");
 }
 
 - (void)testIsEuqal {
-    IGXMLNode* node1a = doc.query(@"cd").firstObject;
-    IGXMLNode* node1b = doc.query(@"cd").firstObject;
-    IGXMLNode* node2 = doc.query(@"cd")[1];
+    IGXMLNode* node1a = [doc queryWithXPath:@"cd"].firstObject;
+    IGXMLNode* node1b = [doc queryWithXPath:@"cd"].firstObject;
+    IGXMLNode* node2 = [doc queryWithXPath:@"cd"][1];
 
     XCTAssertTrue([node1a isEqual:node1b]);
     XCTAssertTrue([node1b isEqual:node1a]);
@@ -217,7 +223,7 @@
 }
 
 - (void)testCopy {
-    IGXMLNode* node1a = doc.query(@"cd").firstObject;
+    IGXMLNode* node1a = [doc queryWithXPath:@"cd"].firstObject;
     IGXMLNode* node1b = [node1a copy];
     XCTAssertEqualObjects(node1a, node1b);
     XCTAssertEqualObjects(node1a.uniqueKey, node1b.uniqueKey);

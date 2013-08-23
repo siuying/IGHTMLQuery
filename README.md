@@ -6,18 +6,12 @@ IGHTMLQuery is a lightweight XML/HTML parser for iOS, built on top of libxml. It
 ```objective-c
 IGXMLDocument* node = [[IGXMLDocument alloc] initWithXMLString:catelogXml error:nil];
 NSString* title = [[[node queryWithXPath:@"//cd/title"] firstObject] text];
-[[node queryWithXPath:@"//title"] enumerateNodesUsingBlock:^(IGXMLNode *node, NSUInteger idx, BOOL *stop) {
-    XCTAssertTrue((NSInteger)[artists indexOfObject:node.text] > -1, @"should be valid artist");
+[[node queryWithXPath:@"//title"] enumerateNodesUsingBlock:^(IGXMLNode *title, NSUInteger idx, BOOL *stop) {
+    NSLog(@"title = %@", title.text);
 }];
 
-// or using jquery style shortcut
-NSString* title = node.query(@"//cd/title").firstObject.text;
-node.query(@"//cd/title").each(^(IGXMLNode* node){ 
-  NSLog(@"%@", node.text);
-})
-
 // quick manipulation
-node.query(@"//cd/title").append(@"<message>Hi!</message>")
+[[node queryWithXPath:@"//title"] appendWithXMLString:@"<message>Hi!</message>"];
 ```
 
 ## Features
@@ -80,14 +74,6 @@ IGXMLNodeSet* contents = [doc queryWithXPath:@"//div[@class='content']"];
 
 ```
 
-Alternative, you can use shorthand syntax:
-
-```objective-c
-IGXMLNode* content = doc.query(@"//div[@class='content']").each(^(IGXMLNode* content){
-    NSLog(@"%@", content.xml);
-});
-```
-
 ### Document Manipulation
 
 You can change the document using methods in ```IGXMLNodeManipulation``` protocol.
@@ -111,16 +97,6 @@ You can change the document using methods in ```IGXMLNodeManipulation``` protoco
 
 @end
 
-```
-
-Shorthands is also available:
-
-```objective-c
-doc.query(@"//div")
-  .append(@"<p>Hello</p>")
-  .prepend(@"<p>World</p>")
-  .before(@"<p>foo</p>")
-  .after(@"<p>bar</p>");
 ```
 
 ## License

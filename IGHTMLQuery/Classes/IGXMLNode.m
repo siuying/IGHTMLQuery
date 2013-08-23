@@ -287,6 +287,61 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     return [IGXMLNode nodeWithXMLNode:newNode];
 }
 
+-(instancetype) appendWithXMLString:(NSString*)xmlString {
+    NSError* error = nil;
+    IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
+                                                         error:&error];
+    if (node) {
+        return [self appendWithNode:node];
+    } else {
+        return nil;
+    }
+}
+
+-(instancetype) prependWithXMLString:(NSString*)xmlString {
+    NSError* error = nil;
+    IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
+                                                         error:&error];
+    if (node) {
+        return [self prependWithNode:node];
+    } else {
+        return nil;
+    }
+}
+
+-(instancetype) addChildWithXMLString:(NSString*)xmlString {
+    NSError* error = nil;
+    IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
+                                                         error:&error];
+    if (node) {
+        return [self addChildWithNode:node];
+    } else {
+        return nil;
+    }
+}
+
+-(instancetype) addNextSiblingWithXMLString:(NSString*)xmlString {
+    NSError* error = nil;
+    IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
+                                                         error:&error];
+    if (node) {
+        return [self addNextSiblingWithNode:node];
+    } else {
+        return nil;
+    }
+}
+
+-(instancetype) addPreviousSiblingWithXMLString:(NSString*)xmlString {
+    NSError* error = nil;
+    IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
+                                                         error:&error];
+    if (node) {
+        return [self addPreviousSiblingWithNode:node];
+    } else {
+        return nil;
+    }
+}
+
 -(void) empty {
     xmlNodePtr cur = self.node;
     cur = cur->children;
@@ -307,68 +362,6 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     
     xmlUnlinkNode(self.node);
     _shouldFreeNode = YES;
-}
-
-#pragma mark - Manipulation - Shorthand
-
--(IGXMLNodeSet* (^)(NSString*)) append {
-    return ^IGXMLNodeSet* (NSString* xml) {
-        NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                             error:&error];
-        if (node) {
-            [self appendWithNode:node];
-            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
-        } else {
-            // TODO: log error for diagnosis
-            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
-        }
-    };
-}
-
--(IGXMLNodeSet* (^)(NSString*)) prepend {
-    return ^IGXMLNodeSet* (NSString* xml) {
-        NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                             error:&error];
-        if (node) {
-            [self prependWithNode:node];
-            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
-        } else {
-            // TODO: log error for diagnosis
-            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
-        }
-    };
-}
-
--(IGXMLNodeSet* (^)(NSString*))after {
-    return ^IGXMLNodeSet* (NSString* xml) {
-        NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                             error:&error];
-        if (node) {
-            [self addNextSiblingWithNode:node];
-            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
-        } else {
-            // TODO: log error for diagnosis
-            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
-        }
-    };
-}
-
--(IGXMLNodeSet* (^)(NSString*))before {
-    return ^IGXMLNodeSet* (NSString* xml) {
-        NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                             error:&error];
-        if (node) {
-            [self addPreviousSiblingWithNode:node];
-            return [[IGXMLNodeSet alloc] initWithNodes:@[node]];
-        } else {
-            // TODO: log error for diagnosis
-            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
-        }
-    };
 }
 
 #pragma mark - Query
@@ -406,13 +399,6 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     
     return [[IGXMLNodeSet alloc] initWithNodes:resultNodes];
 }
-
--(IGXMLNodeSet* (^)(NSString*)) query {
-    return ^IGXMLNodeSet* (NSString* query) {
-        return [self queryWithXPath:query];
-    };
-}
-
 
 #pragma mark - Attributes
 

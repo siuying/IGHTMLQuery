@@ -60,6 +60,8 @@ typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* node);
 
 +(id) nodeSetWithNodes:(NSArray*)nodes;
 
++(id) emptyNodeSet;
+
 /**
  @return number of nodes in the set
  */

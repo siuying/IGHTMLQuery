@@ -28,6 +28,10 @@
     return [[self alloc] initWithNodes:nodes];
 }
 
++(id) emptyNodeSet {
+    return [[self alloc] initWithNodes:@[]];
+}
+
 -(NSUInteger) count {
     return [_nodes count];
 }
@@ -127,6 +131,61 @@
         [newNodes addObject:[node addPreviousSiblingWithNode:child]];
     }];
     return [IGXMLNodeSet nodeSetWithNodes:newNodes];
+}
+
+-(instancetype) appendWithXMLString:(NSString*)xmlString {
+    NSError* error = nil;
+    IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
+                                                         error:&error];
+    if (node) {
+        return [self appendWithNode:node];
+    } else {
+        return nil;
+    }
+}
+
+-(instancetype) prependWithXMLString:(NSString*)xmlString {
+    NSError* error = nil;
+    IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
+                                                         error:&error];
+    if (node) {
+        return [self prependWithNode:node];
+    } else {
+        return [IGXMLNodeSet emptyNodeSet];
+    }
+}
+
+-(instancetype) addChildWithXMLString:(NSString*)xmlString {
+    NSError* error = nil;
+    IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
+                                                         error:&error];
+    if (node) {
+        return [self addChildWithNode:node];
+    } else {
+        return [IGXMLNodeSet emptyNodeSet];
+    }
+}
+
+-(instancetype) addNextSiblingWithXMLString:(NSString*)xmlString {
+    NSError* error = nil;
+    IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
+                                                         error:&error];
+    if (node) {
+        return [self addNextSiblingWithNode:node];
+    } else {
+        return [IGXMLNodeSet emptyNodeSet];
+    }
+}
+
+-(instancetype) addPreviousSiblingWithXMLString:(NSString*)xmlString {
+    NSError* error = nil;
+    IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
+                                                         error:&error];
+    if (node) {
+        return [self addPreviousSiblingWithNode:node];
+    } else {
+        return [IGXMLNodeSet emptyNodeSet];
+    }
 }
 
 -(void) empty {

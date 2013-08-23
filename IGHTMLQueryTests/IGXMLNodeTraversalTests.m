@@ -32,27 +32,27 @@
 
 - (void)testParent
 {
-    IGXMLNodeSet* cd = doc.query(@"//cd");
+    IGXMLNodeSet* cd = [doc queryWithXPath:@"//cd"];
     XCTAssertEqualObjects(cd.firstObject.parent.tag, @"catalog");
 }
 
 - (void)testNoParent
 {
-    IGXMLNode* catalog = doc.query(@"//catalog").firstObject;
+    IGXMLNode* catalog = [[doc queryWithXPath:@"//catalog"] firstObject];
     XCTAssertNotNil(catalog);
     XCTAssertNil(catalog.parent.parent);
 }
 
 - (void)testChildrenAndFirstChild
 {
-    IGXMLNodeSet* cd = doc.query(@"//cd");
+    IGXMLNodeSet* cd = [doc queryWithXPath:@"//cd"];
     XCTAssertEqualObjects(cd.firstObject.children.firstObject.tag, @"title");
     XCTAssertEqualObjects(cd.firstObject.firstChild.tag, @"title");
 }
 
 - (void)testNoChildren
 {
-    IGXMLNode* cd = doc.query(@"//cd").firstObject;
+    IGXMLNode* cd = [[doc queryWithXPath:@"//cd"] firstObject];
     XCTAssertNotNil(cd.firstChild);
     
     IGXMLNode* firstChild = cd.firstChild;
@@ -62,9 +62,10 @@
 
 - (void)testNextAndPreviousSibling
 {
-    IGXMLNode* ukCd = doc.query(@"//cd[@country='UK']").firstObject;
-    XCTAssertEqualObjects(ukCd.previousSibling.query(@"price").firstObject.text, @"10.90");
-    XCTAssertEqualObjects(ukCd.nextSibling.query(@"price").firstObject.text, @"8.90");
+    IGXMLNode* ukCd = [[doc queryWithXPath:@"cd[@country='UK']"] firstObject];
+    
+    XCTAssertEqualObjects([ukCd.previousSibling queryWithXPath:@"price"].firstObject.text, @"10.90");
+    XCTAssertEqualObjects([ukCd.nextSibling queryWithXPath:@"price"].firstObject.text, @"8.90");
 }
 
 @end

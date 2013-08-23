@@ -22,6 +22,16 @@
 
 -(instancetype) addPreviousSiblingWithNode:(IGXMLNode*)child;
 
+-(instancetype) appendWithXMLString:(NSString*)xmlString;
+
+-(instancetype) prependWithXMLString:(NSString*)xmlString;
+
+-(instancetype) addChildWithXMLString:(NSString*)xmlString;
+
+-(instancetype) addNextSiblingWithXMLString:(NSString*)xmlString;
+
+-(instancetype) addPreviousSiblingWithXMLString:(NSString*)xmlString;
+
 -(void) empty;
 
 -(void) remove;
