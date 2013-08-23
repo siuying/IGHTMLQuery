@@ -55,6 +55,11 @@ extern NSString* const IGXMLQueryErrorDomain;
 - (NSString *)text;
 
 /**
+ @param the new content of the node
+ */
+- (void) setText:(NSString*)text;
+
+/**
  @return get XML of node;
  */
 - (NSString *)xml;

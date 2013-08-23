@@ -88,6 +88,10 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     return text;
 }
 
+- (void) setText:(NSString*) text {
+    xmlNodeSetContent(_node, (xmlChar*) [text cStringUsingEncoding:NSUTF8StringEncoding]);
+}
+
 - (NSString *)xml {
     xmlBufferPtr buffer = xmlBufferCreate();
     xmlNodeDump(buffer, self.node->doc, self.node, 0, false);

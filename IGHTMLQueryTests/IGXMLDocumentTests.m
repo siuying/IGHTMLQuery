@@ -36,7 +36,10 @@
     XCTAssertEqualObjects(hello.text, @"Hello");
     
     hello.tag = @"span";
+    hello.text = @"World";
     XCTAssertEqualObjects(hello.tag, @"span");
+    XCTAssertEqualObjects(hello.text, @"World");
+    XCTAssertEqualObjects(hello.xml, @"<span>World</span>");
 }
 
 - (void)testInnerXmlAndXml {
