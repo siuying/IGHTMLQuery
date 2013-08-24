@@ -26,36 +26,6 @@ typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* node);
  */
 @property (nonatomic, copy, readonly) NSOrderedSet* nodes;
 
-/**
- Shorthand for [IGXMLNodeSet queryWithXPath:]
- */
-@property (nonatomic, copy, readonly) IGXMLNodeSet* (^query)(NSString*);
-
-/**
- Shorthand for [IGXMLNodeSet enumerateNodessUsingBlock:]
- */
-@property (nonatomic, copy, readonly) void (^each)(IGXMLNodeSetEachBlock);
-
-/**
- Append xml to the node, shorthand for [IGXMLNodeSet appendWithNode:]
- */
-@property (nonatomic, copy, readonly) IGXMLNodeSet* (^append)(NSString*);
-
-/**
- Prepend xml to the node, shorthand for [IGXMLNodeSet prependWithNode:]
- */
-@property (nonatomic, copy, readonly) IGXMLNodeSet* (^prepend)(NSString*);
-
-/**
- Add xml before the node, shorthand for [IGXMLNodeSet addPreviousSiblingWithNode:]
- */
-@property (nonatomic, copy, readonly) IGXMLNodeSet* (^before)(NSString*);
-
-/**
- Add xml after the node, shorthand for [IGXMLNodeSet addNextSiblingWithNode:]
- */
-@property (nonatomic, copy, readonly) IGXMLNodeSet* (^after)(NSString*);
-
 -(id) initWithNodes:(NSArray*)nodes;
 
 +(id) nodeSetWithNodes:(NSArray*)nodes;

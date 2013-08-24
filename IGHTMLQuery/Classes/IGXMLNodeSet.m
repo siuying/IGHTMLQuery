@@ -93,14 +93,6 @@
     }];
 }
 
--(void (^)(IGXMLNodeSetEachBlock)) each {
-    return ^(IGXMLNodeSetEachBlock block) {
-        [[self.nodes reversedOrderedSet] enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
-            block(node);
-        }];
-    };
-}
-
 #pragma mark - IGXMLNodeManipulation
 
 -(instancetype) appendWithNode:(IGXMLNode*)child {
@@ -210,64 +202,6 @@
     }];
 }
 
-#pragma mark - IGXMLNodeManipulation Shorthand
-
--(IGXMLNodeSet* (^)(NSString*)) append {
-    return ^IGXMLNodeSet* (NSString* xml) {
-        NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                             error:&error];
-        if (node) {
-            return [self appendWithNode:node];
-        } else {
-            // TODO: log error for diagnosis
-            return [IGXMLNodeSet emptyNodeSet];
-        }
-    };
-}
-
--(IGXMLNodeSet* (^)(NSString*)) prepend {
-    return ^IGXMLNodeSet* (NSString* xml) {
-        NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                             error:&error];
-        if (node) {
-            return [self prependWithNode:node];
-        } else {
-            // TODO: log error for diagnosis
-            return [IGXMLNodeSet emptyNodeSet];
-        }
-    };
-}
-
--(IGXMLNodeSet* (^)(NSString*))after {
-    return ^IGXMLNodeSet* (NSString* xml) {
-        NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                             error:&error];
-        if (node) {
-            return [self addNextSiblingWithNode:node];
-        } else {
-            // TODO: log error for diagnosis
-            return [IGXMLNodeSet emptyNodeSet];
-        }
-    };
-}
-
--(IGXMLNodeSet* (^)(NSString*))before {
-    return ^IGXMLNodeSet* (NSString* xml) {
-        NSError* error = nil;
-        IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xml
-                                                             error:&error];
-        if (node) {
-            return [self addPreviousSiblingWithNode:node];
-        } else {
-            // TODO: log error for diagnosis
-            return [IGXMLNodeSet emptyNodeSet];
-        }
-    };
-}
-
 #pragma mark - Query
 
 - (IGXMLNodeSet*) queryWithXPath:(NSString*)xpath {
@@ -279,12 +213,6 @@
         }
     }];
     return [[IGXMLNodeSet alloc] initWithNodes:[nodes array]];
-}
-
--(IGXMLNodeSet* (^)(NSString*)) query {
-    return ^IGXMLNodeSet* (NSString* query) {
-        return [self queryWithXPath:query];
-    };
 }
 
 @end

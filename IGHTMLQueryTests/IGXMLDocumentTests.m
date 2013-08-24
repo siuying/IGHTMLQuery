@@ -99,7 +99,7 @@
     
     IGXMLNodeSet* nodes = [doc queryWithXPath:@"//cd"];
     XCTAssertTrue(nodes.count == 1, @"should have 1 node");
-    XCTAssertEqualObjects(nodes.query(@"title").firstObject.text, @"Empire Burlesque");
+    XCTAssertEqualObjects([nodes queryWithXPath:@"title"].firstObject.text, @"Empire Burlesque");
     
 }
 

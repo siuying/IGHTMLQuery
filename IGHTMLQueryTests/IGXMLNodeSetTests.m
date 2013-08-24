@@ -112,15 +112,6 @@
                           @"<h2>Greetings</h2><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div><p>Test</p>");
 }
 
-- (void)testAfter {
-    doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
-    
-    [doc queryWithXPath:@"//*[@class='inner']"].after(@"<p>Test</p>");
-    
-    XCTAssertEqualObjects(doc.innerXml,
-                          @"<h2>Greetings</h2><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div><p>Test</p>");
-}
-
 - (void)testPreviousNextSibling {
     doc = [[IGXMLDocument alloc] initWithXMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
     
