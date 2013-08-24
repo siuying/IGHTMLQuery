@@ -10,8 +10,8 @@
 #import "IGXMLDocument.h"
 #import "IGHTMLDocument.h"
 
-NSString* const IGXMLQueryErrorDomain = @"IGHTMLQueryError";
-
+NSString* const IGXMLQueryErrorDomain   = @"IGHTMLQueryError";
+NSString* const IGXMLNodeException      = @"IGXMLNodeException";
 /**
  * extracted from Nokigiri
  * @see https://github.com/sparklemotion/nokogiri/blob/master/ext/nokogiri/xml_document.c
@@ -73,10 +73,18 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (void)setTag:(NSString*)tag {
+    if (!_node) {
+        return;
+    }
+
     xmlNodeSetName(_node, (xmlChar*) [tag cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 - (NSString *)text {
+    if (!_node) {
+        return nil;
+    }
+
     xmlChar *key = xmlNodeGetContent(_node);
     NSString *text = (key ? [NSString stringWithUTF8String:(const char *)key] : @"");
     xmlFree(key);
@@ -84,10 +92,18 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (void) setText:(NSString*) text {
+    if (!_node) {
+        return;
+    }
+
     xmlNodeSetContent(_node, (xmlChar*) [text cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 - (NSString *)xml {
+    if (!_node) {
+        return nil;
+    }
+
     xmlBufferPtr buffer = xmlBufferCreate();
     xmlNodeDump(buffer, self.node->doc, self.node, 0, false);
     NSString *text = [NSString stringWithUTF8String:(const char *)xmlBufferContent(buffer)];
@@ -96,6 +112,10 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (NSString *)innerXml {
+    if (!_node) {
+        return nil;
+    }
+
     NSMutableString* innerXml = [NSMutableString string];
     xmlNodePtr cur = self.node->children;
     
@@ -145,7 +165,11 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 #pragma mark - Traversal
 
 - (IGXMLNode *) parent {
-    xmlNodePtr parent = self.node->parent;
+    if (!_node) {
+        return nil;
+    }
+
+    xmlNodePtr parent = _node->parent;
     if (!parent) {
         return nil;
     } else {
@@ -154,7 +178,11 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (IGXMLNode *) nextSibling {
-    xmlNodePtr sibling = xmlNextElementSibling(self.node);
+    if (!_node) {
+        return nil;
+    }
+
+    xmlNodePtr sibling = xmlNextElementSibling(_node);
     if (!sibling) {
         return nil;
     } else {
@@ -163,7 +191,11 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (IGXMLNode *) previousSibling {
-    xmlNodePtr sibling = xmlPreviousElementSibling(self.node);
+    if (!_node) {
+        return nil;
+    }
+
+    xmlNodePtr sibling = xmlPreviousElementSibling(_node);
     if (!sibling) {
         return nil;
     } else {
@@ -172,6 +204,10 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (IGXMLNodeSet *)children {
+    if (!_node) {
+        return [IGXMLNodeSet emptyNodeSet];
+    }
+    
     NSMutableArray* children = [NSMutableArray array];
     xmlNodePtr cur = _node->children;
     
@@ -186,8 +222,11 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(IGXMLNode*) firstChild {
-    xmlNodePtr cur = xmlFirstElementChild(self.node);
+    if (!_node) {
+        return nil;
+    }
 
+    xmlNodePtr cur = xmlFirstElementChild(_node);
     if (cur != nil) {
         return [IGXMLNode nodeWithXMLNode:cur];
     }
@@ -223,8 +262,14 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 #pragma mark - IGXMLNodeManipulation
 
 -(instancetype) appendWithNode:(IGXMLNode*)child {
+    if (!_node) {
+        @throw [NSException exceptionWithName:IGXMLNodeException
+                                       reason:@"cannot append to nil node"
+                                     userInfo:nil];
+    }
+
     if (!child) {
-        @throw [NSException exceptionWithName:@"IGXMLNode Error"
+        @throw [NSException exceptionWithName:IGXMLNodeException
                                        reason:@"child node cannot be nil"
                                      userInfo:nil];
     }
@@ -235,8 +280,14 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(instancetype) prependWithNode:(IGXMLNode*)child {
+    if (!_node) {
+        @throw [NSException exceptionWithName:IGXMLNodeException
+                                       reason:@"cannot prepend to nil node"
+                                     userInfo:nil];
+    }
+
     if (!child) {
-        @throw [NSException exceptionWithName:@"IGXMLNode Error"
+        @throw [NSException exceptionWithName:IGXMLNodeException
                                        reason:@"child node cannot be nil"
                                      userInfo:nil];
     }
@@ -263,8 +314,14 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(IGXMLNode*) addNextSiblingWithNode:(IGXMLNode*)child {
+    if (!_node) {
+        @throw [NSException exceptionWithName:IGXMLNodeException
+                                       reason:@"cannot add sibling to nil node"
+                                     userInfo:nil];
+    }
+
     if (!child) {
-        @throw [NSException exceptionWithName:@"IGXMLNode Error"
+        @throw [NSException exceptionWithName:IGXMLNodeException
                                        reason:@"child node cannot be nil"
                                      userInfo:nil];
     }
@@ -275,8 +332,14 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(IGXMLNode*) addPreviousSiblingWithNode:(IGXMLNode*)child {
+    if (!_node) {
+        @throw [NSException exceptionWithName:IGXMLNodeException
+                                       reason:@"cannot add sibling to nil node"
+                                     userInfo:nil];
+    }
+
     if (!child) {
-        @throw [NSException exceptionWithName:@"IGXMLNode Error"
+        @throw [NSException exceptionWithName:IGXMLNodeException
                                        reason:@"child node cannot be nil"
                                      userInfo:nil];
     }
@@ -342,7 +405,14 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(void) empty {
-    xmlNodePtr cur = self.node;
+    if (!_node) {
+        @throw [NSException exceptionWithName:IGXMLNodeException
+                                       reason:@"Cannot empty a nil node"
+                                     userInfo:nil];
+        return;
+    }
+
+    xmlNodePtr cur = _node;
     cur = cur->children;
     
     while (cur != nil) {
@@ -353,38 +423,47 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     }
 }
 
--(void)remove {
-    if (self.node->type == XML_NAMESPACE_DECL) {
-        @throw [NSException exceptionWithName:IGXMLQueryErrorDomain reason:@"Cannot remove a namespace" userInfo:nil];
+-(void)remove {    
+    if (!_node) {
+        @throw [NSException exceptionWithName:IGXMLNodeException
+                                       reason:@"Cannot remove a nil node"
+                                     userInfo:nil];
         return;
     }
 
-    xmlUnlinkNode(self.node);
-    xmlFreeNode(self.node);
-    self.node = nil;
+    if (_node->type == XML_NAMESPACE_DECL) {
+        @throw [NSException exceptionWithName:IGXMLNodeException
+                                       reason:@"Cannot remove a namespace"
+                                     userInfo:nil];
+        return;
+    }
+
+    xmlUnlinkNode(_node);
+    xmlFreeNode(_node);
+    _node = nil;
 }
 
 #pragma mark - Query
 
 -(IGXMLNodeSet*) queryWithXPath:(NSString*)xpath {
     if (!xpath) {
-        return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        return [IGXMLNodeSet emptyNodeSet];
     }
     
     if (!_node || !_node->doc) {
-        return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+        return [IGXMLNodeSet emptyNodeSet];
     }
     
     xmlXPathContextPtr context = xmlXPathNewContext(self.node->doc);
     if (context == NULL) {
-		return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+		return [IGXMLNodeSet emptyNodeSet];
     }
     
     context->node = self.node;
     
     xmlXPathObjectPtr object = xmlXPathEvalExpression((xmlChar *)[xpath UTF8String], context);
     if (object == NULL) {
-		return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+		return [IGXMLNodeSet emptyNodeSet];
     }
     
 	xmlNodeSetPtr nodes = object->nodesetval;
@@ -407,6 +486,10 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (NSString *)attribute:(NSString *)attName inNamespace:(NSString *)ns {
+    if (!_node) {
+        return nil;
+    }
+
     unsigned char *attCStr = ns ?
     xmlGetNsProp(self.node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding], (const xmlChar *)[ns cStringUsingEncoding:NSUTF8StringEncoding]) :
     xmlGetProp(self.node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding]) ;
@@ -436,7 +519,13 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
                                        reason:@"Attribute value cannot be nil"
                                      userInfo:nil];
     }
-    
+
+    if (!_node) {
+        @throw [NSException exceptionWithName:IGXMLNodeException
+                                       reason:@"Cannot set attribute of a nil node"
+                                     userInfo:nil];
+    }
+
     if (ns) {
         xmlNsPtr nsPtr = xmlSearchNs(self.node->doc, self.node, (const xmlChar *)[ns cStringUsingEncoding:NSUTF8StringEncoding]);
         xmlSetNsProp(self.node,
@@ -455,12 +544,18 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (void) removeAttribute:(NSString*)attName inNamespace:(NSString*)ns {
+    if (!_node) {
+        @throw [NSException exceptionWithName:IGXMLNodeException
+                                       reason:@"Cannot remove attribute from a nil node"
+                                     userInfo:nil];
+    }
+
     if (!attName) {
-        @throw [NSException exceptionWithName:@"IGXMLNode Error"
+        @throw [NSException exceptionWithName:IGXMLNodeException
                                        reason:@"Attribute name cannot be nil"
                                      userInfo:nil];
     }
-    
+
     xmlAttrPtr attr = NULL;
     if (ns) {
         attr = xmlHasNsProp(self.node,

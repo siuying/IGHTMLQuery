@@ -19,6 +19,7 @@
 #import "IGXMLNodeQuery.h"
 
 extern NSString* const IGXMLQueryErrorDomain;
+extern NSString* const IGXMLNodeException;
 
 @class IGXMLDocument;
 

@@ -19,7 +19,9 @@
 -(id) initWithNodes:(NSArray*)nodes {
     self = [super init];
     if (self) {
-        _nodes = [NSOrderedSet orderedSetWithArray:nodes];
+        if (nodes) {
+            _nodes = [NSOrderedSet orderedSetWithArray:nodes];
+        }
     }
     return self;
 }
@@ -29,7 +31,7 @@
 }
 
 +(id) emptyNodeSet {
-    return [[self alloc] initWithNodes:@[]];
+    return [[self alloc] initWithNodes:nil];
 }
 
 -(NSUInteger) count {
@@ -41,11 +43,15 @@
         return YES;
     }
     
+    IGXMLNodeSet* another = object;
+    if (self.nodes == nil && another.nodes == nil)  {
+        return YES;
+    }
+
     if (![object isKindOfClass:[self class]]) {
         return NO;
     }
     
-    IGXMLNodeSet* another = object;
     return [self.nodes isEqual:another.nodes];
 }
 
@@ -60,7 +66,11 @@
 }
 
 -(NSArray *) allObjects {
-    return [self.nodes array];
+    if (self.nodes) {
+        return [self.nodes array];
+    } else {
+        return @[];
+    }
 }
 
 -(IGXMLNode*) firstObject {
@@ -211,7 +221,7 @@
             return [self appendWithNode:node];
         } else {
             // TODO: log error for diagnosis
-            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+            return [IGXMLNodeSet emptyNodeSet];
         }
     };
 }
@@ -225,7 +235,7 @@
             return [self prependWithNode:node];
         } else {
             // TODO: log error for diagnosis
-            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+            return [IGXMLNodeSet emptyNodeSet];
         }
     };
 }
@@ -239,7 +249,7 @@
             return [self addNextSiblingWithNode:node];
         } else {
             // TODO: log error for diagnosis
-            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+            return [IGXMLNodeSet emptyNodeSet];
         }
     };
 }
@@ -253,7 +263,7 @@
             return [self addPreviousSiblingWithNode:node];
         } else {
             // TODO: log error for diagnosis
-            return [[IGXMLNodeSet alloc] initWithNodes:@[]];
+            return [IGXMLNodeSet emptyNodeSet];
         }
     };
 }
@@ -264,7 +274,7 @@
     NSMutableOrderedSet* nodes = [[NSMutableOrderedSet alloc] init];
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         IGXMLNodeSet* nodeSet = [node queryWithXPath:xpath];
-        if (nodeSet) {
+        if (nodeSet && nodeSet.nodes) {
             [nodes unionOrderedSet:nodeSet.nodes];
         }
     }];
