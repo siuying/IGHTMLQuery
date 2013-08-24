@@ -59,6 +59,20 @@
     }];
 }
 
+- (void)testXPathQueryEmpty
+{
+    NSString* xml = doc.xml;
+    IGXMLNodeSet* cds = [doc queryWithXPath:@"//cda"];
+    XCTAssertEqual(0U, [cds count]);
+    
+    IGXMLNodeSet* title = [cds queryWithXPath:@".//title"];
+    XCTAssertEqual(0U, [title count]);
+
+    [title remove];
+    NSString* afterXml = doc.xml;
+    XCTAssertEqualObjects(xml, afterXml, @"should not be changed");
+}
+
 - (void)testXPathShorthand
 {
     XCTAssertEqualObjects([doc queryWithXPath:@"//cd/title"].firstObject.text, @"Empire Burlesque");
