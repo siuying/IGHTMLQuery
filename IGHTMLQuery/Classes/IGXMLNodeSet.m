@@ -78,14 +78,14 @@
 }
 
 -(void) enumerateNodesUsingBlock:(IGXMLNodeSetEnumerateBlock)block {
-    [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
+    [[self.nodes reversedOrderedSet] enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         block(node, idx, stop);
     }];
 }
 
 -(void (^)(IGXMLNodeSetEachBlock)) each {
     return ^(IGXMLNodeSetEachBlock block) {
-        [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
+        [[self.nodes reversedOrderedSet] enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
             block(node);
         }];
     };
