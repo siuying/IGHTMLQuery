@@ -43,7 +43,6 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 @interface IGXMLNode ()
-@property (nonatomic, assign) BOOL shouldFreeNode;
 @end
 
 @implementation IGXMLNode
@@ -51,7 +50,6 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 - (id)initWithXMLNode:(xmlNodePtr)node {
     if ((self = [super init])) {
         _node = node;
-        _shouldFreeNode = NO;
     }
     return self;
 }
@@ -61,9 +59,6 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(void) dealloc {
-    if (_shouldFreeNode) {
-        xmlFreeNode(_node);
-    }
     _node = nil;
 }
 
@@ -363,9 +358,10 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
         @throw [NSException exceptionWithName:IGXMLQueryErrorDomain reason:@"Cannot remove a namespace" userInfo:nil];
         return;
     }
-    
+
     xmlUnlinkNode(self.node);
-    _shouldFreeNode = YES;
+    xmlFreeNode(self.node);
+    self.node = nil;
 }
 
 #pragma mark - Query
