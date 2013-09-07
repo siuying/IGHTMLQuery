@@ -14,7 +14,6 @@
 		543763B017C36EFD004CE333 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 543763AE17C36EFD004CE333 /* InfoPlist.strings */; };
 		543763B217C36EFD004CE333 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763B117C36EFD004CE333 /* main.m */; };
 		543763B617C36EFD004CE333 /* IGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763B517C36EFD004CE333 /* IGAppDelegate.m */; };
-		543763B917C36EFD004CE333 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 543763B717C36EFD004CE333 /* Main.storyboard */; };
 		543763BC17C36EFD004CE333 /* IGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763BB17C36EFD004CE333 /* IGViewController.m */; };
 		543763BE17C36EFD004CE333 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 543763BD17C36EFD004CE333 /* Images.xcassets */; };
 		543763C517C36EFD004CE333 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763C417C36EFD004CE333 /* XCTest.framework */; };
@@ -314,7 +313,6 @@
 			files = (
 				543763BE17C36EFD004CE333 /* Images.xcassets in Resources */,
 				543763B017C36EFD004CE333 /* InfoPlist.strings in Resources */,
-				543763B917C36EFD004CE333 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
