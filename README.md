@@ -1,4 +1,3 @@
-
 # What is it?
 
 IGHTMLQuery is a lightweight XML/HTML parser for iOS, built on top of libxml. It is inspired by jQuery and nokogiri. Consider following snippets:
@@ -68,7 +67,7 @@ You can query the document or any node with ```queryWithXPath:``` method. It wil
 
 ```objective-c
 IGXMLNodeSet* contents = [doc queryWithXPath:@"//div[@class='content']"];
-[contents enumerateObjectsUsingBlock:^(IGXMLNode* content, NSUInteger idx, BOOL *stop){
+[contents enumerateNodesUsingBlock:^(IGXMLNode* content, NSUInteger idx, BOOL *stop){
     NSLog(@"%@", content.xml);
 }]
 
