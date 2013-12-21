@@ -20,9 +20,9 @@ DESC
   s.osx.deployment_target = '10.8'
 
   s.source       = { :git => "https://github.com/siuying/IGHTMLQuery.git", :tag => s.version.to_s }
-  s.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
 
   s.library   = 'xml2'
+
   s.requires_arc = true
 
   s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
@@ -31,6 +31,7 @@ DESC
 
   s.subspec "Core" do |sp|
     sp.ios.deployment_target = '6.0'
+    sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
   end
 
   # Include IGHTMLQuery/JavaScript to enable JavaScriptCore support.
@@ -38,5 +39,6 @@ DESC
     sp.prefix_header_contents = '#define IGHTMLQUERY_JAVSCRIPT_EXPORT'
     sp.ios.deployment_target = '7.0'
     sp.frameworks = 'JavaScriptCore'
+    sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
   end
 end
