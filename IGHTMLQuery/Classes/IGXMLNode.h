@@ -15,7 +15,9 @@
 #import <Foundation/Foundation.h>
 
 #import "IGXMLNodeSet.h"
+#import "IGXMLNodeAttribute.h"
 #import "IGXMLNodeManipulation.h"
+#import "IGXMLNodeTraversal.h"
 #import "IGXMLNodeQuery.h"
 
 extern NSString* const IGXMLQueryErrorDomain;
@@ -23,7 +25,7 @@ extern NSString* const IGXMLNodeException;
 
 @class IGXMLDocument;
 
-@interface IGXMLNode : NSObject <IGXMLNodeManipulation, IGXMLNodeQuery, NSCopying>
+@interface IGXMLNode : NSObject <IGXMLNodeManipulation, IGXMLNodeQuery, IGXMLNodeAttribute, IGXMLNodeTraversal, NSCopying>
 
 /**
  backed XML node,
@@ -79,87 +81,5 @@ extern NSString* const IGXMLNodeException;
  remove namespace of the document recursively.
  */
 - (void)removeNamespaces;
-
-@end
-
-@interface IGXMLNode (Traversal)
-
-/**
-  @return get parent node
- */
-- (IGXMLNode *) parent;
-
-/**
- @return get next sibling node
- */
-- (IGXMLNode *) nextSibling;
-
-/**
- @return get previous sibling node
- */
-- (IGXMLNode *) previousSibling;
-
-/**
- @return get children elements of current node as {{IGXMLNodeSet}}.
- */
-- (IGXMLNodeSet*) children;
-
-/**
- @return get first child element of current node. If no child exists, return nil.
- */
-- (IGXMLNode*) firstChild;
-
-/**
- @return It returns a key guaranteed to be unique for this node, and to always be the same value for this node. In other words, two node objects return the same key if and only if isSameNode indicates that they are the same node.
- */
-- (NSString*) uniqueKey;
-
-@end
-
-@interface IGXMLNode (Attributes)
-
-/**
- @param attName attribute name to get
- @return attribute value
- */
-- (NSString *)attribute:(NSString *)attName;
-
-/**
- @param attName attribute name
- @param ns namespace
- @return attribute value
- */
-- (NSString *)attribute:(NSString *)attName inNamespace:(NSString *)ns;
-
-/**
- @param attName attribute name to set
- @param value value to set
- */
-- (void) setAttribute:(NSString*)attName value:(NSString*)value;
-
-/**
- @param attName attribute name to set
- @param ns namespace
- @param value value to set
- */
-- (void) setAttribute:(NSString*)attName inNamespace:(NSString*)ns value:(NSString*)value;
-
-/**
- @param attName attribute name to remove
- */
-- (void) removeAttribute:(NSString*)attName;
-
-/**
- @param attName attribute name to remove
- */
-- (void) removeAttribute:(NSString*)attName inNamespace:(NSString*)ns;
-
-- (NSArray *)attributeNames;
-
-/**
- subscript support
- */
-- (id)objectForKeyedSubscript:(id)key;
-- (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key;
 
 @end

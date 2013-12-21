@@ -16,21 +16,12 @@ typedef void (^IGXMLNodeSetEnumerateBlock)(IGXMLNode* node, NSUInteger idx, BOOL
 
 typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* node);
 
-/**
- Array like construct allow chaining query
- */
-@interface IGXMLNodeSet : NSObject <NSFastEnumeration, IGXMLNodeManipulation, IGXMLNodeQuery>
+@protocol IGXMLNodeSetCore <NSObject>
 
 /**
  nodes in this node set
  */
 @property (nonatomic, copy, readonly) NSOrderedSet* nodes;
-
--(id) initWithNodes:(NSArray*)nodes;
-
-+(id) nodeSetWithNodes:(NSArray*)nodes;
-
-+(id) emptyNodeSet;
 
 /**
  @return number of nodes in the set
@@ -48,13 +39,26 @@ typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* node);
 -(IGXMLNode*) firstObject;
 
 /**
- @return add support of subscript syntax.
- */
--(id) objectAtIndexedSubscript:(NSUInteger)idx;
-
-/**
  Enumerator
  */
 -(void) enumerateNodesUsingBlock:(IGXMLNodeSetEnumerateBlock)block;
+
+@end
+
+/**
+ Array like construct allow chaining query
+ */
+@interface IGXMLNodeSet : NSObject <NSFastEnumeration, IGXMLNodeSetCore, IGXMLNodeManipulation, IGXMLNodeQuery>
+
+-(id) initWithNodes:(NSArray*)nodes;
+
++(id) nodeSetWithNodes:(NSArray*)nodes;
+
++(id) emptyNodeSet;
+
+/**
+ @return add support of subscript syntax.
+ */
+-(id) objectAtIndexedSubscript:(NSUInteger)idx;
 
 @end
