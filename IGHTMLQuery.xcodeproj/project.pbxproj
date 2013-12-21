@@ -28,6 +28,8 @@
 		543763F717C378CF004CE333 /* IGXMLNodeSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763F617C378CF004CE333 /* IGXMLNodeSet.m */; };
 		543763F817C378CF004CE333 /* IGXMLNodeSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763F617C378CF004CE333 /* IGXMLNodeSet.m */; };
 		543763F917C37BB4004CE333 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763DF17C36F52004CE333 /* libxml2.dylib */; };
+		54432A7818658F9C00FBFDE4 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54432A711865886E00FBFDE4 /* JavaScriptCore.framework */; };
+		54432A7918658F9D00FBFDE4 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54432A711865886E00FBFDE4 /* JavaScriptCore.framework */; };
 		5455B17B17C8710200A992EB /* nytimes.html in Resources */ = {isa = PBXBuildFile; fileRef = 5455B17A17C8710200A992EB /* nytimes.html */; };
 		5455B17D17C8711700A992EB /* IGIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5455B17C17C8711700A992EB /* IGIntegrationTests.m */; };
 		549C1DC317C47DEE00CF4F20 /* catalog.xml in Resources */ = {isa = PBXBuildFile; fileRef = 549C1DC217C47DEE00CF4F20 /* catalog.xml */; };
@@ -82,6 +84,7 @@
 		54432A711865886E00FBFDE4 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		54432A7518658B4E00FBFDE4 /* IGXMLNodeAttribute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGXMLNodeAttribute.h; path = Classes/IGXMLNodeAttribute.h; sourceTree = "<group>"; };
 		54432A7618658BBE00FBFDE4 /* IGXMLNodeTraversal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGXMLNodeTraversal.h; path = Classes/IGXMLNodeTraversal.h; sourceTree = "<group>"; };
+		54432A7718658ED500FBFDE4 /* IGHTMLQueryJavaScriptExport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGHTMLQueryJavaScriptExport.h; path = Classes/IGHTMLQueryJavaScriptExport.h; sourceTree = "<group>"; };
 		5455B17A17C8710200A992EB /* nytimes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = nytimes.html; path = Fixtures/nytimes.html; sourceTree = "<group>"; };
 		5455B17C17C8711700A992EB /* IGIntegrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGIntegrationTests.m; sourceTree = "<group>"; };
 		549C1DC217C47DEE00CF4F20 /* catalog.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = catalog.xml; path = Fixtures/catalog.xml; sourceTree = "<group>"; };
@@ -107,6 +110,7 @@
 			files = (
 				543763E017C36F52004CE333 /* libxml2.dylib in Frameworks */,
 				543763A817C36EFD004CE333 /* CoreGraphics.framework in Frameworks */,
+				54432A7818658F9C00FBFDE4 /* JavaScriptCore.framework in Frameworks */,
 				543763AA17C36EFD004CE333 /* UIKit.framework in Frameworks */,
 				543763A617C36EFD004CE333 /* Foundation.framework in Frameworks */,
 			);
@@ -118,6 +122,7 @@
 			files = (
 				543763F917C37BB4004CE333 /* libxml2.dylib in Frameworks */,
 				543763C517C36EFD004CE333 /* XCTest.framework in Frameworks */,
+				54432A7918658F9D00FBFDE4 /* JavaScriptCore.framework in Frameworks */,
 				543763C717C36EFD004CE333 /* UIKit.framework in Frameworks */,
 				543763C617C36EFD004CE333 /* Foundation.framework in Frameworks */,
 			);
@@ -221,6 +226,7 @@
 				543763E217C37028004CE333 /* IGXMLNode.m */,
 				543763F517C378CF004CE333 /* IGXMLNodeSet.h */,
 				543763F617C378CF004CE333 /* IGXMLNodeSet.m */,
+				54432A7718658ED500FBFDE4 /* IGHTMLQueryJavaScriptExport.h */,
 				549C1DC617C4AC9D00CF4F20 /* IGXMLNodeQuery.h */,
 				549C1DC517C4A4DF00CF4F20 /* IGXMLNodeManipulation.h */,
 				54432A7518658B4E00FBFDE4 /* IGXMLNodeAttribute.h */,

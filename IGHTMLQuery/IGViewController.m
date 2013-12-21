@@ -6,7 +6,9 @@
 //  Copyright (c) 2013 Ignition Soft. All rights reserved.
 //
 
+#import <JavaScriptCore/JavaScriptCore.h>
 #import "IGViewController.h"
+
 #import "IGHTMLQuery.h"
 
 @interface IGViewController ()
@@ -17,28 +19,17 @@
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-
-    for (int i=0; i < 10; i++) {
-        @autoreleasepool {
-            IGHTMLDocument* doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<html><p>Hello World</p></html>" error:nil];
-//
-//            doc.query(@"p")
-//                .firstObject
-//                .append([NSString stringWithFormat:@"<div><span>%d</span></div>", i])
-//                .before(@"<a>opps</a>");
-//            doc.query(@"p")
-//                .firstObject
-//                .prepend([NSString stringWithFormat:@"<div><p>%d</p></div>", i])
-//                .after(@"<a>woo</a>");
-//            [doc.query(@"a") remove];
-//            [doc.query(@"p").firstObject empty];
-//            [doc.query(@"p").firstObject remove];
-//            [doc.query(@"p").firstObject remove];
-//            [doc.query(@"p").firstObject remove];
-        }
-    }
+    
+    IGHTMLDocument* doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<html><p>Hello World</p></html>" error:nil];
+    NSString* content = [[[doc queryWithXPath:@"//p"] firstObject] text];
+    NSLog(@"content from Objective-C = %@", content);
+    
+    JSContext *context = [[JSContext alloc] init];
+    context[@"doc"] = doc;
+    JSValue* output = [context evaluateScript:@"doc.queryWithXPath('//p').firstObject().text()"];
+    NSLog(@"content from JavaScript = %@", [output toString]);
 }
 
 - (void)didReceiveMemoryWarning

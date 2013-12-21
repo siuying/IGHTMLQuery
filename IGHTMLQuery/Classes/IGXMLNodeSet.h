@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IGHTMLQueryJavaScriptExport.h"
 #import "IGXMLNodeManipulation.h"
 #import "IGXMLNodeQuery.h"
 
@@ -16,7 +17,7 @@ typedef void (^IGXMLNodeSetEnumerateBlock)(IGXMLNode* node, NSUInteger idx, BOOL
 
 typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* node);
 
-@protocol IGXMLNodeSetCore <NSObject>
+@protocol IGXMLNodeSetCore <IGHTMLQueryJavaScriptExport, NSObject>
 
 /**
  nodes in this node set

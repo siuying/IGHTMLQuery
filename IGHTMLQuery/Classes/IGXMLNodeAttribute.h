@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IGHTMLQueryJavaScriptExport.h"
 
 @class IGXMLNode;
 
-@protocol IGXMLNodeAttribute <NSObject>
+@protocol IGXMLNodeAttribute <IGHTMLQueryJavaScriptExport, NSObject>
 
 /**
  @param attName attribute name to get

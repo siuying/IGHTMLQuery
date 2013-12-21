@@ -13,7 +13,7 @@
 #import <libxml/xpathInternals.h>
 
 #import <Foundation/Foundation.h>
-
+#import "IGHTMLQueryJavaScriptExport.h"
 #import "IGXMLNodeSet.h"
 #import "IGXMLNodeAttribute.h"
 #import "IGXMLNodeManipulation.h"
@@ -25,22 +25,7 @@ extern NSString* const IGXMLNodeException;
 
 @class IGXMLDocument;
 
-@interface IGXMLNode : NSObject <IGXMLNodeManipulation, IGXMLNodeQuery, IGXMLNodeAttribute, IGXMLNodeTraversal, NSCopying>
-
-/**
- backed XML node,
- */
-@property (nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
-
-/**
- Create a node using a libxml node
- */
-- (id)initWithXMLNode:(xmlNodePtr)node;
-
-/**
- Create a node using a libxml node
- */
-+ (id)nodeWithXMLNode:(xmlNodePtr)node;
+@protocol IGXMLNodeCore <IGHTMLQueryJavaScriptExport, NSObject>
 
 /**
  @return get tag name of current node.
@@ -81,5 +66,24 @@ extern NSString* const IGXMLNodeException;
  remove namespace of the document recursively.
  */
 - (void)removeNamespaces;
+
+@end
+
+@interface IGXMLNode : NSObject <IGXMLNodeCore, IGXMLNodeManipulation, IGXMLNodeQuery, IGXMLNodeAttribute, IGXMLNodeTraversal, NSCopying>
+
+/**
+ backed XML node,
+ */
+@property (nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
+
+/**
+ Create a node using a libxml node
+ */
+- (id)initWithXMLNode:(xmlNodePtr)node;
+
+/**
+ Create a node using a libxml node
+ */
++ (id)nodeWithXMLNode:(xmlNodePtr)node;
 
 @end

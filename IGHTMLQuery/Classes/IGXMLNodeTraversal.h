@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IGHTMLQueryJavaScriptExport.h"
 
 @class IGXMLNode;
 @class IGXMLNodeSet;
 
-@protocol IGXMLNodeTraversal <NSObject>
+@protocol IGXMLNodeTraversal <IGHTMLQueryJavaScriptExport, NSObject>
 
 /**
  @return get parent node
