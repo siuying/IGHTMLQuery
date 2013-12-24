@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "IGHTMLQueryJavaScriptExport.h"
+
 @class IGXMLNode;
 
-@protocol IGXMLNodeManipulation <NSObject>
+@protocol IGXMLNodeManipulation <IGHTMLQueryJavaScriptExport, NSObject>
 
 -(instancetype) appendWithNode:(IGXMLNode*)child;
 

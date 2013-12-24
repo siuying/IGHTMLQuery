@@ -13,9 +13,11 @@
 #import <libxml/xpathInternals.h>
 
 #import <Foundation/Foundation.h>
-
+#import "IGHTMLQueryJavaScriptExport.h"
 #import "IGXMLNodeSet.h"
+#import "IGXMLNodeAttribute.h"
 #import "IGXMLNodeManipulation.h"
+#import "IGXMLNodeTraversal.h"
 #import "IGXMLNodeQuery.h"
 
 extern NSString* const IGXMLQueryErrorDomain;
@@ -23,22 +25,7 @@ extern NSString* const IGXMLNodeException;
 
 @class IGXMLDocument;
 
-@interface IGXMLNode : NSObject <IGXMLNodeManipulation, IGXMLNodeQuery, NSCopying>
-
-/**
- backed XML node,
- */
-@property (nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
-
-/**
- Create a node using a libxml node
- */
-- (id)initWithXMLNode:(xmlNodePtr)node;
-
-/**
- Create a node using a libxml node
- */
-+ (id)nodeWithXMLNode:(xmlNodePtr)node;
+@protocol IGXMLNodeCore <IGHTMLQueryJavaScriptExport, NSObject>
 
 /**
  @return get tag name of current node.
@@ -82,84 +69,21 @@ extern NSString* const IGXMLNodeException;
 
 @end
 
-@interface IGXMLNode (Traversal)
+@interface IGXMLNode : NSObject <IGXMLNodeCore, IGXMLNodeManipulation, IGXMLNodeQuery, IGXMLNodeAttribute, IGXMLNodeTraversal, NSCopying>
 
 /**
-  @return get parent node
+ backed XML node,
  */
-- (IGXMLNode *) parent;
+@property (nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
 
 /**
- @return get next sibling node
+ Create a node using a libxml node
  */
-- (IGXMLNode *) nextSibling;
+- (id)initWithXMLNode:(xmlNodePtr)node;
 
 /**
- @return get previous sibling node
+ Create a node using a libxml node
  */
-- (IGXMLNode *) previousSibling;
-
-/**
- @return get children elements of current node as {{IGXMLNodeSet}}.
- */
-- (IGXMLNodeSet*) children;
-
-/**
- @return get first child element of current node. If no child exists, return nil.
- */
-- (IGXMLNode*) firstChild;
-
-/**
- @return It returns a key guaranteed to be unique for this node, and to always be the same value for this node. In other words, two node objects return the same key if and only if isSameNode indicates that they are the same node.
- */
-- (NSString*) uniqueKey;
-
-@end
-
-@interface IGXMLNode (Attributes)
-
-/**
- @param attName attribute name to get
- @return attribute value
- */
-- (NSString *)attribute:(NSString *)attName;
-
-/**
- @param attName attribute name
- @param ns namespace
- @return attribute value
- */
-- (NSString *)attribute:(NSString *)attName inNamespace:(NSString *)ns;
-
-/**
- @param attName attribute name to set
- @param value value to set
- */
-- (void) setAttribute:(NSString*)attName value:(NSString*)value;
-
-/**
- @param attName attribute name to set
- @param ns namespace
- @param value value to set
- */
-- (void) setAttribute:(NSString*)attName inNamespace:(NSString*)ns value:(NSString*)value;
-
-/**
- @param attName attribute name to remove
- */
-- (void) removeAttribute:(NSString*)attName;
-
-/**
- @param attName attribute name to remove
- */
-- (void) removeAttribute:(NSString*)attName inNamespace:(NSString*)ns;
-
-- (NSArray *)attributeNames;
-
-/**
- subscript support
- */
-- (id)objectForKeyedSubscript:(id)key;
-- (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key;
++ (id)nodeWithXMLNode:(xmlNodePtr)node;
 
 @end

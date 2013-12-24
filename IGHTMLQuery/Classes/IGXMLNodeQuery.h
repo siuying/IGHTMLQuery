@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "IGHTMLQueryJavaScriptExport.h"
+
 @class IGXMLNodeSet;
 
-@protocol IGXMLNodeQuery <NSObject>
+@protocol IGXMLNodeQuery <NSObject, IGHTMLQueryJavaScriptExport>
 
 /**
  Query a node with XPath
