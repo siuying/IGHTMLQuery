@@ -11,8 +11,9 @@
 
 #import <Foundation/Foundation.h>
 #import "IGXMLNode.h"
+#import "IGHTMLQueryJavaScriptExport.h"
 
-@interface IGXMLDocument : IGXMLNode
+@interface IGXMLDocument : IGXMLNode <IGHTMLQueryJavaScriptExport>
 
 @property (nonatomic, readonly, unsafe_unretained) xmlDocPtr doc;
 

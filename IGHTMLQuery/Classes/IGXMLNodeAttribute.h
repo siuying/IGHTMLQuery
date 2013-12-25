@@ -11,7 +11,7 @@
 
 @class IGXMLNode;
 
-@protocol IGXMLNodeAttribute <IGHTMLQueryJavaScriptExport, NSObject>
+@protocol IGXMLNodeAttribute <IGHTMLQueryJavaScriptExport>
 
 /**
  @param attName attribute name to get

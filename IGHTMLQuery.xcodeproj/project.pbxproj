@@ -43,6 +43,7 @@
 		54AB5F4417C47A4C009E2CF1 /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 54AB5F4217C479E6009E2CF1 /* sample.html */; };
 		54AF474D17C3854000D16C80 /* IGXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AF474C17C3854000D16C80 /* IGXMLDocument.m */; };
 		54E40FCD17C3B61C00C8FBB9 /* IGXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AF474C17C3854000D16C80 /* IGXMLDocument.m */; };
+		AD26AEA4B5874711AC6339CF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96ED3153DE494256AF65D79A /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3045E63CBA2049EE9DCBA62C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		541B153417C383FA00F2C646 /* IGXMLNodeSetTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGXMLNodeSetTests.m; sourceTree = "<group>"; };
 		543763A217C36EFD004CE333 /* IGHTMLQuery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IGHTMLQuery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		543763A517C36EFD004CE333 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -101,6 +103,7 @@
 		54AB5F4217C479E6009E2CF1 /* sample.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = sample.html; path = Fixtures/sample.html; sourceTree = "<group>"; };
 		54AF474B17C3854000D16C80 /* IGXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGXMLDocument.h; path = Classes/IGXMLDocument.h; sourceTree = "<group>"; };
 		54AF474C17C3854000D16C80 /* IGXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGXMLDocument.m; path = Classes/IGXMLDocument.m; sourceTree = "<group>"; };
+		96ED3153DE494256AF65D79A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +116,7 @@
 				54432A7818658F9C00FBFDE4 /* JavaScriptCore.framework in Frameworks */,
 				543763AA17C36EFD004CE333 /* UIKit.framework in Frameworks */,
 				543763A617C36EFD004CE333 /* Foundation.framework in Frameworks */,
+				AD26AEA4B5874711AC6339CF /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,12 +135,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21FC7A34E141469C9B8CC01A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				96ED3153DE494256AF65D79A /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5437639917C36EFD004CE333 = {
 			isa = PBXGroup;
 			children = (
 				543763AB17C36EFD004CE333 /* IGHTMLQuery */,
 				543763CA17C36EFD004CE333 /* IGHTMLQueryTests */,
 				543763A317C36EFD004CE333 /* Products */,
+				3045E63CBA2049EE9DCBA62C /* Pods.xcconfig */,
+				21FC7A34E141469C9B8CC01A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -254,9 +268,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 543763D417C36EFD004CE333 /* Build configuration list for PBXNativeTarget "IGHTMLQuery" */;
 			buildPhases = (
+				D523487CCBB14DF7ADE497A9 /* Check Pods Manifest.lock */,
 				5437639E17C36EFD004CE333 /* Sources */,
 				5437639F17C36EFD004CE333 /* Frameworks */,
 				543763A017C36EFD004CE333 /* Resources */,
+				BF0A0C4453B14DEEAE40BA1B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -344,6 +360,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BF0A0C4453B14DEEAE40BA1B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D523487CCBB14DF7ADE497A9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5437639E17C36EFD004CE333 /* Sources */ = {
@@ -485,12 +534,16 @@
 		};
 		543763D517C36EFD004CE333 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3045E63CBA2049EE9DCBA62C /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IGHTMLQuery/IGHTMLQuery-Prefix.pch";
-				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SDK_DIR)\"/usr/include/libxml2",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "IGHTMLQuery/IGHTMLQuery-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -499,12 +552,16 @@
 		};
 		543763D617C36EFD004CE333 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3045E63CBA2049EE9DCBA62C /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IGHTMLQuery/IGHTMLQuery-Prefix.pch";
-				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SDK_DIR)\"/usr/include/libxml2",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "IGHTMLQuery/IGHTMLQuery-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
