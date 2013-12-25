@@ -12,7 +12,7 @@
 @class IGXMLNode;
 @class IGXMLNodeSet;
 
-@protocol IGXMLNodeTraversal <IGHTMLQueryJavaScriptExport, NSObject>
+@protocol IGXMLNodeTraversal <IGHTMLQueryJavaScriptExport>
 
 /**
  @return get parent node

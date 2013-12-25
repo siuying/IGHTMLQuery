@@ -12,6 +12,6 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #define IGHTMLQueryJavaScriptExport JSExport
 #else
-@protocol IGHTMLQueryJavaScriptExport <NSObject>
+@protocol IGHTMLQueryJavaScriptExport NSObject
 @end
 #endif

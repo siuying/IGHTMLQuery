@@ -17,7 +17,7 @@ typedef void (^IGXMLNodeSetEnumerateBlock)(IGXMLNode* node, NSUInteger idx, BOOL
 
 typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* node);
 
-@protocol IGXMLNodeSetCore <IGHTMLQueryJavaScriptExport, NSObject>
+@protocol IGXMLNodeSetCore <IGHTMLQueryJavaScriptExport>
 
 /**
  nodes in this node set

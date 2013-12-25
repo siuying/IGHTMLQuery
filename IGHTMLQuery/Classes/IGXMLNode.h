@@ -25,7 +25,7 @@ extern NSString* const IGXMLNodeException;
 
 @class IGXMLDocument;
 
-@protocol IGXMLNodeCore <IGHTMLQueryJavaScriptExport, NSObject>
+@protocol IGXMLNodeCore <IGHTMLQueryJavaScriptExport>
 
 /**
  @return get tag name of current node.

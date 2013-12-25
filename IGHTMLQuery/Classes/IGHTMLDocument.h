@@ -9,8 +9,9 @@
 #import <libxml2/libxml/HTMLparser.h>
 
 #import "IGXMLDocument.h"
+#import "IGHTMLQueryJavaScriptExport.h"
 
-@interface IGHTMLDocument : IGXMLDocument
+@interface IGHTMLDocument : IGXMLDocument <IGHTMLQueryJavaScriptExport>
 
 - (id)initWithHTMLString:(NSString *)xmlString error:(NSError**)outError;
 
