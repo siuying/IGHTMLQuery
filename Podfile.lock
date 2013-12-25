@@ -1,0 +1,10 @@
+PODS:
+  - JavaScriptCoreOpalAdditions (0.2.0)
+
+DEPENDENCIES:
+  - JavaScriptCoreOpalAdditions
+
+SPEC CHECKSUMS:
+  JavaScriptCoreOpalAdditions: 42f4435dc41a129c62fae400bb4147ed0a527e17
+
+COCOAPODS: 0.28.0
