@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5416CA4F186BAE8300EC5F23 /* IGRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5416CA4E186BAE8300EC5F23 /* IGRubyTests.m */; };
+		5416CA51186BB00300EC5F23 /* xml_node.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5416CA50186BB00300EC5F23 /* xml_node.rb */; };
+		5416CA52186BB00300EC5F23 /* xml_node.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5416CA50186BB00300EC5F23 /* xml_node.rb */; };
+		5416CA55186BB64B00EC5F23 /* xml_node_set.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5416CA54186BB64B00EC5F23 /* xml_node_set.rb */; };
+		5416CA56186BB64B00EC5F23 /* xml_node_set.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5416CA54186BB64B00EC5F23 /* xml_node_set.rb */; };
 		541B153517C383FA00F2C646 /* IGXMLNodeSetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 541B153417C383FA00F2C646 /* IGXMLNodeSetTests.m */; };
 		543763A617C36EFD004CE333 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763A517C36EFD004CE333 /* Foundation.framework */; };
 		543763A817C36EFD004CE333 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763A717C36EFD004CE333 /* CoreGraphics.framework */; };
@@ -58,6 +63,10 @@
 
 /* Begin PBXFileReference section */
 		3045E63CBA2049EE9DCBA62C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		5416CA4E186BAE8300EC5F23 /* IGRubyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRubyTests.m; sourceTree = "<group>"; };
+		5416CA50186BB00300EC5F23 /* xml_node.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = xml_node.rb; path = Ruby/xml_node.rb; sourceTree = "<group>"; };
+		5416CA53186BB2F600EC5F23 /* IGXMLNodeCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGXMLNodeCore.h; path = Classes/IGXMLNodeCore.h; sourceTree = "<group>"; };
+		5416CA54186BB64B00EC5F23 /* xml_node_set.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = xml_node_set.rb; path = Ruby/xml_node_set.rb; sourceTree = "<group>"; };
 		541B153417C383FA00F2C646 /* IGXMLNodeSetTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGXMLNodeSetTests.m; sourceTree = "<group>"; };
 		543763A217C36EFD004CE333 /* IGHTMLQuery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IGHTMLQuery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		543763A517C36EFD004CE333 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -180,6 +189,7 @@
 		543763AB17C36EFD004CE333 /* IGHTMLQuery */ = {
 			isa = PBXGroup;
 			children = (
+				54ECB881186AFAA30037BEBE /* Ruby */,
 				543763DA17C36F04004CE333 /* Classes */,
 				543763B417C36EFD004CE333 /* IGAppDelegate.h */,
 				543763B517C36EFD004CE333 /* IGAppDelegate.m */,
@@ -212,6 +222,7 @@
 				549C1DC717C4B14F00CF4F20 /* IGXMLNodeTraversalTests.m */,
 				541B153417C383FA00F2C646 /* IGXMLNodeSetTests.m */,
 				549C1DC917C4B52000CF4F20 /* IGXMLDocumentAttributeTests.m */,
+				5416CA4E186BAE8300EC5F23 /* IGRubyTests.m */,
 				5455B17C17C8711700A992EB /* IGIntegrationTests.m */,
 				543763A417C36EFD004CE333 /* Frameworks */,
 				543763CB17C36EFD004CE333 /* Supporting Files */,
@@ -241,6 +252,7 @@
 				543763F517C378CF004CE333 /* IGXMLNodeSet.h */,
 				543763F617C378CF004CE333 /* IGXMLNodeSet.m */,
 				54432A7718658ED500FBFDE4 /* IGHTMLQueryJavaScriptExport.h */,
+				5416CA53186BB2F600EC5F23 /* IGXMLNodeCore.h */,
 				549C1DC617C4AC9D00CF4F20 /* IGXMLNodeQuery.h */,
 				549C1DC517C4A4DF00CF4F20 /* IGXMLNodeManipulation.h */,
 				54432A7518658B4E00FBFDE4 /* IGXMLNodeAttribute.h */,
@@ -259,6 +271,15 @@
 				549C1DCB17C4B69700CF4F20 /* atom.xml */,
 			);
 			name = Fixtures;
+			sourceTree = "<group>";
+		};
+		54ECB881186AFAA30037BEBE /* Ruby */ = {
+			isa = PBXGroup;
+			children = (
+				5416CA54186BB64B00EC5F23 /* xml_node_set.rb */,
+				5416CA50186BB00300EC5F23 /* xml_node.rb */,
+			);
+			name = Ruby;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,6 +364,8 @@
 				543763BE17C36EFD004CE333 /* Images.xcassets in Resources */,
 				543763B017C36EFD004CE333 /* InfoPlist.strings in Resources */,
 				543763B917C36EFD004CE333 /* Main.storyboard in Resources */,
+				5416CA51186BB00300EC5F23 /* xml_node.rb in Resources */,
+				5416CA55186BB64B00EC5F23 /* xml_node_set.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +374,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				549C1DCC17C4B91100CF4F20 /* atom.xml in Resources */,
+				5416CA52186BB00300EC5F23 /* xml_node.rb in Resources */,
+				5416CA56186BB64B00EC5F23 /* xml_node_set.rb in Resources */,
 				549C1DCD17C4B91300CF4F20 /* broken.xml in Resources */,
 				5455B17B17C8710200A992EB /* nytimes.html in Resources */,
 				54AB5F4417C47A4C009E2CF1 /* sample.html in Resources */,
@@ -422,6 +447,7 @@
 				5455B17D17C8711700A992EB /* IGIntegrationTests.m in Sources */,
 				54AB5F4017C479A1009E2CF1 /* IGHTMLDocumentTests.m in Sources */,
 				543763E417C37028004CE333 /* IGXMLNode.m in Sources */,
+				5416CA4F186BAE8300EC5F23 /* IGRubyTests.m in Sources */,
 				54AB5F3E17C477BC009E2CF1 /* IGHTMLDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,6 +596,7 @@
 		};
 		543763D817C36EFD004CE333 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3045E63CBA2049EE9DCBA62C /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IGHTMLQuery.app/IGHTMLQuery";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -583,7 +610,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SDK_DIR)\"/usr/include/libxml2",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "IGHTMLQueryTests/IGHTMLQueryTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -593,6 +623,7 @@
 		};
 		543763D917C36EFD004CE333 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3045E63CBA2049EE9DCBA62C /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IGHTMLQuery.app/IGHTMLQuery";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -602,7 +633,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IGHTMLQuery/IGHTMLQuery-Prefix.pch";
-				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SDK_DIR)\"/usr/include/libxml2",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "IGHTMLQueryTests/IGHTMLQueryTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
