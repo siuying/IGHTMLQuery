@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54002DED1872DAA200356559 /* IGRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5416CA4E186BAE8300EC5F23 /* IGRubyTests.m */; };
 		5406F3141872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5406F3131872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m */; };
 		5406F3151872CBF200FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5406F3131872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m */; };
-		5416CA4F186BAE8300EC5F23 /* IGRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5416CA4E186BAE8300EC5F23 /* IGRubyTests.m */; };
 		5416CA51186BB00300EC5F23 /* xml_node.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5416CA50186BB00300EC5F23 /* xml_node.rb */; };
 		5416CA52186BB00300EC5F23 /* xml_node.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5416CA50186BB00300EC5F23 /* xml_node.rb */; };
 		5416CA55186BB64B00EC5F23 /* xml_node_set.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5416CA54186BB64B00EC5F23 /* xml_node_set.rb */; };
@@ -446,6 +446,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				541B153517C383FA00F2C646 /* IGXMLNodeSetTests.m in Sources */,
+				54002DED1872DAA200356559 /* IGRubyTests.m in Sources */,
 				549C1DCA17C4B52000CF4F20 /* IGXMLDocumentAttributeTests.m in Sources */,
 				543763D117C36EFD004CE333 /* IGXMLDocumentTests.m in Sources */,
 				549C1DC817C4B14F00CF4F20 /* IGXMLNodeTraversalTests.m in Sources */,
@@ -455,7 +456,6 @@
 				54AB5F4017C479A1009E2CF1 /* IGHTMLDocumentTests.m in Sources */,
 				5406F3151872CBF200FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m in Sources */,
 				543763E417C37028004CE333 /* IGXMLNode.m in Sources */,
-				5416CA4F186BAE8300EC5F23 /* IGRubyTests.m in Sources */,
 				54AB5F3E17C477BC009E2CF1 /* IGHTMLDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

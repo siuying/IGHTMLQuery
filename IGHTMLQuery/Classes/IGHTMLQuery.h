@@ -17,4 +17,5 @@
 #import "IGXMLDocument.h"
 #import "IGHTMLDocument.h"
 #import "IGXMLNodeSet.h"
+#import "JSContext+IGHTMLQueryRubyAdditions.h"
 #endif
