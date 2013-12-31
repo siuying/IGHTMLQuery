@@ -11,6 +11,7 @@
 #import "IGHTMLQuery.h"
 #import "IGHTMLQueryJavaScriptExport.h"
 #import "JSContext+OpalAdditions.h"
+#import "JSContext+IGHTMLQueryRubyAdditions.h"
 
 @interface IGRubyTests : XCTestCase
 {
@@ -27,15 +28,8 @@
     [super setUp];
     doc = [[IGXMLDocument alloc] initWithXMLResource:@"catalog" ofType:@"xml" encoding:@"utf8" error:nil];
     context = [[JSContext alloc] init];
-    
-    // Load scripts
-    NSString* filename = [[NSBundle bundleForClass:[self class]] pathForResource:@"xml_node" ofType:@"rb"];
-    NSString* script = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
-    JSValue* value = [context evaluateRuby:script];
-    filename = [[NSBundle bundleForClass:[self class]] pathForResource:@"xml_node_set" ofType:@"rb"];
-    script = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
-    value = [context evaluateRuby:script];
-    
+    [context configureIGHTMLQuery];
+
     // setup context
     context[@"doc"] = doc;
     
@@ -90,7 +84,7 @@
 {
     JSValue* node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').find {|node| node.xpath('./price').text.to_f < 9.0 }.xpath('./title').text"]];
     NSString* title = [node toString];
-    XCTAssertEqualObjects((@"Greatest Hits"), title, @"title should be nil");
+    XCTAssertEqualObjects((@"Greatest Hits"), title, @"title should be Greatest Hits");
 }
 
 @end

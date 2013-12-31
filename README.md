@@ -98,6 +98,31 @@ You can change the document using methods in ```IGXMLNodeManipulation``` protoco
 
 ```
 
+## JavaScript/Ruby support
+
+All classes in IGHTMLQuery supports JavaScriptCore exports. Additionally there
+are Ruby wrappers to used with [JavaScriptCoreOpalAdditions](https://github.com/siuying/JavaScriptCoreOpalAdditions), which allow you to manipulate DOM with Ruby in Objective-C like this ...
+
+```ruby
+// create a lambda that evalulate script on the fly
+JSValue* instanceEval = [context evaluateRuby:@"lambda { |doc, script| XMLNode.new(doc).instance_eval(&eval(\"lambda { #{script} }\")) }"];
+
+// a simple script that find the title of first cd have a price less than 9.0
+JSValue* node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').find {|node| node.xpath('./price').text.to_f < 9.0 }.xpath('./title').text"]];
+
+// convert the result to string
+NSString* title = [node toString];
+XCTAssertEqualObjects((@"Greatest Hits"), title, @"title should be Greatest Hits");
+```
+
+To use IGHTMLQuery with Ruby support, add following line to your Podfile:
+
+```ruby
+pod "IGHTMLQuery/Ruby"
+```
+
+See [Test Cases](https://github.com/siuying/IGHTMLQuery/blob/master/IGHTMLQueryTests/IGXMLNodeRubyTests.m) for more detail.
+
 ## License
 
 MIT License.

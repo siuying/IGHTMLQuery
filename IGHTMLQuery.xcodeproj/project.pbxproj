@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5406F3141872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5406F3131872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m */; };
+		5406F3151872CBF200FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5406F3131872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m */; };
 		5416CA4F186BAE8300EC5F23 /* IGRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5416CA4E186BAE8300EC5F23 /* IGRubyTests.m */; };
 		5416CA51186BB00300EC5F23 /* xml_node.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5416CA50186BB00300EC5F23 /* xml_node.rb */; };
 		5416CA52186BB00300EC5F23 /* xml_node.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5416CA50186BB00300EC5F23 /* xml_node.rb */; };
@@ -63,6 +65,8 @@
 
 /* Begin PBXFileReference section */
 		3045E63CBA2049EE9DCBA62C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		5406F3121872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JSContext+IGHTMLQueryRubyAdditions.h"; path = "Classes/JSContext+IGHTMLQueryRubyAdditions.h"; sourceTree = "<group>"; };
+		5406F3131872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JSContext+IGHTMLQueryRubyAdditions.m"; path = "Classes/JSContext+IGHTMLQueryRubyAdditions.m"; sourceTree = "<group>"; };
 		5416CA4E186BAE8300EC5F23 /* IGRubyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRubyTests.m; sourceTree = "<group>"; };
 		5416CA50186BB00300EC5F23 /* xml_node.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = xml_node.rb; path = Ruby/xml_node.rb; sourceTree = "<group>"; };
 		5416CA53186BB2F600EC5F23 /* IGXMLNodeCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGXMLNodeCore.h; path = Classes/IGXMLNodeCore.h; sourceTree = "<group>"; };
@@ -257,6 +261,8 @@
 				549C1DC517C4A4DF00CF4F20 /* IGXMLNodeManipulation.h */,
 				54432A7518658B4E00FBFDE4 /* IGXMLNodeAttribute.h */,
 				54432A7618658BBE00FBFDE4 /* IGXMLNodeTraversal.h */,
+				5406F3121872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.h */,
+				5406F3131872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -424,6 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5406F3141872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m in Sources */,
 				54AF474D17C3854000D16C80 /* IGXMLDocument.m in Sources */,
 				543763B617C36EFD004CE333 /* IGAppDelegate.m in Sources */,
 				543763B217C36EFD004CE333 /* main.m in Sources */,
@@ -446,6 +453,7 @@
 				543763F817C378CF004CE333 /* IGXMLNodeSet.m in Sources */,
 				5455B17D17C8711700A992EB /* IGIntegrationTests.m in Sources */,
 				54AB5F4017C479A1009E2CF1 /* IGHTMLDocumentTests.m in Sources */,
+				5406F3151872CBF200FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m in Sources */,
 				543763E417C37028004CE333 /* IGXMLNode.m in Sources */,
 				5416CA4F186BAE8300EC5F23 /* IGRubyTests.m in Sources */,
 				54AB5F3E17C477BC009E2CF1 /* IGHTMLDocument.m in Sources */,
