@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Ignition Soft. All rights reserved.
 //
 
-#ifdef IGHTMLQUERY_RUBY_EXPORT
 #import <JavaScriptCore/JavaScriptCore.h>
 
 @interface JSContext (IGHTMLQueryRubyAdditions)
@@ -17,4 +16,3 @@
 -(void) configureIGHTMLQuery;
 
 @end
-#endif

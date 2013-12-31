@@ -12,6 +12,7 @@
 
 // following line enable JavaScript Export
 #define IGHTMLQUERY_JAVSCRIPT_EXPORT
+#define IGHTMLQUERY_RUBY_EXPORT
 
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
