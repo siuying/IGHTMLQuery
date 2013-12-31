@@ -43,12 +43,13 @@ DESC
   end
 
   # Include IGHTMLQuery/Opal to enable Ruby support.
-  s.subspec "Opal" do |sp|
+  s.subspec "Ruby" do |sp|
     sp.ios.deployment_target = '7.0'
     sp.osx.deployment_target = '10.9'
     sp.prefix_header_contents = "#define IGHTMLQUERY_JAVSCRIPT_EXPORT\n#define IGHTMLQUERY_RUBY_EXPORT"
     sp.frameworks = 'JavaScriptCore'
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
+    sp.resource_files = 'IGHTMLQuery/Ruby/*.rb'
     sp.dependency 'IGHTMLQuery/JavaScript'
   end
 end
