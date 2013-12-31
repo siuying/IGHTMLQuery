@@ -42,7 +42,7 @@ DESC
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
   end
 
-  # Include IGHTMLQuery/Opal to enable Ruby support.
+  # Include IGHTMLQuery/Ruby to enable Ruby support.
   s.subspec "Ruby" do |sp|
     sp.ios.deployment_target = '7.0'
     sp.osx.deployment_target = '10.9'
