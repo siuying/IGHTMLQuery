@@ -1,4 +1,6 @@
-class XMLNode
+class XMLNodeSet
+  include Enumerable
+
   attr_reader :native
 
   def initialize(native)
@@ -6,88 +8,34 @@ class XMLNode
   end
 
   module Core
-    def tag
-      %x{#@native.tag()}
+    def count
+      %x{#@native.count()}
     end
 
-    def tag=(tag)
-      %x{
-        #@native.setTag(tag)
-        return #@native.tag()
-      }
+    def all
+      %x{#@native.allObjects()}.collect {|node| XMLNode.new(node) }
+    end
+    alias_method :nodes, :all
+
+    def first
+      node = %x{#@native.firstObject()}
+      if node
+        XMLNode.new(node)
+      else
+        nil
+      end
+    end
+
+    def each
+      all.each{ |obj| yield(obj) }
     end
 
     def text
-      %x{#@native.text()}
-    end
-
-    def text=(text)
-      %x{
-        #@native.setText(text)
-        return #@native.text()
-      }
-    end
-
-    def xml
-      %x{#@native.xml()}
-    end
-
-    def inner_xml
-      %x{#@native.innerXml()}
-    end
-
-    def last_error
-      %x{#@native.lastError()}
-    end
-
-    def remove_namespaces
-      %x{#@native.removeNamespaces()}
+      first ? first.text : nil
     end
   end
   include Core
 
-  module Traversal
-    def parent
-      XMLNode.new(%x{#@native.parent()})
-    end
-
-    def next_sibling
-      XMLNode.new(%x{#@native.nextSibling()})
-    end
-
-    def previous_sibling
-      XMLNode.new(%x{#@native.previousSibling()})
-    end
-
-    def children
-      XMLNodeSet.new(%x{#@native.children()})
-    end
-
-    def first_child
-      XMLNodeSet.new(%x{#@native.firstChild()})
-    end
-
-    def unique_key
-      XMLNodeSet.new(%x{#@native.uniqueKey()})
-    end
-  end
-  include Traversal
-
-  module Attribute
-    def []=(name, value)
-      %x{#@native.setAttributeValue(name, value)}
-    end
-
-    def [](name)
-      %x{#@native.attribute(name)}
-    end
-
-    def attributes
-      %x{#@native.attributeNames()}
-    end
-  end
-  include Attribute
-                     
   module Query
     def xpath(query)
       set = %x{#@native.queryWithXPath(query)}
