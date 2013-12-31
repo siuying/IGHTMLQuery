@@ -49,7 +49,7 @@ DESC
     sp.prefix_header_contents = "#define IGHTMLQUERY_JAVSCRIPT_EXPORT\n#define IGHTMLQUERY_RUBY_EXPORT"
     sp.frameworks = 'JavaScriptCore'
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
-    sp.resource_files = 'IGHTMLQuery/Ruby/*.rb'
+    sp.resources = 'IGHTMLQuery/Ruby/*.rb'
     sp.dependency 'IGHTMLQuery/JavaScript'
   end
 end
