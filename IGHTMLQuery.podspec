@@ -31,6 +31,7 @@ DESC
     sp.ios.deployment_target = '6.0'
     sp.osx.deployment_target = '10.8'
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
+    sp.exclude_files = 'IGHTMLQuery/Classes/JSContext+IGHTMLQueryRubyAdditions.h'
   end
 
   # Include IGHTMLQuery/JavaScript to enable JavaScriptCore support.
@@ -40,6 +41,7 @@ DESC
     sp.prefix_header_contents = '#define IGHTMLQUERY_JAVSCRIPT_EXPORT'
     sp.frameworks = 'JavaScriptCore'
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
+    sp.exclude_files = 'IGHTMLQuery/Classes/JSContext+IGHTMLQueryRubyAdditions.h'
   end
 
   # Include IGHTMLQuery/Ruby to enable Ruby support.
