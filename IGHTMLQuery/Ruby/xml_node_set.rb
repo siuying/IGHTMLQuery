@@ -9,12 +9,13 @@ class XMLNodeSet
     %x{#@native.count()}
   end
 
-  def all_objects
-    %x{#@native.allObjects()}
+  def all
+    %x{#@native.allObjects()}.collect {|node| XMLNode.new(node) }
   end
-  alias_method :nodes, :all_objects
+  alias_method :nodes, :all
 
-  def first_object
-    %x{#@native.firstObject()}
+  def first
+    node = %x{#@native.firstObject()}
+    XMLNode.new(node)
   end
 end

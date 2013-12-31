@@ -34,7 +34,7 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testNode
 {
     NSString* filename = [[NSBundle bundleForClass:[self class]] pathForResource:@"xml_node" ofType:@"rb"];
     NSString* script = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
@@ -46,11 +46,30 @@
     value = [context evaluateRuby:script];
     
     context[@"doc"] = doc;
-
-    JSValue* lambda = [context evaluateRuby:@"lambda { |doc, script| XMLNode.new(doc).instance_eval(script) }"];
-    JSValue* node = [lambda callWithArguments:@[doc, @"tag"]];
+    
+    JSValue* block = [context evaluateRuby:@"lambda { |doc, script| XMLNode.new(doc).instance_eval(&eval(\"lambda { #{script} }\")) }"];
+    JSValue* node = [block callWithArguments:@[doc, @"self.tag"]];
     XCTAssertEqualObjects(@"catalog", [node toString], @"should be catalog");
     
 }
+
+- (void)testNodeSet
+{
+    NSString* filename = [[NSBundle bundleForClass:[self class]] pathForResource:@"xml_node" ofType:@"rb"];
+    NSString* script = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
+    JSValue* value = [context evaluateRuby:script];
+    XCTAssertFalse([value isUndefined], @"should not be undefined");
+    
+    filename = [[NSBundle bundleForClass:[self class]] pathForResource:@"xml_node_set" ofType:@"rb"];
+    script = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
+    value = [context evaluateRuby:script];
+    
+    context[@"doc"] = doc;
+    JSValue* block = [context evaluateRuby:@"lambda { |doc, script| XMLNode.new(doc).instance_eval(&eval(\"lambda { #{script} }\")) }"];
+    JSValue* node = [block callWithArguments:@[doc, @"first = self.children.all.first; first.tag"]];
+    XCTAssertEqualObjects(@"cd", [node toString], @"should be cd");
+    
+}
+
 
 @end
