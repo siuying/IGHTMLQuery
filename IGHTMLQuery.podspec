@@ -51,5 +51,6 @@ DESC
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
     sp.resources = 'IGHTMLQuery/Ruby/*.rb'
     sp.dependency 'IGHTMLQuery/JavaScript'
+    sp.dependency 'JavaScriptCoreOpalAdditions'
   end
 end
