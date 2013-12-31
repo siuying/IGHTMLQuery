@@ -80,13 +80,6 @@
     XCTAssertEqualObjects(@"<catalog/>", [node toString], @"should empty xml");
 }
 
-- (void)testNodeSetManipulation
-{
-    JSValue* block = [context evaluateRuby:@"lambda { |doc, script| XMLNode.new(doc).instance_eval(&eval(\"lambda { #{script} }\")) }"];
-    JSValue* node = [block callWithArguments:@[doc, @"self.xpath('//cd').remove; self.xpath('//cd').nodes "]];
-    XCTAssertEqual(0U, [[node toArray] count], @"should remove cds");
-}
-
 - (void)testNodeSet
 {
     JSValue* block = [context evaluateRuby:@"lambda { |doc, script| XMLNode.new(doc).instance_eval(&eval(\"lambda { #{script} }\")) }"];
@@ -95,5 +88,19 @@
     
 }
 
+- (void)testNodeSetManipulation
+{
+    JSValue* block = [context evaluateRuby:@"lambda { |doc, script| XMLNode.new(doc).instance_eval(&eval(\"lambda { #{script} }\")) }"];
+    JSValue* node = [block callWithArguments:@[doc, @"self.xpath('//cd').remove; self.xpath('//cd').nodes "]];
+    XCTAssertEqual(0U, [[node toArray] count], @"should remove cds");
+}
+
+- (void)testNodeSetEnumerable
+{
+    JSValue* block = [context evaluateRuby:@"lambda { |doc, script| XMLNode.new(doc).instance_eval(&eval(\"lambda { #{script} }\")) }"];
+    JSValue* node = [block callWithArguments:@[doc, @"self.xpath('//cd').find {|node| node.xpath('./price').text.to_f < 9.0 }.xpath('./title').text"]];
+    NSString* title = [node toString];
+    XCTAssertEqualObjects((@"Greatest Hits"), title, @"title should be nil");
+}
 
 @end

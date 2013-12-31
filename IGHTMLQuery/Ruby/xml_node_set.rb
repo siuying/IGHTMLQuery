@@ -1,4 +1,6 @@
 class XMLNodeSet
+  include Enumerable
+
   attr_reader :native
 
   def initialize(native)
@@ -17,7 +19,19 @@ class XMLNodeSet
 
     def first
       node = %x{#@native.firstObject()}
-      XMLNode.new(node)
+      if node
+        XMLNode.new(node)
+      else
+        nil
+      end
+    end
+
+    def each
+      all.each{ |obj| yield(obj) }
+    end
+
+    def text
+      first ? first.text : nil
     end
   end
   include Core
