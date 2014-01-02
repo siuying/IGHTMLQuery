@@ -13,14 +13,11 @@
 @implementation JSContext (IGHTMLQueryRubyAdditions)
 
 -(void) configureIGHTMLQuery {
-    [self configureIGHTMLQueryWithFilename:@"xml_node"];
-    [self configureIGHTMLQueryWithFilename:@"xml_node_set"];
-}
+    [self loadOpal];
 
--(void) configureIGHTMLQueryWithFilename:(NSString*)name {
-    NSString* filename = [[NSBundle bundleForClass:[IGXMLNode class]] pathForResource:name ofType:@"rb"];
+    NSString* filename = [[NSBundle bundleForClass:[IGXMLNode class]] pathForResource:@"html_query" ofType:@"js"];
     NSString* script = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
-    [self evaluateRuby:script];
+    [self evaluateScript:script];
 }
 
 @end

@@ -10,11 +10,9 @@
 		54002DED1872DAA200356559 /* IGRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5416CA4E186BAE8300EC5F23 /* IGRubyTests.m */; };
 		5406F3141872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5406F3131872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m */; };
 		5406F3151872CBF200FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5406F3131872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m */; };
-		5416CA51186BB00300EC5F23 /* xml_node.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5416CA50186BB00300EC5F23 /* xml_node.rb */; };
-		5416CA52186BB00300EC5F23 /* xml_node.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5416CA50186BB00300EC5F23 /* xml_node.rb */; };
-		5416CA55186BB64B00EC5F23 /* xml_node_set.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5416CA54186BB64B00EC5F23 /* xml_node_set.rb */; };
-		5416CA56186BB64B00EC5F23 /* xml_node_set.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5416CA54186BB64B00EC5F23 /* xml_node_set.rb */; };
 		541B153517C383FA00F2C646 /* IGXMLNodeSetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 541B153417C383FA00F2C646 /* IGXMLNodeSetTests.m */; };
+		542C23CC1874FB9C0046B93A /* html_query.js in Sources */ = {isa = PBXBuildFile; fileRef = 542C23CB1874FB9C0046B93A /* html_query.js */; };
+		542C23CD1874FB9C0046B93A /* html_query.js in Sources */ = {isa = PBXBuildFile; fileRef = 542C23CB1874FB9C0046B93A /* html_query.js */; };
 		543763A617C36EFD004CE333 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763A517C36EFD004CE333 /* Foundation.framework */; };
 		543763A817C36EFD004CE333 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763A717C36EFD004CE333 /* CoreGraphics.framework */; };
 		543763AA17C36EFD004CE333 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763A917C36EFD004CE333 /* UIKit.framework */; };
@@ -72,6 +70,8 @@
 		5416CA53186BB2F600EC5F23 /* IGXMLNodeCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGXMLNodeCore.h; path = Classes/IGXMLNodeCore.h; sourceTree = "<group>"; };
 		5416CA54186BB64B00EC5F23 /* xml_node_set.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = xml_node_set.rb; path = Ruby/xml_node_set.rb; sourceTree = "<group>"; };
 		541B153417C383FA00F2C646 /* IGXMLNodeSetTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGXMLNodeSetTests.m; sourceTree = "<group>"; };
+		542C23CB1874FB9C0046B93A /* html_query.js */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; name = html_query.js; path = JavaScript/html_query.js; sourceTree = "<group>"; };
+		542C23D01874FD6E0046B93A /* html_query.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; name = html_query.rb; path = Ruby/html_query.rb; sourceTree = "<group>"; };
 		543763A217C36EFD004CE333 /* IGHTMLQuery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IGHTMLQuery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		543763A517C36EFD004CE333 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		543763A717C36EFD004CE333 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -156,6 +156,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		542C23CA1874FB860046B93A /* JavaScript */ = {
+			isa = PBXGroup;
+			children = (
+				542C23CB1874FB9C0046B93A /* html_query.js */,
+			);
+			name = JavaScript;
+			sourceTree = "<group>";
+		};
 		5437639917C36EFD004CE333 = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +201,7 @@
 		543763AB17C36EFD004CE333 /* IGHTMLQuery */ = {
 			isa = PBXGroup;
 			children = (
+				542C23CA1874FB860046B93A /* JavaScript */,
 				54ECB881186AFAA30037BEBE /* Ruby */,
 				543763DA17C36F04004CE333 /* Classes */,
 				543763B417C36EFD004CE333 /* IGAppDelegate.h */,
@@ -282,6 +291,7 @@
 		54ECB881186AFAA30037BEBE /* Ruby */ = {
 			isa = PBXGroup;
 			children = (
+				542C23D01874FD6E0046B93A /* html_query.rb */,
 				5416CA54186BB64B00EC5F23 /* xml_node_set.rb */,
 				5416CA50186BB00300EC5F23 /* xml_node.rb */,
 			);
@@ -370,8 +380,6 @@
 				543763BE17C36EFD004CE333 /* Images.xcassets in Resources */,
 				543763B017C36EFD004CE333 /* InfoPlist.strings in Resources */,
 				543763B917C36EFD004CE333 /* Main.storyboard in Resources */,
-				5416CA51186BB00300EC5F23 /* xml_node.rb in Resources */,
-				5416CA55186BB64B00EC5F23 /* xml_node_set.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,8 +388,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				549C1DCC17C4B91100CF4F20 /* atom.xml in Resources */,
-				5416CA52186BB00300EC5F23 /* xml_node.rb in Resources */,
-				5416CA56186BB64B00EC5F23 /* xml_node_set.rb in Resources */,
 				549C1DCD17C4B91300CF4F20 /* broken.xml in Resources */,
 				5455B17B17C8710200A992EB /* nytimes.html in Resources */,
 				54AB5F4417C47A4C009E2CF1 /* sample.html in Resources */,
@@ -437,6 +443,7 @@
 				54AB5F3D17C477BC009E2CF1 /* IGHTMLDocument.m in Sources */,
 				543763BC17C36EFD004CE333 /* IGViewController.m in Sources */,
 				543763F717C378CF004CE333 /* IGXMLNodeSet.m in Sources */,
+				542C23CC1874FB9C0046B93A /* html_query.js in Sources */,
 				543763E317C37028004CE333 /* IGXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,6 +454,7 @@
 			files = (
 				541B153517C383FA00F2C646 /* IGXMLNodeSetTests.m in Sources */,
 				54002DED1872DAA200356559 /* IGRubyTests.m in Sources */,
+				542C23CD1874FB9C0046B93A /* html_query.js in Sources */,
 				549C1DCA17C4B52000CF4F20 /* IGXMLDocumentAttributeTests.m in Sources */,
 				543763D117C36EFD004CE333 /* IGXMLDocumentTests.m in Sources */,
 				549C1DC817C4B14F00CF4F20 /* IGXMLNodeTraversalTests.m in Sources */,

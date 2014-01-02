@@ -34,7 +34,7 @@
     context[@"doc"] = doc;
     
     // instance_eval on a doc
-    instanceEval = [context evaluateRuby:@"lambda { |doc, script| XMLNode.new(doc).instance_eval(&eval(\"lambda { #{script} }\")) }"];
+    instanceEval = [context evaluateRuby:@"lambda { |doc, script| HTMLQuery::XMLNode.new(doc).instance_eval(&eval(\"lambda { #{script} }\")) }"];
 }
 
 - (void)testNodeCore
