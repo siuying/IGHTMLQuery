@@ -103,7 +103,13 @@ You can change the document using methods in ```IGXMLNodeManipulation``` protoco
 All classes in IGHTMLQuery supports JavaScriptCore exports. Additionally there
 are Ruby wrappers to used with [JavaScriptCoreOpalAdditions](https://github.com/siuying/JavaScriptCoreOpalAdditions), which allow you to manipulate DOM with Ruby in Objective-C like this ...
 
-```ruby
+```objective-c
+#import "JSContext+IGHTMLQueryRubyAdditions.h"
+#import "JSContext+OpalAdditions.h"
+
+// load IGHTMLQuery ruby wrapper classes
+[context configureIGHTMLQuery];
+
 // create a lambda that evalulate script on the fly
 JSValue* instanceEval = [context evaluateRuby:@"lambda { |doc, script| XMLNode.new(doc).instance_eval(&eval(\"lambda { #{script} }\")) }"];
 
