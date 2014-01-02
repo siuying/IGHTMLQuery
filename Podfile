@@ -1,3 +1,3 @@
 platform :ios, '7.0'
 
-pod 'JavaScriptCoreOpalAdditions'
+pod 'JavaScriptCoreOpalAdditions', '>= 0.2.2'

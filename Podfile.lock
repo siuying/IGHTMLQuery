@@ -1,10 +1,10 @@
 PODS:
-  - JavaScriptCoreOpalAdditions (0.2.0)
+  - JavaScriptCoreOpalAdditions (0.2.2)
 
 DEPENDENCIES:
-  - JavaScriptCoreOpalAdditions
+  - JavaScriptCoreOpalAdditions (>= 0.2.2)
 
 SPEC CHECKSUMS:
-  JavaScriptCoreOpalAdditions: 42f4435dc41a129c62fae400bb4147ed0a527e17
+  JavaScriptCoreOpalAdditions: 6bcd360d4fd2ccd81b929a80c32cb8a0afb4bf71
 
-COCOAPODS: 0.28.0
+COCOAPODS: 0.29.0
