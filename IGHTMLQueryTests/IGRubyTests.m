@@ -111,4 +111,12 @@
     
 }
 
+-(void) testHTTPGet {
+    JSValue* oldGet = context[@"HTTPGet"];
+    context[@"HTTPGet"] = ^NSString*(NSString* url){ return @"HELLO"; };
+    NSString* wiki = [[context evaluateRuby:@"IGHTMLQuery::HTTP.get('http://www.wikipedia.org')"] toString];
+    XCTAssertEqualObjects(wiki, @"HELLO", @"should return with HTTPGet method");
+    context[@"HTTPGet"] = oldGet;
+}
+
 @end

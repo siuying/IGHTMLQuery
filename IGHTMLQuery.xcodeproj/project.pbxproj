@@ -48,6 +48,8 @@
 		54AB5F4417C47A4C009E2CF1 /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 54AB5F4217C479E6009E2CF1 /* sample.html */; };
 		54AF474D17C3854000D16C80 /* IGXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AF474C17C3854000D16C80 /* IGXMLDocument.m */; };
 		54E40FCD17C3B61C00C8FBB9 /* IGXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AF474C17C3854000D16C80 /* IGXMLDocument.m */; };
+		54ED457818782F31005391EC /* html_query.js in Resources */ = {isa = PBXBuildFile; fileRef = 542C23CB1874FB9C0046B93A /* html_query.js */; };
+		54ED457918782F42005391EC /* html_query.js in Resources */ = {isa = PBXBuildFile; fileRef = 542C23CB1874FB9C0046B93A /* html_query.js */; };
 		AD26AEA4B5874711AC6339CF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96ED3153DE494256AF65D79A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +72,7 @@
 		5416CA53186BB2F600EC5F23 /* IGXMLNodeCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGXMLNodeCore.h; path = Classes/IGXMLNodeCore.h; sourceTree = "<group>"; };
 		5416CA54186BB64B00EC5F23 /* xml_node_set.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = xml_node_set.rb; path = Ruby/xml_node_set.rb; sourceTree = "<group>"; };
 		541AB8AA187819AC0017F86E /* html_doc.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = html_doc.rb; path = Ruby/html_doc.rb; sourceTree = "<group>"; };
+		541AB8AC18782CD50017F86E /* http.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; name = http.rb; path = Ruby/http.rb; sourceTree = "<group>"; };
 		541B153417C383FA00F2C646 /* IGXMLNodeSetTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGXMLNodeSetTests.m; sourceTree = "<group>"; };
 		542C23CB1874FB9C0046B93A /* html_query.js */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; name = html_query.js; path = JavaScript/html_query.js; sourceTree = "<group>"; };
 		542C23D01874FD6E0046B93A /* html_query.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; name = html_query.rb; path = Ruby/html_query.rb; sourceTree = "<group>"; };
@@ -293,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				542C23D01874FD6E0046B93A /* html_query.rb */,
+				541AB8AC18782CD50017F86E /* http.rb */,
 				541AB8AA187819AC0017F86E /* html_doc.rb */,
 				5416CA54186BB64B00EC5F23 /* xml_node_set.rb */,
 				5416CA50186BB00300EC5F23 /* xml_node.rb */,
@@ -379,6 +383,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54ED457818782F31005391EC /* html_query.js in Resources */,
 				543763BE17C36EFD004CE333 /* Images.xcassets in Resources */,
 				543763B017C36EFD004CE333 /* InfoPlist.strings in Resources */,
 				543763B917C36EFD004CE333 /* Main.storyboard in Resources */,
@@ -389,6 +394,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54ED457918782F42005391EC /* html_query.js in Resources */,
 				549C1DCC17C4B91100CF4F20 /* atom.xml in Resources */,
 				549C1DCD17C4B91300CF4F20 /* broken.xml in Resources */,
 				5455B17B17C8710200A992EB /* nytimes.html in Resources */,

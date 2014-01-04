@@ -15,20 +15,37 @@
 
 -(void) configureIGHTMLQuery {
     [self loadOpal];
+    
+    // Create HTML Document
+    self[@"IGHTMLDocument"] = ^IGHTMLDocument*(NSString* html) {
+        NSError* error;
+        IGHTMLDocument* doc = [[IGHTMLDocument alloc] initWithHTMLString:html error:&error];
+        if (error) {
+            NSLog(@"[IGHTMLQuery] failed create document: %@", error);
+        }
+        return doc;
+    };
+    
+    // send a HTTP request and retrieve HTML string
+    // return HTML string if succeed
+    // return nil if failure
+    self[@"HTTPGet"] = ^NSString*(NSString* url) {
+        NSError* error;
+        NSStringEncoding encoding;
+        NSString* data = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:url]
+                                                    usedEncoding:&encoding
+                                                           error:&error];
+        if (!data && error) {
+            NSLog(@"[IGHTMLQuery] failed create document: %@", error);
+        }
+        return data;
+    };
 
     NSString* filename = [[NSBundle bundleForClass:[IGXMLNode class]] pathForResource:@"html_query" ofType:@"js"];
     NSString* script = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
     NSAssert(script != nil, @"html_query.js not loaded");
     [self evaluateScript:script];
     
-    self[@"IGHTMLDocument"] = ^IGHTMLDocument*(NSString* html) {
-        NSError* error;
-        IGHTMLDocument* doc = [[IGHTMLDocument alloc] initWithHTMLString:html error:&error];
-        if (error) {
-            NSLog(@"[IGHTMLQuery][Warning] failed create document: %@", error);
-        }
-        return doc;
-    };
 }
 
 @end
