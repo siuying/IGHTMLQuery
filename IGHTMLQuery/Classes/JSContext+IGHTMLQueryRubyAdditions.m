@@ -9,6 +9,7 @@
 #import "JSContext+IGHTMLQueryRubyAdditions.h"
 #import "JSContext+OpalAdditions.h"
 #import "IGXMLNode.h"
+#import "IGHTMLDocument.h"
 
 @implementation JSContext (IGHTMLQueryRubyAdditions)
 
@@ -19,6 +20,15 @@
     NSString* script = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
     NSAssert(script != nil, @"html_query.js not loaded");
     [self evaluateScript:script];
+    
+    self[@"IGHTMLDocument"] = ^IGHTMLDocument*(NSString* html) {
+        NSError* error;
+        IGHTMLDocument* doc = [[IGHTMLDocument alloc] initWithHTMLString:html error:&error];
+        if (error) {
+            NSLog(@"[IGHTMLQuery][Warning] failed create document: %@", error);
+        }
+        return doc;
+    };
 }
 
 @end

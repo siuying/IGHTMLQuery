@@ -105,4 +105,10 @@
     XCTAssertEqual(3U, [titleNodeSet count], @"should have 3 nodes in set");
 }
 
+- (void) testHTMLDoc {
+    JSValue* h1 = [context evaluateRuby:@"HTMLDoc.new('<html><body><h1>Header</h1><div id=\"content\"><span>Hello</span></div></body></html>').xpath('//h1').first.text"];
+    XCTAssertEqualObjects(@"Header", [h1 toString], @"should return a doc based on input and can be queried");
+    
+}
+
 @end
