@@ -10,6 +10,8 @@
 		54002DED1872DAA200356559 /* IGRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5416CA4E186BAE8300EC5F23 /* IGRubyTests.m */; };
 		5406F3141872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5406F3131872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m */; };
 		5406F3151872CBF200FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5406F3131872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m */; };
+		541AB873187798680017F86E /* html_query.js in Resources */ = {isa = PBXBuildFile; fileRef = 542C23CB1874FB9C0046B93A /* html_query.js */; };
+		541AB874187798F00017F86E /* html_query.js in Resources */ = {isa = PBXBuildFile; fileRef = 542C23CB1874FB9C0046B93A /* html_query.js */; };
 		541B153517C383FA00F2C646 /* IGXMLNodeSetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 541B153417C383FA00F2C646 /* IGXMLNodeSetTests.m */; };
 		542C23CC1874FB9C0046B93A /* html_query.js in Sources */ = {isa = PBXBuildFile; fileRef = 542C23CB1874FB9C0046B93A /* html_query.js */; };
 		542C23CD1874FB9C0046B93A /* html_query.js in Sources */ = {isa = PBXBuildFile; fileRef = 542C23CB1874FB9C0046B93A /* html_query.js */; };
@@ -377,6 +379,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				541AB873187798680017F86E /* html_query.js in Resources */,
 				543763BE17C36EFD004CE333 /* Images.xcassets in Resources */,
 				543763B017C36EFD004CE333 /* InfoPlist.strings in Resources */,
 				543763B917C36EFD004CE333 /* Main.storyboard in Resources */,
@@ -387,6 +390,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				541AB874187798F00017F86E /* html_query.js in Resources */,
 				549C1DCC17C4B91100CF4F20 /* atom.xml in Resources */,
 				549C1DCD17C4B91300CF4F20 /* broken.xml in Resources */,
 				5455B17B17C8710200A992EB /* nytimes.html in Resources */,

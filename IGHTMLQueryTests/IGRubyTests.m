@@ -34,7 +34,7 @@
     context[@"doc"] = doc;
     
     // instance_eval on a doc
-    instanceEval = [context evaluateRuby:@"lambda { |doc, script| HTMLQuery::XMLNode.new(doc).instance_eval(&eval(\"lambda { #{script} }\")) }"];
+    instanceEval = [context evaluateRuby:@"lambda { |doc, script| XMLNode.new(doc).instance_eval(&eval(\"lambda { #{script} }\")) }"];
 }
 
 - (void)testNodeCore
@@ -80,11 +80,29 @@
     XCTAssertEqual(0U, [[node toArray] count], @"should remove cds");
 }
 
+- (void)testNodeToNative
+{
+    JSValue* node = [instanceEval callWithArguments:@[doc, @"self.to_n"]];
+    IGXMLNode* nodeNative = [node toObject];
+    XCTAssertNotNil(nodeNative, @"should be a node");
+    XCTAssertTrue([nodeNative isKindOfClass:[IGXMLNode class]], @"should be a node");
+    XCTAssertEqualObjects(@"catalog", nodeNative.tag, @"should be a catalog");
+}
+
 - (void)testNodeSetEnumerable
 {
     JSValue* node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').find {|node| node.xpath('./price').text.to_f < 9.0 }.xpath('./title').text"]];
     NSString* title = [node toString];
     XCTAssertEqualObjects((@"Greatest Hits"), title, @"title should be Greatest Hits");
+}
+
+- (void)testNodeSetToNative
+{
+    JSValue* node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').to_n"]];
+    IGXMLNodeSet* titleNodeSet = [node toObject];
+    XCTAssertNotNil(titleNodeSet, @"should be a node set");
+    XCTAssertEqualObjects([titleNodeSet class], [IGXMLNodeSet class], @"should be a NodeSet");
+    XCTAssertEqual(3U, [titleNodeSet count], @"should have 3 nodes in set");
 }
 
 @end

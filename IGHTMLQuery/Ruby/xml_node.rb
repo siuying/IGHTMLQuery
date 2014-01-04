@@ -43,6 +43,10 @@ class XMLNode
     def remove_namespaces
       %x{#@native.removeNamespaces()}
     end
+
+    def to_n
+      %x{#@native}
+    end
   end
   include Core
 

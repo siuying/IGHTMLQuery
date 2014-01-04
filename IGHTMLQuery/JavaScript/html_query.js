@@ -79,7 +79,14 @@
 
         return self['native'].removeNamespaces();
       };
-            ;$opal.donate(self, ["$tag", "$tag=", "$text", "$text=", "$xml", "$inner_xml", "$last_error", "$remove_namespaces"]);
+
+      def.$to_n = function() {
+        var self = this;
+        if (self['native'] == null) self['native'] = nil;
+
+        return self['native'];
+      };
+            ;$opal.donate(self, ["$tag", "$tag=", "$text", "$text=", "$xml", "$inner_xml", "$last_error", "$remove_namespaces", "$to_n"]);
     })(self);
 
     self.$include((($a = $scope.Core) == null ? $opal.cm('Core') : $a));
@@ -345,7 +352,14 @@
           return nil
         };
       };
-            ;$opal.donate(self, ["$count", "$all", "$first", "$each", "$text"]);
+
+      def.$to_n = function() {
+        var self = this;
+        if (self['native'] == null) self['native'] = nil;
+
+        return self['native'];
+      };
+            ;$opal.donate(self, ["$count", "$all", "$first", "$each", "$text", "$to_n"]);
     })(self);
 
     self.$include((($a = $scope.Core) == null ? $opal.cm('Core') : $a));

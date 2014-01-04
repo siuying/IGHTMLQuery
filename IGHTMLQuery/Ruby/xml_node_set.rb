@@ -33,6 +33,10 @@ class XMLNodeSet
     def text
       first ? first.text : nil
     end
+    
+    def to_n
+      %x{#@native}
+    end
   end
   include Core
 

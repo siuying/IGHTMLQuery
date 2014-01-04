@@ -17,6 +17,7 @@
 
     NSString* filename = [[NSBundle bundleForClass:[IGXMLNode class]] pathForResource:@"html_query" ofType:@"js"];
     NSString* script = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
+    NSAssert(script != nil, @"html_query.js not loaded");
     [self evaluateScript:script];
 }
 
