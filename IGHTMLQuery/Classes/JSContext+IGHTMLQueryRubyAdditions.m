@@ -17,7 +17,7 @@
     [self loadOpal];
     
     // Create HTML Document
-    self[@"IGHTMLDocument"] = ^IGHTMLDocument*(NSString* html) {
+    self[@"IGHTMLDocumentCreateWithHTML"] = ^IGHTMLDocument*(NSString* html) {
         NSError* error;
         IGHTMLDocument* doc = [[IGHTMLDocument alloc] initWithHTMLString:html error:&error];
         if (error) {
@@ -25,7 +25,8 @@
         }
         return doc;
     };
-    
+    self[@"IGHTMLDocument"] = [IGHTMLDocument class];
+
     // send a HTTP request and retrieve HTML string
     // return HTML string if succeed
     // return nil if failure

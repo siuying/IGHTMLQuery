@@ -2,6 +2,6 @@ class HTMLDoc < XMLNode
   attr_reader :native
 
   def initialize(html)
-    @native = %x{IGHTMLDocument(html)}
+    @native = `IGHTMLDocumentCreateWithHTML(#{html.to_n})`
   end
 end
