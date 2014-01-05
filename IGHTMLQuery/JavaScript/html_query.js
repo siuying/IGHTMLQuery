@@ -46,7 +46,10 @@
         var self = this;
         if (self['native'] == null) self['native'] = nil;
 
-        return self['native'].tag();
+        
+        var tag = self['native'].tag();
+        return (tag === undefined) ? Opal.NIL : tag;
+      ;
       };
 
       def['$tag='] = function(tag) {
@@ -63,7 +66,10 @@
         var self = this;
         if (self['native'] == null) self['native'] = nil;
 
-        return self['native'].text();
+        
+        var text = self['native'].text();
+        return (text === undefined) ? Opal.NIL : text;
+      ;
       };
 
       def['$text='] = function(text) {
@@ -80,28 +86,38 @@
         var self = this;
         if (self['native'] == null) self['native'] = nil;
 
-        return self['native'].xml();
+        
+        var xml = self['native'].xml();
+        return (xml === undefined) ? Opal.NIL : xml;
+      ;
       };
 
       def.$inner_xml = function() {
         var self = this;
         if (self['native'] == null) self['native'] = nil;
 
-        return self['native'].innerXml();
+        
+        var innerXml = self['native'].innerXml();
+        return (innerXml === undefined) ? Opal.NIL : innerXml;
+      ;
       };
 
       def.$last_error = function() {
         var self = this;
         if (self['native'] == null) self['native'] = nil;
 
-        return self['native'].lastError();
+        
+        var lastError = self['native'].lastError();
+        return (lastError === undefined) ? Opal.NIL : lastError;
+      ;
       };
 
       def.$remove_namespaces = function() {
         var self = this;
         if (self['native'] == null) self['native'] = nil;
 
-        return self['native'].removeNamespaces();
+        self['native'].removeNamespaces();
+        return nil;
       };
 
       def.$to_n = function() {
@@ -123,42 +139,60 @@
         var $a, self = this;
         if (self['native'] == null) self['native'] = nil;
 
-        return (($a = $scope.XMLNode) == null ? $opal.cm('XMLNode') : $a).$new(self['native'].parent());
+        
+        var parent = self['native'].parent();
+        return (parent === undefined) ? Opal.NIL : (($a = $scope.XMLNode) == null ? $opal.cm('XMLNode') : $a).$new(parent);
+      ;
       };
 
       def.$next_sibling = function() {
         var $a, self = this;
         if (self['native'] == null) self['native'] = nil;
 
-        return (($a = $scope.XMLNode) == null ? $opal.cm('XMLNode') : $a).$new(self['native'].nextSibling());
+        
+        var nextSibling = self['native'].nextSibling();
+        return (nextSibling === undefined) ? Opal.NIL : (($a = $scope.XMLNode) == null ? $opal.cm('XMLNode') : $a).$new(nextSibling);
+      ;
       };
 
       def.$previous_sibling = function() {
         var $a, self = this;
         if (self['native'] == null) self['native'] = nil;
 
-        return (($a = $scope.XMLNode) == null ? $opal.cm('XMLNode') : $a).$new(self['native'].previousSibling());
+        
+        var previousSibling = self['native'].previousSibling();
+        return (previousSibling === undefined) ? Opal.NIL : (($a = $scope.XMLNode) == null ? $opal.cm('XMLNode') : $a).$new(previousSibling);
+      ;
       };
 
       def.$children = function() {
         var $a, self = this;
         if (self['native'] == null) self['native'] = nil;
 
-        return (($a = $scope.XMLNodeSet) == null ? $opal.cm('XMLNodeSet') : $a).$new(self['native'].children());
+        
+        var children = self['native'].children();
+        return (children === undefined) ? Opal.NIL : (($a = $scope.XMLNodeSet) == null ? $opal.cm('XMLNodeSet') : $a).$new(children);
+      ;
       };
 
       def.$first_child = function() {
         var $a, self = this;
         if (self['native'] == null) self['native'] = nil;
 
-        return (($a = $scope.XMLNodeSet) == null ? $opal.cm('XMLNodeSet') : $a).$new(self['native'].firstChild());
+        
+        var firstChild = self['native'].firstChild();
+        return (firstChild === undefined) ? Opal.NIL : (($a = $scope.XMLNode) == null ? $opal.cm('XMLNode') : $a).$new(firstChild);
+      ;
       };
 
       def.$unique_key = function() {
-        var $a, self = this;
+        var self = this;
         if (self['native'] == null) self['native'] = nil;
 
-        return (($a = $scope.XMLNodeSet) == null ? $opal.cm('XMLNodeSet') : $a).$new(self['native'].uniqueKey());
+        
+        var uniqueKey = self['native'].uniqueKey();
+        return (uniqueKey === undefined) ? Opal.NIL : uniqueKey;
+      ;
       };
             ;$opal.donate(self, ["$parent", "$next_sibling", "$previous_sibling", "$children", "$first_child", "$unique_key"]);
     })(self);
@@ -180,7 +214,10 @@
         var self = this;
         if (self['native'] == null) self['native'] = nil;
 
-        return self['native'].attribute(name);
+        
+        var attribute = self['native'].attribute(name);
+        return (attribute === undefined) ? Opal.NIL : attribute;
+      ;
       };
 
       def.$attributes = function() {

@@ -47,6 +47,9 @@
 {
     JSValue* node = [instanceEval callWithArguments:@[doc, @"self.children.first['country'] = 'Hong Kong'; self.children.first['country'] "]];\
     XCTAssertEqualObjects(@"Hong Kong", [node toString], @"should be Hong Kong");
+
+    node = [instanceEval callWithArguments:@[doc, @"self.children.first['abc'].nil?"]];\
+    XCTAssertEqualObjects(@YES, [node toNumber], @"non existing attribute should return nil");
 }
 
 - (void)testNodeQuery
@@ -67,6 +70,17 @@
     XCTAssertEqualObjects(@"<catalog/>", [node toString], @"should empty xml");
 }
 
+- (void)testNodeToNative
+{
+    JSValue* node = [instanceEval callWithArguments:@[doc, @"self.to_n"]];
+    IGXMLNode* nodeNative = [node toObject];
+    XCTAssertNotNil(nodeNative, @"should be a node");
+    XCTAssertTrue([nodeNative isKindOfClass:[IGXMLNode class]], @"should be a node");
+    XCTAssertEqualObjects(@"catalog", nodeNative.tag, @"should be a catalog");
+}
+
+#pragma mark - Node Set
+
 - (void)testNodeSet
 {
     JSValue* node = [instanceEval callWithArguments:@[doc, @"first = self.children.all.first; first.tag"]];
@@ -78,15 +92,6 @@
 {
     JSValue* node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').remove; self.xpath('//cd').nodes "]];
     XCTAssertEqual(0U, [[node toArray] count], @"should remove cds");
-}
-
-- (void)testNodeToNative
-{
-    JSValue* node = [instanceEval callWithArguments:@[doc, @"self.to_n"]];
-    IGXMLNode* nodeNative = [node toObject];
-    XCTAssertNotNil(nodeNative, @"should be a node");
-    XCTAssertTrue([nodeNative isKindOfClass:[IGXMLNode class]], @"should be a node");
-    XCTAssertEqualObjects(@"catalog", nodeNative.tag, @"should be a catalog");
 }
 
 - (void)testNodeSetEnumerable
@@ -104,6 +109,55 @@
     XCTAssertEqualObjects([titleNodeSet class], [IGXMLNodeSet class], @"should be a NodeSet");
     XCTAssertEqual(3U, [titleNodeSet count], @"should have 3 nodes in set");
 }
+
+#pragma mark - Traversal
+
+- (void)testParent
+{
+    JSValue* node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').first.parent.tag"]];
+    NSString* tag = [node toString];
+    XCTAssertEqualObjects(tag, @"catalog", @"should be catalog");
+}
+
+- (void)testNoParent
+{
+    JSValue* node = [instanceEval callWithArguments:@[doc, @"self.xpath('//catalog').first.parent.parent.nil?"]];
+    XCTAssertEqualObjects(@YES, [node toNumber], @"non existing parent return nil");
+}
+
+- (void)testChildrenAndFirstChild
+{
+    JSValue* node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').first.children.first.tag"]];
+    XCTAssertEqualObjects(@"title", [node toString], @"should be title");
+    
+    node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').first.first_child.tag"]];
+    XCTAssertEqualObjects(@"title", [node toString], @"should be title");
+}
+
+- (void)testNoChildren
+{
+    JSValue* node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').first.first_child.nil?"]];
+    XCTAssertEqualObjects(@NO, [node toNumber], @"should not be nil");
+
+    node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').first.first_child.first_child.nil?"]];
+    XCTAssertEqualObjects(@YES, [node toNumber], @"should be nil");
+}
+
+- (void)testNextAndPreviousSibling
+{
+    IGXMLNode* ukCd = [[doc queryWithXPath:@"cd[@country='UK']"] firstObject];
+    
+    XCTAssertEqualObjects([ukCd.previousSibling queryWithXPath:@"price"].firstObject.text, @"10.90");
+    XCTAssertEqualObjects([ukCd.nextSibling queryWithXPath:@"price"].firstObject.text, @"8.90");
+    
+    JSValue* node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd[@country=\"UK\"]').first.previous_sibling.xpath('price').first.text"]];
+    XCTAssertEqualObjects(@"10.90", [node toString], @"should not be nil");
+
+    node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd[@country=\"UK\"]').first.next_sibling.xpath('price').first.text"]];
+    XCTAssertEqualObjects(@"8.90", [node toString], @"should not be nil");
+}
+
+#pragma mark - Others
 
 - (void) testHTMLDoc {
     JSValue* h1 = [context evaluateRuby:@"HTMLDoc.new('<html><body><h1>Header</h1><div id=\"content\"><span>Hello</span></div></body></html>').xpath('//h1').first.text"];

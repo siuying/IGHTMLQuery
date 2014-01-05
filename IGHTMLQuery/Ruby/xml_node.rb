@@ -7,7 +7,10 @@ class XMLNode
 
   module Core
     def tag
-      %x{#@native.tag()}
+      %x{
+        var tag = #@native.tag();
+        return (tag === undefined) ? Opal.NIL : tag;
+      }
     end
 
     def tag=(tag)
@@ -18,7 +21,10 @@ class XMLNode
     end
 
     def text
-      %x{#@native.text()}
+      %x{
+        var text = #@native.text();
+        return (text === undefined) ? Opal.NIL : text;
+      }
     end
 
     def text=(text)
@@ -29,19 +35,29 @@ class XMLNode
     end
 
     def xml
-      %x{#@native.xml()}
+      %x{
+        var xml = #@native.xml();
+        return (xml === undefined) ? Opal.NIL : xml;
+      }
     end
 
     def inner_xml
-      %x{#@native.innerXml()}
+      %x{
+        var innerXml = #@native.innerXml();
+        return (innerXml === undefined) ? Opal.NIL : innerXml;
+      }
     end
 
     def last_error
-      %x{#@native.lastError()}
+      %x{
+        var lastError = #@native.lastError();
+        return (lastError === undefined) ? Opal.NIL : lastError;
+      }
     end
 
     def remove_namespaces
       %x{#@native.removeNamespaces()}
+      nil
     end
 
     def to_n
@@ -52,27 +68,45 @@ class XMLNode
 
   module Traversal
     def parent
-      XMLNode.new(%x{#@native.parent()})
+      %x{
+        var parent = #@native.parent();
+        return (parent === undefined) ? Opal.NIL : #{XMLNode.new(`parent`)};
+      }
     end
 
     def next_sibling
-      XMLNode.new(%x{#@native.nextSibling()})
+      %x{
+        var nextSibling = #@native.nextSibling();
+        return (nextSibling === undefined) ? Opal.NIL : #{XMLNode.new(`nextSibling`)};
+      }
     end
 
     def previous_sibling
-      XMLNode.new(%x{#@native.previousSibling()})
+      %x{
+        var previousSibling = #@native.previousSibling();
+        return (previousSibling === undefined) ? Opal.NIL : #{XMLNode.new(`previousSibling`)};
+      }
     end
 
     def children
-      XMLNodeSet.new(%x{#@native.children()})
+      %x{
+        var children = #@native.children();
+        return (children === undefined) ? Opal.NIL : #{XMLNodeSet.new(`children`)};
+      }
     end
 
     def first_child
-      XMLNodeSet.new(%x{#@native.firstChild()})
+      %x{
+        var firstChild = #@native.firstChild();
+        return (firstChild === undefined) ? Opal.NIL : #{XMLNode.new(`firstChild`)};
+      }
     end
 
     def unique_key
-      XMLNodeSet.new(%x{#@native.uniqueKey()})
+      %x{
+        var uniqueKey = #@native.uniqueKey();
+        return (uniqueKey === undefined) ? Opal.NIL : uniqueKey;
+      }
     end
   end
   include Traversal
@@ -83,7 +117,10 @@ class XMLNode
     end
 
     def [](name)
-      %x{#@native.attribute(name)}
+      %x{
+        var attribute = #@native.attribute(name);
+        return (attribute === undefined) ? Opal.NIL : attribute;
+      }
     end
 
     def attributes
