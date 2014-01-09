@@ -215,4 +215,15 @@
     return [[IGXMLNodeSet alloc] initWithNodes:[nodes array]];
 }
 
+- (IGXMLNodeSet*) queryWithCSS:(NSString*)cssSelector {
+    NSMutableOrderedSet* nodes = [[NSMutableOrderedSet alloc] init];
+    [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
+        IGXMLNodeSet* nodeSet = [node queryWithCSS:cssSelector];
+        if (nodeSet && nodeSet.nodes) {
+            [nodes unionOrderedSet:nodeSet.nodes];
+        }
+    }];
+    return [[IGXMLNodeSet alloc] initWithNodes:[nodes array]];
+}
+
 @end

@@ -241,8 +241,16 @@
 
         set = self['native'].queryWithXPath(query);
         return (($a = $scope.XMLNodeSet) == null ? $opal.cm('XMLNodeSet') : $a).$new(set);
-      }
-            ;$opal.donate(self, ["$xpath"]);
+      };
+
+      def.$css = function(query) {
+        var $a, self = this, set = nil;
+        if (self['native'] == null) self['native'] = nil;
+
+        set = self['native'].queryWithCSS(query);
+        return (($a = $scope.XMLNodeSet) == null ? $opal.cm('XMLNodeSet') : $a).$new(set);
+      };
+            ;$opal.donate(self, ["$xpath", "$css"]);
     })(self);
 
     self.$include((($a = $scope.Query) == null ? $opal.cm('Query') : $a));
@@ -435,8 +443,16 @@
 
         set = self['native'].queryWithXPath(query);
         return (($a = $scope.XMLNodeSet) == null ? $opal.cm('XMLNodeSet') : $a).$new(set);
-      }
-            ;$opal.donate(self, ["$xpath"]);
+      };
+
+      def.$css = function(query) {
+        var $a, self = this, set = nil;
+        if (self['native'] == null) self['native'] = nil;
+
+        set = self['native'].queryWithCSS(query);
+        return (($a = $scope.XMLNodeSet) == null ? $opal.cm('XMLNodeSet') : $a).$new(set);
+      };
+            ;$opal.donate(self, ["$xpath", "$css"]);
     })(self);
 
     self.$include((($a = $scope.Query) == null ? $opal.cm('Query') : $a));

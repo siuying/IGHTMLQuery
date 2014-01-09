@@ -21,4 +21,13 @@
  */
 - (IGXMLNodeSet*) queryWithXPath:(NSString*)xpath;
 
+/**
+ Query a node with CSS Selector (Level 3)
+ @param css selector used to query the document
+ @return elements matched by supplied css selector.
+ @ref Check CSSSelectorConverter (https://github.com/siuying/CSSSelectorConverter) to see how this works.
+ @throw IGXMLQueryCSSConversionException when cannot convert css to xpath.
+ */
+- (IGXMLNodeSet*) queryWithCSS:(NSString*)cssSelector;
+
 @end

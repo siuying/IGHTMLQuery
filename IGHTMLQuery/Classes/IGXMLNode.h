@@ -23,6 +23,7 @@
 
 extern NSString* const IGXMLQueryErrorDomain;
 extern NSString* const IGXMLNodeException;
+extern NSString* const IGXMLQueryCSSConversionException;
 
 @class IGXMLDocument;
 

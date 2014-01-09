@@ -134,6 +134,10 @@ class XMLNode
       set = %x{#@native.queryWithXPath(query)}
       XMLNodeSet.new(set)
     end
+    def css(query)
+      set = %x{#@native.queryWithCSS(query)}
+      XMLNodeSet.new(set)
+    end
   end
   include Query
 
