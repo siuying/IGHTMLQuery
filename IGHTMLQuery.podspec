@@ -44,6 +44,7 @@ DESC
     sp.osx.deployment_target = '10.9'
     sp.prefix_header_contents = '#define IGHTMLQUERY_JAVSCRIPT_EXPORT'
     sp.frameworks = 'JavaScriptCore'
+    sp.dependency 'IGHTMLQuery/Core'
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
     sp.exclude_files = 'IGHTMLQuery/Classes/JSContext+IGHTMLQueryRubyAdditions.{h,m}'
   end
