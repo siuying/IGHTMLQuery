@@ -1,1 +1,13 @@
-COCOAPODS: 0.24.0
+PODS:
+  - JavaScriptCoreOpalAdditions (0.3.0):
+    - ObjectiveSugar (~> 1.1.0)
+  - ObjectiveSugar (1.1.0)
+
+DEPENDENCIES:
+  - JavaScriptCoreOpalAdditions (>= 0.2.2)
+
+SPEC CHECKSUMS:
+  JavaScriptCoreOpalAdditions: 86235b1c0d1f0b29f978bdc8485f5c73521ebdea
+  ObjectiveSugar: e90d09b348ec0d1739d6d93bdcee385cf0a96036
+
+COCOAPODS: 0.29.0

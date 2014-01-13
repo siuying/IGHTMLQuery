@@ -12,7 +12,7 @@
 
 @class IGXMLNode;
 
-@protocol IGXMLNodeManipulation <IGHTMLQueryJavaScriptExport, NSObject>
+@protocol IGXMLNodeManipulation <IGHTMLQueryJavaScriptExport>
 
 -(instancetype) appendWithNode:(IGXMLNode*)child;
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>DEE983D1-2B51-4546-A366-7D8F1DED9F74</string>
+	<key>IDESourceControlProjectName</key>
+	<string>IGHTMLQuery</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6115DD44-65D7-45C6-A601-E1F692E3D57D</key>
+		<string>ssh://github.com/siuying/IGHTMLQuery.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>IGHTMLQuery.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6115DD44-65D7-45C6-A601-E1F692E3D57D</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/siuying/IGHTMLQuery.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6115DD44-65D7-45C6-A601-E1F692E3D57D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6115DD44-65D7-45C6-A601-E1F692E3D57D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IGHTMLQuery</string>
+		</dict>
+	</array>
+</dict>
+</plist>

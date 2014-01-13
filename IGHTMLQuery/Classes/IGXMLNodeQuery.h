@@ -12,7 +12,7 @@
 
 @class IGXMLNodeSet;
 
-@protocol IGXMLNodeQuery <NSObject, IGHTMLQueryJavaScriptExport>
+@protocol IGXMLNodeQuery <IGHTMLQueryJavaScriptExport>
 
 /**
  Query a node with XPath
