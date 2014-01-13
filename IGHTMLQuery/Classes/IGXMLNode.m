@@ -9,9 +9,12 @@
 #import "IGXMLNode.h"
 #import "IGXMLDocument.h"
 #import "IGHTMLDocument.h"
+#import "CSSSelectorConverter.h"
 
 NSString* const IGXMLQueryErrorDomain   = @"IGHTMLQueryError";
 NSString* const IGXMLNodeException      = @"IGXMLNodeException";
+NSString* const IGXMLQueryCSSConversionException = @"IGXMLQueryCSSConversionException";
+
 /**
  * extracted from Nokigiri
  * @see https://github.com/sparklemotion/nokogiri/blob/master/ext/nokogiri/xml_document.c
@@ -43,6 +46,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 @interface IGXMLNode ()
+@property (nonatomic, strong) CSSToXPathConverter* cssConverter;
 @end
 
 @implementation IGXMLNode
@@ -477,6 +481,24 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     xmlXPathFreeContext(context);
     
     return [[IGXMLNodeSet alloc] initWithNodes:resultNodes];
+}
+
+- (IGXMLNodeSet*) queryWithCSS:(NSString*)cssSelector {
+    if (!_cssConverter) {
+        _cssConverter = [[CSSToXPathConverter alloc] init];
+    }
+    
+    NSError* cssError = nil;
+    NSString* xpath = [_cssConverter xpathWithCSS:cssSelector error:&cssError];
+    if (!xpath) {
+        if (cssError) {
+            [NSException raise:IGXMLQueryCSSConversionException format:@"Cannot convert CSS into XPath: %@", [cssError localizedDescription]];
+        } else {
+            [NSException raise:IGXMLQueryCSSConversionException format:@"Cannot convert CSS into XPath: unknown error"];
+        }
+    }
+
+    return [self queryWithXPath:xpath];
 }
 
 #pragma mark - Attributes

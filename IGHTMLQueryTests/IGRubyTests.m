@@ -58,6 +58,15 @@
     XCTAssertEqualWithAccuracy(10.9, [[node toNumber] doubleValue], 0.001, @"should find first price");
 }
 
+- (void)testNodeCSSQuery
+{
+    JSValue* node = [instanceEval callWithArguments:@[doc, @"self.css('cd > price').first.text.to_f"]];
+    XCTAssertEqualWithAccuracy(10.9, [[node toNumber] doubleValue], 0.001, @"should find first price");
+    
+    node = [instanceEval callWithArguments:@[doc, @"self.css('cd[country=\"UK\"] price').text.to_f"]];
+    XCTAssertEqualWithAccuracy(9.9, [[node toNumber] doubleValue], 0.001, @"should find first price");
+}
+
 - (void)testNodeManipulationRemove
 {
     JSValue* node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').each {|n| n.remove }; self.xpath('//cd').nodes "]];
@@ -161,6 +170,9 @@
 
 - (void) testHTMLDoc {
     JSValue* h1 = [context evaluateRuby:@"HTMLDoc.new('<html><body><h1>Header</h1><div id=\"content\"><span>Hello</span></div></body></html>').xpath('//h1').first.text"];
+    XCTAssertEqualObjects(@"Header", [h1 toString], @"should return a doc based on input and can be queried");
+    
+    h1 = [context evaluateRuby:@"HTMLDoc.new('<html><body><h1>Header</h1><div id=\"content\"><span>Hello</span></div></body></html>').css('h1').first.text"];
     XCTAssertEqualObjects(@"Header", [h1 toString], @"should return a doc based on input and can be queried");
     
 }
