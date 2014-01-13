@@ -110,17 +110,7 @@
         return (firstChild === undefined) ? Opal.NIL : (($a = $scope.XMLNode) == null ? $opal.cm('XMLNode') : $a).$new(firstChild);
       ;
       };
-
-      def.$unique_key = function() {
-        var self = this;
-        if (self['native'] == null) self['native'] = nil;
-
-        
-        var uniqueKey = self['native'].uniqueKey();
-        return (uniqueKey === undefined) ? Opal.NIL : uniqueKey;
-      ;
-      };
-            ;$opal.donate(self, ["$parent", "$next_sibling", "$previous_sibling", "$children", "$first_child", "$unique_key"]);
+            ;$opal.donate(self, ["$parent", "$next_sibling", "$previous_sibling", "$children", "$first_child"]);
     })(self);
 
     self.$include((($a = $scope.Traversal) == null ? $opal.cm('Traversal') : $a));
@@ -146,13 +136,8 @@
       ;
       };
 
-      def.$attributes = function() {
-        var self = this;
-        if (self['native'] == null) self['native'] = nil;
-
-        return self['native'].attributeNames();
-      };
-            ;$opal.donate(self, ["$[]=", "$[]", "$attributes"]);
+      self.$alias_native("attributes", "attributeNames");
+            ;$opal.donate(self, ["$[]=", "$[]"]);
     })(self);
 
     self.$include((($a = $scope.Attribute) == null ? $opal.cm('Attribute') : $a));

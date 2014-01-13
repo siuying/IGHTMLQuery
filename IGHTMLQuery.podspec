@@ -28,7 +28,6 @@ DESC
   s.default_subspec = 'Core'
 
   s.ios.deployment_target = '7.0'
-
   s.osx.deployment_target = '10.9'
 
   s.subspec "Core" do |sp|
@@ -36,6 +35,7 @@ DESC
     sp.osx.deployment_target = '10.8'
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
     sp.exclude_files = 'IGHTMLQuery/Classes/JSContext+IGHTMLQueryRubyAdditions.{h,m}'
+    sp.dependency 'CSSSelectorConverter'
   end
 
   # Include IGHTMLQuery/JavaScript to enable JavaScriptCore support.
