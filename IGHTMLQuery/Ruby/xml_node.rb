@@ -1,68 +1,16 @@
 class XMLNode
-  attr_reader :native
-
-  def initialize(native)
-    @native = native
-  end
+  include Native
 
   module Core
-    def tag
-      %x{
-        var tag = #@native.tag();
-        return (tag === undefined) ? Opal.NIL : tag;
-      }
-    end
+    include Native
 
-    def tag=(tag)
-      %x{
-        #@native.setTag(tag)
-        return #@native.tag()
-      }
-    end
-
-    def text
-      %x{
-        var text = #@native.text();
-        return (text === undefined) ? Opal.NIL : text;
-      }
-    end
-
-    def text=(text)
-      %x{
-        #@native.setText(text)
-        return #@native.text()
-      }
-    end
-
-    def xml
-      %x{
-        var xml = #@native.xml();
-        return (xml === undefined) ? Opal.NIL : xml;
-      }
-    end
-
-    def inner_xml
-      %x{
-        var innerXml = #@native.innerXml();
-        return (innerXml === undefined) ? Opal.NIL : innerXml;
-      }
-    end
-
-    def last_error
-      %x{
-        var lastError = #@native.lastError();
-        return (lastError === undefined) ? Opal.NIL : lastError;
-      }
-    end
-
-    def remove_namespaces
-      %x{#@native.removeNamespaces()}
-      nil
-    end
-
-    def to_n
-      %x{#@native}
-    end
+    alias_native :tag, :tag
+    alias_native :tag=, :setTag
+    alias_native :text, :text
+    alias_native :text=, :setText
+    alias_native :xml, :xml
+    alias_native :inner_xml, :innerXml
+    alias_native :remove_namespaces, :removeNamespaces
   end
   include Core
 
@@ -101,13 +49,6 @@ class XMLNode
         return (firstChild === undefined) ? Opal.NIL : #{XMLNode.new(`firstChild`)};
       }
     end
-
-    def unique_key
-      %x{
-        var uniqueKey = #@native.uniqueKey();
-        return (uniqueKey === undefined) ? Opal.NIL : uniqueKey;
-      }
-    end
   end
   include Traversal
 
@@ -123,9 +64,7 @@ class XMLNode
       }
     end
 
-    def attributes
-      %x{#@native.attributeNames()}
-    end
+    alias_native :attributes, :attributeNames
   end
   include Attribute
                      

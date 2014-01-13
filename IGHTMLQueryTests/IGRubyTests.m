@@ -67,6 +67,13 @@
     XCTAssertEqualWithAccuracy(9.9, [[node toNumber] doubleValue], 0.001, @"should find first price");
 }
 
+- (void)testNodeAttributes
+{
+    JSValue* attributes = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').first.attributes"]];
+    XCTAssertEqual(1U, [[attributes toArray] count], @"should have attributes");
+    XCTAssertEqualObjects(@"country", [attributes[0] toString], @"should attribute country");
+}
+
 - (void)testNodeManipulationRemove
 {
     JSValue* node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').each {|n| n.remove }; self.xpath('//cd').nodes "]];

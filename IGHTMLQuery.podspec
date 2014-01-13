@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "IGHTMLQuery"
-  s.version      = "0.6.6"
+  s.version      = "0.7.0"
   s.summary      = "IGHTMLQuery is a lightweight XML/HTML parser for iOS, built on top of libxml."
 
   s.description  = <<-DESC
@@ -57,6 +57,6 @@ DESC
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
     sp.resources = 'IGHTMLQuery/JavaScript/*.js', 'IGHTMLQuery/Ruby/*.rb'
     sp.dependency 'IGHTMLQuery/JavaScript'
-    sp.dependency 'JavaScriptCoreOpalAdditions', '>= 0.2.2'
+    sp.dependency 'JavaScriptCoreOpalAdditions', '>= 0.3.1'
   end
 end
