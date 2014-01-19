@@ -136,8 +136,16 @@
       ;
       };
 
-      self.$alias_native("attributes", "attributeNames");
-            ;$opal.donate(self, ["$[]=", "$[]"]);
+      def.$attributes = function() {
+        var self = this;
+        if (self['native'] == null) self['native'] = nil;
+
+        
+        var names = self['native'].attributeNames();
+        return (names === undefined) ? Opal.NIL : names;
+      ;
+      };
+            ;$opal.donate(self, ["$[]=", "$[]", "$attributes"]);
     })(self);
 
     self.$include((($a = $scope.Attribute) == null ? $opal.cm('Attribute') : $a));

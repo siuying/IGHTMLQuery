@@ -64,7 +64,12 @@ class XMLNode
       }
     end
 
-    alias_native :attributes, :attributeNames
+    def attributes
+      %x{
+        var names = #@native.attributeNames();
+        return (names === undefined) ? Opal.NIL : names;
+      }
+    end
   end
   include Attribute
                      
