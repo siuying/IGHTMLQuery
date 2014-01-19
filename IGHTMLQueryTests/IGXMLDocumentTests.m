@@ -225,11 +225,33 @@
     XCTAssertNotEqualObjects(node1a.uniqueKey, node2.uniqueKey);
 }
 
-- (void)testCopy {
-    IGXMLNode* node1a = [doc queryWithXPath:@"cd"].firstObject;
-    IGXMLNode* node1b = [node1a copy];
+- (void)testCopyNode {
+    IGXMLNode* node1a;
+    IGXMLNode* node1b;
+    
+    // get a copy of the node.
+    node1a = [[doc queryWithXPath:@"cd"].firstObject copy];
+    node1b = [node1a copy];
+
+    // if we just use the object return by query (instead of a copy of it),
+    // when we dereference the doc, try to access the node will crash the app
+    doc = nil;
+
+    XCTAssertEqualObjects([node1a xml], [node1b xml]);
     XCTAssertEqualObjects(node1a, node1b);
-    XCTAssertEqualObjects(node1a.uniqueKey, node1b.uniqueKey);
+}
+
+- (void)testCopyDoc {
+    IGXMLDocument* docCopy1;
+    IGXMLDocument* docCopy2;
+    
+    // get copies of the doc.
+    docCopy1 = [doc copy];
+    docCopy2 = [docCopy1 copy];
+    doc = nil;
+    
+    XCTAssertEqualObjects([docCopy1 xml], [docCopy2 xml]);
+    XCTAssertEqualObjects(docCopy1, docCopy2);
 }
 
 @end

@@ -54,7 +54,7 @@
             xmlNodePtr root = xmlDocGetRootElement(_doc);
             if (root) {
                 self.node = root;
-                self.shouldFreeNode = NO;
+                self.shouldFreeNode = YES;
             } else {
                 xmlFreeDoc(_doc);
                 _doc = nil;
@@ -75,10 +75,11 @@
 #pragma mark - Lifecycle
 
 -(void) dealloc {
-    if (_doc) {
+    if (_doc && _shouldFreeNode) {
         xmlFreeDoc(_doc);
+        _doc = nil;
+        self.node = nil;
     }
-    _doc = nil;
 }
 
 #pragma mark - Override super class

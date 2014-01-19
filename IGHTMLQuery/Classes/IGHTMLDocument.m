@@ -46,7 +46,7 @@
             xmlNodePtr root = xmlDocGetRootElement(self.doc);
             if (root) {
                 self.node = root;
-                self.shouldFreeNode = NO;
+                self.shouldFreeNode = YES;
             } else {
                 xmlFreeDoc(self.doc);
                 self.doc = nil;
@@ -65,10 +65,11 @@
 }
 
 -(void) dealloc {
-    if (self.doc) {
+    if (self.doc && self.shouldFreeNode) {
         xmlFreeDoc(self.doc);
+        self.doc = nil;
+        self.node = nil;
     }
-    self.doc = nil;
 }
 
 @end

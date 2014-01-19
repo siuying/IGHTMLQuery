@@ -47,23 +47,40 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 
 @interface IGXMLNode ()
 @property (nonatomic, strong) CSSToXPathConverter* cssConverter;
+@property (nonatomic, assign) BOOL shouldFreeNode;
+
+- (id)initWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode;
++ (id)nodeWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode;
 @end
 
 @implementation IGXMLNode
 
 - (id)initWithXMLNode:(xmlNodePtr)node {
+    return [self initWithXMLNode:node shouldFreeNode:NO];
+}
+
+- (id)initWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode {
     if ((self = [super init])) {
+        _shouldFreeNode = shouldFreeNode;
         _node = node;
     }
     return self;
 }
 
 + (id)nodeWithXMLNode:(xmlNodePtr)node {
-    return [[self alloc] initWithXMLNode:node];
+    return [self nodeWithXMLNode:node shouldFreeNode:NO];
+}
+
++ (id)nodeWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode {
+    return [[self alloc] initWithXMLNode:node shouldFreeNode:shouldFreeNode];
 }
 
 -(void) dealloc {
-    _node = nil;
+    if (_node && _shouldFreeNode) {
+        xmlFreeNode(_node);
+        _shouldFreeNode = NO;
+        _node = nil;
+    }
 }
 
 #pragma mark -
@@ -163,7 +180,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(id)copyWithZone:(NSZone *)zone{
-    return [IGXMLNode nodeWithXMLNode:self.node];
+    xmlNodePtr newNode = xmlCopyNode(_node, 1);
+    return [IGXMLNode nodeWithXMLNode:newNode shouldFreeNode:YES];
 }
 
 #pragma mark - Traversal
@@ -252,7 +270,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     }
     
     IGXMLNode* another = object;
-    if (self.node == another.node) {
+    if ([[self xml] isEqual:[another xml]]) {
         return YES;
     }
     
@@ -260,7 +278,9 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (NSUInteger)hash {
-    return (NSUInteger) self.node;
+    // There is no simple way to calculate the hash unless we compare
+    // whole document, so I rather just return 0 here.
+    return 0;
 }
 
 #pragma mark - IGXMLNodeManipulation
