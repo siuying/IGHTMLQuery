@@ -20,8 +20,8 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   CocoaLumberjack: be87113f649942f020a37c061c58009b6ee5ff68
   CSSSelectorConverter: 9bcb9c0280113fe4da3d8d201414a48e472d4018
-  JavaScriptCoreOpalAdditions: e6a006befd2409dc6f88af14915f6121bc54a07e
-  ObjectiveSugar: e90d09b348ec0d1739d6d93bdcee385cf0a96036
-  ParseKit: b7a059d743342b674bf905792fd66f1027bd3d8d
+  JavaScriptCoreOpalAdditions: 826a276909f3b9f2044f7ceb4f38698b384d3d8c
+  ObjectiveSugar: fed588577bcf9733546aeaa089de444e4bab9a52
+  ParseKit: 3e29375d37e10b468fa2298ad7304a10f553bcef
 
 COCOAPODS: 0.29.0
