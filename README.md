@@ -66,16 +66,26 @@ IGHTMLDocument* node = [[IGHTMLDocument alloc] initWithHTMLString:html error:nil
 
 Use ```parent```, ```nextSibling```, ```previousSibling```, ```children``` and ```firstChild``` to traverse the document.
 
-### Query using XPath
+### Query using XPath or CSS Selector
 
-You can query the document or any node with ```queryWithXPath:``` method. It will always return a ```IGXMLNodeSet``` object, which is a set like object that you can chain query and operations.
+You can query the document or any node with ```queryWithXPath:``` or ```queryWithCSS:``` methods. They will always return a ```IGXMLNodeSet``` object, which is a set like object that you can chain query and operations.
 
 ```objective-c
 IGXMLNodeSet* contents = [doc queryWithXPath:@"//div[@class='content']"];
 [contents enumerateNodesUsingBlock:^(IGXMLNode* content, NSUInteger idx, BOOL *stop){
     NSLog(@"%@", content.xml);
-}]
+}];
 
+// use a @try/@catch block for queryWithCSS, as it can throw an exception if 
+// the CSS Selector cannot be converted to XPath.
+@try {
+  contents = [doc queryWithCSS:@"div.content"];
+  [contents enumerateNodesUsingBlock:^(IGXMLNode* content, NSUInteger idx, BOOL *stop){
+      NSLog(@"%@", content.xml);
+  }];
+} @catch(NSException * e) {
+  // handle error
+}
 ```
 
 ### Document Manipulation
