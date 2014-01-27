@@ -9,13 +9,18 @@ NSString* title = [[[node queryWithXPath:@"//cd/title"] firstObject] text];
     NSLog(@"title = %@", title.text);
 }];
 
+// or use CSS Selector
+[[node queryWithCSS:@"title"] enumerateNodesUsingBlock:^(IGXMLNode *title, NSUInteger idx, BOOL *stop) {
+    NSLog(@"title = %@", title.text);
+}];
+
 // quick manipulation
 [[node queryWithXPath:@"//title"] appendWithXMLString:@"<message>Hi!</message>"];
 ```
 
 ## Features
 
-- XPath support for document searching.
+- Use XPath and CSS Selector for document searching.
 - jQuery style chainable syntax.
 - XML traversal and manipulation.
 
