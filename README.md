@@ -142,7 +142,7 @@ To use IGHTMLQuery with Ruby support, add following line to your Podfile:
 pod "IGHTMLQuery/Ruby"
 ```
 
-See [Test Cases](https://github.com/siuying/IGHTMLQuery/blob/master/IGHTMLQueryTests/IGXMLNodeRubyTests.m) for more detail.
+See [Test Cases](https://github.com/siuying/IGHTMLQuery/blob/master/IGHTMLQueryTests/IGRubyTests.m) for more detail.
 
 ## License
 

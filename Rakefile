@@ -12,4 +12,9 @@ task :build do
   end
 end
 
+desc "Run tests"
+task :test do
+  system("xcodebuild -workspace IGHTMLQuery.xcworkspace -scheme IGHTMLQuery -sdk iphonesimulator test")
+end
+
 task :default => :build
