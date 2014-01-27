@@ -46,7 +46,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 @interface IGXMLNode ()
-@property (nonatomic, strong) CSSToXPathConverter* cssConverter;
+@property (nonatomic, strong) CSSSelectorToXPathConverter* cssConverter;
 @property (nonatomic, assign) BOOL shouldFreeNode;
 
 - (id)initWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode;
@@ -505,7 +505,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 
 - (IGXMLNodeSet*) queryWithCSS:(NSString*)cssSelector {
     if (!_cssConverter) {
-        _cssConverter = [[CSSToXPathConverter alloc] init];
+        _cssConverter = [[CSSSelectorToXPathConverter alloc] init];
     }
     
     NSError* cssError = nil;

@@ -35,7 +35,7 @@ DESC
     sp.osx.deployment_target = '10.8'
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
     sp.exclude_files = 'IGHTMLQuery/Classes/JSContext+IGHTMLQueryRubyAdditions.{h,m}'
-    sp.dependency 'CSSSelectorConverter'
+    sp.dependency 'CSSSelectorConverter', '>= 1.1.0'
   end
 
   # Include IGHTMLQuery/JavaScript to enable JavaScriptCore support.
