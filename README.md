@@ -29,7 +29,7 @@ NSString* title = [[[node queryWithXPath:@"//cd/title"] firstObject] text];
 IGHTMLQuery is available through [CocoaPods](http://cocoapods.org/), to install it simply add the following line to your Podfile:
 
 ```ruby
-pod "IGHTMLQuery"
+pod "IGHTMLQuery", "~> 0.7.1"
 ```
 
 Alternatively:
