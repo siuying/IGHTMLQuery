@@ -1,3 +1,4 @@
+rvm: 2.1.0
 language: objective-c
 xcode_project: IGHTMLQuery.xcodeproj
 xcode_scheme: IGHTMLQuery
