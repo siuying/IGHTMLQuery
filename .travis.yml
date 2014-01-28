@@ -1,5 +1,3 @@
 rvm: 1.9.3
 language: objective-c
-xcode_project: IGHTMLQuery.xcodeproj
-xcode_scheme: IGHTMLQuery
-xcode_sdk: iphonesimulator
+script: xcodebuild -workspace IGHTMLQuery.xcworkspace -scheme IGHTMLQuery -sdk iphonesimulator test
