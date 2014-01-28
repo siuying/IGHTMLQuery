@@ -1,5 +1,4 @@
-rvm: 2.0.0
-before_install: gem install cocoapods
+rvm: 1.9.3
 language: objective-c
 xcode_project: IGHTMLQuery.xcodeproj
 xcode_scheme: IGHTMLQuery
