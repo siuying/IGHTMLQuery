@@ -1,5 +1,6 @@
 rvm: 1.9.3
 language: objective-c
 before_script:
+  - export LANG=en_US.UTF-8
   - gem install xcpretty
 script: xcodebuild -workspace IGHTMLQuery.xcworkspace -scheme IGHTMLQuery -sdk iphonesimulator test | xcpretty -c; exit ${PIPESTATUS[0]}
