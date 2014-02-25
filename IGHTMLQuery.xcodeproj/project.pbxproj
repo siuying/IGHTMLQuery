@@ -48,6 +48,7 @@
 		54AB5F4417C47A4C009E2CF1 /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 54AB5F4217C479E6009E2CF1 /* sample.html */; };
 		54AF474D17C3854000D16C80 /* IGXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AF474C17C3854000D16C80 /* IGXMLDocument.m */; };
 		54BF4278187E90F6006D2E2A /* IGCSSQueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54BF4277187E90F6006D2E2A /* IGCSSQueryTests.m */; };
+		54BFE64318BC6E2E0088052E /* cleaned_news.html in Resources */ = {isa = PBXBuildFile; fileRef = 54BFE64218BC6E2E0088052E /* cleaned_news.html */; };
 		54E40FCD17C3B61C00C8FBB9 /* IGXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AF474C17C3854000D16C80 /* IGXMLDocument.m */; };
 		54ED457818782F31005391EC /* html_query.js in Resources */ = {isa = PBXBuildFile; fileRef = 542C23CB1874FB9C0046B93A /* html_query.js */; };
 		54ED457918782F42005391EC /* html_query.js in Resources */ = {isa = PBXBuildFile; fileRef = 542C23CB1874FB9C0046B93A /* html_query.js */; };
@@ -122,6 +123,7 @@
 		54AF474B17C3854000D16C80 /* IGXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGXMLDocument.h; path = Classes/IGXMLDocument.h; sourceTree = "<group>"; };
 		54AF474C17C3854000D16C80 /* IGXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGXMLDocument.m; path = Classes/IGXMLDocument.m; sourceTree = "<group>"; };
 		54BF4277187E90F6006D2E2A /* IGCSSQueryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGCSSQueryTests.m; sourceTree = "<group>"; };
+		54BFE64218BC6E2E0088052E /* cleaned_news.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = cleaned_news.html; path = Fixtures/cleaned_news.html; sourceTree = "<group>"; };
 		96ED3153DE494256AF65D79A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -291,6 +293,7 @@
 				549C1DC217C47DEE00CF4F20 /* catalog.xml */,
 				549C1DC417C4827200CF4F20 /* broken.xml */,
 				549C1DCB17C4B69700CF4F20 /* atom.xml */,
+				54BFE64218BC6E2E0088052E /* cleaned_news.html */,
 			);
 			name = Fixtures;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				549C1DCC17C4B91100CF4F20 /* atom.xml in Resources */,
 				549C1DCD17C4B91300CF4F20 /* broken.xml in Resources */,
 				5455B17B17C8710200A992EB /* nytimes.html in Resources */,
+				54BFE64318BC6E2E0088052E /* cleaned_news.html in Resources */,
 				54AB5F4417C47A4C009E2CF1 /* sample.html in Resources */,
 				549C1DC317C47DEE00CF4F20 /* catalog.xml in Resources */,
 				543763CF17C36EFD004CE333 /* InfoPlist.strings in Resources */,

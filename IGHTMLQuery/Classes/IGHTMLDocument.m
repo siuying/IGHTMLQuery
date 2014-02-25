@@ -19,6 +19,10 @@
     return [self initWithHTMLData:[xmlString dataUsingEncoding:NSUTF8StringEncoding] encoding:@"utf8" error:outError];
 }
 
+- (id)initWithHTMLFragmentString:(NSString *)xmlString error:(NSError**)outError {
+    return [self initWithHTMLFragmentData:[xmlString dataUsingEncoding:NSUTF8StringEncoding] encoding:@"utf8" error:outError];
+}
+
 - (id)initWithHTMLFile:(NSString *)filename encoding:(NSString*)encoding error:(NSError**)outError{
     NSString *fullPath = [[[NSBundle bundleForClass:self.class] bundlePath] stringByAppendingPathComponent:filename];
     return [self initWithHTMLData:[NSData dataWithContentsOfFile:fullPath] encoding:encoding error:outError];
@@ -34,6 +38,10 @@
 }
 
 - (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding error:(NSError**)outError{
+    return [self initWithHTMLData:data encoding:encoding options:(HTML_PARSE_RECOVER | HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR | HTML_PARSE_NONET) error:outError];
+}
+
+- (id)initWithHTMLFragmentData:(NSData *)data encoding:(NSString*)encoding error:(NSError**)outError {
     return [self initWithHTMLData:data encoding:encoding options:(HTML_PARSE_RECOVER | HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR | HTML_PARSE_NOIMPLIED | HTML_PARSE_NONET) error:outError];
 }
 

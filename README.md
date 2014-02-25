@@ -144,6 +144,14 @@ pod "IGHTMLQuery/Ruby"
 
 See [Test Cases](https://github.com/siuying/IGHTMLQuery/blob/master/IGHTMLQueryTests/IGRubyTests.m) for more detail.
 
+## Breaking Changes
+
+### 0.7.2
+
+In previous version, the method ``[[IGHTMLDocument alloc] initWithHTMLString:]`` will create html element without implied HTML tag. (HTML_PARSE_NOIMPLIED option in libxml). Since 0.7.2, HTML_PARSE_NOIMPLIED will no longer be the default.
+
+If you want to maintain the old behavior, check the ``[[IGHTMLDocument alloc] initWithHTMLFragmentString:]`` method.
+
 ## License
 
 MIT License.

@@ -15,6 +15,8 @@
 
 - (id)initWithHTMLString:(NSString *)xmlString error:(NSError**)outError;
 
+- (id)initWithHTMLFragmentString:(NSString *)xmlString error:(NSError**)outError;
+
 - (id)initWithHTMLFile:(NSString *)filename encoding:(NSString*)encoding error:(NSError**)outError;
 
 - (id)initWithHTMLResource:(NSString *)filename ofType:(NSString*)extension encoding:(NSString*)encoding error:(NSError**)outError;
@@ -22,6 +24,8 @@
 - (id)initWithHTMLFilePath:(NSString *)fullPath encoding:(NSString*)encoding error:(NSError**)outError;
 
 - (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding error:(NSError**)outError;
+
+- (id)initWithHTMLFragmentData:(NSData *)data encoding:(NSString*)encoding error:(NSError**)outError;
 
 - (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding options:(htmlParserOption)options error:(NSError**)outError;
 

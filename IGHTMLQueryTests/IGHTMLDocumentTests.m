@@ -65,26 +65,40 @@
 }
 
 - (void)testAfterShorthand {
-    doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
-    [[doc queryWithXPath:@"//div[@class='inner']"] addNextSiblingWithXMLString:@"<p>Test</p>"];
-    XCTAssertEqualObjects(doc.innerXml,
-                          @"<h2>Greetings</h2><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div><p>Test</p>");
+    doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<div id=\"root\"><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
+    [[doc queryWithCSS:@".inner"] addNextSiblingWithXMLString:@"<p>Test</p>"];
+    XCTAssertEqualObjects([[[doc queryWithCSS:@"#root"] firstObject] innerXml], @"<h2>Greetings</h2><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div><p>Test</p>");
 }
 
 - (void)testBeforeShorthand {
-    doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<div><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
-    [[doc queryWithXPath:@"//div[@class='inner']"] addPreviousSiblingWithXMLString:@"<p>Test</p>"];
-    XCTAssertEqualObjects(doc.innerXml,
-                          @"<h2>Greetings</h2><p>Test</p><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div>");
+    doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<div id=\"root\"><h2>Greetings</h2><div class=\"inner\">Hello</div><div class=\"inner\">World</div></div>" error:nil];
+    [[doc queryWithCSS:@".inner"] addPreviousSiblingWithXMLString:@"<p>Test</p>"];
+    XCTAssertEqualObjects([[[doc queryWithCSS:@"#root"] firstObject] innerXml], @"<h2>Greetings</h2><p>Test</p><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div>");
 }
 
 - (void)testHtmlFragment
 {
+    doc = [[IGHTMLDocument alloc] initWithHTMLFragmentString:@"<div>Hello</div>" error:nil];
+    XCTAssertNotNil(doc);
+    XCTAssertEqualObjects(@"<div>Hello</div>", [doc xml]);
+    
     doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<div>Hello</div>" error:nil];
     XCTAssertNotNil(doc);
-    XCTAssertEqualObjects(@"<div>Hello</div>", doc.xml);
-    XCTAssertNil(doc.parent.parent);
-    XCTAssertNil(doc.firstChild);
+    XCTAssertEqualObjects(@"<html><body><div>Hello</div></body></html>", [doc xml]);    
+}
+
+- (void)testHtmlFragment2
+{
+    NSError* error;
+    doc = [[IGHTMLDocument alloc] initWithHTMLResource:@"cleaned_news" ofType:@"html" encoding:@"utf8" error:&error];
+    XCTAssertNotNil(doc);
+    if (error) {
+        NSLog(@"error = %@", error);
+    }
+
+    IGXMLNode *h1 = [[doc queryWithXPath:@"//h1"] firstObject];
+    NSString* h1Text = [h1 text];
+    XCTAssertEqualObjects(h1Text, @"為迎習近平 南鑼鼓巷商舖拆招牌", @"should found the h1");
 }
 
 - (void)testCopyDoc {
