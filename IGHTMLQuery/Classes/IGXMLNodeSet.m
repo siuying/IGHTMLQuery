@@ -88,7 +88,7 @@
 }
 
 -(void) enumerateNodesUsingBlock:(IGXMLNodeSetEnumerateBlock)block {
-    [[self.nodes reversedOrderedSet] enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
+    [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         block(node, idx, stop);
     }];
 }
