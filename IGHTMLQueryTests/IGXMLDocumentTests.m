@@ -254,4 +254,18 @@
     XCTAssertEqualObjects(docCopy1, docCopy2);
 }
 
+- (void) testQuerySameNode {
+    doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<html><body><ul><li>1</li><li>1</li><li>2</li></ul>" error:nil];
+    XCTAssertNotNil(doc);
+    
+    XCTAssertEqual(3U, [[doc queryWithXPath:@"//li"] count]);
+    
+    [[doc queryWithXPath:@"//li"] enumerateNodesUsingBlock:^(IGXMLNode *elem, NSUInteger idx, BOOL *stop) {
+        [elem remove];
+    }];
+    
+    XCTAssertEqual(0U, [[doc queryWithXPath:@"//li"] count]);
+    
+}
+
 @end
