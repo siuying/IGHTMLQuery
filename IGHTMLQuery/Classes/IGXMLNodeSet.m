@@ -226,4 +226,12 @@
     return [[IGXMLNodeSet alloc] initWithNodes:[nodes array]];
 }
 
+- (IGXMLNodeSet*) query:(NSString*)xpathOrCssSelector {
+    if ([xpathOrCssSelector hasPrefix:@"./"] || [xpathOrCssSelector hasPrefix:@"/"] || [xpathOrCssSelector hasPrefix:@"../"]) {
+        return [self queryWithXPath:xpathOrCssSelector];
+    } else {
+        return [self queryWithCSS:xpathOrCssSelector];
+    }
+}
+
 @end

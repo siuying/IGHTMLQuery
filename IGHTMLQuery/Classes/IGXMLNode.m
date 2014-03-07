@@ -517,6 +517,14 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     return [self queryWithXPath:xpath];
 }
 
+- (IGXMLNodeSet*) query:(NSString*)xpathOrCssSelector {
+    if ([xpathOrCssSelector hasPrefix:@"./"] || [xpathOrCssSelector hasPrefix:@"/"] || [xpathOrCssSelector hasPrefix:@"../"]) {
+        return [self queryWithXPath:xpathOrCssSelector];
+    } else {
+        return [self queryWithCSS:xpathOrCssSelector];
+    }
+}
+
 #pragma mark - Attributes
 
 - (NSString *)attribute:(NSString *)attName {

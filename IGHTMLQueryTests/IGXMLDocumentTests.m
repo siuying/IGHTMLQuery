@@ -266,4 +266,12 @@
     
 }
 
+- (void)testQuery
+{
+    IGXMLNodeSet* cds1 = [doc query:@"//cd"];
+    IGXMLNodeSet* cds2 = [doc query:@"cd"];
+    XCTAssertEqual([cds1 count], 3U, @"should query with XPath");
+    XCTAssertEqual([cds2 count], 3U, @"should query with CSS");
+}
+
 @end
