@@ -1,5 +1,14 @@
 Changelog
 =========
+0.8.0 (7/3/2014)
+-----------------
+* Added: [node query:] and [nodeSet query:] which automatically select query using XPath or CSS Selector.
+* Fixes bug for IGXMLNode equality.
+* [nodeSet enumerateNodesUsingBlock:] now enumerate the order of the set instead of reversed.
+
+0.7.2 (25/2/2014)
+-----------------
+* Remove the HTML_PARSE_NOIMPLIED option in HTML parser.
 
 0.7.1 (28/1/2014)
 -----------------
