@@ -21,6 +21,10 @@
 {
     
     [super viewDidLoad];
+    
+    if (NSClassFromString(@"IGRubyTests")) {
+        return;
+    }
 
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"begin loop");
