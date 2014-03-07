@@ -111,7 +111,6 @@
     doc = nil;
     
     XCTAssertEqualObjects([docCopy1 xml], [docCopy2 xml]);
-    XCTAssertEqualObjects(docCopy1, docCopy2);
 }
 
 @end

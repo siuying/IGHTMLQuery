@@ -264,23 +264,17 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     if (self == object) {
         return YES;
     }
-    
+
     if (![object isKindOfClass:[self class]]) {
         return NO;
     }
     
     IGXMLNode* another = object;
-    if ([[self xml] isEqual:[another xml]]) {
-        return YES;
-    }
-    
-    return NO;
+    return another.node == self.node;
 }
 
 - (NSUInteger)hash {
-    // There is no simple way to calculate the hash unless we compare
-    // whole document, so I rather just return 0 here.
-    return 0;
+    return (NSUInteger) self.node;
 }
 
 #pragma mark - IGXMLNodeManipulation
@@ -484,7 +478,9 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     }
     
     context->node = self.node;
-    
+
+    xmlResetLastError();
+
     xmlXPathObjectPtr object = xmlXPathEvalExpression((xmlChar *)[xpath UTF8String], context);
     if (object == NULL) {
 		return [IGXMLNodeSet emptyNodeSet];
@@ -499,7 +495,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 	}
     xmlXPathFreeObject(object);
     xmlXPathFreeContext(context);
-    
+
     return [[IGXMLNodeSet alloc] initWithNodes:resultNodes];
 }
 

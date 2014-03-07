@@ -56,7 +56,6 @@
             [element remove];
         }
     }];
-    NSLog(@"xml = %@", doc.xml);
 }
 
 @end

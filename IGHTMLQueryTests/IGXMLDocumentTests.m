@@ -238,7 +238,6 @@
     doc = nil;
 
     XCTAssertEqualObjects([node1a xml], [node1b xml]);
-    XCTAssertEqualObjects(node1a, node1b);
 }
 
 - (void)testCopyDoc {
@@ -251,7 +250,6 @@
     doc = nil;
     
     XCTAssertEqualObjects([docCopy1 xml], [docCopy2 xml]);
-    XCTAssertEqualObjects(docCopy1, docCopy2);
 }
 
 - (void) testQuerySameNode {
