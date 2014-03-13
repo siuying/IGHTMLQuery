@@ -35,8 +35,8 @@
     doc = [[IGHTMLDocument alloc] initWithHTMLResource:@"nytimes" ofType:@"html" encoding:@"utf8" error:nil];
     XCTAssertNotNil(doc);
 
-    // Remove scripts, style and select
-    [[doc queryWithXPath:@"//script|//style|//select|//meta"] enumerateNodesUsingBlock:^(IGXMLNode *elem, NSUInteger idx, BOOL *stop) {
+    // Because we are removing nodes while enumerating them, we have to reverse them first to prevent crash
+    [[[[doc queryWithXPath:@"//script|//style|//select|//meta"] nodes] reversedOrderedSet] enumerateObjectsUsingBlock:^(IGXMLNode *elem, NSUInteger idx, BOOL *stop) {
         [elem remove];
     }];
     XCTAssertEqual(0U, [[doc queryWithXPath:@"//script|//style|//select"] count]);
@@ -50,8 +50,8 @@
         }
     }];
     
-    // just remove something!
-    [[doc queryWithXPath:@"//table | //ul | //div"] enumerateNodesUsingBlock:^(IGXMLNode *element, NSUInteger idx, BOOL *stop) {
+    // Because we are removing nodes while enumerating them, we have to reverse them first to prevent crash
+    [[[[doc queryWithXPath:@"//table | //ul | //div"] nodes] reversedOrderedSet] enumerateObjectsUsingBlock:^(IGXMLNode *element, NSUInteger idx, BOOL *stop) {
         if (idx % 2 == 0) {
             [element remove];
         }
