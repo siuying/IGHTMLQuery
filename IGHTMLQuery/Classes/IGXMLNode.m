@@ -10,6 +10,7 @@
 #import "IGXMLDocument.h"
 #import "IGHTMLDocument.h"
 #import "CSSSelectorConverter.h"
+#import <libxml2/libxml/HTMLtree.h>
 
 NSString* const IGXMLQueryErrorDomain   = @"IGHTMLQueryError";
 NSString* const IGXMLNodeException      = @"IGXMLNodeException";
@@ -124,9 +125,21 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     if (!_node) {
         return nil;
     }
-
+    
     xmlBufferPtr buffer = xmlBufferCreate();
     xmlNodeDump(buffer, self.node->doc, self.node, 0, false);
+    NSString *text = [NSString stringWithUTF8String:(const char *)xmlBufferContent(buffer)];
+    xmlBufferFree(buffer);
+    return text;
+}
+
+- (NSString *)html {
+    if (!_node) {
+        return nil;
+    }
+    
+    xmlBufferPtr buffer = xmlBufferCreate();
+    htmlNodeDump(buffer, self.node->doc, self.node);
     NSString *text = [NSString stringWithUTF8String:(const char *)xmlBufferContent(buffer)];
     xmlBufferFree(buffer);
     return text;
@@ -156,6 +169,32 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
         cur = cur->next;
     }
     return innerXml;
+}
+
+- (NSString *)innerHtml {
+    if (!_node) {
+        return nil;
+    }
+    
+    NSMutableString* innerHtml = [NSMutableString string];
+    xmlNodePtr cur = self.node->children;
+    
+    while (cur != nil) {
+        if (cur->type == XML_TEXT_NODE) {
+            xmlChar *key = xmlNodeGetContent(cur);
+            NSString *text = (key ? [NSString stringWithUTF8String:(const char *)key] : @"");
+            xmlFree(key);
+            [innerHtml appendString:text];
+        } else {
+            xmlBufferPtr buffer = xmlBufferCreate();
+            htmlNodeDump(buffer, self.node->doc, cur);
+            NSString *text = [NSString stringWithUTF8String:(const char *)xmlBufferContent(buffer)];
+            xmlBufferFree(buffer);
+            [innerHtml appendString:text];
+        }
+        cur = cur->next;
+    }
+    return innerHtml;
 }
 
 - (NSError*) lastError {

@@ -37,9 +37,19 @@
 - (NSString *)xml;
 
 /**
+ @return get HTML of node;
+ */
+- (NSString *)html;
+
+/**
  @return get inner XML of node;
  */
 - (NSString *)innerXml;
+
+/**
+ @return get inner HTML of node;
+ */
+- (NSString *)innerHtml;
 
 /**
  @return get last error.

@@ -10,6 +10,8 @@ class XMLNode
     alias_native :text=, :setText
     alias_native :xml, :xml
     alias_native :inner_xml, :innerXml
+    alias_native :html, :html
+    alias_native :inner_html, :innerHtml
     alias_native :remove_namespaces, :removeNamespaces
   end
   include Core

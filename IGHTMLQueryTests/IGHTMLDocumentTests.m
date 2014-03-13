@@ -95,10 +95,27 @@
     if (error) {
         NSLog(@"error = %@", error);
     }
-
+    
     IGXMLNode *h1 = [[doc queryWithXPath:@"//h1"] firstObject];
     NSString* h1Text = [h1 text];
     XCTAssertEqualObjects(h1Text, @"為迎習近平 南鑼鼓巷商舖拆招牌", @"should found the h1");
+}
+
+
+- (void)testHtmlAndInnerHTML
+{
+    NSError* error;
+    doc = [[IGHTMLDocument alloc] initWithHTMLString:@"<html><body><p></p><div>Hi!<a></a></div></body></html>" error:&error];
+    XCTAssertNotNil(doc);
+    if (error) {
+        NSLog(@"error = %@", error);
+    }
+    
+    NSString* html = [[[doc queryWithXPath:@"//p"] firstObject] html];
+    XCTAssertEqualObjects([html stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]], @"<p></p>", @"should keep empty tag");
+    
+    html = [[[doc queryWithXPath:@"//div"] firstObject] innerHtml];
+    XCTAssertEqualObjects([html stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]], @"Hi!<a></a>", @"should keep empty tag");
 }
 
 - (void)testCopyDoc {
