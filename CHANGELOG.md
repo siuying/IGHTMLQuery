@@ -1,5 +1,10 @@
 Changelog
 =========
+0.8.1 (13/3/2014)
+-----------------
+
+* Added: ``[node innerHtml]`` and ``[node html]``. Like ``[node innerXml]`` and ``[node xml]``, they return the markup of the node. If you are working on HTML document, you should use the html version of the method, as they handle self-closing tag differently.  
+
 0.8.0 (7/3/2014)
 -----------------
 * Added: [node query:] and [nodeSet query:] which automatically select query using XPath or CSS Selector.
