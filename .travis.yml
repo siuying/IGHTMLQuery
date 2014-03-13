@@ -1,5 +1,5 @@
 language: objective-c
-before_script:
+before_install:
   - export LANG=en_US.UTF-8
   - gem install xcpretty
   - gem install cocoapods -v '0.29.0'
