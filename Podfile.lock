@@ -1,20 +1,15 @@
 PODS:
-  - CocoaLumberjack (1.8.0):
-    - CocoaLumberjack/Extensions (= 1.8.0)
-  - CocoaLumberjack/Core (1.8.0)
-  - CocoaLumberjack/Extensions (1.8.0):
+  - CocoaLumberjack (1.9.2):
+    - CocoaLumberjack/Extensions (= 1.9.2)
+  - CocoaLumberjack/Core (1.9.2)
+  - CocoaLumberjack/Extensions (1.9.2):
     - CocoaLumberjack/Core
-  - CSSSelectorConverter (1.1.0):
-    - CocoaLumberjack (>= 1.6.4)
-    - CSSSelectorConverter/Core (= 1.1.0)
-    - CSSSelectorConverter/CoreParse (= 1.1.0)
-  - CSSSelectorConverter/Core (1.1.0):
-    - CocoaLumberjack (>= 1.6.4)
-    - CSSSelectorConverter/CoreParse
-  - CSSSelectorConverter/CoreParse (1.1.0):
-    - CocoaLumberjack (>= 1.6.4)
+  - CSSSelectorConverter (1.2.0):
+    - CocoaLumberjack (~> 1.9.0)
+    - NUIParse
   - JavaScriptCoreOpalAdditions (0.3.1):
     - ObjectiveSugar (~> 1.1.0)
+  - NUIParse (1.2.1)
   - ObjectiveSugar (1.1.0)
 
 DEPENDENCIES:
@@ -22,9 +17,10 @@ DEPENDENCIES:
   - JavaScriptCoreOpalAdditions (= 0.3.1)
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: 2799baf46a4587116e97e85483538e0e92818430
-  CSSSelectorConverter: 876d4fadcfd1a835f71b14d2dc115a560ff5197e
+  CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
+  CSSSelectorConverter: a41a427231403e180898d22bfc756ac12be91e53
   JavaScriptCoreOpalAdditions: 03fedeb053ad5ef8704bf1dff4a490bab2c47161
+  NUIParse: f29eb240cfc9848b216c827884f37ae64abd19e4
   ObjectiveSugar: f48793f5902c77cfc02a4ce46d2e8ecddcad4dc2
 
 COCOAPODS: 0.36.1
