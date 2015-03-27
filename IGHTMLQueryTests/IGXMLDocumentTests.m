@@ -21,7 +21,8 @@
 {
     [super setUp];
     
-    doc = [[IGXMLDocument alloc] initWithXMLResource:@"catalog" ofType:@"xml" encoding:@"utf8" error:nil];
+    NSString* content = [[NSString alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"catalog" ofType:@"xml"] encoding:NSUTF8StringEncoding error:nil];
+    doc = [[IGXMLDocument alloc] initWithXMLString:content error:nil];
 }
 
 - (void)tearDown
@@ -201,7 +202,9 @@
 
 - (void)testNamespaces {
     NSError* error = nil;
-    IGXMLDocument* atom = [[IGXMLDocument alloc] initWithXMLResource:@"atom" ofType:@"xml" encoding:@"utf8" error:&error];
+    
+    NSString* content = [[NSString alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"atom" ofType:@"xml"] encoding:NSUTF8StringEncoding error:nil];
+    IGXMLDocument* atom = [[IGHTMLDocument alloc] initWithHTMLString:content error:nil];
     [atom removeNamespaces];
     
     IGXMLNode* entry = [atom queryWithXPath:@"//entry"].firstObject;

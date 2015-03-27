@@ -8,10 +8,12 @@
 
 #import <XCTest/XCTest.h>
 #import <JavaScriptCore/JavaScriptCore.h>
-#import "IGHTMLQuery.h"
-#import "IGHTMLQueryJavaScriptExport.h"
+#import <JavaScriptCoreOpalAdditions/OpalCore.h>
+
 #import "JSContext+OpalAdditions.h"
 #import "JSContext+IGHTMLQueryRubyAdditions.h"
+#import "IGHTMLQuery.h"
+#import "IGHTMLQueryJavaScriptExport.h"
 
 @interface IGRubyTests : XCTestCase
 {
@@ -26,7 +28,9 @@
 - (void)setUp
 {
     [super setUp];
-    doc = [[IGXMLDocument alloc] initWithXMLResource:@"catalog" ofType:@"xml" encoding:@"utf8" error:nil];
+    
+    NSString* content = [[NSString alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"catalog" ofType:@"xml"] encoding:NSUTF8StringEncoding error:nil];
+    doc = [[IGXMLDocument alloc] initWithXMLString:content error:nil];
     context = [[JSContext alloc] init];
     [context configureIGHTMLQuery];
 
@@ -122,7 +126,7 @@
     JSValue* node = [instanceEval callWithArguments:@[doc, @"self.xpath('//cd').to_n"]];
     IGXMLNodeSet* titleNodeSet = [node toObject];
     XCTAssertNotNil(titleNodeSet, @"should be a node set");
-    XCTAssertEqualObjects([titleNodeSet class], [IGXMLNodeSet class], @"should be a NodeSet");
+    XCTAssertEqualObjects(NSStringFromClass([titleNodeSet class]), NSStringFromClass([IGXMLNodeSet class]), @"should be a NodeSet");
     XCTAssertEqual(3U, [titleNodeSet count], @"should have 3 nodes in set");
 }
 

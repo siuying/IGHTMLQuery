@@ -1,13 +1,13 @@
 PODS:
   - CocoaLumberjack (1.8.0):
-    - CocoaLumberjack/Extensions
+    - CocoaLumberjack/Extensions (= 1.8.0)
   - CocoaLumberjack/Core (1.8.0)
   - CocoaLumberjack/Extensions (1.8.0):
     - CocoaLumberjack/Core
   - CSSSelectorConverter (1.1.0):
     - CocoaLumberjack (>= 1.6.4)
-    - CSSSelectorConverter/Core
-    - CSSSelectorConverter/CoreParse
+    - CSSSelectorConverter/Core (= 1.1.0)
+    - CSSSelectorConverter/CoreParse (= 1.1.0)
   - CSSSelectorConverter/Core (1.1.0):
     - CocoaLumberjack (>= 1.6.4)
     - CSSSelectorConverter/CoreParse
@@ -22,9 +22,9 @@ DEPENDENCIES:
   - JavaScriptCoreOpalAdditions (= 0.3.1)
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: 6ed94046d2ca7fde03a73b3d01b8cfc56574b314
-  CSSSelectorConverter: f9b31f0996658cbcb4730357d1b1d2558cc34d4a
-  JavaScriptCoreOpalAdditions: 826a276909f3b9f2044f7ceb4f38698b384d3d8c
-  ObjectiveSugar: fed588577bcf9733546aeaa089de444e4bab9a52
+  CocoaLumberjack: 2799baf46a4587116e97e85483538e0e92818430
+  CSSSelectorConverter: 876d4fadcfd1a835f71b14d2dc115a560ff5197e
+  JavaScriptCoreOpalAdditions: 03fedeb053ad5ef8704bf1dff4a490bab2c47161
+  ObjectiveSugar: f48793f5902c77cfc02a4ce46d2e8ecddcad4dc2
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.36.1

@@ -22,7 +22,8 @@
 {
     [super setUp];
     
-    doc = [[IGXMLDocument alloc] initWithXMLResource:@"catalog" ofType:@"xml" encoding:@"utf8" error:nil];
+    NSString* content = [[NSString alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"catalog" ofType:@"xml"] encoding:NSUTF8StringEncoding error:nil];
+    doc = [[IGXMLDocument alloc] initWithXMLString:content error:nil];
 }
 
 - (void)tearDown

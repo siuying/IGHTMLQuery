@@ -32,7 +32,8 @@
 
 - (void)testNYTimes
 {
-    doc = [[IGHTMLDocument alloc] initWithHTMLResource:@"nytimes" ofType:@"html" encoding:@"utf8" error:nil];
+    NSString* content = [[NSString alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"nytimes" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+    doc = [[IGHTMLDocument alloc] initWithHTMLString:content error:nil];
     XCTAssertNotNil(doc);
 
     // Because we are removing nodes while enumerating them, we have to reverse them first to prevent crash

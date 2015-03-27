@@ -10,29 +10,29 @@
 	<string>IGHTMLQuery</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>6115DD44-65D7-45C6-A601-E1F692E3D57D</key>
+		<key>F6943E46221E4DE85114D74040722E56AD7F0813</key>
 		<string>ssh://github.com/siuying/IGHTMLQuery.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>IGHTMLQuery.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>6115DD44-65D7-45C6-A601-E1F692E3D57D</key>
+		<key>F6943E46221E4DE85114D74040722E56AD7F0813</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/siuying/IGHTMLQuery.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>6115DD44-65D7-45C6-A601-E1F692E3D57D</string>
+	<string>F6943E46221E4DE85114D74040722E56AD7F0813</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>6115DD44-65D7-45C6-A601-E1F692E3D57D</string>
+			<string>F6943E46221E4DE85114D74040722E56AD7F0813</string>
 			<key>IDESourceControlWCCName</key>
 			<string>IGHTMLQuery</string>
 		</dict>

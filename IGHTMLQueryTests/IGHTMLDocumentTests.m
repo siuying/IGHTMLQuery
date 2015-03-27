@@ -20,7 +20,9 @@
 - (void)setUp
 {
     [super setUp];
-    doc = [[IGHTMLDocument alloc] initWithHTMLResource:@"sample" ofType:@"html" encoding:@"utf8" error:nil];
+
+    NSString* content = [[NSString alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"sample" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+    doc = [[IGHTMLDocument alloc] initWithHTMLString:content error:nil];
 }
 
 - (void)tearDown
@@ -90,7 +92,9 @@
 - (void)testHtmlFragment2
 {
     NSError* error;
-    doc = [[IGHTMLDocument alloc] initWithHTMLResource:@"cleaned_news" ofType:@"html" encoding:@"utf8" error:&error];
+    
+    NSString* content = [[NSString alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"cleaned_news" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+    doc = [[IGHTMLDocument alloc] initWithHTMLString:content error:nil];
     XCTAssertNotNil(doc);
     if (error) {
         NSLog(@"error = %@", error);

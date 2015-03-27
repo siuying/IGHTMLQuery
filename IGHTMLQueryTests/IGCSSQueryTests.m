@@ -20,7 +20,10 @@
 - (void)setUp
 {
     [super setUp];
-    doc = [[IGHTMLDocument alloc] initWithHTMLResource:@"sample" ofType:@"html" encoding:@"utf8" error:nil];
+    NSError* error;
+    NSString* content = [[NSString alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"sample" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+    doc = [[IGHTMLDocument alloc] initWithHTMLString:content error:nil];
+    NSAssert(!error, [error description]);
 }
 
 - (void)tearDown
