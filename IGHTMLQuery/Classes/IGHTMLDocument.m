@@ -8,8 +8,11 @@
 
 #import "IGHTMLDocument.h"
 
+@interface IGXMLDocument ()
+@property (nonatomic, unsafe_unretained) htmlDocPtr doc;
+@end
+
 @interface IGHTMLDocument ()
-@property (nonatomic, unsafe_unretained) xmlDocPtr doc;
 @property (nonatomic, assign) BOOL shouldFreeNode;
 @end
 
