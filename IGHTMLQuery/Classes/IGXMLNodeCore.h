@@ -56,10 +56,5 @@
  */
 - (NSError*) lastError;
 
-/**
- remove namespace of the document recursively.
- */
-- (void)removeNamespaces;
-
 @end
 

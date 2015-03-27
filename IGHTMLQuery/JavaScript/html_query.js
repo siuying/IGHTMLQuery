@@ -54,8 +54,6 @@
       self.$alias_native("html", "html");
 
       self.$alias_native("inner_html", "innerHtml");
-
-      self.$alias_native("remove_namespaces", "removeNamespaces");
       
     })(self);
 

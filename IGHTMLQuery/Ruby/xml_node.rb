@@ -12,7 +12,6 @@ class XMLNode
     alias_native :inner_xml, :innerXml
     alias_native :html, :html
     alias_native :inner_html, :innerHtml
-    alias_native :remove_namespaces, :removeNamespaces
   end
   include Core
 

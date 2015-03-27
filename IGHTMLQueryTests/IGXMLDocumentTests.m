@@ -200,20 +200,20 @@
                           @"<h2>Greetings</h2><p>Test</p><div class=\"inner\">Hello</div><p>Test</p><div class=\"inner\">World</div>");
 }
 
-- (void)testNamespaces {
-    NSError* error = nil;
-    
-    NSString* content = [[NSString alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"atom" ofType:@"xml"] encoding:NSUTF8StringEncoding error:nil];
-    IGXMLDocument* atom = [[IGHTMLDocument alloc] initWithHTMLString:content error:nil];
-    [atom removeNamespaces];
-    
-    IGXMLNode* entry = [atom queryWithXPath:@"//entry"].firstObject;
-    XCTAssertNotNil(entry);
-    
-    IGXMLNodeSet* titles = [atom queryWithXPath:@"title"];
-    NSString* lang = titles.firstObject[@"lang"];
-    XCTAssertEqualObjects(lang, @"zh-Hant");
-}
+//- (void)testNamespaces {
+//    NSError* error = nil;
+//    
+//    NSString* content = [[NSString alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"atom" ofType:@"xml"] encoding:NSUTF8StringEncoding error:nil];
+//    IGXMLDocument* atom = [[IGHTMLDocument alloc] initWithHTMLString:content error:nil];
+//    [atom removeNamespaces];
+//    
+//    IGXMLNode* entry = [atom queryWithXPath:@"//entry"].firstObject;
+//    XCTAssertNotNil(entry);
+//    
+//    IGXMLNodeSet* titles = [atom queryWithCSS:@"title"];
+//    NSString* lang = titles.firstObject[@"lang"];
+//    XCTAssertEqualObjects(lang, @"zh-Hant");
+//}
 
 - (void)testIsEuqal {
     IGXMLNode* node1a = [doc queryWithXPath:@"cd"].firstObject;
