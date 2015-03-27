@@ -69,4 +69,15 @@
     XCTAssertEqualObjects([doc queryWithCSS:@"div.inner"].firstObject.innerXml, @"<img/>Hello");
 }
 
+- (void)testNestedContext {
+    NSString* content = [[NSString alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"catalog" ofType:@"xml"] encoding:NSUTF8StringEncoding error:nil];
+    IGXMLDocument* xml = [[IGXMLDocument alloc] initWithXMLString:content error:nil];
+   
+    NSMutableArray* data = [NSMutableArray array];
+    [[xml queryWithCSS:@"cd"] enumerateNodesUsingBlock:^(IGXMLNode *node, NSUInteger idx, BOOL *stop) {
+        [data addObject:[[[node queryWithCSS:@"title"] firstObject] text]];
+    }];
+    XCTAssertEqualObjects(([data copy]), (@[@"Empire Burlesque", @"Hide your heart", @"Greatest Hits"]));
+}
+
 @end

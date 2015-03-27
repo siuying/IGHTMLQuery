@@ -128,4 +128,15 @@
     XCTAssertEqual([node1a hash], [node1b hash]);
 }
 
+- (void)testNestedContext {
+    NSString* content = [[NSString alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"catalog" ofType:@"xml"] encoding:NSUTF8StringEncoding error:nil];
+    IGXMLDocument* xml = [[IGXMLDocument alloc] initWithXMLString:content error:nil];
+    
+    NSMutableArray* data = [NSMutableArray array];
+    [[xml queryWithXPath:@"//cd"] enumerateNodesUsingBlock:^(IGXMLNode *node, NSUInteger idx, BOOL *stop) {
+        [data addObject:[[[node queryWithXPath:@"./title"] firstObject] text]];
+    }];
+    XCTAssertEqualObjects(([data copy]), (@[@"Empire Burlesque", @"Hide your heart", @"Greatest Hits"]));
+}
+
 @end
