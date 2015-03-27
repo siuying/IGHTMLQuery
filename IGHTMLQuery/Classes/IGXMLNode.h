@@ -26,6 +26,7 @@ extern NSString* const IGXMLNodeException;
 extern NSString* const IGXMLQueryCSSConversionException;
 
 @class IGXMLDocument;
+@class CSSSelectorToXPathConverter;
 
 @interface IGXMLNode : NSObject <IGXMLNodeCore, IGXMLNodeManipulation, IGXMLNodeQuery, IGXMLNodeAttribute, IGXMLNodeTraversal, NSCopying>
 
@@ -43,5 +44,7 @@ extern NSString* const IGXMLQueryCSSConversionException;
  Create a node using a libxml node
  */
 + (id)nodeWithXMLNode:(xmlNodePtr)node;
+
+- (CSSSelectorToXPathConverter*) cssConverter;
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "IGXMLDocument.h"
+#import <CSSSelectorConverter/CSSSelectorToXPathConverter.h>
+
 
 @interface IGXMLDocument ()
 @property (nonatomic, unsafe_unretained) xmlDocPtr doc;
@@ -70,6 +72,19 @@
         }
     }
     return self;
+}
+
+- (IGXMLNodeSet*) queryWithCSS:(NSString*)cssSelector {
+    NSError* cssError = nil;
+    NSString* xpath = [self.cssConverter xpathWithCSS:cssSelector error:&cssError];
+    if (!xpath) {
+        if (cssError) {
+            [NSException raise:IGXMLQueryCSSConversionException format:@"Cannot convert CSS into XPath: %@", [cssError localizedDescription]];
+        } else {
+            [NSException raise:IGXMLQueryCSSConversionException format:@"Cannot convert CSS into XPath: unknown error"];
+        }
+    }
+    return [self queryWithXPath:xpath];
 }
 
 #pragma mark - Lifecycle
