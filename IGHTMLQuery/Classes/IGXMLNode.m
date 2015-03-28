@@ -47,7 +47,6 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 @interface IGXMLNode ()
-@property (nonatomic, strong) CSSSelectorToXPathConverter* cssConverter;
 @property (nonatomic, assign) BOOL shouldFreeNode;
 - (id)initWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode;
 + (id)nodeWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode;
@@ -540,7 +539,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 - (CSSSelectorToXPathConverter*) cssConverter
 {
     if (!_cssConverter) {
-        _cssConverter = [[CSSSelectorToXPathConverter alloc] init];
+        _cssConverter = [CSSSelectorToXPathConverter sharedConverter];
     }
     return _cssConverter;
 }
