@@ -1,5 +1,16 @@
 Changelog
 =========
+
+0.8.3
+=====
+
+* Use a shared instance of CSSSelectorConverter.
+
+0.8.2
+=====
+
+* Fix a bug cause nested CSS query not work as expect.
+
 0.8.1 (13/3/2014)
 -----------------
 
