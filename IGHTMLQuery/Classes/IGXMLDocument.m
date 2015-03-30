@@ -76,7 +76,7 @@
 
 - (IGXMLNodeSet*) queryWithCSS:(NSString*)cssSelector {
     NSError* cssError = nil;
-    NSString* xpath = [self.cssConverter xpathWithCSS:cssSelector error:&cssError];
+    NSString* xpath = [[[self class] cssConverter] xpathWithCSS:cssSelector error:&cssError];
     if (!xpath) {
         if (cssError) {
             [NSException raise:IGXMLQueryCSSConversionException format:@"Cannot convert CSS into XPath: %@", [cssError localizedDescription]];

@@ -36,13 +36,6 @@ extern NSString* const IGXMLQueryCSSConversionException;
 @property (nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
 
 /**
- * The converter to convert CSS to XPath.
- *
- * By default it lazily initialized a shared instance. You can set a customized instance if needed.
- */
-@property (nonatomic, strong) CSSSelectorToXPathConverter* cssConverter;
-
-/**
  Create a node using a libxml node
  */
 - (id)initWithXMLNode:(xmlNodePtr)node;
@@ -51,5 +44,10 @@ extern NSString* const IGXMLQueryCSSConversionException;
  Create a node using a libxml node
  */
 + (id)nodeWithXMLNode:(xmlNodePtr)node;
+
+/**
+ * per thread shared css converter
+ */
++(CSSSelectorToXPathConverter *) cssConverter;
 
 @end

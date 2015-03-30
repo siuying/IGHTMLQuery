@@ -15,6 +15,7 @@
 NSString* const IGXMLQueryErrorDomain   = @"IGHTMLQueryError";
 NSString* const IGXMLNodeException      = @"IGXMLNodeException";
 NSString* const IGXMLQueryCSSConversionException = @"IGXMLQueryCSSConversionException";
+static NSString* const CSSSelectorToXPathConverterCacheKey = @"CSSSelectorToXPathConverter";
 
 /**
  * extracted from Nokigiri
@@ -536,17 +537,20 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     return [[IGXMLNodeSet alloc] initWithNodes:resultNodes];
 }
 
-- (CSSSelectorToXPathConverter*) cssConverter
++ (CSSSelectorToXPathConverter *)cssConverter
 {
-    if (!_cssConverter) {
-        _cssConverter = [CSSSelectorToXPathConverter sharedConverter];
+    NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary] ;
+    CSSSelectorToXPathConverter *cssConverter = [threadDictionary objectForKey:CSSSelectorToXPathConverterCacheKey];
+    if (!cssConverter) {
+        cssConverter = [[CSSSelectorToXPathConverter alloc] init];
+        [threadDictionary setObject:cssConverter forKey:CSSSelectorToXPathConverterCacheKey];
     }
-    return _cssConverter;
+    return cssConverter;
 }
 
 - (IGXMLNodeSet*) queryWithCSS:(NSString*)cssSelector {
     NSError* cssError = nil;
-    NSString* xpath = [@"." stringByAppendingString:[self.cssConverter xpathWithCSS:cssSelector error:&cssError]];
+    NSString* xpath = [[[self class] cssConverter] xpathWithCSS:cssSelector error:&cssError];
     if (!xpath) {
         if (cssError) {
             [NSException raise:IGXMLQueryCSSConversionException format:@"Cannot convert CSS into XPath: %@", [cssError localizedDescription]];
@@ -554,7 +558,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
             [NSException raise:IGXMLQueryCSSConversionException format:@"Cannot convert CSS into XPath: unknown error"];
         }
     }
-    return [self queryWithXPath:xpath];
+    return [self queryWithXPath:[@"." stringByAppendingString:xpath]];
 }
 
 - (IGXMLNodeSet*) query:(NSString*)xpathOrCssSelector {
