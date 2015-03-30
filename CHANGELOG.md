@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.8.4
+=====
+
+* Use a per thread cached instance of CSSSelectorConverter.
+
 0.8.3
 =====
 
