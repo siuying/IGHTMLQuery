@@ -1,3 +1,13 @@
+
+# IGHTMLQuery
+---
+
+[![CI Status](http://img.shields.io/travis/serluca/IGHTMLQuery.svg?style=flat)](https://travis-ci.org/serluca/IGHTMLQuery)
+[![Coverage Status](https://coveralls.io/repos/serluca/IGHTMLQuery/badge.svg?branch=master)](https://coveralls.io/r/serluca/IGHTMLQuery?branch=master)
+
+
+
+
 # What is it?
 
 IGHTMLQuery is a lightweight XML/HTML parser for iOS, built on top of libxml. It is inspired by jQuery and nokogiri. Consider following snippets:
