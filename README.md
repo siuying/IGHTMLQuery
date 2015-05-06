@@ -1,6 +1,6 @@
 
 # IGHTMLQuery
----
+
 
 [![CI Status](http://img.shields.io/travis/serluca/IGHTMLQuery.svg?style=flat)](https://travis-ci.org/serluca/IGHTMLQuery)
 [![Coverage Status](https://coveralls.io/repos/serluca/IGHTMLQuery/badge.svg?branch=master)](https://coveralls.io/r/serluca/IGHTMLQuery?branch=master)
