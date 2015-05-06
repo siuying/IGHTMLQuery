@@ -1,0 +1,6 @@
+[
+  "-workspace", "IGHTMLQuery.xcworkspace",
+  "-scheme", "IGHTMLQuery",
+  "-configuration", "Debug",
+  "-sdk", "iphonesimulator",
+]
