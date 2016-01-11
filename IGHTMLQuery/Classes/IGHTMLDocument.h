@@ -13,20 +13,20 @@
 
 @interface IGHTMLDocument : IGXMLDocument <IGHTMLQueryJavaScriptExport>
 
-- (id)initWithHTMLString:(NSString *)xmlString error:(NSError**)outError;
+- (nullable id)initWithHTMLString:(nonnull NSString *)xmlString error:(NSError * _Nullable * _Nullable)outError;
 
-- (id)initWithHTMLFragmentString:(NSString *)xmlString error:(NSError**)outError;
+- (nullable id)initWithHTMLFragmentString:(nonnull NSString *)xmlString error:(NSError * _Nullable * _Nullable)outError;
 
-- (id)initWithHTMLFile:(NSString *)filename encoding:(NSString*)encoding error:(NSError**)outError;
+- (nullable id)initWithHTMLFile:(nonnull NSString *)filename encoding:(nonnull NSString*)encoding error:(NSError * _Nullable * _Nullable)outError;
 
-- (id)initWithHTMLResource:(NSString *)filename ofType:(NSString*)extension encoding:(NSString*)encoding error:(NSError**)outError;
+- (nullable id)initWithHTMLResource:(nonnull NSString *)filename ofType:(nonnull NSString*)extension encoding:(nonnull NSString*)encoding error:(NSError * _Nullable * _Nullable)outError;
 
-- (id)initWithHTMLFilePath:(NSString *)fullPath encoding:(NSString*)encoding error:(NSError**)outError;
+- (nullable id)initWithHTMLFilePath:(nonnull NSString *)fullPath encoding:(nonnull NSString*)encoding error:(NSError * _Nullable * _Nullable)outError;
 
-- (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding error:(NSError**)outError;
+- (nullable id)initWithHTMLData:(nonnull NSData *)data encoding:(nonnull NSString*)encoding error:(NSError * _Nullable * _Nullable)outError;
 
-- (id)initWithHTMLFragmentData:(NSData *)data encoding:(NSString*)encoding error:(NSError**)outError;
+- (nullable id)initWithHTMLFragmentData:(nonnull NSData *)data encoding:(nonnull NSString*)encoding error:(NSError * _Nullable * _Nullable)outError;
 
-- (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding options:(htmlParserOption)options error:(NSError**)outError;
+- (nullable id)initWithHTMLData:(nonnull NSData *)data encoding:(nonnull NSString*)encoding options:(htmlParserOption)options error:(NSError * _Nullable * _Nullable)outError;
 
 @end

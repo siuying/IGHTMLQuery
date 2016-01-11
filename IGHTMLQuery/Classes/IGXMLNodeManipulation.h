@@ -14,25 +14,25 @@
 
 @protocol IGXMLNodeManipulation <IGHTMLQueryJavaScriptExport>
 
--(instancetype) appendWithNode:(IGXMLNode*)child;
+-(nullable instancetype) appendWithNode:(nonnull IGXMLNode*)child;
 
--(instancetype) prependWithNode:(IGXMLNode*)child;
+-(nullable instancetype) prependWithNode:(nonnull IGXMLNode*)child;
 
--(instancetype) addChildWithNode:(IGXMLNode*)child;
+-(nullable instancetype) addChildWithNode:(nonnull IGXMLNode*)child;
 
--(instancetype) addNextSiblingWithNode:(IGXMLNode*)child;
+-(nullable instancetype) addNextSiblingWithNode:(nonnull IGXMLNode*)child;
 
--(instancetype) addPreviousSiblingWithNode:(IGXMLNode*)child;
+-(nullable instancetype) addPreviousSiblingWithNode:(nonnull IGXMLNode*)child;
 
--(instancetype) appendWithXMLString:(NSString*)xmlString;
+-(nullable instancetype) appendWithXMLString:(nonnull NSString*)xmlString;
 
--(instancetype) prependWithXMLString:(NSString*)xmlString;
+-(nullable instancetype) prependWithXMLString:(nonnull NSString*)xmlString;
 
--(instancetype) addChildWithXMLString:(NSString*)xmlString;
+-(nullable instancetype) addChildWithXMLString:(nonnull NSString*)xmlString;
 
--(instancetype) addNextSiblingWithXMLString:(NSString*)xmlString;
+-(nullable instancetype) addNextSiblingWithXMLString:(nonnull NSString*)xmlString;
 
--(instancetype) addPreviousSiblingWithXMLString:(NSString*)xmlString;
+-(nullable instancetype) addPreviousSiblingWithXMLString:(nonnull NSString*)xmlString;
 
 -(void) empty;
 

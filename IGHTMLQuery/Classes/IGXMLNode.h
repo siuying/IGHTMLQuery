@@ -21,9 +21,11 @@
 #import "IGXMLNodeTraversal.h"
 #import "IGXMLNodeQuery.h"
 
+NS_ASSUME_NONNULL_BEGIN
 extern NSString* const IGXMLQueryErrorDomain;
 extern NSString* const IGXMLNodeException;
 extern NSString* const IGXMLQueryCSSConversionException;
+NS_ASSUME_NONNULL_END
 
 @class IGXMLDocument;
 @class CSSSelectorToXPathConverter;
@@ -33,21 +35,21 @@ extern NSString* const IGXMLQueryCSSConversionException;
 /**
  backed XML node,
  */
-@property (nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
+@property (nullable, nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
 
 /**
  Create a node using a libxml node
  */
-- (id)initWithXMLNode:(xmlNodePtr)node;
+- (nullable id)initWithXMLNode:(nullable xmlNodePtr)node;
 
 /**
  Create a node using a libxml node
  */
-+ (id)nodeWithXMLNode:(xmlNodePtr)node;
++ (nullable id)nodeWithXMLNode:(nullable xmlNodePtr)node;
 
 /**
  * per thread shared css converter
  */
-+(CSSSelectorToXPathConverter *) cssConverter;
++(nullable CSSSelectorToXPathConverter *) cssConverter;
 
 @end

@@ -17,31 +17,31 @@
 /**
  @return get parent node
  */
-- (IGXMLNode *) parent;
+- (nullable IGXMLNode *) parent;
 
 /**
  @return get next sibling node
  */
-- (IGXMLNode *) nextSibling;
+- (nullable IGXMLNode *) nextSibling;
 
 /**
  @return get previous sibling node
  */
-- (IGXMLNode *) previousSibling;
+- (nullable IGXMLNode *) previousSibling;
 
 /**
  @return get children elements of current node as {{IGXMLNodeSet}}.
  */
-- (IGXMLNodeSet*) children;
+- (nullable IGXMLNodeSet*) children;
 
 /**
  @return get first child element of current node. If no child exists, return nil.
  */
-- (IGXMLNode*) firstChild;
+- (nullable IGXMLNode*) firstChild;
 
 /**
  @return It returns a key guaranteed to be unique for this node, and to always be the same value for this node. In other words, two node objects return the same key if and only if isSameNode indicates that they are the same node.
  */
-- (NSString*) uniqueKey;
+- (nonnull NSString*) uniqueKey;
 
 @end

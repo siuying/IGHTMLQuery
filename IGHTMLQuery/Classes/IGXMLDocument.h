@@ -15,20 +15,20 @@
 
 @interface IGXMLDocument : IGXMLNode <IGHTMLQueryJavaScriptExport>
 
-@property (nonatomic, readonly, unsafe_unretained) xmlDocPtr doc;
+@property (nullable, nonatomic, readonly, unsafe_unretained) xmlDocPtr doc;
 
-- (id)initWithXMLString:(NSString *)xmlString error:(NSError**)outError;
+- (nullable id)initWithXMLString:(nonnull NSString *)xmlString error:(NSError * _Nullable * _Nullable)outError;
 
-- (id)initWithXMLFilePath:(NSString *)fullPath encoding:(NSString*)encoding error:(NSError**)outError;
+- (nullable id)initWithXMLFilePath:(nonnull NSString *)fullPath encoding:(nonnull NSString*)encoding error:(NSError * _Nullable * _Nullable)outError;
 
-- (id)initWithXMLFile:(NSString *)filename encoding:(NSString*)encoding error:(NSError**)outError;
+- (nullable id)initWithXMLFile:(nonnull NSString *)filename encoding:(nonnull NSString*)encoding error:(NSError * _Nullable * _Nullable)outError;
 
-- (id)initWithXMLResource:(NSString *)resource ofType:(NSString *)extension encoding:(NSString*)encoding error:(NSError**)outError;
+- (nullable id)initWithXMLResource:(nonnull NSString *)resource ofType:(nonnull NSString *)extension encoding:(nonnull NSString*)encoding error:(NSError * _Nullable * _Nullable)outError;
 
-- (id)initWithURL:(NSURL *)url encoding:(NSString*)encoding error:(NSError**)outError;
+- (nullable id)initWithURL:(nonnull NSURL *)url encoding:(nonnull NSString*)encoding error:(NSError * _Nullable * _Nullable)outError;
 
-- (id)initWithXMLData:(NSData *)data encoding:(NSString*)encoding error:(NSError**)outError;
+- (nullable id)initWithXMLData:(nonnull NSData *)data encoding:(nonnull NSString*)encoding error:(NSError * _Nullable * _Nullable)outError;
 
-- (id)initWithXMLData:(NSData *)data encoding:(NSString*)encoding options:(xmlParserOption)options error:(NSError**)outError;
+- (nullable id)initWithXMLData:(nonnull NSData *)data encoding:(nonnull NSString*)encoding options:(xmlParserOption)options error:(NSError * _Nullable * _Nullable)outError;
 
 @end

@@ -14,47 +14,47 @@
 /**
  @return get tag name of current node.
  */
-- (NSString *)tag;
+- (nullable NSString *)tag;
 
 /**
  @param the new tag to set
  */
-- (void)setTag:(NSString*)tag;
+- (void)setTag:(nonnull NSString*)tag;
 
 /**
  @return get text of current node.
  */
-- (NSString *)text;
+- (nullable NSString *)text;
 
 /**
  @param the new content of the node
  */
-- (void) setText:(NSString*)text;
+- (void) setText:(nonnull NSString*)text;
 
 /**
  @return get XML of node;
  */
-- (NSString *)xml;
+- (nullable NSString *)xml;
 
 /**
  @return get HTML of node;
  */
-- (NSString *)html;
+- (nullable NSString *)html;
 
 /**
  @return get inner XML of node;
  */
-- (NSString *)innerXml;
+- (nullable NSString *)innerXml;
 
 /**
  @return get inner HTML of node;
  */
-- (NSString *)innerHtml;
+- (nullable NSString *)innerHtml;
 
 /**
  @return get last error.
  */
-- (NSError*) lastError;
+- (nullable NSError*) lastError;
 
 @end
 
