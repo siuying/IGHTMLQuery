@@ -32,7 +32,7 @@ typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* _Nonnull node);
 /**
  @return return an array of all objects in the node set.
  */
--(nonnull NSArray *) allObjects;
+-(nonnull NSArray<IGXMLNode*> *) allObjects;
 
 /**
  @return return first object in the node set.
@@ -51,9 +51,9 @@ typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* _Nonnull node);
  */
 @interface IGXMLNodeSet : NSObject <NSFastEnumeration, IGXMLNodeSetCore, IGXMLNodeManipulation, IGXMLNodeQuery>
 
--(nullable id) initWithNodes:(nullable NSArray*)nodes;
+-(nullable id) initWithNodes:(nullable NSArray<IGXMLNode*>*)nodes;
 
-+(nullable id) nodeSetWithNodes:(nullable NSArray*)nodes;
++(nullable id) nodeSetWithNodes:(nullable NSArray<IGXMLNode*>*)nodes;
 
 +(nullable id) emptyNodeSet;
 

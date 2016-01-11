@@ -49,7 +49,7 @@
  */
 - (void) removeAttribute:(nonnull NSString*)attName inNamespace:(nullable NSString*)ns;
 
-- (nonnull NSArray *)attributeNames;
+- (nonnull NSArray<NSString*> *)attributeNames;
 
 /**
  subscript support
