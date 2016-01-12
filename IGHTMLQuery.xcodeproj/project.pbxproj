@@ -330,6 +330,7 @@
 				5437639F17C36EFD004CE333 /* Frameworks */,
 				543763A017C36EFD004CE333 /* Resources */,
 				BF0A0C4453B14DEEAE40BA1B /* Copy Pods Resources */,
+				72111F10C0C95F94979B0275 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -349,6 +350,7 @@
 				543763C017C36EFD004CE333 /* Frameworks */,
 				543763C117C36EFD004CE333 /* Resources */,
 				4EBB07BE3CE6591466276273 /* Copy Pods Resources */,
+				ACA78204969D0B4796533976 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -439,6 +441,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		72111F10C0C95F94979B0275 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A8FB6CCE7C791B0E25E17EAC /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -452,6 +469,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ACA78204969D0B4796533976 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BF0A0C4453B14DEEAE40BA1B /* Copy Pods Resources */ = {
