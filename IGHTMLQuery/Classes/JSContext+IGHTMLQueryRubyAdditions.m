@@ -14,7 +14,7 @@
 @implementation JSContext (IGHTMLQueryRubyAdditions)
 
 -(void) configureIGHTMLQuery {
-    [self loadOpal];
+    [self evaluateRuby:@""];
     
     // Create HTML Document
     self[@"IGHTMLDocumentCreateWithHTML"] = ^IGHTMLDocument*(NSString* html) {

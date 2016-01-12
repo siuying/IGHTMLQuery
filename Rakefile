@@ -1,9 +1,9 @@
 require 'rubygems'
 require 'bundler'
-Bundler.require
 
 desc "Build JavaScripts from Ruby"
-task :build do  
+task :build do
+  Bundler.require
   env = Opal::Environment.new
   env.append_path "IGHTMLQuery/Ruby"
 
@@ -14,7 +14,7 @@ end
 
 desc "Run tests"
 task :test do
-  system("xcodebuild -workspace IGHTMLQuery.xcworkspace -scheme IGHTMLQuery -sdk iphonesimulator test")
+  system("xcodebuild -workspace IGHTMLQuery.xcworkspace -scheme IGHTMLQuery -sdk iphonesimulator9.2 test -destination 'platform=iOS Simulator,name=iPhone 6 Plus' | xcpretty -c")
 end
 
-task :default => :build
+task :default => :test
