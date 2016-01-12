@@ -4,4 +4,4 @@ before_install:
   - export LANG=en_US.UTF-8
   - bundle install
   - pod install
-script: xcodebuild -workspace IGHTMLQuery.xcworkspace -scheme IGHTMLQuery -sdk iphonesimulator9.2 test | xcpretty -c; exit ${PIPESTATUS[0]}
+script: xcodebuild -workspace IGHTMLQuery.xcworkspace -scheme IGHTMLQuery -sdk iphonesimulator9.2 test -destination 'platform=iOS Simulator,name=iPhone 6 Plus' | xcpretty -c; exit ${PIPESTATUS[0]}
