@@ -6,6 +6,4 @@ target 'IGHTMLQuery' do
 end
 
 target 'IGHTMLQueryTests' do
-  pod 'JavaScriptCoreOpalAdditions', '>= 0.5.1'
-  pod 'CSSSelectorConverter'
 end
