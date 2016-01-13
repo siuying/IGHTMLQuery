@@ -14,15 +14,15 @@
 
 @protocol IGXMLNodeManipulation <IGHTMLQueryJavaScriptExport>
 
--(nullable instancetype) appendWithNode:(nonnull IGXMLNode*)child;
+-(nonnull instancetype) appendWithNode:(nonnull IGXMLNode*)child;
 
--(nullable instancetype) prependWithNode:(nonnull IGXMLNode*)child;
+-(nonnull instancetype) prependWithNode:(nonnull IGXMLNode*)child;
 
--(nullable instancetype) addChildWithNode:(nonnull IGXMLNode*)child;
+-(nonnull instancetype) addChildWithNode:(nonnull IGXMLNode*)child;
 
--(nullable instancetype) addNextSiblingWithNode:(nonnull IGXMLNode*)child;
+-(nonnull instancetype) addNextSiblingWithNode:(nonnull IGXMLNode*)child;
 
--(nullable instancetype) addPreviousSiblingWithNode:(nonnull IGXMLNode*)child;
+-(nonnull instancetype) addPreviousSiblingWithNode:(nonnull IGXMLNode*)child;
 
 -(nullable instancetype) appendWithXMLString:(nonnull NSString*)xmlString;
 

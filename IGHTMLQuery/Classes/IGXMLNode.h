@@ -40,12 +40,12 @@ NS_ASSUME_NONNULL_END
 /**
  Create a node using a libxml node
  */
-- (nullable id)initWithXMLNode:(nullable xmlNodePtr)node;
+- (nonnull id)initWithXMLNode:(nullable xmlNodePtr)node;
 
 /**
  Create a node using a libxml node
  */
-+ (nullable id)nodeWithXMLNode:(nullable xmlNodePtr)node;
++ (nonnull id)nodeWithXMLNode:(nullable xmlNodePtr)node;
 
 /**
  * per thread shared css converter
