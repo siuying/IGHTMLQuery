@@ -29,7 +29,6 @@
 		543763E017C36F52004CE333 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763DF17C36F52004CE333 /* libxml2.dylib */; };
 		543763E317C37028004CE333 /* IGXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763E217C37028004CE333 /* IGXMLNode.m */; };
 		543763F717C378CF004CE333 /* IGXMLNodeSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763F617C378CF004CE333 /* IGXMLNodeSet.m */; };
-		543763F817C378CF004CE333 /* IGXMLNodeSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 543763F617C378CF004CE333 /* IGXMLNodeSet.m */; };
 		543763F917C37BB4004CE333 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 543763DF17C36F52004CE333 /* libxml2.dylib */; };
 		54432A7818658F9C00FBFDE4 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54432A711865886E00FBFDE4 /* JavaScriptCore.framework */; };
 		54432A7918658F9D00FBFDE4 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54432A711865886E00FBFDE4 /* JavaScriptCore.framework */; };
@@ -551,7 +550,6 @@
 				543763D117C36EFD004CE333 /* IGXMLDocumentTests.m in Sources */,
 				549C1DC817C4B14F00CF4F20 /* IGXMLNodeTraversalTests.m in Sources */,
 				54925B671AC52AE000FA51CE /* IGRubyTests.m in Sources */,
-				543763F817C378CF004CE333 /* IGXMLNodeSet.m in Sources */,
 				5455B17D17C8711700A992EB /* IGIntegrationTests.m in Sources */,
 				54AB5F4017C479A1009E2CF1 /* IGHTMLDocumentTests.m in Sources */,
 				54BF4278187E90F6006D2E2A /* IGCSSQueryTests.m in Sources */,
@@ -627,7 +625,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -658,7 +656,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -705,15 +703,10 @@
 			baseConfigurationReference = F9897309002E46C635A6FCE6 /* Pods-IGHTMLQueryTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IGHTMLQuery.app/IGHTMLQuery";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IGHTMLQuery/IGHTMLQuery-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
 					"IGHTMLQUERY_JAVSCRIPT_EXPORT=1",
 				);
@@ -733,14 +726,13 @@
 			baseConfigurationReference = 0CE71297F3262C056E28178A /* Pods-IGHTMLQueryTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IGHTMLQuery.app/IGHTMLQuery";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IGHTMLQuery/IGHTMLQuery-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "IGHTMLQUERY_JAVSCRIPT_EXPORT=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"IGHTMLQUERY_JAVSCRIPT_EXPORT=1",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"\"$(SDK_DIR)\"/usr/include/libxml2",
 					"$(inherited)",
