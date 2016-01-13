@@ -22,7 +22,7 @@ typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* _Nonnull node);
 /**
  nodes in this node set
  */
-@property (nullable, nonatomic, copy, readonly) NSOrderedSet* nodes;
+@property (nonnull, nonatomic, copy, readonly) NSOrderedSet* nodes;
 
 /**
  @return number of nodes in the set
@@ -51,11 +51,11 @@ typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* _Nonnull node);
  */
 @interface IGXMLNodeSet : NSObject <NSFastEnumeration, IGXMLNodeSetCore, IGXMLNodeManipulation, IGXMLNodeQuery>
 
--(nullable id) initWithNodes:(nullable NSArray<IGXMLNode*>*)nodes;
+-(nonnull id) initWithNodes:(nullable NSArray<IGXMLNode*>*)nodes;
 
-+(nullable id) nodeSetWithNodes:(nullable NSArray<IGXMLNode*>*)nodes;
++(nonnull id) nodeSetWithNodes:(nullable NSArray<IGXMLNode*>*)nodes;
 
-+(nullable id) emptyNodeSet;
++(nonnull id) emptyNodeSet;
 
 /**
  @return add support of subscript syntax.

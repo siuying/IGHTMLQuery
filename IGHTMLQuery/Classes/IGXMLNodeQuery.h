@@ -19,7 +19,7 @@
  @param xpath used to query the document
  @return elements matched by supplied XPath query.
  */
-- (nullable IGXMLNodeSet*) queryWithXPath:(nullable NSString*)xpath;
+- (nonnull IGXMLNodeSet*) queryWithXPath:(nullable NSString*)xpath;
 
 /**
  Query a node with CSS Selector (Level 3)
@@ -28,7 +28,7 @@
  @ref Check CSSSelectorConverter (https://github.com/siuying/CSSSelectorConverter) to see how this works.
  @throw IGXMLQueryCSSConversionException when cannot convert css to xpath.
  */
-- (nullable IGXMLNodeSet*) queryWithCSS:(nullable NSString*)cssSelector;
+- (nonnull IGXMLNodeSet*) queryWithCSS:(nullable NSString*)cssSelector;
 
 /**
  Query a node with either XPath or CSS Selector
@@ -37,6 +37,6 @@
  @ref Check CSSSelectorConverter (https://github.com/siuying/CSSSelectorConverter) to see how this works.
  @throw IGXMLQueryCSSConversionException when cannot convert css to xpath.
  */
-- (nullable IGXMLNodeSet*) query:(nullable NSString*)xpathOrCssSelector;
+- (nonnull IGXMLNodeSet*) query:(nullable NSString*)xpathOrCssSelector;
 
 @end
