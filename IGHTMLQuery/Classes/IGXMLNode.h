@@ -38,6 +38,12 @@ NS_ASSUME_NONNULL_END
 @property (nullable, nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
 
 /**
+ return true if the node has removed (by [node remove]). 
+ Any action performed on removed node will result a runtime exception.
+ */
+@property (nonatomic, assign, readonly) BOOL removed;
+
+/**
  Create a node using a libxml node
  */
 - (nonnull id)initWithXMLNode:(nullable xmlNodePtr)node;

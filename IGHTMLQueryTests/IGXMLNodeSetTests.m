@@ -85,8 +85,19 @@
 }
 
 - (void)testRemove {
-    [[doc queryWithXPath:@"//cd"] remove];
+    IGXMLNodeSet* cds = [doc queryWithXPath:@"//cd"];
+    IGXMLNode* node = [cds firstObject];
+    XCTAssertNotNil(node, @"node should not be nil");
+
+    [cds remove];
     XCTAssertEqualObjects(@"<catalog/>", doc.xml);
+
+    @try {
+        [node xml]; // this should throw exception
+        XCTFail(@"access removed node should throw exception");
+    } @catch (NSException* e) {
+        // OK
+    }
 }
 
 - (void)testEmpty {

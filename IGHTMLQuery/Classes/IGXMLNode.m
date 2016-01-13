@@ -48,6 +48,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 @interface IGXMLNode ()
+@property (nonatomic, assign) BOOL removed;
 @property (nonatomic, assign) BOOL shouldFreeNode;
 - (id)initWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode;
 + (id)nodeWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode;
@@ -61,8 +62,10 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 
 - (id)initWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode {
     if ((self = [super init])) {
+        NSParameterAssert(node);
         _shouldFreeNode = shouldFreeNode;
         _node = node;
+        _removed = false;
     }
     return self;
 }
@@ -86,6 +89,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 #pragma mark -
 
 - (NSString *)tag {
+    NSAssert(!_removed, @"cannot access a removed node");
+
     if (_node && _node->name) {
         return [NSString stringWithUTF8String:(const char *)_node->name];
     } else {
@@ -94,18 +99,15 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (void)setTag:(NSString*)tag {
-    if (!_node) {
-        return;
-    }
-    
+    NSParameterAssert(tag);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlNodeSetName(_node, (xmlChar*) [tag cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 - (NSString *)text {
-    if (!_node) {
-        return nil;
-    }
-    
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlChar *key = xmlNodeGetContent(_node);
     NSString *text = (key ? [NSString stringWithUTF8String:(const char *)key] : @"");
     xmlFree(key);
@@ -113,18 +115,15 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (void) setText:(NSString*) text {
-    if (!_node) {
-        return;
-    }
-    
+    NSParameterAssert(text);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlNodeSetContent(_node, (xmlChar*) [text cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 - (NSString *)xml {
-    if (!_node) {
-        return nil;
-    }
-    
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlBufferPtr buffer = xmlBufferCreate();
     xmlNodeDump(buffer, self.node->doc, self.node, 0, false);
     NSString *text = [NSString stringWithUTF8String:(const char *)xmlBufferContent(buffer)];
@@ -133,10 +132,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (NSString *)html {
-    if (!_node) {
-        return nil;
-    }
-    
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlBufferPtr buffer = xmlBufferCreate();
     htmlNodeDump(buffer, self.node->doc, self.node);
     NSString *text = [NSString stringWithUTF8String:(const char *)xmlBufferContent(buffer)];
@@ -145,10 +142,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (NSString *)innerXml {
-    if (!_node) {
-        return nil;
-    }
-    
+    NSAssert(!_removed, @"cannot access a removed node");
+
     NSMutableString* innerXml = [NSMutableString string];
     xmlNodePtr cur = self.node->children;
     
@@ -171,10 +166,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (NSString *)innerHtml {
-    if (!_node) {
-        return nil;
-    }
-    
+    NSAssert(!_removed, @"cannot access a removed node");
+
     NSMutableString* innerHtml = [NSMutableString string];
     xmlNodePtr cur = self.node->children;
     
@@ -214,10 +207,14 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (void)removeNamespaces {
+    NSAssert(!_removed, @"cannot access a removed node");
+
     recursively_remove_namespaces_from_node(self.node);
 }
 
 -(id)copyWithZone:(NSZone *)zone{
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlNodePtr newNode = xmlCopyNode(_node, 1);
     return [IGXMLNode nodeWithXMLNode:newNode shouldFreeNode:YES];
 }
@@ -225,10 +222,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 #pragma mark - Traversal
 
 - (IGXMLNode *) parent {
-    if (!_node) {
-        return nil;
-    }
-    
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlNodePtr parent = _node->parent;
     if (!parent) {
         return nil;
@@ -238,10 +233,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (IGXMLNode *) nextSibling {
-    if (!_node) {
-        return nil;
-    }
-    
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlNodePtr sibling = xmlNextElementSibling(_node);
     if (!sibling) {
         return nil;
@@ -251,10 +244,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (IGXMLNode *) previousSibling {
-    if (!_node) {
-        return nil;
-    }
-    
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlNodePtr sibling = xmlPreviousElementSibling(_node);
     if (!sibling) {
         return nil;
@@ -264,10 +255,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (IGXMLNodeSet *)children {
-    if (!_node) {
-        return [IGXMLNodeSet emptyNodeSet];
-    }
-    
+    NSAssert(!_removed, @"cannot access a removed node");
+
     NSMutableArray* children = [NSMutableArray array];
     xmlNodePtr cur = _node->children;
     
@@ -282,10 +271,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(IGXMLNode*) firstChild {
-    if (!_node) {
-        return nil;
-    }
-    
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlNodePtr cur = xmlFirstElementChild(_node);
     if (cur != nil) {
         return [IGXMLNode nodeWithXMLNode:cur];
@@ -295,10 +282,14 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (NSString*) uniqueKey {
+    NSAssert(!_removed, @"cannot access a removed node");
+
     return [NSString stringWithFormat:@"%x", (int) self.node];
 }
 
 - (BOOL) isEqual:(id)object {
+    NSAssert(!_removed, @"cannot access a removed node");
+
     if (self == object) {
         return YES;
     }
@@ -312,42 +303,26 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (NSUInteger)hash {
+    NSAssert(!_removed, @"cannot access a removed node");
+
     return (NSUInteger) self.node;
 }
 
 #pragma mark - IGXMLNodeManipulation
 
 -(instancetype) appendWithNode:(IGXMLNode*)child {
-    if (!_node) {
-        @throw [NSException exceptionWithName:IGXMLNodeException
-                                       reason:@"cannot append to nil node"
-                                     userInfo:nil];
-    }
-    
-    if (!child) {
-        @throw [NSException exceptionWithName:IGXMLNodeException
-                                       reason:@"child node cannot be nil"
-                                     userInfo:nil];
-    }
-    
+    NSParameterAssert(child);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlNodePtr newNode = xmlDocCopyNode(child.node, self.node->doc, 1);
     xmlAddChild(self.node, newNode);
     return [IGXMLNode nodeWithXMLNode:newNode];
 }
 
 -(instancetype) prependWithNode:(IGXMLNode*)child {
-    if (!_node) {
-        @throw [NSException exceptionWithName:IGXMLNodeException
-                                       reason:@"cannot prepend to nil node"
-                                     userInfo:nil];
-    }
-    
-    if (!child) {
-        @throw [NSException exceptionWithName:IGXMLNodeException
-                                       reason:@"child node cannot be nil"
-                                     userInfo:nil];
-    }
-    
+    NSParameterAssert(child);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlNodePtr cur = self.node;
     cur = cur->children;
     
@@ -370,42 +345,27 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(IGXMLNode*) addNextSiblingWithNode:(IGXMLNode*)child {
-    if (!_node) {
-        @throw [NSException exceptionWithName:IGXMLNodeException
-                                       reason:@"cannot add sibling to nil node"
-                                     userInfo:nil];
-    }
-    
-    if (!child) {
-        @throw [NSException exceptionWithName:IGXMLNodeException
-                                       reason:@"child node cannot be nil"
-                                     userInfo:nil];
-    }
-    
+    NSParameterAssert(child);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlNodePtr newNode = xmlDocCopyNode(child.node, self.node->doc, 1);
     xmlAddNextSibling(self.node, newNode);
     return [IGXMLNode nodeWithXMLNode:newNode];
 }
 
 -(IGXMLNode*) addPreviousSiblingWithNode:(IGXMLNode*)child {
-    if (!_node) {
-        @throw [NSException exceptionWithName:IGXMLNodeException
-                                       reason:@"cannot add sibling to nil node"
-                                     userInfo:nil];
-    }
-    
-    if (!child) {
-        @throw [NSException exceptionWithName:IGXMLNodeException
-                                       reason:@"child node cannot be nil"
-                                     userInfo:nil];
-    }
-    
+    NSParameterAssert(child);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlNodePtr newNode = xmlDocCopyNode(child.node, self.node->doc, 1);
     xmlAddPrevSibling(self.node, newNode);
     return [IGXMLNode nodeWithXMLNode:newNode];
 }
 
 -(instancetype) appendWithXMLString:(NSString*)xmlString {
+    NSParameterAssert(xmlString);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     NSError* error = nil;
     IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
                                                          error:&error];
@@ -417,6 +377,9 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(instancetype) prependWithXMLString:(NSString*)xmlString {
+    NSParameterAssert(xmlString);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     NSError* error = nil;
     IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
                                                          error:&error];
@@ -428,6 +391,9 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(instancetype) addChildWithXMLString:(NSString*)xmlString {
+    NSParameterAssert(xmlString);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     NSError* error = nil;
     IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
                                                          error:&error];
@@ -439,6 +405,9 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(instancetype) addNextSiblingWithXMLString:(NSString*)xmlString {
+    NSParameterAssert(xmlString);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     NSError* error = nil;
     IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
                                                          error:&error];
@@ -450,6 +419,9 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(instancetype) addPreviousSiblingWithXMLString:(NSString*)xmlString {
+    NSParameterAssert(xmlString);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     NSError* error = nil;
     IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
                                                          error:&error];
@@ -461,13 +433,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(void) empty {
-    if (!_node) {
-        @throw [NSException exceptionWithName:IGXMLNodeException
-                                       reason:@"Cannot empty a nil node"
-                                     userInfo:nil];
-        return;
-    }
-    
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlNodePtr cur = _node;
     cur = cur->children;
     
@@ -480,13 +447,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 -(void)remove {
-    if (!_node) {
-        @throw [NSException exceptionWithName:IGXMLNodeException
-                                       reason:@"Cannot remove a nil node"
-                                     userInfo:nil];
-        return;
-    }
-    
+    NSAssert(!_removed, @"cannot access a removed node");
+
     if (_node->type == XML_NAMESPACE_DECL) {
         @throw [NSException exceptionWithName:IGXMLNodeException
                                        reason:@"Cannot remove a namespace"
@@ -497,11 +459,15 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
     xmlUnlinkNode(_node);
     xmlFreeNode(_node);
     _node = nil;
+    _removed = true;
 }
 
 #pragma mark - Query
 
 -(IGXMLNodeSet*) queryWithXPath:(NSString*)xpath {
+    NSParameterAssert(xpath);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     if (!xpath) {
         return [IGXMLNodeSet emptyNodeSet];
     }
@@ -549,6 +515,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (IGXMLNodeSet*) queryWithCSS:(NSString*)cssSelector {
+    NSParameterAssert(cssSelector);
+
     NSError* cssError = nil;
     NSString* xpath = [[[self class] cssConverter] xpathWithCSS:cssSelector error:&cssError];
     if (!xpath) {
@@ -562,6 +530,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (IGXMLNodeSet*) query:(NSString*)xpathOrCssSelector {
+    NSParameterAssert(xpathOrCssSelector);
+
     if ([xpathOrCssSelector hasPrefix:@"./"] || [xpathOrCssSelector hasPrefix:@"/"] || [xpathOrCssSelector hasPrefix:@"../"]) {
         return [self queryWithXPath:xpathOrCssSelector];
     } else {
@@ -576,10 +546,9 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (NSString *)attribute:(NSString *)attName inNamespace:(NSString *)ns {
-    if (!_node) {
-        return nil;
-    }
-    
+    NSParameterAssert(attName);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     unsigned char *attCStr = ns ?
     xmlGetNsProp(self.node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding], (const xmlChar *)[ns cStringUsingEncoding:NSUTF8StringEncoding]) :
     xmlGetProp(self.node, (const xmlChar *)[attName cStringUsingEncoding:NSUTF8StringEncoding]) ;
@@ -598,23 +567,9 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (void) setAttribute:(NSString*)attName inNamespace:(NSString*)ns value:(NSString*)value {
-    if (!attName) {
-        @throw [NSException exceptionWithName:@"IGXMLNode Error"
-                                       reason:@"Attribute name cannot be nil"
-                                     userInfo:nil];
-    }
-    
-    if (!value) {
-        @throw [NSException exceptionWithName:@"IGXMLNode Error"
-                                       reason:@"Attribute value cannot be nil"
-                                     userInfo:nil];
-    }
-    
-    if (!_node) {
-        @throw [NSException exceptionWithName:IGXMLNodeException
-                                       reason:@"Cannot set attribute of a nil node"
-                                     userInfo:nil];
-    }
+    NSParameterAssert(attName);
+    NSParameterAssert(value);
+    NSAssert(!_removed, @"cannot access a removed node");
     
     if (ns) {
         xmlNsPtr nsPtr = xmlSearchNs(self.node->doc, self.node, (const xmlChar *)[ns cStringUsingEncoding:NSUTF8StringEncoding]);
@@ -634,18 +589,9 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (void) removeAttribute:(NSString*)attName inNamespace:(NSString*)ns {
-    if (!_node) {
-        @throw [NSException exceptionWithName:IGXMLNodeException
-                                       reason:@"Cannot remove attribute from a nil node"
-                                     userInfo:nil];
-    }
-    
-    if (!attName) {
-        @throw [NSException exceptionWithName:IGXMLNodeException
-                                       reason:@"Attribute name cannot be nil"
-                                     userInfo:nil];
-    }
-    
+    NSParameterAssert(attName);
+    NSAssert(!_removed, @"cannot access a removed node");
+
     xmlAttrPtr attr = NULL;
     if (ns) {
         attr = xmlHasNsProp(self.node,
@@ -661,6 +607,8 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 - (NSArray *)attributeNames {
+    NSAssert(!_removed, @"cannot access a removed node");
+
     NSMutableArray *names = [[NSMutableArray alloc] init];
     
     for(xmlAttrPtr attr = self.node->properties; attr != nil; attr = attr->next) {
