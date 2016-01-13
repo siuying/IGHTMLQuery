@@ -157,6 +157,8 @@
 }
 
 -(instancetype) prependWithXMLString:(NSString*)xmlString {
+    NSParameterAssert(xmlString);
+
     NSError* error = nil;
     IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
                                                          error:&error];
@@ -168,6 +170,8 @@
 }
 
 -(instancetype) addChildWithXMLString:(NSString*)xmlString {
+    NSParameterAssert(xmlString);
+
     NSError* error = nil;
     IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
                                                          error:&error];
@@ -179,6 +183,8 @@
 }
 
 -(instancetype) addNextSiblingWithXMLString:(NSString*)xmlString {
+    NSParameterAssert(xmlString);
+
     NSError* error = nil;
     IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
                                                          error:&error];
@@ -190,6 +196,8 @@
 }
 
 -(instancetype) addPreviousSiblingWithXMLString:(NSString*)xmlString {
+    NSParameterAssert(xmlString);
+
     NSError* error = nil;
     IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
                                                          error:&error];
@@ -201,14 +209,12 @@
 }
 
 -(void) empty {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         [node empty];
     }];
 }
 
 -(void) remove {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         [node remove];
     }];
@@ -217,7 +223,6 @@
 #pragma mark - Query
 
 - (IGXMLNodeSet*) queryWithXPath:(NSString*)xpath {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     NSMutableOrderedSet* nodes = [[NSMutableOrderedSet alloc] init];
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         IGXMLNodeSet* nodeSet = [node queryWithXPath:xpath];
@@ -229,7 +234,6 @@
 }
 
 - (IGXMLNodeSet*) queryWithCSS:(NSString*)cssSelector {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     NSMutableOrderedSet* nodes = [[NSMutableOrderedSet alloc] init];
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         IGXMLNodeSet* nodeSet = [node queryWithCSS:cssSelector];
