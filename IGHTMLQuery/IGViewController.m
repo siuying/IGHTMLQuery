@@ -21,8 +21,8 @@
 {
     
     [super viewDidLoad];
-    
-    if (NSClassFromString(@"IGRubyTests")) {
+
+    if (NSClassFromString(@"XCTestCase")) {
         return;
     }
 
