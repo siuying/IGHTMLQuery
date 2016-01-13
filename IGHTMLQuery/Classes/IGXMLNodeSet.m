@@ -84,6 +84,8 @@
 }
 
 -(void) enumerateNodesUsingBlock:(IGXMLNodeSetEnumerateBlock)block {
+    NSParameterAssert(block);
+
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         block(node, idx, stop);
     }];
@@ -92,6 +94,8 @@
 #pragma mark - IGXMLNodeManipulation
 
 -(instancetype) appendWithNode:(IGXMLNode*)child {
+    NSParameterAssert(child);
+
     NSMutableArray* newNodes = [NSMutableArray array];
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         [newNodes addObject:[node appendWithNode:child]];
@@ -100,6 +104,8 @@
 }
 
 -(instancetype) prependWithNode:(IGXMLNode*)child {
+    NSParameterAssert(child);
+
     NSMutableArray* newNodes = [NSMutableArray array];
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         [newNodes addObject:[node prependWithNode:child]];
@@ -108,6 +114,8 @@
 }
 
 -(instancetype) addChildWithNode:(IGXMLNode*)child {
+    NSParameterAssert(child);
+
     NSMutableArray* newNodes = [NSMutableArray array];
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         [newNodes addObject:[node prependWithNode:child]];
@@ -116,6 +124,8 @@
 }
 
 -(instancetype) addNextSiblingWithNode:(IGXMLNode*)child {
+    NSParameterAssert(child);
+
     NSMutableArray* newNodes = [NSMutableArray array];
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         [newNodes addObject:[node addNextSiblingWithNode:child]];
@@ -124,6 +134,8 @@
 }
 
 -(instancetype) addPreviousSiblingWithNode:(IGXMLNode*)child {
+    NSParameterAssert(child);
+
     NSMutableArray* newNodes = [NSMutableArray array];
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         [newNodes addObject:[node addPreviousSiblingWithNode:child]];
@@ -132,6 +144,8 @@
 }
 
 -(instancetype) appendWithXMLString:(NSString*)xmlString {
+    NSParameterAssert(xmlString);
+
     NSError* error = nil;
     IGXMLNode* node = [[IGXMLDocument alloc] initWithXMLString:xmlString
                                                          error:&error];

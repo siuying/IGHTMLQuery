@@ -312,6 +312,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 
 -(instancetype) appendWithNode:(IGXMLNode*)child {
     NSParameterAssert(child);
+    NSAssert(!child.removed, @"cannot access a removed child node");
     NSAssert(!_removed, @"cannot access a removed node");
 
     xmlNodePtr newNode = xmlDocCopyNode(child.node, self.node->doc, 1);
@@ -321,6 +322,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 
 -(instancetype) prependWithNode:(IGXMLNode*)child {
     NSParameterAssert(child);
+    NSAssert(!child.removed, @"cannot access a removed child node");
     NSAssert(!_removed, @"cannot access a removed node");
 
     xmlNodePtr cur = self.node;
@@ -346,6 +348,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 
 -(IGXMLNode*) addNextSiblingWithNode:(IGXMLNode*)child {
     NSParameterAssert(child);
+    NSAssert(!child.removed, @"cannot access a removed child node");
     NSAssert(!_removed, @"cannot access a removed node");
 
     xmlNodePtr newNode = xmlDocCopyNode(child.node, self.node->doc, 1);
@@ -355,6 +358,7 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 
 -(IGXMLNode*) addPreviousSiblingWithNode:(IGXMLNode*)child {
     NSParameterAssert(child);
+    NSAssert(!child.removed, @"cannot access a removed child node");
     NSAssert(!_removed, @"cannot access a removed node");
 
     xmlNodePtr newNode = xmlDocCopyNode(child.node, self.node->doc, 1);

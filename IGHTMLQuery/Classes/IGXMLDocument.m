@@ -40,17 +40,13 @@
 }
 
 - (id)initWithXMLData:(NSData *)data encoding:(NSString*)encoding error:(NSError**)outError {
-    if (!data) {
-        if (outError) {
-            *outError = [NSError errorWithDomain:IGXMLQueryErrorDomain code:0 userInfo:@{@"reason": @"data cannot be nil"}];
-        }
-        return nil;
-    }
     return [self initWithXMLData:data encoding:encoding options:XML_PARSE_RECOVER|XML_PARSE_NOBLANKS|XML_PARSE_NONET error:outError];
 }
 
 - (id)initWithXMLData:(NSData *)data encoding:(NSString*)encoding options:(xmlParserOption)options error:(NSError**)outError {
     if ((self = [super init])) {
+        NSParameterAssert(data);
+
         _doc = xmlReadMemory([data bytes], (int)[data length], encoding ? [encoding UTF8String] : nil, nil, options);
         if (_doc) {
             xmlNodePtr root = xmlDocGetRootElement(_doc);

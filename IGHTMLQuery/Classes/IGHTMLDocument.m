@@ -50,6 +50,8 @@
 
 - (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding options:(htmlParserOption)options error:(NSError**)outError{
     if ((self = [super init])) {
+        NSParameterAssert(data);
+
         xmlKeepBlanksDefault(false);
 
         self.doc = htmlReadMemory([data bytes], (int)[data length], "", encoding ? [encoding UTF8String] : nil, options);
