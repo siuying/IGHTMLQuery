@@ -21,8 +21,7 @@
     if (self) {
         if (nodes) {
             _nodes = [NSOrderedSet orderedSetWithArray:nodes];
-        }
-        else {
+        } else {
             _nodes = [NSOrderedSet orderedSet];
         }
     }
@@ -38,7 +37,6 @@
 }
 
 -(NSUInteger) count {
-    NSAssert(_nodes != nil, @"_nodes should never be nil");
     return [_nodes count];
 }
 
@@ -58,24 +56,20 @@
 }
 
 - (NSUInteger)hash {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     return self.nodes.hash;
 }
 
 #pragma NSFastEnumeration -
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained [])buffer count:(NSUInteger)len {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     return [self.nodes countByEnumeratingWithState:state objects:buffer count:len];
 }
 
 -(NSArray *) allObjects {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     return [self.nodes array];
 }
 
 -(IGXMLNode*) firstObject {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     if ([self.nodes count] > 0) {
         return self.nodes[0];
     } else {
@@ -86,12 +80,10 @@
 #pragma mark -
 
 - (id)objectAtIndexedSubscript:(NSUInteger)idx {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     return [self.nodes objectAtIndexedSubscript:idx];
 }
 
 -(void) enumerateNodesUsingBlock:(IGXMLNodeSetEnumerateBlock)block {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         block(node, idx, stop);
     }];
@@ -100,7 +92,6 @@
 #pragma mark - IGXMLNodeManipulation
 
 -(instancetype) appendWithNode:(IGXMLNode*)child {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     NSMutableArray* newNodes = [NSMutableArray array];
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         [newNodes addObject:[node appendWithNode:child]];
@@ -109,7 +100,6 @@
 }
 
 -(instancetype) prependWithNode:(IGXMLNode*)child {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     NSMutableArray* newNodes = [NSMutableArray array];
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         [newNodes addObject:[node prependWithNode:child]];
@@ -118,7 +108,6 @@
 }
 
 -(instancetype) addChildWithNode:(IGXMLNode*)child {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     NSMutableArray* newNodes = [NSMutableArray array];
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         [newNodes addObject:[node prependWithNode:child]];
@@ -127,7 +116,6 @@
 }
 
 -(instancetype) addNextSiblingWithNode:(IGXMLNode*)child {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     NSMutableArray* newNodes = [NSMutableArray array];
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         [newNodes addObject:[node addNextSiblingWithNode:child]];
@@ -136,7 +124,6 @@
 }
 
 -(instancetype) addPreviousSiblingWithNode:(IGXMLNode*)child {
-    NSAssert(self.nodes != nil, @"self.nodes should never be nil");
     NSMutableArray* newNodes = [NSMutableArray array];
     [self.nodes enumerateObjectsUsingBlock:^(IGXMLNode* node, NSUInteger idx, BOOL *stop) {
         [newNodes addObject:[node addPreviousSiblingWithNode:child]];
