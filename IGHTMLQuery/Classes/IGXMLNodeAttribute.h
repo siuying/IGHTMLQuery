@@ -17,45 +17,45 @@
  @param attName attribute name to get
  @return attribute value
  */
-- (NSString *)attribute:(NSString *)attName;
+- (nullable NSString *)attribute:(nonnull NSString *)attName;
 
 /**
  @param attName attribute name
  @param ns namespace
  @return attribute value
  */
-- (NSString *)attribute:(NSString *)attName inNamespace:(NSString *)ns;
+- (nullable NSString *)attribute:(nonnull NSString *)attName inNamespace:(nullable NSString *)ns;
 
 /**
  @param attName attribute name to set
  @param value value to set
  */
-- (void) setAttribute:(NSString*)attName value:(NSString*)value;
+- (void) setAttribute:(nonnull NSString*)attName value:(nonnull NSString*)value;
 
 /**
  @param attName attribute name to set
  @param ns namespace
  @param value value to set
  */
-- (void) setAttribute:(NSString*)attName inNamespace:(NSString*)ns value:(NSString*)value;
+- (void) setAttribute:(nonnull NSString*)attName inNamespace:(nullable NSString*)ns value:(nonnull NSString*)value;
 
 /**
  @param attName attribute name to remove
  */
-- (void) removeAttribute:(NSString*)attName;
+- (void) removeAttribute:(nonnull NSString*)attName;
 
 /**
  @param attName attribute name to remove
  */
-- (void) removeAttribute:(NSString*)attName inNamespace:(NSString*)ns;
+- (void) removeAttribute:(nonnull NSString*)attName inNamespace:(nullable NSString*)ns;
 
-- (NSArray *)attributeNames;
+- (nonnull NSArray<NSString*> *)attributeNames;
 
 /**
  subscript support
  */
-- (id)objectForKeyedSubscript:(id)key;
+- (nullable id)objectForKeyedSubscript:(nonnull id)key;
 
-- (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key;
+- (void)setObject:(nonnull id)obj forKeyedSubscript:(nonnull id <NSCopying>)key;
 
 @end

@@ -13,16 +13,16 @@
 
 @class IGXMLNode;
 
-typedef void (^IGXMLNodeSetEnumerateBlock)(IGXMLNode* node, NSUInteger idx, BOOL *stop);
+typedef void (^IGXMLNodeSetEnumerateBlock)(IGXMLNode* _Nonnull node, NSUInteger idx, BOOL* _Nullable stop);
 
-typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* node);
+typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* _Nonnull node);
 
 @protocol IGXMLNodeSetCore <IGHTMLQueryJavaScriptExport>
 
 /**
  nodes in this node set
  */
-@property (nonatomic, copy, readonly) NSOrderedSet* nodes;
+@property (nonnull, nonatomic, copy, readonly) NSOrderedSet* nodes;
 
 /**
  @return number of nodes in the set
@@ -32,17 +32,17 @@ typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* node);
 /**
  @return return an array of all objects in the node set.
  */
--(NSArray *) allObjects;
+-(nonnull NSArray<IGXMLNode*> *) allObjects;
 
 /**
  @return return first object in the node set.
  */
--(IGXMLNode*) firstObject;
+-(nullable IGXMLNode*) firstObject;
 
 /**
  Enumerator
  */
--(void) enumerateNodesUsingBlock:(IGXMLNodeSetEnumerateBlock)block;
+-(void) enumerateNodesUsingBlock:(nonnull IGXMLNodeSetEnumerateBlock)block;
 
 @end
 
@@ -51,15 +51,15 @@ typedef void (^IGXMLNodeSetEachBlock)(IGXMLNode* node);
  */
 @interface IGXMLNodeSet : NSObject <NSFastEnumeration, IGXMLNodeSetCore, IGXMLNodeManipulation, IGXMLNodeQuery>
 
--(id) initWithNodes:(NSArray*)nodes;
+-(nonnull id) initWithNodes:(nullable NSArray<IGXMLNode*>*)nodes;
 
-+(id) nodeSetWithNodes:(NSArray*)nodes;
++(nonnull id) nodeSetWithNodes:(nullable NSArray<IGXMLNode*>*)nodes;
 
-+(id) emptyNodeSet;
++(nonnull id) emptyNodeSet;
 
 /**
  @return add support of subscript syntax.
  */
--(id) objectAtIndexedSubscript:(NSUInteger)idx;
+-(nonnull id) objectAtIndexedSubscript:(NSUInteger)idx;
 
 @end

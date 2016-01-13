@@ -509,4 +509,3 @@
 })(Opal);
 
 //@ sourceMappingURL=/__opal_source_maps__/html_query.js.map
-;
