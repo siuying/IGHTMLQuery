@@ -6,12 +6,6 @@
 //  Copyright (c) 2013 Ignition Soft. All rights reserved.
 //
 
-#import <libxml2/libxml/xmlreader.h>
-#import <libxml2/libxml/xmlmemory.h>
-#import <libxml2/libxml/xmlerror.h>
-#import <libxml/xpath.h>
-#import <libxml/xpathInternals.h>
-
 #import <Foundation/Foundation.h>
 #import "IGHTMLQueryJavaScriptExport.h"
 #import "IGXMLNodeCore.h"
@@ -33,25 +27,10 @@ NS_ASSUME_NONNULL_END
 @interface IGXMLNode : NSObject <IGXMLNodeCore, IGXMLNodeManipulation, IGXMLNodeQuery, IGXMLNodeAttribute, IGXMLNodeTraversal, NSCopying>
 
 /**
- backed XML node,
- */
-@property (nullable, nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
-
-/**
  return true if the node has removed (by [node remove]). 
  Any action performed on removed node will result a runtime exception.
  */
 @property (nonatomic, assign, readonly) BOOL removed;
-
-/**
- Create a node using a libxml node
- */
-- (nonnull id)initWithXMLNode:(nullable xmlNodePtr)node;
-
-/**
- Create a node using a libxml node
- */
-+ (nonnull id)nodeWithXMLNode:(nullable xmlNodePtr)node;
 
 /**
  * per thread shared css converter

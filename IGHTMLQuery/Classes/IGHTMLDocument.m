@@ -6,10 +6,12 @@
 //  Copyright (c) 2013 Ignition Soft. All rights reserved.
 //
 
+#import <libxml2/libxml/HTMLparser.h>
 #import "IGHTMLDocument.h"
 
 @interface IGXMLDocument ()
 @property (nonatomic, unsafe_unretained) htmlDocPtr doc;
+@property (nullable, nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
 @end
 
 @interface IGHTMLDocument ()
@@ -48,7 +50,7 @@
     return [self initWithHTMLData:data encoding:encoding options:(HTML_PARSE_RECOVER | HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR | HTML_PARSE_NOIMPLIED | HTML_PARSE_NONET) error:outError];
 }
 
-- (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding options:(htmlParserOption)options error:(NSError**)outError{
+- (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding options:(int)options error:(NSError**)outError{
     if ((self = [super init])) {
         NSParameterAssert(data);
 
