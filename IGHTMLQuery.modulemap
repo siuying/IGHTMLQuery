@@ -1,4 +1,4 @@
 module IGHTMLQuery {
-  umbrella header "IGHTMLQuery.h"
+  umbrella header "IGHTMLQuery/Classes/IGHTMLQuery.h"
   export *
 }

@@ -17,7 +17,7 @@ DESC
 
   s.author       = { "Francis Chong" => "francis@ignition.hk" }
 
-  s.source       = { :git => "https://github.com/siuying/IGHTMLQuery.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/siuying/IGHTMLQuery.git", :commit => "86260fe" }
 
   s.library   = 'xml2'
 
@@ -28,6 +28,7 @@ DESC
   s.default_subspec = 'Core'
   s.ios.deployment_target = '7.0'
   s.osx.deployment_target = '10.9'
+  s.module_map = "IGHTMLQuery.modulemap"
 
   s.subspec "Core" do |sp|
     sp.ios.deployment_target = '7.0'
@@ -35,7 +36,6 @@ DESC
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
     sp.exclude_files = 'IGHTMLQuery/Classes/JSContext+IGHTMLQueryRubyAdditions.{h,m}'
     sp.dependency 'CSSSelectorConverter', '>= 1.2.0'
-    sp.module_map = "IGHTMLQuery.modulemap"
   end
 
   # Include IGHTMLQuery/JavaScript to enable JavaScriptCore support.
@@ -47,7 +47,6 @@ DESC
     sp.frameworks = 'JavaScriptCore'
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
     sp.exclude_files = 'IGHTMLQuery/Classes/JSContext+IGHTMLQueryRubyAdditions.{h,m}'
-    sp.module_map = "IGHTMLQuery.modulemap"
   end
 
   # Include IGHTMLQuery/Ruby to enable Ruby support.
@@ -60,6 +59,5 @@ DESC
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
     sp.resources = 'IGHTMLQuery/JavaScript/*.js', 'IGHTMLQuery/Ruby/*.rb'
     sp.dependency 'JavaScriptCoreOpalAdditions', '>= 0.5.1'
-    sp.module_map = "IGHTMLQuery.modulemap"
   end
 end
