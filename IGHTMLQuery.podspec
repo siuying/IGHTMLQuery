@@ -35,9 +35,7 @@ DESC
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
     sp.exclude_files = 'IGHTMLQuery/Classes/JSContext+IGHTMLQueryRubyAdditions.{h,m}'
     sp.dependency 'CSSSelectorConverter', '>= 1.2.0'
-    sp.public_header_files = [
-      'IGHTMLQuery/Classes/**/*.{h,m}'
-    ]
+    sp.module_map = "IGHTMLQuery.modulemap"
   end
 
   # Include IGHTMLQuery/JavaScript to enable JavaScriptCore support.
@@ -49,9 +47,7 @@ DESC
     sp.frameworks = 'JavaScriptCore'
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
     sp.exclude_files = 'IGHTMLQuery/Classes/JSContext+IGHTMLQueryRubyAdditions.{h,m}'
-    sp.public_header_files = [
-      'IGHTMLQuery/Classes/**/*.{h,m}'
-    ]
+    sp.module_map = "IGHTMLQuery.modulemap"
   end
 
   # Include IGHTMLQuery/Ruby to enable Ruby support.
@@ -64,8 +60,6 @@ DESC
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
     sp.resources = 'IGHTMLQuery/JavaScript/*.js', 'IGHTMLQuery/Ruby/*.rb'
     sp.dependency 'JavaScriptCoreOpalAdditions', '>= 0.5.1'
-    sp.public_header_files = [
-      'IGHTMLQuery/Classes/**/*.{h,m}'
-    ]
+    sp.module_map = "IGHTMLQuery.modulemap"
   end
 end
