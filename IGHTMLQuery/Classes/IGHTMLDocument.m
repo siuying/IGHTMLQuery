@@ -6,7 +6,9 @@
 //  Copyright (c) 2013 Ignition Soft. All rights reserved.
 //
 
+#import <libxml2/libxml/HTMLparser.h>
 #import "IGHTMLDocument.h"
+#import "IGXMLNode_Private.h"
 
 @interface IGXMLDocument ()
 @property (nonatomic, unsafe_unretained) htmlDocPtr doc;

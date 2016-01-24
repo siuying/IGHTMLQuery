@@ -33,8 +33,9 @@ DESC
     sp.ios.deployment_target = '7.0'
     sp.osx.deployment_target = '10.9'
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
-    sp.exclude_files = 'IGHTMLQuery/Classes/JSContext+IGHTMLQueryRubyAdditions.{h,m}'
+    sp.exclude_files = ['IGHTMLQuery/Classes/JSContext+IGHTMLQueryRubyAdditions.{h,m}']
     sp.dependency 'CSSSelectorConverter', '>= 1.2.0'
+    sp.private_header_files = "IGHTMLQuery/Classes/Private/*.h"
   end
 
   # Include IGHTMLQuery/JavaScript to enable JavaScriptCore support.
@@ -46,6 +47,7 @@ DESC
     sp.frameworks = 'JavaScriptCore'
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
     sp.exclude_files = 'IGHTMLQuery/Classes/JSContext+IGHTMLQueryRubyAdditions.{h,m}'
+    sp.private_header_files = "IGHTMLQuery/Classes/Private/*.h"
   end
 
   # Include IGHTMLQuery/Ruby to enable Ruby support.
@@ -58,5 +60,6 @@ DESC
     sp.source_files  = 'IGHTMLQuery/Classes/**/*.{h,m}'
     sp.resources = 'IGHTMLQuery/JavaScript/*.js', 'IGHTMLQuery/Ruby/*.rb'
     sp.dependency 'JavaScriptCoreOpalAdditions', '>= 0.5.1'
+    sp.private_header_files = "IGHTMLQuery/Classes/Private/*.h"
   end
 end

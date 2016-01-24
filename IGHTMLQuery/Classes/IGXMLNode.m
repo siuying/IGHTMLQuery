@@ -6,6 +6,12 @@
 //  Copyright (c) 2013 Ignition Soft. All rights reserved.
 //
 
+#import <libxml2/libxml/xmlreader.h>
+#import <libxml2/libxml/xmlmemory.h>
+#import <libxml2/libxml/xmlerror.h>
+#import <libxml/xpath.h>
+#import <libxml/xpathInternals.h>
+
 #import "IGXMLNode.h"
 #import "IGXMLDocument.h"
 #import "IGHTMLDocument.h"
@@ -48,8 +54,13 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 }
 
 @interface IGXMLNode ()
+@property (nullable, nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
 @property (nonatomic, assign) BOOL removed;
 @property (nonatomic, assign) BOOL shouldFreeNode;
+
+- (nonnull id)initWithXMLNode:(nullable xmlNodePtr)node;
++ (nonnull id)nodeWithXMLNode:(nullable xmlNodePtr)node;
+
 - (id)initWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode;
 + (id)nodeWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode;
 @end

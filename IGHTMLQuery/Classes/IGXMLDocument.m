@@ -6,7 +6,10 @@
 //  Copyright (c) 2013 Ignition Soft. All rights reserved.
 //
 
+#import <libxml2/libxml/xmlreader.h>
+#import <libxml2/libxml/xmlmemory.h>
 #import "IGXMLDocument.h"
+#import "IGXMLNode_Private.h"
 #import <CSSSelectorConverter/CSSSelectorToXPathConverter.h>
 
 
@@ -43,7 +46,7 @@
     return [self initWithXMLData:data encoding:encoding options:XML_PARSE_RECOVER|XML_PARSE_NOBLANKS|XML_PARSE_NONET error:outError];
 }
 
-- (id)initWithXMLData:(NSData *)data encoding:(NSString*)encoding options:(xmlParserOption)options error:(NSError**)outError {
+- (id)initWithXMLData:(NSData *)data encoding:(NSString*)encoding options:(int)options error:(NSError**)outError {
     if ((self = [super init])) {
         NSParameterAssert(data);
 
