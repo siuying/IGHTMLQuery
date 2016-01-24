@@ -11,11 +11,6 @@
 #import "IGHTMLDocument.h"
 #import "CSSSelectorConverter.h"
 #import <libxml2/libxml/HTMLtree.h>
-#import <libxml2/libxml/xmlreader.h>
-#import <libxml2/libxml/xmlmemory.h>
-#import <libxml2/libxml/xmlerror.h>
-#import <libxml/xpath.h>
-#import <libxml/xpathInternals.h>
 
 NSString* const IGXMLQueryErrorDomain   = @"IGHTMLQueryError";
 NSString* const IGXMLNodeException      = @"IGXMLNodeException";
@@ -55,10 +50,6 @@ static void recursively_remove_namespaces_from_node(xmlNodePtr node)
 @interface IGXMLNode ()
 @property (nonatomic, assign) BOOL removed;
 @property (nonatomic, assign) BOOL shouldFreeNode;
-@property (nullable, nonatomic, readwrite, unsafe_unretained) xmlNodePtr node;
-
-- (nonnull id)initWithXMLNode:(nullable xmlNodePtr)node;
-+ (nonnull id)nodeWithXMLNode:(nullable xmlNodePtr)node;
 - (id)initWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode;
 + (id)nodeWithXMLNode:(xmlNodePtr)node shouldFreeNode:(BOOL)shouldFreeNode;
 @end

@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Ignition Soft. All rights reserved.
 //
 
+#import <libxml2/libxml/HTMLparser.h>
+
 #import "IGXMLDocument.h"
 #import "IGHTMLQueryJavaScriptExport.h"
 
@@ -25,6 +27,6 @@
 
 - (nullable id)initWithHTMLFragmentData:(nonnull NSData *)data encoding:(nonnull NSString*)encoding error:(NSError * _Nullable * _Nullable)outError;
 
-- (nullable id)initWithHTMLData:(nonnull NSData *)data encoding:(nonnull NSString*)encoding options:(int)options error:(NSError * _Nullable * _Nullable)outError;
+- (nullable id)initWithHTMLData:(nonnull NSData *)data encoding:(nonnull NSString*)encoding options:(htmlParserOption)options error:(NSError * _Nullable * _Nullable)outError;
 
 @end
