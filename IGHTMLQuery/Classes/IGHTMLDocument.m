@@ -50,7 +50,7 @@
     return [self initWithHTMLData:data encoding:encoding options:(HTML_PARSE_RECOVER | HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR | HTML_PARSE_NOIMPLIED | HTML_PARSE_NONET) error:outError];
 }
 
-- (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding options:(htmlParserOption)options error:(NSError**)outError{
+- (id)initWithHTMLData:(NSData *)data encoding:(NSString*)encoding options:(int)options error:(NSError**)outError{
     if ((self = [super init])) {
         NSParameterAssert(data);
 
