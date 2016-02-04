@@ -25,6 +25,6 @@
 
 - (nullable id)initWithHTMLFragmentData:(nonnull NSData *)data encoding:(nonnull NSString*)encoding error:(NSError * _Nullable * _Nullable)outError;
 
-- (nullable id)initWithHTMLData:(nonnull NSData *)data encoding:(nonnull NSString*)encoding options:(htmlParserOption)options error:(NSError * _Nullable * _Nullable)outError;
+- (nullable id)initWithHTMLData:(nonnull NSData *)data encoding:(nonnull NSString*)encoding options:(int)options error:(NSError * _Nullable * _Nullable)outError;
 
 @end
