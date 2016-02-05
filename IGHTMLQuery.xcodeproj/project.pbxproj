@@ -105,6 +105,7 @@
 		5455B17A17C8710200A992EB /* nytimes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = nytimes.html; path = Fixtures/nytimes.html; sourceTree = "<group>"; };
 		5455B17C17C8711700A992EB /* IGIntegrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGIntegrationTests.m; sourceTree = "<group>"; };
 		546D83491C55281300712414 /* IGXMLNode_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGXMLNode_Private.h; path = Classes/Private/IGXMLNode_Private.h; sourceTree = "<group>"; };
+		546D834B1C5528AE00712414 /* IGXMLNode_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGXMLNode_Private.h; sourceTree = "<group>"; };
 		549C1DC217C47DEE00CF4F20 /* catalog.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = catalog.xml; path = Fixtures/catalog.xml; sourceTree = "<group>"; };
 		549C1DC417C4827200CF4F20 /* broken.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = broken.xml; path = Fixtures/broken.xml; sourceTree = "<group>"; };
 		549C1DC517C4A4DF00CF4F20 /* IGXMLNodeManipulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGXMLNodeManipulation.h; path = Classes/IGXMLNodeManipulation.h; sourceTree = "<group>"; };
@@ -258,6 +259,7 @@
 		543763DA17C36F04004CE333 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				546D834A1C5528AE00712414 /* Private */,
 				54AB5F3A17C47786009E2CF1 /* IGHTMLQuery.h */,
 				54AB5F3B17C477BC009E2CF1 /* IGHTMLDocument.h */,
 				54AB5F3C17C477BC009E2CF1 /* IGHTMLDocument.m */,
@@ -278,6 +280,15 @@
 				5406F3131872CAFE00FD6A96 /* JSContext+IGHTMLQueryRubyAdditions.m */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		546D834A1C5528AE00712414 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				546D834B1C5528AE00712414 /* IGXMLNode_Private.h */,
+			);
+			name = Private;
+			path = Classes/Private;
 			sourceTree = "<group>";
 		};
 		54AB5F4117C479D1009E2CF1 /* Fixtures */ = {
