@@ -6,5 +6,5 @@ gem 'tilt', '>= 2.0.0'
 gem 'opal'
 gem 'opal-sprockets'
 
-gem "cocoapods", "~> 1.0.0.beta.2"
+gem "cocoapods", "~> 1.0.0"
 gem "xcpretty", "<= 0.1.8"

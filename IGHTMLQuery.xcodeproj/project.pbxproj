@@ -343,12 +343,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 543763D417C36EFD004CE333 /* Build configuration list for PBXNativeTarget "IGHTMLQuery" */;
 			buildPhases = (
-				CAE5D04AC711590E0408C2D3 /* Check Pods Manifest.lock */,
+				CAE5D04AC711590E0408C2D3 /* [CP] Check Pods Manifest.lock */,
 				5437639E17C36EFD004CE333 /* Sources */,
 				5437639F17C36EFD004CE333 /* Frameworks */,
 				543763A017C36EFD004CE333 /* Resources */,
-				A78CE1F3B3BDA2B88DD8F96D /* Embed Pods Frameworks */,
-				BBC34AFD0DEF70A08AF436FC /* Copy Pods Resources */,
+				A78CE1F3B3BDA2B88DD8F96D /* [CP] Embed Pods Frameworks */,
+				BBC34AFD0DEF70A08AF436FC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -363,12 +363,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 543763D717C36EFD004CE333 /* Build configuration list for PBXNativeTarget "IGHTMLQueryTests" */;
 			buildPhases = (
-				B7E064CC1CCEBB7E8B942B76 /* Check Pods Manifest.lock */,
+				B7E064CC1CCEBB7E8B942B76 /* [CP] Check Pods Manifest.lock */,
 				543763BF17C36EFD004CE333 /* Sources */,
 				543763C017C36EFD004CE333 /* Frameworks */,
 				543763C117C36EFD004CE333 /* Resources */,
-				B7776342FAA5AD70D7D471BD /* Embed Pods Frameworks */,
-				27F81D580ADF63704B8F2B26 /* Copy Pods Resources */,
+				B7776342FAA5AD70D7D471BD /* [CP] Embed Pods Frameworks */,
+				27F81D580ADF63704B8F2B26 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -444,14 +444,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		27F81D580ADF63704B8F2B26 /* Copy Pods Resources */ = {
+		27F81D580ADF63704B8F2B26 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,14 +459,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IGHTMLQueryTests/Pods-IGHTMLQueryTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A78CE1F3B3BDA2B88DD8F96D /* Embed Pods Frameworks */ = {
+		A78CE1F3B3BDA2B88DD8F96D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -474,14 +474,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IGHTMLQuery/Pods-IGHTMLQuery-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B7776342FAA5AD70D7D471BD /* Embed Pods Frameworks */ = {
+		B7776342FAA5AD70D7D471BD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,14 +489,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IGHTMLQueryTests/Pods-IGHTMLQueryTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B7E064CC1CCEBB7E8B942B76 /* Check Pods Manifest.lock */ = {
+		B7E064CC1CCEBB7E8B942B76 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,14 +504,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		BBC34AFD0DEF70A08AF436FC /* Copy Pods Resources */ = {
+		BBC34AFD0DEF70A08AF436FC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -519,14 +519,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IGHTMLQuery/Pods-IGHTMLQuery-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CAE5D04AC711590E0408C2D3 /* Check Pods Manifest.lock */ = {
+		CAE5D04AC711590E0408C2D3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
