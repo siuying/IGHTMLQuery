@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 
-gem "rake", "<= 10.4.2"
+gem "rake"
 
-gem 'tilt', '>= 2.0.0'
+gem 'tilt'
 gem 'opal'
 gem 'opal-sprockets'
 
-gem "cocoapods", "~> 1.0.0"
-gem "xcpretty", "<= 0.1.8"
+gem "cocoapods"
+gem "xcpretty"

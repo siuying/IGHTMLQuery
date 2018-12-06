@@ -21,6 +21,15 @@ DEPENDENCIES:
   - CSSSelectorConverter
   - JavaScriptCoreOpalAdditions (>= 0.5.1)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CocoaLumberjack
+    - CSSSelectorConverter
+    - IGDigest
+    - JavaScriptCoreOpalAdditions
+    - NUIParse
+    - ObjectiveSugar
+
 SPEC CHECKSUMS:
   CocoaLumberjack: f58d8a19629f4d8379ae14bb3534def24161430e
   CSSSelectorConverter: 00680dc04a48b74c7a8f792928b89e9f3def9970
@@ -31,4 +40,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 48fa42f99c68519452f86e23ed4cd3cd3247f44f
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.5.3
